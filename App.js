@@ -25,18 +25,24 @@ import { SearchPage } from "./Pages/SearchPage";
 import { AddTour } from "./Pages/AddTour";
 import { Home2 } from "./Pages/Home2"
 import { NativeBaseProvider, Circle } from "native-base"
-
+import { Tourdet3 } from './components/Details/Tourdet3';
+import { Provider } from 'react-redux';
+import {Store,persistor} from './assets/State-Management/Store';
+import { PersistGate } from 'redux-persist/integration/react'
 export default function App() {
   const MainSatck = createNativeStackNavigator()
 
   return (
-
-    <NavigationContainer>
+<Provider store={Store}>
+<PersistGate loading={null} persistor={persistor}>
+<NavigationContainer onReady={()=>console.log("ddd")}>
       <MainSatck.Navigator screenOptions={{
         headerShown: false,
       }}>
         <MainSatck.Screen name="Tabstack" component={Tabstack} />
         <MainSatck.Screen name="TourDet" component={TourDet} />
+        <MainSatck.Screen name="TourDet3" component={Tourdet3} />
+
 
         <MainSatck.Screen name="CompanyDet" component={CompanyDet} />
         <MainSatck.Screen name="Direct" component={Direct} />
@@ -45,6 +51,9 @@ export default function App() {
       </MainSatck.Navigator>
 
     </NavigationContainer>
+    </PersistGate>
+</Provider>
+   
   );
 }
 

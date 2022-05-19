@@ -212,6 +212,7 @@ android {
             }
         }
     }
+    
 
     splits {
         abi {
@@ -229,7 +230,7 @@ android {
             keyPassword 'android'
         }
     }
-    buildTypes {
+     buildTypes {
         debug {
             signingConfig signingConfigs.debug
         }
