@@ -14,8 +14,10 @@ export const Test = () => {
       {/* {products.map(item=>
                 <Box key={item.id}>{item.title}-{item.price}</Box>)}
         */}
-      <Text>{logied}</Text>
-
+      <Text>{logied}kkk</Text>
+<Box>
+  {logied}
+</Box>
       </View>
       <Addtest/>
    </NativeBaseProvider>

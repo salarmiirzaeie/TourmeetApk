@@ -7,12 +7,15 @@ import {
   Image,
   IconButton,
   Box,
-  Heading
+  Heading,useDisclose,Actionsheet,Text, Button
 
 } from "native-base";
 import  AntDesign  from "react-native-vector-icons/AntDesign";
+import  Ionicons  from "react-native-vector-icons/Ionicons";
+import { useSelector } from 'react-redux'
+
 import { Profileabout } from "../components/Profile/Profileabout";
-export const Profile = () => {
+export const Profile = ({navigation}) => {
   const [dataa, setdata] = useState({});
 
   useEffect(() => {
@@ -33,7 +36,14 @@ export const Profile = () => {
         }
       );
   };
+  const {
+    isOpen,
+    onOpen,
+    onClose
+  } = useDisclose();
 
+  const IsSigned=useSelector(store=>store.loginState)
+if(IsSigned){
   return (
     <NativeBaseProvider >
       <View p={0} bg="#8F95D3" flex={1}>
@@ -45,7 +55,7 @@ export const Profile = () => {
           borderRadius={10}
 
         >
-          <HStack borderRadius="full">
+          <HStack>
             <IconButton
               // onPress={console.log("f")}
               _icon={{
@@ -58,20 +68,21 @@ export const Profile = () => {
           </HStack>
 
 
-          <HStack borderRadius="full">
+          <HStack>
             <IconButton
+            onPress={onOpen}
 
               _icon={{
-                as: AntDesign,
-                name: "upload",
+                as: Ionicons,
+                name: "menu-outline",
                 color: "white",
-                size: 7,
+                size: 8,
               }}
             />
           </HStack>
 
         </HStack>
-        <View bg="white" borderRadius={30} shadow={3} flex={1}>
+        <View bg="white" borderTopRadius={30} shadow={3} flex={1}>
           <Box size="79" mt={-9} bg="red.100" rounded="full" alignSelf="center">
 
             <Image
@@ -106,11 +117,101 @@ export const Profile = () => {
 
       </View>
 
-
+      <Center>
+      <Actionsheet isOpen={isOpen} onClose={onClose}>
+        <Actionsheet.Content>
+          <Box w="100%" h={60} px={4} justifyContent="center">
+            <Text fontSize="16" color="gray.500" _dark={{
+            color: "gray.300"
+          }}>
+              Albums
+            </Text>
+          </Box>
+          <Actionsheet.Item>Delete</Actionsheet.Item>
+          <Actionsheet.Item onPress={()=>navigation.navigate("Settings")}>Settings</Actionsheet.Item>
+          <Actionsheet.Item>Play</Actionsheet.Item>
+          <Actionsheet.Item>Favourite</Actionsheet.Item>
+          <Actionsheet.Item>Cancel</Actionsheet.Item>
+        </Actionsheet.Content>
+      </Actionsheet>
+    </Center>
 
 
 
 
     </NativeBaseProvider>
   );
+
+}
+else{
+  return (
+    <NativeBaseProvider >
+      <View p={0} bg="#8F95D3" flex={1}>
+        <HStack
+          justifyContent="space-between"
+          bg="transparent"
+          w="100%"
+          p={1}
+          borderRadius={10}
+
+        >
+          <HStack>
+            <IconButton
+              // onPress={console.log("f")}
+              _icon={{
+                as: AntDesign,
+                name: "left",
+                color: "white",
+                size: 7,
+              }}
+            />
+          </HStack>
+
+
+          <HStack>
+            <IconButton
+            onPress={onOpen}
+
+              _icon={{
+                as: Ionicons,
+                name: "menu-outline",
+                color: "white",
+                size: 8,
+              }}
+            />
+          </HStack>
+
+        </HStack>
+      <Button onPress={()=>navigation.navigate("Login")}>Login</Button>
+      </View>
+
+      <Center>
+      <Actionsheet isOpen={isOpen} onClose={onClose}>
+        <Actionsheet.Content>
+          <Box w="100%" h={60} px={4} justifyContent="center">
+            <Text fontSize="16" color="gray.500" _dark={{
+            color: "gray.300"
+          }}>
+              Albums
+            </Text>
+          </Box>
+          <Actionsheet.Item>Delete</Actionsheet.Item>
+          <Actionsheet.Item onPress={()=>navigation.navigate("Settings")}>Settings</Actionsheet.Item>
+          <Actionsheet.Item>Play</Actionsheet.Item>
+          <Actionsheet.Item>Favourite</Actionsheet.Item>
+          <Actionsheet.Item>Cancel</Actionsheet.Item>
+        </Actionsheet.Content>
+      </Actionsheet>
+    </Center>
+
+
+
+
+    </NativeBaseProvider>
+  );
+
+}
+
+
+  
 };

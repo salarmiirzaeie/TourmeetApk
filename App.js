@@ -10,8 +10,7 @@ import React from 'react';
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { Home } from './assets/pages/Home';
+
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
@@ -24,11 +23,18 @@ import { CampProfile } from "./Pages/CampProfile";
 import { SearchPage } from "./Pages/SearchPage";
 import { AddTour } from "./Pages/AddTour";
 import { Home2 } from "./Pages/Home2"
-import { NativeBaseProvider, Circle } from "native-base"
+import { NativeBaseProvider, Circle ,Stagger} from "native-base"
 import { Tourdet3 } from './components/Details/Tourdet3';
 import { Provider } from 'react-redux';
 import {Store,persistor} from './assets/State-Management/Store';
 import { PersistGate } from 'redux-persist/integration/react'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useSelector } from 'react-redux'
+import { SignUp } from './assets/signpages/SignUp';
+import { Settings } from './Pages/Settings';
+import { Login } from './assets/signpages/Login';
+import { ProfileGallery } from './components/Profile/ProfileGallery';
+
 export default function App() {
   const MainSatck = createNativeStackNavigator()
 
@@ -48,6 +54,8 @@ export default function App() {
         <MainSatck.Screen name="Direct" component={Direct} />
         <MainSatck.Screen name="SearchPage" component={SearchPage} />
         <MainSatck.Screen name="AddTour1" component={AddTour} />
+        <MainSatck.Screen name="SignUp" component={SignUp} />
+
       </MainSatck.Navigator>
 
     </NavigationContainer>
@@ -57,38 +65,81 @@ export default function App() {
   );
 }
 
+function HomeSatck() {
+  const HomingSatck = createNativeStackNavigator()
 
-const Tab = createMaterialBottomTabNavigator();
+  return (
+
+      <HomingSatck.Navigator screenOptions={{
+        headerShown: false,
+      }}>
+        <HomingSatck.Screen name="cc" component={Home2} />
+        <HomingSatck.Screen name="CampProfile" component={CampProfile} />
+        <HomingSatck.Screen name="Settings" component={Settings} />
+
+      
+
+       
+      </HomingSatck.Navigator>
+
+  
+   
+  );
+}
+
+
+
+
+function ProfileSatck() {
+  const ProfileingSatck = createNativeStackNavigator()
+
+  return (
+
+      <ProfileingSatck.Navigator screenOptions={{
+        headerShown: false,
+      }}>
+        <ProfileingSatck.Screen name="Profile" component={Profile} />
+      
+        <ProfileingSatck.Screen name="Settings" component={Settings} />
+        <ProfileingSatck.Screen name="Login" component={Login} />
+
+
+       
+      </ProfileingSatck.Navigator>
+
+  
+   
+  );
+}
+
+
 
 function Tabstack() {
+  const Tab = createBottomTabNavigator();
+  const IsSigned=useSelector(store=>store.loginState)
+// if(IsSigned){
   return (
 
     <Tab.Navigator
-      labeled={true}
-      barStyle={{
-        position: "absolute",
-        backgroundColor: "white",
-        borderRadius: 35,
-        borderTopColor: "white",
-        stopAnimation: "50",
-      }}
-
+      
 
     >
       <Tab.Screen
         options={{
           unmountOnBlur: true,
+          tabBarActiveTintColor: "#00A693",
 
           headerShown: false,
           tabBarShowLabel: false,
+          lazy:true,
           tabBarIcon: ({ color }) => (
             <AntDesign name="home" size={24} color={color} />
           ),
 
 
         }}
-        name="Homea"
-        component={Home2}
+        name="HomeSatck"
+        component={HomeSatck}
       />
       <Tab.Screen
         name="nnnn"
@@ -110,11 +161,16 @@ function Tabstack() {
 
           tabBarIcon: ({ color }) => (
             <NativeBaseProvider>
-              <Circle size={41} mt={-2} shadow={5} bg="#00A693">
-                <Feather name="plus" size={24} color={color} />
+              <Circle size={50} mt={-5} shadow={7} bg="#00A693">
+                <Feather name="plus" size={30} color={color} />
               </Circle>
             </NativeBaseProvider>
           ),
+          tabBarShowLabel: false,
+          headerShown: false,
+          tabBarActiveTintColor:"gray"
+
+
         }}
 
 
@@ -132,7 +188,7 @@ function Tabstack() {
           ),
 
         }}
-        component={Profile}
+        component={ProfileGallery}
       />
       <Tab.Screen
         name="Esxplore"
@@ -146,8 +202,36 @@ function Tabstack() {
           ),
 
         }}
-        component={CampProfile}
+        component={ProfileSatck}
       />
     </Tab.Navigator>
+  );
+// }
+// else{
+//   return(
+
+//    <LoginSatck/>
+//   )
+// }
+ 
+}
+function LoginSatck() {
+  const LogingSatck = createNativeStackNavigator()
+
+  return (
+
+      <LogingSatck.Navigator screenOptions={{
+        headerShown: false,
+      }}>
+        <LogingSatck.Screen name="Login" component={Login} />
+      
+        <LogingSatck.Screen name="SignUp" component={SignUp} />
+
+
+       
+      </LogingSatck.Navigator>
+
+  
+   
   );
 }

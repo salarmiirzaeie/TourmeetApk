@@ -8,7 +8,7 @@ export const HomeCategories = () => {
     <ScrollView showsHorizontalScrollIndicator={false} pagingEnabled={true} horizontal={true}>
       <HStack h="95%" W="full" space={4} justifyContent="center">
         <Pressable
-          onPress={() => navigation.navigate("List")}
+         onPress={() => navigation.navigate("TourDet3")}
           h="full"
           w="40"
           rounded="lg"
@@ -42,7 +42,7 @@ export const HomeCategories = () => {
         </Pressable>
 
         <Pressable
-          onPress={() => navigation.navigate("List")}
+        onPress={() => navigation.navigate("TourDet3")}
           h="full"
           w="40"
           rounded="lg"
@@ -76,7 +76,7 @@ export const HomeCategories = () => {
             <JoinedPeople />
           </Center> */}
         </Pressable>
-        <Pressable h="full" w="40" rounded="lg" shadow={6}>
+        <Pressable h="full" w="40" rounded="lg" shadow={6} onPress={() => navigation.navigate("TourDet3")}>
           <Image
             rounded="lg"
             h="full"
@@ -105,7 +105,7 @@ export const HomeCategories = () => {
             <JoinedPeople />
           </Center> */}
         </Pressable>
-        <Pressable h="full" w="40" rounded="lg" shadow={6}>
+        <Pressable h="full" w="40" rounded="lg" shadow={6} onPress={() => navigation.navigate("TourDet3")}>
           <Image
             rounded="lg"
             h="full"

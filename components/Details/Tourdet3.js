@@ -30,7 +30,7 @@ export const Tourdet3 = () => {
     const [ff, setff] = useState([0.45, 0.5,false])
     const move=(i)=>{
         if(i==1){
-            setff([0.1,0.85,true])
+            setff([0.15,0.85,true])
 
         }
         if(i==0){
@@ -60,7 +60,56 @@ export const Tourdet3 = () => {
                 </View>
 
                 <View mt={-4} borderTopRadius={30} flex={ff[1]} bg="white">
+                    <View  pl={7}flex={0.01} alignItems="center" zIndex={999} pr={7}>
+                    {/* <Box bg="white" shadow={4} rounded={"md"} mt={-7} size={10}>
+                        
+                        <IconButton
+                        mt={2}
+                    h={1}
+                    onPress={()=>{move(0)}}
+
+                        _icon={{
+                            as: AntDesign,
+                            name: "heart",
+                            color: "red.500",
+                             size: 7,
+                            width:30
+                        }}
+                    /></Box> */}
+                    <Box shadow={5} bg="white" mt={-6} rounded={"full"} size={10}> 
+                    
                     {ff[2]==true?<IconButton
+                  
+                  rounded={"full"}
+                    onPress={()=>{move(0)}}
+
+                        _icon={{
+                            as: AntDesign,
+                            name: "down",
+                            color: "gray.300",
+                             size: 5,
+                          
+                             
+                        }}
+                    />:
+
+                    <IconButton  rounded={"full"}
+                    onPress={()=>{move(1)}}
+                 
+                        _icon={{
+                            as: AntDesign,
+                            name: "up",
+                            color: "gray.300",
+                        size: 5,
+                           
+                        }}
+                    />
+
+                    }
+                    </Box>
+
+                    </View>
+                    {/* {ff[2]==true?<IconButton
                     h={1}
                     onPress={()=>{move(0)}}
 
@@ -86,12 +135,24 @@ export const Tourdet3 = () => {
                     />
 
                     }
-                    
+                     */}
                    
                     <TabViev/>
                 </View>
-                <View pl={2} pr={2} flex={0.06}>
-                    <Button borderRadius={10} bg="#8F95D3" h="full">پیوستن</Button>
+                <View pl={2} bg="white" justifyContent="space-between" flexDirection="row" pr={2} flex={0.06}>
+                <Box bg="white" flex={0.14} shadow={4} rounded={"md"} >
+                        
+                        <IconButton
+                       
+
+                        _icon={{
+                            as: AntDesign,
+                            name: "heart",
+                            color: "red.500",
+                             size: 7,
+                        }}
+                    /></Box> 
+                    <Button borderRadius={10} flex={0.85} bg="#8F95D3" h="full">پیوستن</Button>
                 </View>
 
             </View>

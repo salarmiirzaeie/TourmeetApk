@@ -39,7 +39,7 @@ export const Home2 = () => {
             <SearchInput />
           </Center>
         </View>
-        <View bg="#F1F5F2" p={3} mt={30} borderRadius={25} shadow={3} flex={0.9}>
+        <View bg="#F1F5F2" p={3} mt={30} borderTopRadius={25} shadow={3} flex={0.86}>
 
 
           <View zIndex={-100} flex={0.3}>
@@ -123,18 +123,20 @@ export const Home2 = () => {
 
 
           </View>
-          <View pt={0} flex={0.4}>
+          <View pt={0} flex={0.45}>
             <HomeCategories />
           </View>
 
-          <View pt={3} flex={0.24}>
-            <Center pb={5}>
+          <View  pt={0} flex={0.32}>
+            <Center pt={5}>
               <Heading fonts color="#023436">
                 محبوبترین <Heading color="#00A693">کمپ ها </Heading>
               </Heading>
             </Center>
+<View flex={1} pt={5}>
+<PopularCompanies  />
 
-            <PopularCompanies />
+</View>
           </View>
         </View>
 

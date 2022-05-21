@@ -15,7 +15,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import  AntDesign  from 'react-native-vector-icons/AntDesign';
 
-export  const List = () => {
+ const List = () => {
   const [dataa, setdata] = React.useState([]);
 
 
@@ -45,7 +45,7 @@ flexDirection="column"
 showsVerticalScrollIndicator={false}
 
 >
-<VStack  space={2} >
+<VStack pl={2}pt={1} pr={2} space={1} >
   {dataa.map((data, i) => (
     <Pressable
       w="full"
@@ -58,6 +58,7 @@ showsVerticalScrollIndicator={false}
       key={i}
       onPress={() => navigation.navigate("TourDet3")}
       p={1}
+      
     >
       <Image
         rounded="md"
@@ -118,3 +119,4 @@ showsVerticalScrollIndicator={false}
   
   );
 };
+export default React.memo(List)
