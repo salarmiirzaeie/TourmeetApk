@@ -19,12 +19,13 @@ export const AppBar = ({ showmodal }) => {
     <>
       <HStack
         justifyContent="space-between"
-        zIndex={9999}
+        zIndex={9}
         bg="transparent"
         w="100%"
-        p={3}
+        p={2}
         position="absolute"
         borderRadius={10}
+        
 
       >
         <HStack borderRadius="full">

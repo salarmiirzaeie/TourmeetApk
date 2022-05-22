@@ -1,10 +1,11 @@
-import { View, Image, Text, FlatList, NativeBaseProvider, Box, Center, Button, IconButton } from 'native-base'
+import { View, Image, Text, FlatList, NativeBaseProvider, Box, Pressable, Button, IconButton ,Modal,useDisclose} from 'native-base'
 import React, { useState } from 'react'
 import { Dimensions } from "react-native"
 import { AppBar } from '../Camp/AppBar';
 import { TabViev } from './TabViev';
 const { width: windowWidth } = Dimensions.get("window");
 import  AntDesign  from 'react-native-vector-icons/AntDesign';
+import axios from 'axios'
 
 const slideList = Array.from({ length: 30 }).map((_, i) => {
     return {
@@ -15,9 +16,11 @@ const slideList = Array.from({ length: 30 }).map((_, i) => {
 });
 
 function Slide({ data }) {
+      /* 2. Get the param */
     return (
 
         <Image
+        
             alt='ll'
             source={{ uri: data.image }}
             style={{ width: windowWidth, height: "100%" }}
@@ -26,40 +29,72 @@ function Slide({ data }) {
 
     );
 }
-export const Tourdet3 = () => {
-    const [ff, setff] = useState([0.45, 0.5,false])
+export const Tourdet3 = ({navgation,route}) => {
+    const {
+        isOpen,
+        onOpen,onClose
+      } = useDisclose();
+    const [ff, setff] = useState([0.44, 0.5,false])
     const move=(i)=>{
         if(i==1){
-            setff([0.15,0.85,true])
+            setff([0.1,0.84,true])
 
         }
         if(i==0){
-            setff([0.45,0.5,false])
+            setff([0.44,0.5,false])
  
         }
 
     }
+
+    const  Id  = route.params;
+    console.log(Id)
+    const data={"id": 0,
+    "title": "string",
+    "description": "string",
+    "bannerUrl": "string",
+    "duration": "2022-05-22T14:39:37.585Z",
+    "price": 0,
+    "capacity": 0,
+    "approvalStatus": {}}
+    React.useEffect(() => {
+        getdetails();
+      }, []);
+    const getdetails = () => {
+    axios.post('http://192.168.43.153:3333/api/tour/find', data)
+    .then(function (response) {
+      console.log(response)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
     return (
         <NativeBaseProvider>
             <AppBar />
             
             <View flex={1} flexDirection="column">
-                
-                <View flex={ff[0]}>
+                {/* {ff[2]?<View bg="#8F95D3" flex={ff[0]}></View>: */}
+                  <View  flex={ff[0]}>
                     
-                    <FlatList
-                        data={slideList}
-                        renderItem={({ item }) => {
-                            return <Slide data={item} />;
-                        }}
-                        pagingEnabled
-                        horizontal
-                        showsHorizontalScrollIndicator={false}
-                    />
+                  <FlatList
+                  
+                      data={slideList}
+                      renderItem={({ item }) => {
+                          return (<Pressable onPress={onOpen}>
+                        <Slide data={item} />
+                          </Pressable>);
+                      }}
+                      pagingEnabled
+                      horizontal
+                      showsHorizontalScrollIndicator={false}
+                  />
 
-                </View>
+              </View>
+                {/* } */}
+              
 
-                <View mt={-4} borderTopRadius={30} flex={ff[1]} bg="white">
+                <View mt={-3.5} zIndex={12} borderTopRadius={30} flex={ff[1]} bg="white">
                     <View  pl={7}flex={0.01} alignItems="center" zIndex={999} pr={7}>
                     {/* <Box bg="white" shadow={4} rounded={"md"} mt={-7} size={10}>
                         
@@ -156,7 +191,28 @@ export const Tourdet3 = () => {
                 </View>
 
             </View>
+<Modal backgroundColor={"black"} size={"full"} onClose={onClose} isOpen={isOpen}>
+<Modal.CloseButton/>
 
+    <Modal.Content flex={0.5}>
+    <FlatList
+                  
+                  data={slideList}
+                  renderItem={({ item }) => {
+                      return (<Pressable onPress={()=>console.log("far")}>
+                    <Slide data={item} />
+                      </Pressable>);
+                  }}
+                  pagingEnabled
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+              />  
+              
+                </Modal.Content>
+
+
+                <Modal.Footer display={"none"}></Modal.Footer>
+</Modal>
         </NativeBaseProvider>
 
     );

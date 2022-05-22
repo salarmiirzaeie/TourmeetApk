@@ -75,7 +75,6 @@ function HomeSatck() {
       }}>
         <HomingSatck.Screen name="cc" component={Home2} />
         <HomingSatck.Screen name="CampProfile" component={CampProfile} />
-        <HomingSatck.Screen name="Settings" component={Settings} />
 
       
 
@@ -101,7 +100,6 @@ function ProfileSatck() {
         <ProfileingSatck.Screen name="Profile" component={Profile} />
       
         <ProfileingSatck.Screen name="Settings" component={Settings} />
-        <ProfileingSatck.Screen name="Login" component={Login} />
 
 
        
@@ -117,7 +115,7 @@ function ProfileSatck() {
 function Tabstack() {
   const Tab = createBottomTabNavigator();
   const IsSigned=useSelector(store=>store.loginState)
-// if(IsSigned){
+ if(IsSigned){
   return (
 
     <Tab.Navigator
@@ -155,6 +153,7 @@ function Tabstack() {
         }}
         component={Explore}
       />
+      
       <Tab.Screen
         name=" "
         options={{
@@ -206,13 +205,13 @@ function Tabstack() {
       />
     </Tab.Navigator>
   );
-// }
-// else{
-//   return(
+}
+else{
+  return(
 
-//    <LoginSatck/>
-//   )
-// }
+   <LoginSatck/>
+  )
+}
  
 }
 function LoginSatck() {

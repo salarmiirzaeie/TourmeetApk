@@ -14,6 +14,7 @@ import {
 } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import  AntDesign  from 'react-native-vector-icons/AntDesign';
+import axios from 'axios'
 
  const List = () => {
   const [dataa, setdata] = React.useState([]);
@@ -23,18 +24,13 @@ import  AntDesign  from 'react-native-vector-icons/AntDesign';
     getTours();
   }, []);
   const getTours = () => {
-    const apiUrl = "http://192.168.43.153:3333/api/tour/list";
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then(
-        (data) => {
-          setdata(data);
-          console.log(dataa)
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+
+    axios.get(`http://192.168.43.153:3333/api/tour/list`)
+    .then(res => {
+      const data = res.data;
+      setdata(data);
+    })
+
   };
   const navigation = useNavigation();
   return (
@@ -56,7 +52,10 @@ showsVerticalScrollIndicator={false}
       rounded="md"
       shadow={3}
       key={i}
-      onPress={() => navigation.navigate("TourDet3")}
+      onPress={() => navigation.navigate("TourDet3", {
+        Id: data.id,
+       
+      })}
       p={1}
       
     >
