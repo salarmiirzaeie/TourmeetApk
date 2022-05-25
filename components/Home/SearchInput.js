@@ -10,8 +10,8 @@ export const SearchInput = () => {
     <Input
     isFocused={false} showSoftInputOnFocus={false}  onFocus={()=>{navigation.navigate("SearchPage")
     }}
-      w="80%"
-      h="full"
+      w="90%"
+      h="90%"
       bg="white"
       borderColor="white"
       shadow={4}
@@ -32,7 +32,7 @@ export const SearchInput = () => {
             },
           }}
         >
-          <Circle bg="#8F95D3" size={9} >
+          <Circle bg="#8F95D3" size={8} >
             <AntDesign name="search1" color="white" size={20} />
           </Circle>
         </PresenceTransition>

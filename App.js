@@ -14,6 +14,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import { CompanyDet } from "./Pages/CompanyDet";
 import { Explore } from "./Pages/Explore";
 import { TourDet } from "./Pages/TourDet";
@@ -23,16 +26,16 @@ import { CampProfile } from "./Pages/CampProfile";
 import { SearchPage } from "./Pages/SearchPage";
 import { AddTour } from "./Pages/AddTour";
 import { Home2 } from "./Pages/Home2"
-import { NativeBaseProvider, Circle ,Stagger} from "native-base"
+import { NativeBaseProvider, Circle ,Stagger,Center,Box,Icon,useDisclose,IconButton,HStack} from "native-base"
 import { Tourdet3 } from './components/Details/Tourdet3';
 import { Provider } from 'react-redux';
 import {Store,persistor} from './assets/State-Management/Store';
 import { PersistGate } from 'redux-persist/integration/react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useSelector } from 'react-redux'
-import { SignUp } from './assets/signpages/SignUp';
+import { SignUp } from './assets/Pages/signpages/SignUp';
 import { Settings } from './Pages/Settings';
-import { Login } from './assets/signpages/Login';
+import { Login } from './assets/Pages/signpages/Login';
 import { ProfileGallery } from './components/Profile/ProfileGallery';
 
 export default function App() {
@@ -53,7 +56,6 @@ export default function App() {
         <MainSatck.Screen name="CompanyDet" component={CompanyDet} />
         <MainSatck.Screen name="Direct" component={Direct} />
         <MainSatck.Screen name="SearchPage" component={SearchPage} />
-        <MainSatck.Screen name="AddTour1" component={AddTour} />
         <MainSatck.Screen name="SignUp" component={SignUp} />
 
       </MainSatck.Navigator>
@@ -115,6 +117,12 @@ function ProfileSatck() {
 function Tabstack() {
   const Tab = createBottomTabNavigator();
   const IsSigned=useSelector(store=>store.loginState)
+  
+
+  const {
+    isOpen,
+    onToggle
+  } = useDisclose();
  if(IsSigned){
   return (
 
@@ -129,7 +137,6 @@ function Tabstack() {
 
           headerShown: false,
           tabBarShowLabel: false,
-          lazy:true,
           tabBarIcon: ({ color }) => (
             <AntDesign name="home" size={24} color={color} />
           ),
@@ -155,22 +162,34 @@ function Tabstack() {
       />
       
       <Tab.Screen
+      
         name=" "
+        
+        
         options={{
-
+        
+         
           tabBarIcon: ({ color }) => (
+            
             <NativeBaseProvider>
-              <Circle size={50} mt={-5} shadow={7} bg="#00A693">
-                <Feather name="plus" size={30} color={color} />
+            
+            <Circle size={45}shadow={7} bg="cyan.400">
+                <AntDesign name="plus" size={30}  />
               </Circle>
+
+              
             </NativeBaseProvider>
           ),
           tabBarShowLabel: false,
           headerShown: false,
-          tabBarActiveTintColor:"gray"
+          tabBarActiveTintColor:"gray",
+          
+          
 
 
-        }}
+        }
+      }
+      
 
 
         component={AddTour}

@@ -18,16 +18,14 @@ export const AddTour = () => {
     return (
         <NativeBaseProvider>
             <StatusBar />
-            <View display={"flex"} flexDirection="column" flex={0.93}>
+            <View display={"flex"} flexDirection="column" flex={1}>
                 <HStack
                     justifyContent="space-between"
                     zIndex={9999}
                     bg="gray.100"
                     w="100%"
                     p={3}
-                    borderRadius={10}
-
-                >
+                    borderRadius={10}>
                     <HStack borderRadius="full">
                         <IconButton
                             onPress={() => navigation.goBack()}

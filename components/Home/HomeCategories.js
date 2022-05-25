@@ -6,13 +6,13 @@ export const HomeCategories = () => {
   const navigation = useNavigation()
   return (
     <ScrollView showsHorizontalScrollIndicator={false} pagingEnabled={true} horizontal={true}>
-      <HStack h="95%" W="full" space={4} justifyContent="center">
+      <HStack h={225} W="full" space={4} justifyContent="center">
         <Pressable
          onPress={() => navigation.navigate("TourDet3")}
           h="full"
           w="40"
           rounded="lg"
-          shadow={6}
+          shadow={8}
         >
           <Image
             rounded="lg"

@@ -16,19 +16,20 @@ import { useNavigation } from "@react-navigation/native";
 import  AntDesign  from 'react-native-vector-icons/AntDesign';
 import axios from 'axios'
 
- const List = () => {
+ const List = (datas) => {
   const [dataa, setdata] = React.useState([]);
 
 
   React.useEffect(() => {
     getTours();
-  }, []);
+  }, [datas.datas]);
   const getTours = () => {
 
     axios.get(`http://192.168.43.153:3333/api/tour/list`)
     .then(res => {
       const data = res.data;
       setdata(data);
+      console.log(data.length)
     })
 
   };

@@ -7,16 +7,20 @@ import {
   Image,
   IconButton,
   Box,
-  Heading,useDisclose,Actionsheet,Text, Button
+  Heading,useDisclose,Actionsheet,Text, Icon
 
 } from "native-base";
 import  AntDesign  from "react-native-vector-icons/AntDesign";
 import  Ionicons  from "react-native-vector-icons/Ionicons";
-import { useSelector } from 'react-redux'
+import  MaterialIcons  from "react-native-vector-icons/MaterialIcons";
+
+import {LogOut,login} from '../assets/State-Management/actions/LoginAction'
+import { useDispatch } from 'react-redux'
 
 import { Profileabout } from "../components/Profile/Profileabout";
 export const Profile = ({navigation}) => {
   const [dataa, setdata] = useState({});
+  const dispatch=useDispatch();
 
   useEffect(() => {
     getcampinfo();
@@ -58,7 +62,7 @@ export const Profile = ({navigation}) => {
               // onPress={console.log("f")}
               _icon={{
                 as: AntDesign,
-                name: "logout",
+                name: "qrcode",
                 color: "white",
                 size: 7,
               }}
@@ -99,7 +103,7 @@ export const Profile = ({navigation}) => {
             <Heading color="gray.300" size="md">I am Mona</Heading>
 
           </Center>
-          <View bg="white"  flex={0.92}>
+          <View bg="white"  flex={1}>
 
 
 
@@ -116,20 +120,24 @@ export const Profile = ({navigation}) => {
       </View>
 
       <Center>
-      <Actionsheet isOpen={isOpen} onClose={onClose}>
+      <Actionsheet isOpen={isOpen} onClose={onClose} size="full">
         <Actionsheet.Content>
-          <Box w="100%" h={60} px={4} justifyContent="center">
-            <Text fontSize="16" color="gray.500" _dark={{
-            color: "gray.300"
-          }}>
-              Albums
-            </Text>
-          </Box>
-          <Actionsheet.Item>Delete</Actionsheet.Item>
-          <Actionsheet.Item onPress={()=>navigation.navigate("Settings")}>Settings</Actionsheet.Item>
-          <Actionsheet.Item>Play</Actionsheet.Item>
-          <Actionsheet.Item>Favourite</Actionsheet.Item>
-          <Actionsheet.Item>Cancel</Actionsheet.Item>
+         
+          <Actionsheet.Item startIcon={<Icon as={MaterialIcons} color="trueGray.400" mr="1" size="6" name="settings" />}>
+            Settings
+          </Actionsheet.Item>
+          <Actionsheet.Item startIcon={<Icon as={MaterialIcons} name="bookmark" color="trueGray.400" mr="1" size="6" />}>
+            Saved
+          </Actionsheet.Item>
+          <Actionsheet.Item startIcon={<Icon as={Ionicons} name="play-circle" color="trueGray.400" mr="1" size="6" />}>
+            Play
+          </Actionsheet.Item>
+          <Actionsheet.Item startIcon={<Icon as={MaterialIcons} color="trueGray.400" mr="1" size="6" name="favorite" />}>
+            Favourite
+          </Actionsheet.Item>
+          <Actionsheet.Item onPress={()=> dispatch(LogOut())}  startIcon={<Icon as={MaterialIcons} color="trueGray.400" mr="1" size="6" name="logout" />}>
+            Logout
+          </Actionsheet.Item>
         </Actionsheet.Content>
       </Actionsheet>
     </Center>

@@ -16,7 +16,7 @@ import {
     Input,Button,Link,IconButton,Menu,Divider,Text, Circle,Color
   
   } from "native-base";
-  import {login}from '../State-Management/actions/LoginAction'
+  import { login } from "../../State-Management/actions/LoginAction";
   import  AntDesign  from 'react-native-vector-icons/AntDesign';
   import MaterialIcons  from 'react-native-vector-icons/MaterialIcons';
   import Feather  from 'react-native-vector-icons/Feather';
@@ -43,7 +43,7 @@ export const SignUp = ({navigation}) => {
 <View bg={"white"} flex={1} w={"100%"}   alignItems={"center"}>
   
   <View w={"100%"}   flex={0.1}>
-    <Center>    <Menu mr={10} bg="white" mr={3}  defaultIsOpen={false}  w="190" trigger={triggerProps => {
+    <Center>    <Menu mr={10} bg="white" marginRight={120}  defaultIsOpen={false}  w="150" trigger={triggerProps => {
                 return (
 
                 <Box flexDirection={"row"}>
@@ -68,16 +68,12 @@ _icon={{
               
               
               }>
-                <Menu.Group title="Free">
+                
                   <Menu.Item>Arial</Menu.Item>
                   <Menu.Item>Nunito Sans</Menu.Item>
                   <Menu.Item>Roboto</Menu.Item>
-                </Menu.Group>
-                <Divider mt="3" w="100%" />
-                <Menu.Group title="Paid">
-                  <Menu.Item>SF Pro</Menu.Item>
-                  <Menu.Item>Helvetica</Menu.Item>
-                </Menu.Group>
+              
+               
               </Menu>
 </Center>
     

@@ -2,6 +2,7 @@ import React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Galleryprofile } from './Galleryprofile';
 import  List  from '../Explore/List';
+import { Gallery } from '../../assets/Components/Gallery';
 const Tab = createMaterialTopTabNavigator();
 export const Profileabout = (gallery) => {
 
@@ -16,7 +17,8 @@ export const Profileabout = (gallery) => {
 
 
     }}>
-      <Tab.Screen name="bfdf" children={() => <Galleryprofile gallery={gallery} />} />
+            <Tab.Screen name="galley" component={Gallery} />
+
       <Tab.Screen name="Settbfdbdfings" component={List} />
 
     </Tab.Navigator>

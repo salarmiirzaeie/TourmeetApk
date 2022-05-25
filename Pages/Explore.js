@@ -4,6 +4,7 @@ import List  from "../components/Explore/List";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import { NativeBaseProvider} from "native-base";
+import { Gallery } from "../assets/Components/Gallery";
 const Tab = createMaterialTopTabNavigator();
 
 export const Explore = () => {
@@ -28,7 +29,7 @@ export const Explore = () => {
             
          
           }}>
-             <Tab.Screen  name="ujhgn"  component={List} />
+             <Tab.Screen  name="ujhgn" children={()=><List datas={5}/>} />
           <Tab.Screen name="nhnh" component={List} />
       
            <Tab.Screen name="ngngfhnf" component={List} />
