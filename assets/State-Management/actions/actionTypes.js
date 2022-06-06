@@ -5,8 +5,9 @@ export const LOGEDIN="LOGEDIN"
 export const LOGOUT="LOGOUT"
 
 
-export const NONEPROFILE="NONEPROFILE"
+export const EDITPROFILE="EDITPROFILE"
 export const USERPROFILE="USERPROFILE"
+export const CREATEPROFILE="CREATEPROFILE"
 
 
 

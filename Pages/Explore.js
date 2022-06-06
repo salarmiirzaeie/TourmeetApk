@@ -1,14 +1,28 @@
 import React from "react";
+import axios from 'axios'
 
 import List  from "../components/Explore/List";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import { NativeBaseProvider} from "native-base";
-import { Gallery } from "../assets/Components/Gallery";
 const Tab = createMaterialTopTabNavigator();
 
 export const Explore = () => {
+  const [dataa, setdata] = React.useState([]);
+
+  React.useEffect(() => {
+    getTours();
+  }, []);
+  const getTours = () => {
+
+    axios.get(`http://192.168.43.153:3333/api/tour/list`)
+    .then(res => {
+      const data = res.data;
+      setdata(data);
     
+    })
+
+  };
     return (
       <NativeBaseProvider>
       <Tab.Navigator  screenOptions={{
@@ -29,10 +43,10 @@ export const Explore = () => {
             
          
           }}>
-             <Tab.Screen  name="ujhgn" children={()=><List datas={5}/>} />
-          <Tab.Screen name="nhnh" component={List} />
+             <Tab.Screen  name="ujhgn" children={()=><List datas={dataa}/>} />
+          <Tab.Screen name="nhnh" children={()=><List />} />
       
-           <Tab.Screen name="ngngfhnf" component={List} />
+           <Tab.Screen name="ngngfhnf" children={()=><List />}  />
         </Tab.Navigator>
     </NativeBaseProvider>
   );

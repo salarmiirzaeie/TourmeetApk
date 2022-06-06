@@ -15,7 +15,7 @@ export const PopularCompanies = () => {
   return (
     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
       <HStack space={5} direction="row">
-        <Pressable onPress={()=>navigation.navigate("CampProfile")}>
+        <Pressable onPress={()=>navigation.navigate("Profile")}>
           <Box  bg="white" h="70" w="70" rounded="full" shadow={7}>
           <Badge
             bg="#8F95D3"
@@ -40,7 +40,7 @@ export const PopularCompanies = () => {
           />
         </Box>
         </Pressable>
-        <Pressable onPress={()=>navigation.navigate("CampProfile")}>
+        <Pressable onPress={()=>navigation.navigate("Profile")}>
           <Box  bg="white" h="70" w="70" rounded="full" shadow={7}>
           <Badge
             bg="#8F95D3"
@@ -65,7 +65,7 @@ export const PopularCompanies = () => {
           />
         </Box>
         </Pressable>
-        <Pressable onPress={()=>navigation.navigate("CampProfile")}>
+        <Pressable onPress={()=>navigation.navigate("Profile")}>
           <Box  bg="white" h="70" w="70" rounded="full" shadow={7}>
           <Badge
             bg="#8F95D3"
@@ -90,7 +90,7 @@ export const PopularCompanies = () => {
           />
         </Box>
         </Pressable>
-        <Pressable onPress={()=>navigation.navigate("CampProfile")}>
+        <Pressable onPress={()=>navigation.navigate("Profile")}>
           <Box  bg="white" h="70" w="70" rounded="full" shadow={7}>
           <Badge
             bg="#8F95D3"

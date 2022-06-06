@@ -8,160 +8,140 @@
 
 import React from 'react';
 
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { CompanyDet } from "./Pages/CompanyDet";
-import { Explore } from "./Pages/Explore";
-import { TourDet } from "./Pages/TourDet";
-import { Profile } from "./Pages/Profile";
-import { Direct } from "./components/Home/Direct";
-import { CampProfile } from "./Pages/CampProfile";
-import { SearchPage } from "./Pages/SearchPage";
-import { AddTour } from "./Pages/AddTour";
-import { Home2 } from "./Pages/Home2"
-import { NativeBaseProvider, Circle ,Stagger,Center,Box,Icon,useDisclose,IconButton,HStack} from "native-base"
-import { Tourdet3 } from './components/Details/Tourdet3';
-import { Provider } from 'react-redux';
-import {Store,persistor} from './assets/State-Management/Store';
-import { PersistGate } from 'redux-persist/integration/react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useSelector } from 'react-redux'
-import { SignUp } from './assets/Pages/signpages/SignUp';
-import { Settings } from './Pages/Settings';
-import { Login } from './assets/Pages/signpages/Login';
-import { ProfileGallery } from './components/Profile/ProfileGallery';
+import {CompanyDet} from './Pages/CompanyDet';
+import {Explore} from './Pages/Explore';
+import {Profile} from './Pages/Profile';
+import {Direct} from './components/Home/Direct';
+import {CampProfile} from './Pages/CampProfile';
+import {SearchPage} from './Pages/SearchPage';
+import {Home2} from './Pages/Home2';
+import {
+  NativeBaseProvider,
+  Circle,
+  Stagger,
+  Center,
+  Box,
+  Icon,
+  useDisclose,
+  IconButton,
+  HStack,
+} from 'native-base';
+import {Tourdet3} from './components/Details/Tourdet3';
+import {Provider} from 'react-redux';
+import {Store, persistor} from './assets/State-Management/Store';
+import {PersistGate} from 'redux-persist/integration/react';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {useSelector} from 'react-redux';
+import {SignUp} from './assets/Pages/signpages/SignUp';
+import {Login} from './assets/Pages/signpages/Login';
+import {ProfileGallery} from './components/Profile/ProfileGallery';
+import {Companies} from './Pages/Companies';
+import {Activity} from './Pages/Activity';
+import {ConfirmationPage} from './Pages/ConfirmationPage';
 
 export default function App() {
-  const MainSatck = createNativeStackNavigator()
+  const MainSatck = createNativeStackNavigator();
 
   return (
-<Provider store={Store}>
-<PersistGate loading={null} persistor={persistor}>
-<NavigationContainer onReady={()=>console.log("ddd")}>
-      <MainSatck.Navigator screenOptions={{
-        headerShown: false,
-      }}>
-        <MainSatck.Screen name="Tabstack" component={Tabstack} />
-        <MainSatck.Screen name="TourDet" component={TourDet} />
-        <MainSatck.Screen name="TourDet3" component={Tourdet3} />
+    <Provider store={Store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer onReady={() => console.log('ddd')}>
+          <MainSatck.Navigator
+            screenOptions={{
+              headerShown: false,
+            }}>
+            <MainSatck.Screen name="Tabstack" component={Tabstack} />
+            <MainSatck.Screen name="TourDet3" component={Tourdet3} />
 
-
-        <MainSatck.Screen name="CompanyDet" component={CompanyDet} />
-        <MainSatck.Screen name="Direct" component={Direct} />
-        <MainSatck.Screen name="SearchPage" component={SearchPage} />
-        <MainSatck.Screen name="SignUp" component={SignUp} />
-
-      </MainSatck.Navigator>
-
-    </NavigationContainer>
-    </PersistGate>
-</Provider>
-   
+            <MainSatck.Screen name="CompanyDet" component={CompanyDet} />
+            <MainSatck.Screen name="Direct" component={Direct} />
+            <MainSatck.Screen name="SearchPage" component={SearchPage} />
+            <MainSatck.Screen name="SignUp" component={SignUp} />
+            <MainSatck.Screen
+              name="ConfirmationPage"
+              component={ConfirmationPage}
+            />
+          </MainSatck.Navigator>
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
   );
 }
 
 function HomeSatck() {
-  const HomingSatck = createNativeStackNavigator()
+  const HomingSatck = createNativeStackNavigator();
 
   return (
-
-      <HomingSatck.Navigator screenOptions={{
+    <HomingSatck.Navigator
+      screenOptions={{
         headerShown: false,
       }}>
-        <HomingSatck.Screen name="cc" component={Home2} />
-        <HomingSatck.Screen name="CampProfile" component={CampProfile} />
-
-      
-
-       
-      </HomingSatck.Navigator>
-
-  
-   
+      <HomingSatck.Screen name="cc" component={Home2} />
+      <HomingSatck.Screen name="Profile" component={Profile} />
+      <HomingSatck.Screen name="Companies" component={Companies} />
+    </HomingSatck.Navigator>
   );
 }
-
-
-
 
 function ProfileSatck() {
-  const ProfileingSatck = createNativeStackNavigator()
+  const ProfileingSatck = createNativeStackNavigator();
 
   return (
-
-      <ProfileingSatck.Navigator screenOptions={{
+    <ProfileingSatck.Navigator
+      screenOptions={{
         headerShown: false,
       }}>
-        <ProfileingSatck.Screen name="Profile" component={Profile} />
-      
-        <ProfileingSatck.Screen name="Settings" component={Settings} />
+      <ProfileingSatck.Screen name="Profile" component={CampProfile} />
 
-
-       
-      </ProfileingSatck.Navigator>
-
-  
-   
+    </ProfileingSatck.Navigator>
   );
 }
-
-
 
 function Tabstack() {
   const Tab = createBottomTabNavigator();
-  const IsSigned=useSelector(store=>store.loginState)
-  
+  const IsSigned = useSelector(store => store.loginState);
 
-  const {
-    isOpen,
-    onToggle
-  } = useDisclose();
- if(IsSigned){
-  return (
+  const {isOpen, onToggle} = useDisclose();
+  if (IsSigned) {
+    return (
+      <Tab.Navigator>
+        <Tab.Screen
+          options={{
+            unmountOnBlur: true,
+            tabBarActiveTintColor: '#00A693',
 
-    <Tab.Navigator
+            headerShown: false,
+            tabBarShowLabel: false,
+            tabBarIcon: ({color}) => (
+              <AntDesign name="home" size={24} color={color} />
+            ),
+          }}
+          name="HomeSatck"
+          component={HomeSatck}
+        />
+        <Tab.Screen
+          name="nnnn"
+          options={{
+            tabBarShowLabel: false,
+            unmountOnBlur: true,
+            tabBarActiveTintColor: '#00A693',
+            headerShown: false,
+            tabBarIcon: ({color}) => (
+              <Ionicons name="compass-outline" size={24} color={color} />
+            ),
+          }}
+          component={Explore}
+        />
+
+        {/* <Tab.Screen
       
-
-    >
-      <Tab.Screen
-        options={{
-          unmountOnBlur: true,
-          tabBarActiveTintColor: "#00A693",
-
-          headerShown: false,
-          tabBarShowLabel: false,
-          tabBarIcon: ({ color }) => (
-            <AntDesign name="home" size={24} color={color} />
-          ),
-
-
-        }}
-        name="HomeSatck"
-        component={HomeSatck}
-      />
-      <Tab.Screen
-        name="nnnn"
-        options={{
-          tabBarShowLabel: false,
-          unmountOnBlur: true,
-          tabBarActiveTintColor: "#00A693",
-          headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <Ionicons name="compass-outline" size={24} color={color} />
-          ),
-
-        }}
-        component={Explore}
-      />
-      
-      <Tab.Screen
       
         name=" "
         
@@ -193,63 +173,50 @@ function Tabstack() {
 
 
         component={AddTour}
-      />
-      <Tab.Screen
-        name="s"
-        options={{
-          tabBarShowLabel: false,
-          unmountOnBlur: true,
-          tabBarActiveTintColor: "#00A693",
-          headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <AntDesign name="hearto" size={24} color={color} />
-          ),
-
-        }}
-        component={ProfileGallery}
-      />
-      <Tab.Screen
-        name="Esxplore"
-        options={{
-          tabBarShowLabel: false,
-          unmountOnBlur: true,
-          tabBarActiveTintColor: "#00A693",
-          headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <Feather name="user" size={24} color={color} />
-          ),
-
-        }}
-        component={ProfileSatck}
-      />
-    </Tab.Navigator>
-  );
-}
-else{
-  return(
-
-   <LoginSatck/>
-  )
-}
- 
+      /> */}
+        <Tab.Screen
+          name="s"
+          options={{
+            tabBarShowLabel: false,
+            unmountOnBlur: true,
+            tabBarActiveTintColor: '#00A693',
+            headerShown: false,
+            tabBarIcon: ({color}) => (
+              <AntDesign name="hearto" size={24} color={color} />
+            ),
+          }}
+          component={Activity}
+        />
+        <Tab.Screen
+          name="Esxplore"
+          options={{
+            tabBarShowLabel: false,
+            unmountOnBlur: true,
+            tabBarActiveTintColor: '#00A693',
+            headerShown: false,
+            tabBarIcon: ({color}) => (
+              <Feather name="user" size={24} color={color} />
+            ),
+          }}
+          component={ProfileSatck}
+        />
+      </Tab.Navigator>
+    );
+  } else {
+    return <LoginSatck />;
+  }
 }
 function LoginSatck() {
-  const LogingSatck = createNativeStackNavigator()
+  const LogingSatck = createNativeStackNavigator();
 
   return (
-
-      <LogingSatck.Navigator screenOptions={{
+    <LogingSatck.Navigator
+      screenOptions={{
         headerShown: false,
       }}>
-        <LogingSatck.Screen name="Login" component={Login} />
-      
-        <LogingSatck.Screen name="SignUp" component={SignUp} />
+      <LogingSatck.Screen name="Login" component={Login} />
 
-
-       
-      </LogingSatck.Navigator>
-
-  
-   
+      <LogingSatck.Screen name="SignUp" component={SignUp} />
+    </LogingSatck.Navigator>
   );
 }
