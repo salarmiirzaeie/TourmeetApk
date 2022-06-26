@@ -45,6 +45,9 @@ import {ProfileGallery} from './components/Profile/ProfileGallery';
 import {Companies} from './Pages/Companies';
 import {Activity} from './Pages/Activity';
 import {ConfirmationPage} from './Pages/ConfirmationPage';
+import { MyProfile } from './Pages/MyProfile';
+import { CamProfile2 } from './Pages/CamProfile2';
+import { Profile2 } from './Pages/Profile2';
 
 export default function App() {
   const MainSatck = createNativeStackNavigator();
@@ -84,7 +87,7 @@ function HomeSatck() {
         headerShown: false,
       }}>
       <HomingSatck.Screen name="cc" component={Home2} />
-      <HomingSatck.Screen name="Profile" component={Profile} />
+      <HomingSatck.Screen name="CampProfile" component={CampProfile} />
       <HomingSatck.Screen name="Companies" component={Companies} />
     </HomingSatck.Navigator>
   );
@@ -98,7 +101,7 @@ function ProfileSatck() {
       screenOptions={{
         headerShown: false,
       }}>
-      <ProfileingSatck.Screen name="Profile" component={CampProfile} />
+      <ProfileingSatck.Screen name="MyProfile" component={MyProfile} />
 
     </ProfileingSatck.Navigator>
   );

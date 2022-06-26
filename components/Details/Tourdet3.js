@@ -72,7 +72,6 @@ export const Tourdet3 = ({navgation, route}) => {
           setdata(response.data);
         }
 
-        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -82,7 +81,7 @@ export const Tourdet3 = ({navgation, route}) => {
     <NativeBaseProvider>
       <AppBar />
 
-      <View flex={1} flexDirection="column">
+      <View  flex={1} flexDirection="column">
         <View flex={ff[0]}>
           <FlatList
             data={slideList}
@@ -138,6 +137,7 @@ export const Tourdet3 = ({navgation, route}) => {
             </Box>
           </View>
           <Tab.Navigator
+          
             style={styles.container}
             options={{
               tabBarShowLabel: false,

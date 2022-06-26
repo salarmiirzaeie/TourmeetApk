@@ -1,21 +1,27 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {HStack, Divider, Text, ScrollView, View} from 'native-base';
+import {Animated} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 export const About = aboutdata => {
-  
-  var datan;
-  if(aboutdata.aboutdata==undefined){
-    datan={}
+  const offset = useRef(new Animated.Value(0)).current;
 
-  }
-  else{
-    datan=aboutdata.aboutdata
+  var datan;
+  if (aboutdata.aboutdata == undefined) {
+    datan = {};
+  } else {
+    datan = aboutdata.aboutdata;
   }
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView
+    
+      showsVerticalScrollIndicator={false}
+      scrollEventThrottle={16}
+      onScroll={Animated.event([{nativeEvent: {contentOffset: {y: offset}}}], {
+        useNativeDriver: false,
+      })}>
       <HStack bg="white" justifyContent="space-between" w="100%" p={4}>
         <HStack>
           <Text>dsdsf</Text>
