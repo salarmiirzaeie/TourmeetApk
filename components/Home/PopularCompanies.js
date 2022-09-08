@@ -18,7 +18,7 @@ export const PopularCompanies = () => {
         <Pressable
           onPress={() =>
             navigation.navigate('CampProfile', {
-              id: data.id,
+              // id: data.id,
             })
           }>
           <Box bg="white" h="70" w="70" rounded="full" shadow={7}>

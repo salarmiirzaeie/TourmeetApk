@@ -97,7 +97,7 @@ export const CampProfile = ({navigation, route}) => {
     outputRange: [HEADER_HEIGHT + insets.top, insets.top + 0],
     extrapolate: 'clamp',
   });
-  var pad=250;
+  const [pad,setpad]=useState(250)
   return (
     <NativeBaseProvider>
       <View bg={'#8F95D3'} flex={1}>
@@ -245,6 +245,7 @@ export const CampProfile = ({navigation, route}) => {
                 onScroll={Animated.event(
                   [{nativeEvent: {contentOffset: {y: offset}}}],
                   {useNativeDriver: false},
+
                 )}>
 
                   <Gallery/>

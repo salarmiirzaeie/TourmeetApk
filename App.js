@@ -17,21 +17,14 @@ import Feather from 'react-native-vector-icons/Feather';
 
 import {CompanyDet} from './Pages/CompanyDet';
 import {Explore} from './Pages/Explore';
-import {Profile} from './Pages/Profile';
 import {Direct} from './components/Home/Direct';
 import {CampProfile} from './Pages/CampProfile';
 import {SearchPage} from './Pages/SearchPage';
 import {Home2} from './Pages/Home2';
 import {
-  NativeBaseProvider,
-  Circle,
-  Stagger,
-  Center,
-  Box,
-  Icon,
+  
   useDisclose,
-  IconButton,
-  HStack,
+ 
 } from 'native-base';
 import {Tourdet3} from './components/Details/Tourdet3';
 import {Provider} from 'react-redux';
@@ -41,13 +34,12 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useSelector} from 'react-redux';
 import {SignUp} from './assets/Pages/signpages/SignUp';
 import {Login} from './assets/Pages/signpages/Login';
-import {ProfileGallery} from './components/Profile/ProfileGallery';
 import {Companies} from './Pages/Companies';
 import {Activity} from './Pages/Activity';
 import {ConfirmationPage} from './Pages/ConfirmationPage';
 import { MyProfile } from './Pages/MyProfile';
-import { CamProfile2 } from './Pages/CamProfile2';
-import { Profile2 } from './Pages/Profile2';
+
+import { Chat } from './Pages/Chat';
 
 export default function App() {
   const MainSatck = createNativeStackNavigator();
@@ -67,6 +59,10 @@ export default function App() {
             <MainSatck.Screen name="Direct" component={Direct} />
             <MainSatck.Screen name="SearchPage" component={SearchPage} />
             <MainSatck.Screen name="SignUp" component={SignUp} />
+            <MainSatck.Screen name="Chat" component={Chat} />
+            <MainSatck.Screen name="MyProfile" component={MyProfile} />
+
+
             <MainSatck.Screen
               name="ConfirmationPage"
               component={ConfirmationPage}

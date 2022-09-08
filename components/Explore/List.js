@@ -27,7 +27,7 @@ const List = datas => {
   if (datas.datas) {
     return (
       <NativeBaseProvider>
-        <ScrollView flexDirection="column" showsVerticalScrollIndicator={false}>
+        <ScrollView  flexDirection="column" showsVerticalScrollIndicator={false}>
           <VStack pl={2} pt={1} pr={2} space={1}>
             {dataa.map((data, i) => (
               <Pressable

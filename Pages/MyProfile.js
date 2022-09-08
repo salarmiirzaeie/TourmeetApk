@@ -11,12 +11,15 @@ import {
   ScrollView,
   Text,
   Divider,
+  Actionsheet,
+  useDisclose,
 } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
 
-export const MyProfile = ({navgation, route}) => {
+export const MyProfile = ({navigation, route}) => {
+  const {isOpen, onOpen, onClose} = useDisclose();
   return (
     <NativeBaseProvider>
       <View bg={'#8F95D3'} flex={1}>
@@ -28,6 +31,7 @@ export const MyProfile = ({navgation, route}) => {
           flex={0.2}>
           <View>
             <IconButton
+            onPress={()=>navigation.navigate("qrcode")}
               _icon={{
                 as: AntDesign,
                 name: 'qrcode',
@@ -39,7 +43,7 @@ export const MyProfile = ({navgation, route}) => {
 
           <View>
             <IconButton
-              // onPress={onOpen}
+              onPress={onOpen}
               _icon={{
                 as: AntDesign,
                 name: 'menu-fold',
@@ -88,11 +92,11 @@ export const MyProfile = ({navgation, route}) => {
                 </View>
               </View>
             </View>
-            <Divider bg={"gray.100"} />
+            <Divider bg={'gray.100'} />
             <View flex={0.15} flexDirection="row">
               <View justifyContent={'center'} alignItems="center" flex={0.15}>
-              <AntDesign name="infocirlce" size={24} color="black" />
-                                          </View>
+                <AntDesign name="infocirlce" size={24} color="black" />
+              </View>
               <View flex={0.85}>
                 <View justifyContent={'center'} flex={0.5}>
                   <Text>Bio</Text>
@@ -100,14 +104,13 @@ export const MyProfile = ({navgation, route}) => {
                 <View justifyContent={'center'} flex={0.5}>
                   <Text bold={true}>I am Legend</Text>
                 </View>
-               
               </View>
             </View>
-            <Divider bg={"gray.100"} />
+            <Divider bg={'gray.100'} />
             <View flex={0.15} flexDirection="row">
               <View justifyContent={'center'} alignItems="center" flex={0.15}>
-              <AntDesign name="phone" size={24} color="black" />
-                            </View>
+                <AntDesign name="phone" size={24} color="black" />
+              </View>
               <View flex={0.85}>
                 <View justifyContent={'center'} flex={0.5}>
                   <Text>Phone</Text>
@@ -115,13 +118,30 @@ export const MyProfile = ({navgation, route}) => {
                 <View justifyContent={'center'} flex={0.5}>
                   <Text bold={true}>09222541680</Text>
                 </View>
-               
               </View>
             </View>
-            
           </View>
         </View>
       </View>
+      <Actionsheet isOpen={isOpen} onClose={onClose}>
+        <Actionsheet.Content>
+          <Box w="100%" h={60} px={4} justifyContent="center">
+            <Text
+              fontSize="16"
+              color="gray.500"
+              _dark={{
+                color: 'gray.300',
+              }}>
+              Albums
+            </Text>
+          </Box>
+          <Actionsheet.Item>Delete</Actionsheet.Item>
+          <Actionsheet.Item>Share</Actionsheet.Item>
+          <Actionsheet.Item>Play</Actionsheet.Item>
+          <Actionsheet.Item>Favourite</Actionsheet.Item>
+          <Actionsheet.Item>Cancel</Actionsheet.Item>
+        </Actionsheet.Content>
+      </Actionsheet>
     </NativeBaseProvider>
   );
 };

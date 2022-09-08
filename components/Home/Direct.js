@@ -13,8 +13,9 @@ import {
   Icon
 } from "native-base";
 import  Ionicons  from "react-native-vector-icons/Ionicons";
+import { Pressable } from "react-native";
 
-export const Direct = () => {
+export const Direct = ({navigation}) => {
   const data = [{
     id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
     fullName: "Aafreen Khan",
@@ -60,10 +61,11 @@ export const Direct = () => {
       </Box>
       <FlatList data={data} renderItem={({
         item
-      }) => <Box borderBottomWidth="1" _dark={{
+      }) => <Pressable onPress={()=>navigation.navigate("Chat")}>
+        <Box  borderBottomWidth="1" _dark={{
         borderColor: "gray.600"
       }} borderColor="coolGray.200" pl="4" pr="5" py="2">
-          <HStack space={3} justifyContent="space-between">
+          <HStack  space={3} justifyContent="space-between">
             <Avatar size="48px" source={{
               uri: item.avatarUrl
             }} />
@@ -86,7 +88,9 @@ export const Direct = () => {
               {item.timeStamp}
             </Text>
           </HStack>
-        </Box>} keyExtractor={item => item.id} />
+        </Box>
+      </Pressable>
+      } keyExtractor={item => item.id} />
     </Box>
   </NativeBaseProvider>
     ;
