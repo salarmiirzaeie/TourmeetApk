@@ -1,0 +1,125 @@
+import React, {useState, useRef, useEffect} from 'react';
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  StatusBar,
+  SafeAreaView,
+  Animated,
+  Text,
+  Image,
+  Pressable,
+  FlatList,
+} from 'react-native';
+import {TabView, TabBar} from 'react-native-tab-view';
+import List2 from '../../components/List2';
+import NoList from '../../components/NoList';
+import {getIndex} from '../../services/postServices';
+
+const DATA = [
+  {name: 'Marissa Castillo'},
+  {name: 'Denzel Curry'},
+  {name: 'Miles Ferguson'},
+  {name: 'Kenny Moreno'},
+  {name: 'Shelby Craig'},
+  {name: 'Jordyn Brewer'},
+  {name: 'Tanya Walker'},
+  {name: 'Nolan Figueroa'},
+  {name: 'Sophia Gibbs'},
+  {name: 'Vincent Sandoval'},
+];
+
+const initialLayout = {
+  height: 0,
+  width: Dimensions.get('window').width,
+};
+
+const Explore2 = () => {
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
+    {key: 'first', title: 'جدیدترین ها'},
+    {key: 'second', title: 'ارزانترین ها'},
+    {key: 'third', title: 'محبوبترین ها'},
+  ]);
+
+  const isValidTabPress: any = useRef(false);
+  const [posts, setpostss] = useState([]);
+  const date = a => new Date(a);
+
+  useEffect(() => {
+    getIndex().then(res => {
+      setpostss(res.data.posts);
+    });
+  }, []);
+  const renderScene = ({route}: any) => {
+    switch (route.key) {
+      case 'first':
+        return posts.length !== 0 ? (
+          <List2 datas={posts.sort((a, b) => b.capacity - a.capacity)} />
+        ) : (
+          <NoList />
+        );
+      case 'second':
+        return posts.length !== 0 ? (
+          <List2 datas={posts.sort((a, b) => a.price - b.price)} />
+        ) : (
+          <NoList />
+        );
+
+      case 'third':
+        return posts.length !== 0 ? (
+          <List2
+            datas={posts.sort((a, b) => date(a.createdAt) - date(b.createdAt))}
+          />
+        ) : (
+          <NoList />
+        );
+      default:
+        return null;
+    }
+  };
+
+  const renderTabBar = (props: any) => {
+    return (
+      <TabBar
+        {...props}
+        indicatorStyle={{backgroundColor: 'transparent'}}
+        style={{
+          height: 50,
+          backgroundColor: 'skyblue',
+          borderBottomEndRadius: 30,
+          borderBottomLeftRadius: 30,
+        }}
+        onTabPress={({route, preventDefault}) => {
+          if (isValidTabPress.current) {
+            preventDefault();
+          }
+        }}
+      />
+    );
+  };
+  React.PureComponent(renderTabBar);
+  const [post, setposts] = useState({});
+
+  useEffect(() => {
+    getIndex().then(res => {
+      setposts(res.data.posts);
+    });
+  }, []);
+  return (
+    <>
+      <StatusBar barStyle="dark-content" />
+      <SafeAreaView style={{flex: 1, backgroundColor: 'lightgray'}}>
+        <TabView
+          navigationState={{index, routes}}
+          renderScene={renderScene}
+          renderTabBar={renderTabBar}
+          onIndexChange={setIndex}
+          initialLayout={initialLayout}
+        />
+      </SafeAreaView>
+    </>
+  );
+};
+
+export default Explore2;
