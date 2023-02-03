@@ -23,7 +23,7 @@ export const NoLogin = () => {
           alignSelf="center"
           bg={'white'}
           shadow={'5'}>
-          <Text textAlign={'center'}>لطفاواردحساب کاربری خودشوید.</Text>
+          <Text fontFamily={"B Yekan"} textAlign={'center'}>لطفاواردحساب کاربری خودشوید.</Text>
           <HStack space={1} pt={5} justifyContent={'center'}>
             <Button
               bg={'amber.300'}

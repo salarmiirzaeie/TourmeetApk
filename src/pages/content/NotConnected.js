@@ -4,7 +4,7 @@ import React from 'react'
 export const NotConnected = () => {
   return (
     <NativeBaseProvider>
-        <Text>اینترنت متصل نیست</Text>
+        <Text fontFamily={"B Yekan"}>اینترنت متصل نیست</Text>
     </NativeBaseProvider>
   )
 }

@@ -1,18 +1,21 @@
 import React from 'react';
-import {IconButton, HStack, Heading, Center, useToast, Pressable} from 'native-base';
+import {
+  IconButton,
+  HStack,
+  Heading,
+  Center,
+  useToast,
+  Pressable,
+  Text,
+} from 'native-base';
 import {useNavigation} from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
+import {DastNevis} from '../assets/fonts/DastNevis.otf';
 export const HomeHeader = ({toTop}) => {
   const navigation = useNavigation();
   const toast = useToast();
   return (
     <HStack p={2} justifyContent="space-between" w="100%">
-      <HStack>
-        <Pressable onPress={()=>toTop()} justifyContent={"center"} ml={2}>
-          <Heading color="white">Tourino</Heading>
-        </Pressable>
-      </HStack>
       <HStack>
         <IconButton
           onPress={() =>
@@ -28,6 +31,13 @@ export const HomeHeader = ({toTop}) => {
             size: 7,
           }}
         />
+      </HStack>
+      <HStack pr={2}>
+        <Pressable onPress={() => toTop()} justifyContent={'center'} ml={2}>
+          <Text fontFamily={"B Yekan"} color="white" fontFamily={"DastNevis"} fontSize="3xl">
+            تورینو
+          </Text>
+        </Pressable>
       </HStack>
     </HStack>
   );

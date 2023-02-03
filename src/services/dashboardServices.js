@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 const apiPort = 'http://192.168.43.153:3333/dashboard';
-const token = AsyncStorage.getItem('@storage_Key');
+let token = AsyncStorage.getItem('@storage_Key');
 
 // const token = async () => {
 //   const tok = await AsyncStorage.getItem('@storage_Key');
@@ -9,9 +9,9 @@ const token = AsyncStorage.getItem('@storage_Key');
 // };
 // const uu = token().then();
 
-export const joinTour = data => {
-  
-  const res = axios
+export const joinTour = async data => {
+  console.log('first');
+  const res = await axios
     .put(`${apiPort}/join-tour`, data, {
       headers: {
         Authorization: `Bearer ${token._j}`,
@@ -56,7 +56,6 @@ export const saveTour = data => {
   return res;
 };
 export const unSaveTour = data => {
-  
   const res = axios
     .put(`${apiPort}/unsave-tour`, data, {
       headers: {

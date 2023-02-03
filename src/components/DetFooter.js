@@ -26,9 +26,9 @@ export const DetFooter = () => {
     <View px={2} bg="white" flex={0.05}>
       {!joined ? (
         <Button
-          onPress={() => {
+          onPress={async () => {
             setJoined(true);
-            joinTour(data);
+            await joinTour(data);
           }}
           borderRadius={'xl'}
           bg={'skyblue'}>
@@ -36,9 +36,9 @@ export const DetFooter = () => {
         </Button>
       ) : (
         <Button
-          onPress={() => {
+          onPress={async () => {
             setJoined(false);
-            unjoinTour(data);
+            await unjoinTour(data);
           }}
           borderRadius={'xl'}
           bg={'gray.400'}>

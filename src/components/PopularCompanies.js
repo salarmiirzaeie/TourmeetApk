@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Center,
   Box,
@@ -20,15 +20,24 @@ export const PopularCompanies = () => {
     getPopularCamps().then(res => {
       setcamps(res.data);
     });
+    console.log(camps);
   }, []);
+  const scrollRef = useRef();
+  const scrollToEnd = () => scrollRef.current.scrollToEnd({animated: false});
   return (
-    <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
+    <ScrollView
+      showsHorizontalScrollIndicator={false}
+      ref={scrollRef}
+      onContentSizeChange={scrollToEnd}
+      contentContainerStyle={{flexDirection: 'row-reverse'}}
+      horizontal={true}>
       <HStack space={5} direction="row">
         {camps.map((post, i) => (
-          <Pressable key={i}
+          <Pressable
+            key={i}
             onPress={() =>
               navigation.navigate('CampProfile', {
-                // id: data.id,
+                id: post.id,
               })
             }>
             <Box bg="white" h="70" w="70" rounded="full" shadow={7}>
@@ -44,13 +53,76 @@ export const PopularCompanies = () => {
                 }}>
                 9.8
               </Badge>
-              <Image 
-              
+              <Image
                 rounded="full"
                 h="full"
                 alt="ee"
                 source={{
-                  uri: `http://192.168.43.153:3333/uploads/${post.photo}`
+                  uri: `http://192.168.43.153:3333/uploads/${post.photo}`,
+                }}
+              />
+            </Box>
+          </Pressable>
+        ))}
+         {camps.map((post, i) => (
+          <Pressable
+            key={i}
+            onPress={() =>
+              navigation.navigate('CampProfile', {
+                id: post.id,
+              })
+            }>
+            <Box bg="white" h="70" w="70" rounded="full" shadow={7}>
+              <Badge
+                bg="skyblue"
+                rounded="full"
+                mb={-5}
+                zIndex={99}
+                variant="solid"
+                alignSelf="flex-start"
+                _text={{
+                  fontSize: 10,
+                }}>
+                9.8
+              </Badge>
+              <Image
+                rounded="full"
+                h="full"
+                alt="ee"
+                source={{
+                  uri: `http://192.168.43.153:3333/uploads/${post.photo}`,
+                }}
+              />
+            </Box>
+          </Pressable>
+        ))}
+         {camps.map((post, i) => (
+          <Pressable
+            key={i}
+            onPress={() =>
+              navigation.navigate('CampProfile', {
+                id: post.id,
+              })
+            }>
+            <Box bg="white" h="70" w="70" rounded="full" shadow={7}>
+              <Badge
+                bg="skyblue"
+                rounded="full"
+                mb={-5}
+                zIndex={99}
+                variant="solid"
+                alignSelf="flex-start"
+                _text={{
+                  fontSize: 10,
+                }}>
+                9.8
+              </Badge>
+              <Image
+                rounded="full"
+                h="full"
+                alt="ee"
+                source={{
+                  uri: `http://192.168.43.153:3333/uploads/${post.photo}`,
                 }}
               />
             </Box>

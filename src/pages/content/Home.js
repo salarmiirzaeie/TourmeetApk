@@ -39,16 +39,20 @@ export const Home = () => {
             <View
               bg="#F1F5F2"
               p={3}
+              
               mt={0}
               borderTopRadius={25}
               shadow={3}
               flex={1}>
               <HomeCategory />
-              <View h={280} pt={0}>
-                <Text color={'dark.400'}>محبوب ترین تورها</Text>
+              <Text  color={'dark.400'}>محبوب ترین تورها</Text>
+
+              <View h={250} pt={3}>
                 <PopularTours />
               </View>
-              <View borderRadius={'md'} h={90} mt={5}>
+              <Text color={'dark.400'}pb={2}>محبوب ترین کمپ ها</Text>
+
+              <View borderRadius={'md'} h={90}>
                 <PopularCompanies />
               </View>
             </View>

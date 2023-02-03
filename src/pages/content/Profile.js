@@ -18,9 +18,16 @@ import {
   FormControl,
   TextArea,
   useToast,
+  Icon,
 } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Entypo from 'react-native-vector-icons/Entypo';
+import Feather from 'react-native-vector-icons/Feather';
+
+Feather
 import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
@@ -32,7 +39,6 @@ import {profileMode} from '../../state-management/action/profileModeAction';
 import {Formik} from 'formik';
 
 export const Profile = ({navigation, route}) => {
-
   const dispatch = useDispatch();
   const {isOpen, onOpen, onClose} = useDisclose();
   const logedin = useSelector(state => state.profileModeState);
@@ -72,6 +78,19 @@ export const Profile = ({navigation, route}) => {
             w="100%"
             p={1}
             flex={0.2}>
+            
+
+            <View>
+              <IconButton
+                onPress={onOpen}
+                _icon={{
+                  as: Feather,
+                  name: 'align-left',
+                  color: 'white',
+                  size: 7,
+                }}
+              />
+            </View>
             <View>
               <IconButton
                 onPress={() =>
@@ -83,18 +102,6 @@ export const Profile = ({navigation, route}) => {
                 _icon={{
                   as: AntDesign,
                   name: 'qrcode',
-                  color: 'white',
-                  size: 7,
-                }}
-              />
-            </View>
-
-            <View>
-              <IconButton
-                onPress={onOpen}
-                _icon={{
-                  as: AntDesign,
-                  name: 'menu-fold',
                   color: 'white',
                   size: 7,
                 }}
@@ -125,10 +132,8 @@ export const Profile = ({navigation, route}) => {
                 phone: profile.phoneNumber,
                 email: profile.email,
               }}
-
               onSubmit={values => {
                 console.log(values);
-               
               }}>
               {({
                 values,
@@ -144,7 +149,6 @@ export const Profile = ({navigation, route}) => {
                 handleSubmit,
 
                 isSubmitting,
-
               }) => (
                 <View pr={3} flex={1}>
                   <View h={75} flexDirection="row">
@@ -156,14 +160,14 @@ export const Profile = ({navigation, route}) => {
                     </View>
                     <View flex={0.85}>
                       <View justifyContent={'center'} flex={0.5}>
-                        <Text>Name</Text>
+                        <Text fontFamily={"B Yekan"}>Name</Text>
                       </View>
 
                       <View justifyContent={'center'} flex={0.5}>
                         {editMode ? (
                           <Input value={profile.name} />
                         ) : (
-                          <Text bold>{profile.name}</Text>
+                          <Text fontFamily={"B Yekan"} bold>{profile.name}</Text>
                         )}
                       </View>
                     </View>
@@ -179,13 +183,13 @@ export const Profile = ({navigation, route}) => {
                     </View>
                     <View flex={0.85}>
                       <View justifyContent={'center'} flex={0.5}>
-                        <Text>Phone</Text>
+                        <Text fontFamily={"B Yekan"}>Phone</Text>
                       </View>
                       <View justifyContent={'center'} flex={0.5}>
                         {editMode ? (
                           <Input value={profile.phoneNumber} />
                         ) : (
-                          <Text bold>{profile.phoneNumber}</Text>
+                          <Text fontFamily={"B Yekan"} bold>{profile.phoneNumber}</Text>
                         )}
                       </View>
                     </View>
@@ -199,7 +203,7 @@ export const Profile = ({navigation, route}) => {
                     </View>
                     <View flex={0.85}>
                       <View justifyContent={'center'} flex={0.5}>
-                        <Text>email</Text>
+                        <Text fontFamily={"B Yekan"}>email</Text>
                       </View>
                       <View justifyContent={'center'} flex={0.5}>
                         {editMode ? (
@@ -213,7 +217,7 @@ export const Profile = ({navigation, route}) => {
                             />
                           </FormControl>
                         ) : (
-                          <Text bold>{profile.email}</Text>
+                          <Text fontFamily={"B Yekan"} bold>{profile.email}</Text>
                         )}
                       </View>
                     </View>
@@ -227,13 +231,13 @@ export const Profile = ({navigation, route}) => {
                     </View>
                     <View flex={0.85}>
                       <View justifyContent={'center'} flex={0.5}>
-                        <Text>Bio</Text>
+                        <Text fontFamily={"B Yekan"}>Bio</Text>
                       </View>
                       <View justifyContent={'center'} flex={0.5}>
                         {editMode ? (
-                          <TextArea mt={10} value={profile.description} />
+                          <Text fontFamily={"B Yekan"}Area mt={10} value={profile.description} />
                         ) : (
-                          <Text bold>{profile.description}</Text>
+                          <Text fontFamily={"B Yekan"} bold>{profile.description}</Text>
                         )}
                       </View>
                     </View>
@@ -268,42 +272,47 @@ export const Profile = ({navigation, route}) => {
         </View>
         <Actionsheet isOpen={isOpen} onClose={onClose}>
           <Actionsheet.Content>
-            <Box w="100%" h={60} px={4} justifyContent="center">
-              <Text
-                fontSize="16"
-                color="gray.500"
-                _dark={{
-                  color: 'gray.300',
-                }}>
-                Albums
-              </Text>
-            </Box>
-            <Actionsheet.Item>Delete</Actionsheet.Item>
             <Actionsheet.Item
+              endIcon={<Icon as={AntDesign} size="6" name="edit" />}
+              alignItems="flex-end"
               onPress={() => {
                 setEditMode(true);
                 onClose();
               }}>
-              EditProfile
+              ویرایش پروفایل
             </Actionsheet.Item>
             <Actionsheet.Item
+              endIcon={<Icon as={MaterialIcons} size="6" name="bookmark" />}
+              alignItems="flex-end"
               onPress={() => {
                 navigation.navigate('Saveds');
               }}>
-              saveds
+              ذخیره ها
             </Actionsheet.Item>
             <Actionsheet.Item
+              endIcon={<Icon as={MaterialIcons} size="6" name="settings" />}
+              alignItems="flex-end"
+              onPress={() => {
+                navigation.navigate('settings');
+              }}>
+              {'تنظیمات '}
+            </Actionsheet.Item>
+            <Actionsheet.Item
+              endIcon={<Icon as={Entypo} size="6" name="aircraft" />}
+              alignItems="flex-end"
               onPress={() => {
                 navigation.navigate('MyTours');
               }}>
-              MyTours
+              تورهای من
             </Actionsheet.Item>
             <Actionsheet.Item
+              endIcon={<Icon as={SimpleLineIcons} size="6" name="logout" />}
+              alignItems="flex-end"
               onPress={() => {
                 AsyncStorage.removeItem('@storage_Key');
                 dispatch(profileMode(false));
               }}>
-              logOut
+              {'خروج'}
             </Actionsheet.Item>
           </Actionsheet.Content>
         </Actionsheet>

@@ -10,6 +10,7 @@ import {
   Text,
   Image,
   Pressable,
+  
 } from 'react-native';
 import {TabView, TabBar} from 'react-native-tab-view';
 import {
@@ -296,7 +297,7 @@ const CamProfile2 = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={{flex: 1, backgroundColor: 'lightgray'}}>
-        <View flex={0.1}>
+        <View flex={0.09}>
           <DefaultHeader name={post.name} />
         </View>
         <TabView

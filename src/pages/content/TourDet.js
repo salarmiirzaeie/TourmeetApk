@@ -22,6 +22,7 @@ import {
   Avatar,
   Skeleton,
   Spinner,
+  Center,
 } from 'native-base';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -34,6 +35,7 @@ import {Joineds} from '../../components/Joineds';
 import {useNavigation} from '@react-navigation/native';
 import {Animated, Dimensions} from 'react-native';
 import {DetContent} from '../../components/DetContent';
+import Timer from '../../components/Timer';
 const TourDet = ({route}) => {
   const [pos, setposition] = useState({mode: true});
   const [post, setpost] = useState({});
@@ -76,15 +78,24 @@ const TourDet = ({route}) => {
               justifyContent="space-between"
               borderTopRadius={'3xl'}>
               {/* <DetContent data={post} /> */}
-              <List>
+              <List style={{borderTopColor: 'transparent'}}>
                 <List.Item>
                   <View
                     flexDirection={'row'}
                     flex={1}
+                    h={100}
                     px={2}
                     justifyContent="space-between">
-                    <Text>{post.title}</Text>
-                    <Text>عنوان</Text>
+                    <View justifyContent="center" flex={0.5}>
+                      <Timer />
+                    </View>
+                    <Divider orientation="vertical" />
+                    <View justifyContent="center" flex={0.5}>
+                      <Text fontFamily={"B Yekan"} textAlign={'center'}>
+                        {post.price}
+                        {'تومان'}
+                      </Text>
+                    </View>
                   </View>
                 </List.Item>
                 <Divider />
@@ -94,8 +105,8 @@ const TourDet = ({route}) => {
                     flex={1}
                     px={2}
                     justifyContent="space-between">
-                    <Text>{post.price}</Text>
-                    <Text>قیمت</Text>
+                    <Text fontFamily={"B Yekan"}>{post.title}</Text>
+                    <Text fontFamily={"B Yekan"}>عنوان</Text>
                   </View>
                 </List.Item>
                 <Divider />
@@ -105,8 +116,8 @@ const TourDet = ({route}) => {
                     flex={1}
                     px={2}
                     justifyContent="space-between">
-                    <Text>{post.capacity}</Text>
-                    <Text>ظرفیت</Text>
+                    <Text fontFamily={"B Yekan"}>{post.price}</Text>
+                    <Text fontFamily={"B Yekan"}>قیمت</Text>
                   </View>
                 </List.Item>
                 <Divider />
@@ -116,8 +127,8 @@ const TourDet = ({route}) => {
                     flex={1}
                     px={2}
                     justifyContent="space-between">
-                    <Text>{post.durationTime}</Text>
-                    <Text>مدت زمان</Text>
+                    <Text fontFamily={"B Yekan"}>{post.capacity}</Text>
+                    <Text fontFamily={"B Yekan"}>ظرفیت</Text>
                   </View>
                 </List.Item>
                 <Divider />
@@ -127,8 +138,19 @@ const TourDet = ({route}) => {
                     flex={1}
                     px={2}
                     justifyContent="space-between">
-                    <Text> {formDate(post.date)}</Text>
-                    <Text>تاریخ</Text>
+                    <Text fontFamily={"B Yekan"}>{post.durationTime}</Text>
+                    <Text fontFamily={"B Yekan"}>مدت زمان</Text>
+                  </View>
+                </List.Item>
+                <Divider />
+                <List.Item>
+                  <View
+                    flexDirection={'row'}
+                    flex={1}
+                    px={2}
+                    justifyContent="space-between">
+                    <Text fontFamily={"B Yekan"}> {formDate(post.date)}</Text>
+                    <Text fontFamily={"B Yekan"}>تاریخ</Text>
                   </View>
                 </List.Item>
                 <Divider />
@@ -146,10 +168,10 @@ const TourDet = ({route}) => {
                         });
                       }}>
                       <Badge colorScheme={'danger'}>
-                        <Text>{creator.name}</Text>
+                        <Text fontFamily={"B Yekan"}>{creator.name}</Text>
                       </Badge>
                     </Pressable>
-                    <Text>میزبان</Text>
+                    <Text fontFamily={"B Yekan"}>میزبان</Text>
                   </View>
                 </List.Item>
                 <Divider />
@@ -160,7 +182,7 @@ const TourDet = ({route}) => {
                     px={2}
                     justifyContent="space-between">
                     <Joineds />
-                    <Text>افرادعضوشده</Text>
+                    <Text fontFamily={"B Yekan"}>افرادعضوشده</Text>
                   </View>
                 </List.Item>
                 <Divider />
@@ -171,13 +193,12 @@ const TourDet = ({route}) => {
                     px={2}
                     h={100}
                     justifyContent="space-between">
-                    <Text>{post.description}</Text>
-                    <Text>توضیحات</Text>
+                    <Text fontFamily={"B Yekan"}>{post.description}</Text>
+                    <Text fontFamily={"B Yekan"}>توضیحات</Text>
                   </View>
                 </List.Item>
                 <Divider />
               </List>
-             
             </View>
           </ScrollView>
         </View>

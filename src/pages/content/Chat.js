@@ -217,7 +217,7 @@ export const Chat = ({navigation}) => {
             <Avatar size="38" source={{
               uri:  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwgu1A5zgPSvfE83nurkuzNEoXs9DMNr8Ww&usqp=CAU'
             }} />
-            <Text>SaraMazaheri</Text>
+            <Text fontFamily={"B Yekan"}>SaraMazaheri</Text>
             </Pressable>
            
           </View>
@@ -250,7 +250,7 @@ export const Chat = ({navigation}) => {
                 bg={item.type == 1 ? 'white' : 'gray.300'}
                 m={1}
                 rounded={'xl'}>
-                <Text>{item.recentText}</Text>
+                <Text fontFamily={"B Yekan"}>{item.recentText}</Text>
               </Box>
             ))}
           </ScrollView>

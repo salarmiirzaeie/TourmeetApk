@@ -16,7 +16,7 @@ export const Saveds = () => {
   return (
     <NativeBaseProvider>
       <View flex={1}>
-        <View flex={0.2}>
+        <View flex={0.12}>
           <DefaultHeader name={'تورهای ذخیره شده'} />
         </View>
         <List2 datas={saves} />

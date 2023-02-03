@@ -55,7 +55,7 @@ export const DetAppBar = ({pos}) => {
           zIndex: 99,
           width: '100%',
           borderRadius: 10,
-          flexDirection: 'row',
+          flexDirection: 'row-reverse',
           justifyContent: 'space-between',
           paddingHorizontal: 15,
           paddingVertical: 5,
@@ -69,7 +69,7 @@ export const DetAppBar = ({pos}) => {
             colorScheme={animateHeaderTextColor}
             _icon={{
               as: AntDesign,
-              name: 'left',
+              name: 'right',
               size: 7,
               shadow: 5,
               color: 'white',

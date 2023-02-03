@@ -42,7 +42,7 @@ const List2 = ({datas}: any) => {
               padding: 7,
             }}>
             <View style={{flex: 0.4}}>
-              <Text style={{color: 'black', textAlign: 'right', fontSize: 15}}>
+              <Text fontFamily={"B Yekan"} style={{color: 'black', textAlign: 'right', fontSize: 15}}>
                 {item.title}
               </Text>
             </View>
@@ -51,15 +51,15 @@ const List2 = ({datas}: any) => {
                 flexDirection: 'column',
                 flex: 0.6,
               }}>
-              <Text style={{color: 'black', textAlign: 'right'}}>
+              <Text fontFamily={"B Yekan"} style={{color: 'black', textAlign: 'right'}}>
                 {item.price}
                 {'تومان'}
               </Text>
-              <Text style={{color: 'black', textAlign: 'right'}}>
+              <Text fontFamily={"B Yekan"} style={{color: 'black', textAlign: 'right'}}>
                 {item.capacity - item.joinedUsers.length}
                 {'نفرباقی مانده'}
               </Text>
-              <Text
+              <Text fontFamily={"B Yekan"}
                 style={{
                   color: 'black',
                   textAlign: 'right',

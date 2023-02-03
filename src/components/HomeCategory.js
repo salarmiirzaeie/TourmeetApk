@@ -41,7 +41,7 @@ export const HomeCategory = () => {
                   uri: `http://192.168.43.153:3333/uploads/sea.jpg`,
                 }}
               />
-              <Text
+              <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
                 bg={'gray.500'}
                 color={'white'}
                 textAlign={'center'}
@@ -67,7 +67,7 @@ export const HomeCategory = () => {
                   uri: `http://192.168.43.153:3333/uploads/offroad.jpg`,
                 }}
               />
-              <Text
+              <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
                 bg={'gray.500'}
                 color={'white'}
                 textAlign={'center'}
@@ -93,7 +93,7 @@ export const HomeCategory = () => {
                   uri: `http://192.168.43.153:3333/uploads/mountain.jpg`,
                 }}
               />
-              <Text
+              <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
                 bg={'gray.500'}
                 color={'white'}
                 textAlign={'center'}
@@ -121,7 +121,7 @@ export const HomeCategory = () => {
                   uri: `http://192.168.43.153:3333/uploads/desert.jpg`,
                 }}
               />
-              <Text
+              <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
                 bg={'gray.500'}
                 color={'white'}
                 textAlign={'center'}
@@ -147,7 +147,7 @@ export const HomeCategory = () => {
                   uri: `http://192.168.43.153:3333/uploads/jungle.jpg`,
                 }}
               />
-              <Text
+              <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
                 bg={'gray.500'}
                 color={'white'}
                 textAlign={'center'}
@@ -173,7 +173,7 @@ export const HomeCategory = () => {
                   uri: `http://192.168.43.153:3333/uploads/historical.jpg`,
                 }}
               />
-              <Text
+              <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
                 bg={'gray.500'}
                 color={'white'}
                 textAlign={'center'}

@@ -13,6 +13,7 @@ import {NotConnected} from '../pages/content/NotConnected';
 import {MyTours} from '../pages/content/MyTours';
 import {Saveds} from '../pages/content/Saveds';
 import Explore2 from '../pages/content/Explore2';
+import { Settings } from '../pages/content/Settings';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,25 +21,22 @@ export const DefaultLayout = () => {
   const netInfo = useNetInfo();
 
   return (
-    <Tab.Navigator>
-      <Tab.Screen
+    <Tab.Navigator initialRouteName='HomeSatck'>
+      <Tab.Screen 
+
+        name="ProfileSatck"
         options={{
+          tabBarShowLabel: false,
           unmountOnBlur: true,
           tabBarActiveTintColor: 'skyblue',
-          lazy: true,
-        
-
           headerShown: false,
-          tabBarShowLabel: false,
           tabBarIcon: ({color}) => (
-            <AntDesign name="home" size={24} color={color} />
+            <Feather name="user" size={24} color={color} />
           ),
-        
-        }} 
-        
-        name="HomeSatck"
-        component={netInfo.isConnected ? HomeSatck : NotConnected}
+        }}
+        component={netInfo.isConnected ? ProfileSatck : NotConnected}
       />
+
       <Tab.Screen
         name="nnnn"
         options={{
@@ -54,17 +52,23 @@ export const DefaultLayout = () => {
       />
 
       <Tab.Screen
-        name="ProfileSatck"
+      
         options={{
-          tabBarShowLabel: false,
+          
           unmountOnBlur: true,
           tabBarActiveTintColor: 'skyblue',
+          lazy: true,
+          
+
           headerShown: false,
+          tabBarShowLabel: false,
           tabBarIcon: ({color}) => (
-            <Feather name="user" size={24} color={color} />
+            <AntDesign name="home" size={24} color={color} />
           ),
         }}
-        component={netInfo.isConnected ? ProfileSatck : NotConnected}
+
+        name="HomeSatck"
+        component={netInfo.isConnected ? HomeSatck : NotConnected}
       />
     </Tab.Navigator>
   );
@@ -92,6 +96,8 @@ function ProfileSatck() {
       <Profiles.Screen name="Profile" component={Profile} />
       <Profiles.Screen name="MyTours" component={MyTours} />
       <Profiles.Screen name="Saveds" component={Saveds} />
+      <Profiles.Screen name="settings" component={Settings} />
+
     </Profiles.Navigator>
   );
 }

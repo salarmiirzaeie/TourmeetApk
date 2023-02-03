@@ -70,19 +70,19 @@ import { Pressable } from "react-native";
               uri: item.avatarUrl
             }} />
             <VStack>
-              <Text _dark={{
+              <Text fontFamily={"B Yekan"} _dark={{
                 color: "warmGray.50"
               }} color="coolGray.800" bold>
                 {item.fullName}
               </Text>
-              <Text color="coolGray.600" _dark={{
+              <Text fontFamily={"B Yekan"} color="coolGray.600" _dark={{
                 color: "warmGray.200"
               }}>
                 {item.recentText}
               </Text>
             </VStack>
             <Spacer />
-            <Text fontSize="xs" _dark={{
+            <Text fontFamily={"B Yekan"} fontSize="xs" _dark={{
               color: "warmGray.50"
             }} color="coolGray.800" alignSelf="flex-start">
               {item.timeStamp}

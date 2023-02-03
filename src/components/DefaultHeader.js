@@ -28,25 +28,26 @@ export const DefaultHeader = name => {
         bg="skyblue"
         w="100%"
         p={2}
-        flex={1}
+        // flex={1}
         flexDirection="row"
         borderRadius={10}>
+               <Text fontFamily={"B Yekan"}>{''}</Text>
+
+        <View pl={5} justifyContent={'center'}>
+          <Text fontFamily={"B Yekan"} fontSize={15} textAlign="center">
+            {name.name}
+          </Text>
+        </View>
         <IconButton
           onPress={() => navigation.goBack()}
           _icon={{
             as: AntDesign,
-            name: 'left',
+            name: 'right',
             color: 'white',
             size: 7,
             shadow: 5,
           }}
         />
-        <View pr={5} justifyContent={'center'}>
-          <Text fontSize={15} textAlign="center">
-            {name.name}
-          </Text>
-        </View>
-        <Text>{''}</Text>
       </HStack>
     </NativeBaseProvider>
   );

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Pressable,
   Image,
@@ -8,6 +8,7 @@ import {
   Text,
   Skeleton,
 } from 'native-base';
+
 import {useNavigation} from '@react-navigation/native';
 import {getPopularTours} from '../services/postServices';
 export const PopularTours = () => {
@@ -20,12 +21,19 @@ export const PopularTours = () => {
       setposts(res.data);
     });
   }, []);
+  const scrollRef = useRef();
+  const scrollToEnd = () => scrollRef.current.scrollToEnd({animated: false});
   return (
     <ScrollView
       showsHorizontalScrollIndicator={false}
-      pagingEnabled={true}
+      // pagingEnabled={true}
+      // bounces={false}
+      // directionalLockEnabled={true}
+      ref={scrollRef}
+      onContentSizeChange={scrollToEnd}
+      contentContainerStyle={{flexDirection: 'row-reverse'}}
       horizontal={true}>
-      <HStack h={225} W="full" space={4} justifyContent="center">
+      <HStack h={225} W="full" space={4}>
         {posts.length !== 0
           ? posts.map((post, i) => (
               <Pressable
@@ -58,6 +66,7 @@ export const PopularTours = () => {
                   <View flex={0.8}></View>
                   <View bg="gray.500" borderRadius="lg" flex={0.2}>
                     <Text
+                      fontFamily={'B Yekan'}
                       alignSelf="center"
                       fontSize={20}
                       bold={true}
@@ -84,7 +93,8 @@ export const PopularTours = () => {
                       alignSelf="center"
                       fontSize={20}
                       bold={true}
-                      color="white"/>
+                      color="white"
+                    />
                   </View>
                 </View>
               </View>

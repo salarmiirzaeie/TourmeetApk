@@ -74,7 +74,7 @@ const SearchPage = () => {
 
             searchTour({text: q.nativeEvent.text});
           }}
-          placeholder="Search People & Places"
+          placeholder="جستجو..."
           width="100%"
           borderRadius="4"
           py="3"
@@ -89,15 +89,15 @@ const SearchPage = () => {
               as={<MaterialIcons name="search" />}
             />
           }
-          InputRightElement={
-            <Icon
-              m="2"
-              mr="3"
-              size="6"
-              color="gray.400"
-              as={<MaterialIcons name="mic" />}
-            />
-          }
+          // InputRightElement={
+          //   <Icon
+          //     m="2"
+          //     mr="3"
+          //     size="6"
+          //     color="gray.400"
+          //     as={<MaterialIcons name="mic" />}
+          //   />
+          // }
         />
         <View
           flexDirection="row"
@@ -108,7 +108,7 @@ const SearchPage = () => {
           {/* <MaterialIcons name="list" /> */}
           <Pressable onPress={onOpen}>
             <View flexDirection={'row'}>
-              <Text>{sort}</Text>
+              <Text fontFamily={"B Yekan"}>{sort}</Text>
 
               <FontAwesome style={{fontSize: 20}} name="sort-amount-desc" />
             </View>
@@ -132,7 +132,7 @@ const SearchPage = () => {
 
                 onClose();
               }}>
-              <Text textAlign={"right"}>{'جدیدترین'}</Text>
+              <Text fontFamily={"B Yekan"} textAlign={"right"}>{'جدیدترین'}</Text>
             </List.Item>
             <Divider />
             <List.Item 
@@ -142,7 +142,7 @@ const SearchPage = () => {
 
                 onClose();
               }}>
-              <Text textAlign={"right"}>{'ارزان ترین'}</Text>
+              <Text fontFamily={"B Yekan"} textAlign={"right"}>{'ارزان ترین'}</Text>
             </List.Item>
             <Divider />
             <List.Item
@@ -152,7 +152,7 @@ const SearchPage = () => {
 
                 onClose();
               }}>
-              <Text textAlign={"right"}>{' محبوبترین'}</Text>
+              <Text fontFamily={"B Yekan"} textAlign={"right"}>{' محبوبترین'}</Text>
             </List.Item>
           </List>
         </Modal.Content>

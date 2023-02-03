@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import {Formik} from 'formik';
 
 import {
@@ -18,6 +18,9 @@ import {
   Text,
   Circle,
   Color,
+  AlertDialog,
+  Spinner,
+  Alert,
 } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
@@ -26,8 +29,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch} from 'react-redux';
 import {profileMode} from '../state-management/action/profileModeAction';
 
- const Login = ({navigation}) => {
+const Login = ({navigation}) => {
+  const [isOpen, setIsOpen] = useState({isOpen: false, message: ''});
+
+  const onClose = () => setIsOpen(false);
+
+  const cancelRef = useRef(null);
   const dispatch = useDispatch();
+  const [isload, setislpad] = useState(false);
   const storeData = async value => {
     try {
       await AsyncStorage.setItem('@storage_Key', value);
@@ -38,73 +47,29 @@ import {profileMode} from '../state-management/action/profileModeAction';
   return (
     <NativeBaseProvider>
       <View bg={'white'} flex={1} w={'100%'} alignItems={'center'}>
-        <View w={'100%'} flex={0.1}>
-          <Center>
-            <Menu
-              bg="white"
-              mr={3}
-              defaultIsOpen={false}
-              w="190"
-              trigger={triggerProps => {
-                return (
-                  <Box flexDirection={'row'}>
-                    <Text>English</Text>
-                    <IconButton
-                      _icon={{
-                        as: AntDesign,
-                        name: 'down',
-                        color: 'gray.400',
-                        size: 3,
-                        mt: -1,
-                      }}
-                      {...triggerProps}
-                    />
-                  </Box>
-                );
-              }}>
-              <Menu.Group title="Free">
-                <Menu.Item>Arial</Menu.Item>
-                <Menu.Item>Nunito Sans</Menu.Item>
-                <Menu.Item>Roboto</Menu.Item>
-              </Menu.Group>
-              <Divider mt="3" w="100%" />
-              <Menu.Group title="Paid">
-                <Menu.Item>SF Pro</Menu.Item>
-                <Menu.Item>Helvetica</Menu.Item>
-              </Menu.Group>
-            </Menu>
-          </Center>
-        </View>
-        <View w={'100%'} flex={0.8}>
+      
+        <View w={'100%'} flex={1}>
           <Center flex={1}>
-            <Text fontSize={50} bold={true}>
+            <Text fontFamily={'DastN'} fontSize={50} bold={true}>
               Tourino
             </Text>
             <View w={'80%'}>
               <Formik
                 initialValues={{email: '', password: ''}}
-                // validate={values => {
-                //   const errors = {};
-                //   if (!values.email) {
-                //     errors.email = 'Required';
-                //   } else if (
-                //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
-                //       values.email,
-                //     )
-                //   ) {
-                //     errors.email = 'Invalid email address';
-                //   }
-                //   return errors;
-                // }}
                 onSubmit={values => {
+                  setislpad(true);
                   setTimeout(async () => {
                     login(values).then(res => {
+                      setislpad(false);
+
                       if (res.status === 207) {
                         storeData(res.data.token.toString());
                         dispatch(profileMode(true));
                         navigation.navigate('Profile');
                       } else {
-                        console.log(res.data.message);
+                        setIsOpen({isOpen: true, message: res.data.message});
+
+                        // alert(res.data.message);
                       }
                       // setSubmitting(false);
                     });
@@ -128,34 +93,42 @@ import {profileMode} from '../state-management/action/profileModeAction';
                   /* and other goodies */
                 }) => (
                   <VStack width="100%" space={4}>
-                    <FormControl isRequired>
-                      {/* <FormControl.Label>User Name</FormControl.Label> */}
-                      <Input
-                        bgColor={'gray.100'}
-                        onBlur={handleBlur('email')}
-                        placeholder="UserName"
-                        onChangeText={handleChange('email')}
-                        value={values.email}
-                      />
-                    </FormControl>
+                    <Input
+                      bgColor={'gray.100'}
+                      onBlur={handleBlur('email')}
+                      placeholder="Email"
+                      onChangeText={handleChange('email')}
+                      value={values.email}
+                      isRequired
+                      autoFocus
+                      autoComplete="email"
+                    />
 
-                    <FormControl isRequired>
-                      {/* <FormControl.Label>Password</FormControl.Label> */}
-                      <Input
-                        bgColor={'gray.100'}
-                        onBlur={handleBlur('password')}
-                        placeholder="Password"
-                        onChangeText={handleChange('password')}
-                        value={values.password}
-                      />
-                    </FormControl>
+                    <Input
+                      bgColor={'gray.100'}
+                      onBlur={handleBlur('password')}
+                      placeholder="Password"
+                      onChangeText={handleChange('password')}
+                      value={values.password}
+                      type={'password'}
+                      isRequired
+                      autoComplete="password"
+                    />
 
-                    <Button onPress={handleSubmit} bg="skyblue">
-                      Submit
+                    <Button
+                      isDisabled={
+                        !values.email || !values.password ? true : false
+                      }
+                      isLoading={isload}
+                      onPress={handleSubmit}
+                      bg="skyblue">
+                      {'ورود'}
                     </Button>
-                    <Link>Forgot Password?</Link>
-                    <Link onPress={() => navigation.navigate('SignUp')}>
-                      SignUp
+                    <Link alignSelf={'flex-end'}>فراموشی رمز؟ </Link>
+                    <Link
+                      alignSelf={'flex-end'}
+                      onPress={() => navigation.navigate('SignUp')}>
+                      ثبت نام
                     </Link>
 
                     <Divider />
@@ -164,7 +137,14 @@ import {profileMode} from '../state-management/action/profileModeAction';
                       p={1}
                       flexDirection="row"
                       justifyContent="space-between">
-                      <Circle size={50} shadow={7} bg="#00A693">
+                      <Button
+                        w={'full'}
+                        colorScheme="dark"
+                        startIcon={<AntDesign name="google" />}>
+                        ورودباگوگل
+                      </Button>
+
+                      {/* <Circle size={50} shadow={7} bg="#00A693">
                         <AntDesign name="google" size={30} />
                       </Circle>
 
@@ -173,7 +153,7 @@ import {profileMode} from '../state-management/action/profileModeAction';
                       </Circle>
                       <Circle size={50} shadow={7} bg="#00A693">
                         <Feather name="linkedin" size={30} />
-                      </Circle>
+                      </Circle> */}
                     </View>
                   </VStack>
                 )}
@@ -181,16 +161,31 @@ import {profileMode} from '../state-management/action/profileModeAction';
             </View>
           </Center>
         </View>
-        <View w="100%" flex={0.1}>
+        {/* <View w="100%" flex={0.1}>
           <View flex={0.5}></View>
           <Divider />
 
           <View flex={0.5} pl={10}>
-            <Text>cd</Text>
+            <Text fontFamily={"B Yekan"}>cd</Text>
           </View>
-        </View>
+        </View> */}
       </View>
+      <AlertDialog
+        leastDestructiveRef={cancelRef}
+        isOpen={isOpen.isOpen}
+        onClose={() => {
+          onClose();
+        }}>
+        <AlertDialog.Content>
+          <AlertDialog.CloseButton />
+          <AlertDialog.Header>{''}</AlertDialog.Header>
+          <AlertDialog.Body>
+            <Center>{isOpen.message}</Center>
+          </AlertDialog.Body>
+          
+        </AlertDialog.Content>
+      </AlertDialog>
     </NativeBaseProvider>
   );
 };
-export default Login
+export default Login;
