@@ -98,14 +98,7 @@ const Explore2 = () => {
       />
     );
   };
-  React.PureComponent(renderTabBar);
-  const [post, setposts] = useState({});
 
-  useEffect(() => {
-    getIndex().then(res => {
-      setposts(res.data.posts);
-    });
-  }, []);
   return (
     <>
       <StatusBar barStyle="dark-content" />

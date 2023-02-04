@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import axios from 'axios';
 import {Formik} from 'formik';
 
@@ -19,6 +19,7 @@ import {
   Text,
   Circle,
   Color,
+  AlertDialog,
 } from 'native-base';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -27,8 +28,14 @@ import {login, register} from '../services/userServices';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch} from 'react-redux';
 import {profileMode} from '../state-management/action/profileModeAction';
+import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
 
 const SignUp = ({navigation}) => {
+  const [isOpen, setIsOpen] = useState({isOpen: false, message: ''});
+
+  const onClose = () => setIsOpen(false);
+
+  const cancelRef = useRef(null);
   const [isload, setislpad] = useState(false);
   const dispatch = useDispatch();
 
@@ -60,7 +67,6 @@ const SignUp = ({navigation}) => {
                   setislpad(true);
 
                   setTimeout(() => {
-                    console.log(values);
                     register(values).then(res => {
                       setislpad(false);
                       if (res.status === 201) {
@@ -75,7 +81,8 @@ const SignUp = ({navigation}) => {
                           }
                         });
                       } else {
-                        console.log(res.data.message);
+                        setIsOpen({isOpen: true, message: res.data.message});
+
                       }
                     });
 
@@ -132,12 +139,7 @@ const SignUp = ({navigation}) => {
                       p={1}
                       flexDirection="row"
                       justifyContent="space-between">
-                      <Button
-                        w={'full'}
-                        colorScheme="dark"
-                        startIcon={<AntDesign name="google" />}>
-                        ورودباگوگل
-                      </Button>
+                      <GoogleSigninButton style={{width: '100%'}} />
                     </View>
                   </VStack>
                 )}
@@ -146,6 +148,20 @@ const SignUp = ({navigation}) => {
           </Center>
         </View>
       </View>
+      <AlertDialog
+        leastDestructiveRef={cancelRef}
+        isOpen={isOpen.isOpen}
+        onClose={() => {
+          onClose();
+        }}>
+        <AlertDialog.Content>
+          <AlertDialog.CloseButton />
+          <AlertDialog.Header>{''}</AlertDialog.Header>
+          <AlertDialog.Body>
+            <Center>{isOpen.message}</Center>
+          </AlertDialog.Body>
+        </AlertDialog.Content>
+      </AlertDialog>
     </NativeBaseProvider>
   );
 };

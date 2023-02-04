@@ -28,6 +28,11 @@ import {login} from '../services/userServices';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch} from 'react-redux';
 import {profileMode} from '../state-management/action/profileModeAction';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 
 const Login = ({navigation}) => {
   const [isOpen, setIsOpen] = useState({isOpen: false, message: ''});
@@ -44,10 +49,44 @@ const Login = ({navigation}) => {
       // saving error
     }
   };
+  GoogleSignin.configure({
+    scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
+    webClientId: '<FROM DEVELOPER CONSOLE>', // client ID of type WEB for your server (needed to verify user ID and offline access)
+    offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+    hostedDomain: '', // specifies a hosted domain restriction
+    forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
+    accountName: '', // [Android] specifies an account name on the device that should be used
+    iosClientId: '<FROM DEVELOPER CONSOLE>', // [iOS] if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
+    googleServicePlistPath: '', // [iOS] if you renamed your GoogleService-Info file, new name here, e.g. GoogleService-Info-Staging
+    openIdRealm: '', // [iOS] The OpenID2 realm of the home web server. This allows Google to include the user's OpenID Identifier in the OpenID Connect ID token.
+    profileImageSize: 120, // [iOS] The desired height (and width) of the profile image. Defaults to 120px
+  });
+  const signIn = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      console.log({userInfo});
+      console.log('first');
+    } catch (error) {
+      console.log(error);
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+        console.log('cancel');
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        console.log('progress');
+        // operation (e.g. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        console.log('notavailabe');
+        // play services not available or outdated
+      } else {
+        // some other error happened
+        console.log('حطا');
+      }
+    }
+  };
   return (
     <NativeBaseProvider>
       <View bg={'white'} flex={1} w={'100%'} alignItems={'center'}>
-      
         <View w={'100%'} flex={1}>
           <Center flex={1}>
             <Text fontFamily={'DastN'} fontSize={50} bold={true}>
@@ -135,25 +174,13 @@ const Login = ({navigation}) => {
                     <View
                       mt={2}
                       p={1}
+                      
                       flexDirection="row"
                       justifyContent="space-between">
-                      <Button
-                        w={'full'}
-                        colorScheme="dark"
-                        startIcon={<AntDesign name="google" />}>
-                        ورودباگوگل
-                      </Button>
-
-                      {/* <Circle size={50} shadow={7} bg="#00A693">
-                        <AntDesign name="google" size={30} />
-                      </Circle>
-
-                      <Circle size={50} shadow={7} bg="#00A693">
-                        <AntDesign name="github" size={30} />
-                      </Circle>
-                      <Circle size={50} shadow={7} bg="#00A693">
-                        <Feather name="linkedin" size={30} />
-                      </Circle> */}
+                      <GoogleSigninButton
+                        onPress={() => signIn()}
+                        style={{width: '100%'}}
+                      />
                     </View>
                   </VStack>
                 )}
@@ -182,7 +209,6 @@ const Login = ({navigation}) => {
           <AlertDialog.Body>
             <Center>{isOpen.message}</Center>
           </AlertDialog.Body>
-          
         </AlertDialog.Content>
       </AlertDialog>
     </NativeBaseProvider>

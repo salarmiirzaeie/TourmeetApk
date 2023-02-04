@@ -14,6 +14,7 @@ import {MyTours} from '../pages/content/MyTours';
 import {Saveds} from '../pages/content/Saveds';
 import Explore2 from '../pages/content/Explore2';
 import { Settings } from '../pages/content/Settings';
+import { EditProfile } from '../pages/content/EditProfile';
 
 const Tab = createBottomTabNavigator();
 
@@ -97,6 +98,8 @@ function ProfileSatck() {
       <Profiles.Screen name="MyTours" component={MyTours} />
       <Profiles.Screen name="Saveds" component={Saveds} />
       <Profiles.Screen name="settings" component={Settings} />
+      <Profiles.Screen name="EditProfile" component={EditProfile} />
+
 
     </Profiles.Navigator>
   );

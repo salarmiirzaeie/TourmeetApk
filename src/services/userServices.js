@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 const apiPort = 'http://192.168.43.153:3333/users';
-const token = AsyncStorage.getItem('token');
+let token = AsyncStorage.getItem('@storage_Key');
 
 export const login = data => {
   const res = axios
@@ -57,11 +57,11 @@ export const editProfile = data => {
     });
   return res;
 };
-export const userProfile = data => {
+export const userProfile = () => {
   const res = axios
     .get(`${apiPort}/profile`, {
       headers: {
-        Authorization: `Bearer ${data}`,
+        Authorization: `Bearer ${token._j}`,
       },
     })
     .then(response => {

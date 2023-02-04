@@ -20,7 +20,6 @@ export const PopularCompanies = () => {
     getPopularCamps().then(res => {
       setcamps(res.data);
     });
-    console.log(camps);
   }, []);
   const scrollRef = useRef();
   const scrollToEnd = () => scrollRef.current.scrollToEnd({animated: false});

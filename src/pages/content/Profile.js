@@ -19,6 +19,9 @@ import {
   TextArea,
   useToast,
   Icon,
+  CircleIcon,
+  Circle,
+  Pressable,
 } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -27,7 +30,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
 
-Feather
 import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
@@ -36,50 +38,33 @@ import {userProfile} from '../../services/userServices';
 import {NoLogin} from '../../components/NoLogin';
 import {useDispatch} from 'react-redux';
 import {profileMode} from '../../state-management/action/profileModeAction';
-import {Formik} from 'formik';
+import {Gallery} from '../../components/Gallery';
+import {GalleryModal} from '../../components/GalleryModal';
 
 export const Profile = ({navigation, route}) => {
   const dispatch = useDispatch();
   const {isOpen, onOpen, onClose} = useDisclose();
   const logedin = useSelector(state => state.profileModeState);
-  const [editMode, setEditMode] = useState(false);
   const [profile, setProfile] = useState({});
-  const getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem('@storage_Key');
-      if (value !== null) {
-        return value;
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  const eff = () => {
-    setEditMode(false);
-  };
+  
   useEffect(() => {
     if (logedin) {
-      getData().then(tok => {
-        userProfile(tok).then(res => {
-          setProfile(res.data);
-        });
+      userProfile().then(res => {
+        setProfile(res.data);
       });
     }
-  }, [logedin]);
+  }, []);
   const toast = useToast();
-
   if (logedin) {
     return (
       <NativeBaseProvider>
-        <View bg={'skyblue'} flex={1}>
+        <View bg={'skyblue'} onTouchCancel={onClose} flex={1}>
           <View
             flexDirection={'row'}
             justifyContent="space-between"
             w="100%"
             p={1}
             flex={0.2}>
-            
-
             <View>
               <IconButton
                 onPress={onOpen}
@@ -108,166 +93,91 @@ export const Profile = ({navigation, route}) => {
               />
             </View>
           </View>
-          <View bg="white" borderTopRadius={30} p={2} shadow={3} flex={0.8}>
+          <View bg="white" borderTopRadius={30} shadow={3} flex={0.8}>
             <Box
               size="170"
               mt={-85}
               bg="red.100"
-              rounded="full"
+              bg="transparent"
               alignSelf="center">
-              <Image
-                rounded="full"
-                h={'full'}
-                W={'full'}
-                alt="ee"
-                source={{
-                  uri: `http://192.168.43.153:3333/uploads/sea.jpg`,
-                }}
-              />
+              <GalleryModal images={profile.profilePhotos} />
+              
             </Box>
-            <Formik
-              initialValues={{
-                name: profile.name,
-                bio: profile.description,
-                phone: profile.phoneNumber,
-                email: profile.email,
-              }}
-              onSubmit={values => {
-                console.log(values);
-              }}>
-              {({
-                values,
 
-                errors,
-
-                touched,
-
-                handleChange,
-
-                handleBlur,
-
-                handleSubmit,
-
-                isSubmitting,
-              }) => (
-                <View pr={3} flex={1}>
-                  <View h={75} flexDirection="row">
-                    <View
-                      justifyContent={'center'}
-                      alignItems="center"
-                      flex={0.15}>
-                      <Ionicons name="person" size={24} color="black" />
-                    </View>
-                    <View flex={0.85}>
-                      <View justifyContent={'center'} flex={0.5}>
-                        <Text fontFamily={"B Yekan"}>Name</Text>
-                      </View>
-
-                      <View justifyContent={'center'} flex={0.5}>
-                        {editMode ? (
-                          <Input value={profile.name} />
-                        ) : (
-                          <Text fontFamily={"B Yekan"} bold>{profile.name}</Text>
-                        )}
-                      </View>
-                    </View>
+            <View pl={6} flex={1}>
+              <View h={75} flexDirection="row">
+                <View flex={0.85}>
+                  <View justifyContent={'center'} flex={0.5}>
+                    <Text textAlign={'right'} fontFamily={'B Yekan'}>
+                      نام
+                    </Text>
                   </View>
-                  <Divider bg={'gray.100'} />
 
-                  <View h={75} flexDirection="row">
-                    <View
-                      justifyContent={'center'}
-                      alignItems="center"
-                      flex={0.15}>
-                      <AntDesign name="phone" size={24} color="black" />
-                    </View>
-                    <View flex={0.85}>
-                      <View justifyContent={'center'} flex={0.5}>
-                        <Text fontFamily={"B Yekan"}>Phone</Text>
-                      </View>
-                      <View justifyContent={'center'} flex={0.5}>
-                        {editMode ? (
-                          <Input value={profile.phoneNumber} />
-                        ) : (
-                          <Text fontFamily={"B Yekan"} bold>{profile.phoneNumber}</Text>
-                        )}
-                      </View>
-                    </View>
-                  </View>
-                  <View h={75} flexDirection="row">
-                    <View
-                      justifyContent={'center'}
-                      alignItems="center"
-                      flex={0.15}>
-                      <AntDesign name="mail" size={24} color="black" />
-                    </View>
-                    <View flex={0.85}>
-                      <View justifyContent={'center'} flex={0.5}>
-                        <Text fontFamily={"B Yekan"}>email</Text>
-                      </View>
-                      <View justifyContent={'center'} flex={0.5}>
-                        {editMode ? (
-                          <FormControl isRequired>
-                            <Input
-                              type="text"
-                              name="email"
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              value={profile.email}
-                            />
-                          </FormControl>
-                        ) : (
-                          <Text fontFamily={"B Yekan"} bold>{profile.email}</Text>
-                        )}
-                      </View>
-                    </View>
-                  </View>
-                  <View h={75} flexDirection="row">
-                    <View
-                      justifyContent={'center'}
-                      alignItems="center"
-                      flex={0.15}>
-                      <AntDesign name="infocirlce" size={24} color="black" />
-                    </View>
-                    <View flex={0.85}>
-                      <View justifyContent={'center'} flex={0.5}>
-                        <Text fontFamily={"B Yekan"}>Bio</Text>
-                      </View>
-                      <View justifyContent={'center'} flex={0.5}>
-                        {editMode ? (
-                          <Text fontFamily={"B Yekan"}Area mt={10} value={profile.description} />
-                        ) : (
-                          <Text fontFamily={"B Yekan"} bold>{profile.description}</Text>
-                        )}
-                      </View>
-                    </View>
-                  </View>
-                  <Divider bg={'gray.100'} />
-                  <View h={50} mt={50} flexDirection="row">
-                    <View flex={0.15}></View>
-
-                    {editMode ? (
-                      <View
-                        justifyContent={'space-between'}
-                        flexDirection={'row'}
-                        flex={0.85}>
-                        <Button flex={0.5} onPress={handleSubmit}>
-                          ثبت
-                        </Button>
-                        <Button
-                          flex={0.5}
-                          colorScheme={'danger'}
-                          onPress={() => eff()}>
-                          لغو
-                        </Button>
-                      </View>
-                    ) : (
-                      ''
-                    )}
+                  <View justifyContent={'center'} flex={0.5}>
+                    <Text textAlign={'right'} fontFamily={'B Yekan'} bold>
+                      {profile.name}
+                    </Text>
                   </View>
                 </View>
-              )}
-            </Formik>
+                <View justifyContent={'center'} alignItems="center" flex={0.15}>
+                  <Ionicons name="person" size={24} color="black" />
+                </View>
+              </View>
+              <Divider bg={'gray.100'} />
+
+              <View h={75} flexDirection="row">
+                <View flex={0.85}>
+                  <View justifyContent={'center'} flex={0.5}>
+                    <Text textAlign={'right'} fontFamily={'B Yekan'}>
+                      تلفن
+                    </Text>
+                  </View>
+                  <View justifyContent={'center'} flex={0.5}>
+                    <Text textAlign={'right'} fontFamily={'B Yekan'} bold>
+                      {profile.phoneNumber}
+                    </Text>
+                  </View>
+                </View>
+                <View justifyContent={'center'} alignItems="center" flex={0.15}>
+                  <AntDesign name="phone" size={24} color="black" />
+                </View>
+              </View>
+              <View h={75} flexDirection="row">
+                <View flex={0.85}>
+                  <View justifyContent={'center'} flex={0.5}>
+                    <Text textAlign={'right'} fontFamily={'B Yekan'}>
+                      ایمیل
+                    </Text>
+                  </View>
+                  <View justifyContent={'center'} flex={0.5}>
+                    <Text textAlign={'right'} fontFamily={'B Yekan'} bold>
+                      {profile.email}
+                    </Text>
+                  </View>
+                </View>
+                <View justifyContent={'center'} alignItems="center" flex={0.15}>
+                  <AntDesign name="mail" size={24} color="black" />
+                </View>
+              </View>
+              <View h={75} flexDirection="row">
+                <View flex={0.85}>
+                  <View justifyContent={'center'} flex={0.5}>
+                    <Text textAlign={'right'} fontFamily={'B Yekan'}>
+                      درباره
+                    </Text>
+                  </View>
+                  <View justifyContent={'center'} flex={0.5}>
+                    <Text textAlign={'right'} fontFamily={'B Yekan'} bold>
+                      {profile.description}
+                    </Text>
+                  </View>
+                </View>
+                <View justifyContent={'center'} alignItems="center" flex={0.15}>
+                  <AntDesign name="infocirlce" size={24} color="black" />
+                </View>
+              </View>
+              <Divider bg={'gray.100'} />
+            </View>
           </View>
         </View>
         <Actionsheet isOpen={isOpen} onClose={onClose}>
@@ -276,8 +186,9 @@ export const Profile = ({navigation, route}) => {
               endIcon={<Icon as={AntDesign} size="6" name="edit" />}
               alignItems="flex-end"
               onPress={() => {
-                setEditMode(true);
-                onClose();
+                navigation.navigate('EditProfile', {
+                  profile: profile,
+                });
               }}>
               ویرایش پروفایل
             </Actionsheet.Item>

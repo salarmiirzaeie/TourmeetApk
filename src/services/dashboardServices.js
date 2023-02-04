@@ -10,7 +10,7 @@ let token = AsyncStorage.getItem('@storage_Key');
 // const uu = token().then();
 
 export const joinTour = async data => {
-  console.log('first');
+  console.log(token._j);
   const res = await axios
     .put(`${apiPort}/join-tour`, data, {
       headers: {
