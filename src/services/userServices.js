@@ -72,3 +72,21 @@ export const userProfile = () => {
     });
   return res;
 };
+export const uploadprofilephoto = data => {
+  console.log('first');
+  const res = axios
+    .post(`${apiPort}/upload-profilephoto`, data, {
+      headers: {
+        Authorization: `Bearer ${token._j}`,
+        'content-type': 'multipart/form-data',
+        // Accept: 'application/json',
+      },
+    })
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      return err.response;
+    });
+  return res;
+};

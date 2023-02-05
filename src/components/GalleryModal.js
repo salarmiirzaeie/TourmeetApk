@@ -13,22 +13,42 @@ import {
   HamburgerIcon,
 } from 'native-base';
 import React, {useState} from 'react';
-import {Dimensions, Modal} from 'react-native';
+import {Dimensions, Modal, Platform} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {uploadprofilephoto} from '../services/userServices';
 
 export const GalleryModal = ({images}) => {
   const {width: windowWidth} = Dimensions.get('window');
-  const {height: windowheight} = Dimensions.get('window');
 
-  const {isOpen, onOpen, onClose} = useDisclose();
   const [visible, setvisible] = useState(false);
   const options = {
     noData: true,
-    // selectionLimit: 5,
+    // includeBase64:true,
+    selectionLimit: 5,
   };
+
+  const createFormData = photos => {
+    const datas = [];
+    const data = new FormData();
+    // console.log(photo)
+    photos.forEach(element => {
+      data.append('photo', {
+        name: element.fileName,
+        type: element.type,
+        uri:
+          Platform.OS === 'android'
+            ? element.uri
+            : element.uri.replace('file://', ''),
+      });
+      datas.push(data);
+    });
+    return datas;
+  };
+
   return (
     <>
       <FlatList
@@ -54,9 +74,11 @@ export const GalleryModal = ({images}) => {
       <Pressable
         onPress={() => {
           launchImageLibrary(options, res => {
-            console.log(res);
-            // setphoto(res.assets[0]);
-            // console.log(res.assets[0])
+            const df = createFormData(res.assets);
+            console.log(df);
+            uploadprofilephoto(df).then(res => {
+              console.log(res);
+            });
           });
         }}
         justifyContent={'center'}
@@ -72,7 +94,6 @@ export const GalleryModal = ({images}) => {
       </Pressable>
       <Modal
         visible={visible}
-        
         animationType={'fade'}
         onRequestClose={() => setvisible(false)}>
         <View
@@ -99,7 +120,20 @@ export const GalleryModal = ({images}) => {
               );
             }}>
             <Menu.Item flexDirection={'row-reverse'}>حذف</Menu.Item>
-            <Menu.Item flexDirection={'row-reverse'}>ذخیره</Menu.Item>
+            <Menu.Item
+              onPress={() => {
+                console.log('x');
+
+                CameraRoll.save({
+                  uri: `http://192.168.43.153:3333/uploads/thumbnails/defaultProfile.jpg`,
+                }).then(() => {
+                  console.log('first');
+                });
+                console.log('x');
+              }}
+              flexDirection={'row-reverse'}>
+              ذخیره
+            </Menu.Item>
           </Menu>
           <IconButton
             my={3}

@@ -104,7 +104,9 @@ const Login = ({navigation}) => {
                       if (res.status === 207) {
                         storeData(res.data.token.toString());
                         dispatch(profileMode(true));
-                        navigation.navigate('Profile');
+                        navigation.navigate('Profile', {
+                          pf: true,
+                        });
                       } else {
                         setIsOpen({isOpen: true, message: res.data.message});
 

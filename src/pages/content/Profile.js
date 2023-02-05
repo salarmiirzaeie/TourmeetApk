@@ -38,7 +38,6 @@ import {userProfile} from '../../services/userServices';
 import {NoLogin} from '../../components/NoLogin';
 import {useDispatch} from 'react-redux';
 import {profileMode} from '../../state-management/action/profileModeAction';
-import {Gallery} from '../../components/Gallery';
 import {GalleryModal} from '../../components/GalleryModal';
 
 export const Profile = ({navigation, route}) => {
@@ -46,14 +45,14 @@ export const Profile = ({navigation, route}) => {
   const {isOpen, onOpen, onClose} = useDisclose();
   const logedin = useSelector(state => state.profileModeState);
   const [profile, setProfile] = useState({});
-  
+
   useEffect(() => {
     if (logedin) {
       userProfile().then(res => {
         setProfile(res.data);
       });
     }
-  }, []);
+  }, [route.params]);
   const toast = useToast();
   if (logedin) {
     return (
@@ -101,7 +100,6 @@ export const Profile = ({navigation, route}) => {
               bg="transparent"
               alignSelf="center">
               <GalleryModal images={profile.profilePhotos} />
-              
             </Box>
 
             <View pl={6} flex={1}>
