@@ -73,9 +73,9 @@ const SignUp = ({navigation}) => {
                         login({
                           email: values.email,
                           password: values.password,
-                        }).then(res => {
+                        }).then(async res => {
                           if (res.status === 207) {
-                            storeData(res.data.token.toString());
+                            await storeData(res.data.token.toString());
                             dispatch(profileMode(true));
                             navigation.navigate('Profile', {
                               pf: true,
@@ -84,7 +84,6 @@ const SignUp = ({navigation}) => {
                         });
                       } else {
                         setIsOpen({isOpen: true, message: res.data.message});
-
                       }
                     });
 

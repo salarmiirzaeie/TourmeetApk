@@ -124,9 +124,9 @@ export const GalleryModal = ({images}) => {
               onPress={() => {
                 console.log('x');
 
-                CameraRoll.save({
-                  uri: `http://192.168.43.153:3333/uploads/thumbnails/defaultProfile.jpg`,
-                }).then(() => {
+                CameraRoll.save(
+                  `http://192.168.43.153:3333/uploads/thumbnails/defaultProfile.jpg`,
+                ).then(() => {
                   console.log('first');
                 });
                 console.log('x');

@@ -13,8 +13,8 @@ import {NotConnected} from '../pages/content/NotConnected';
 import {MyTours} from '../pages/content/MyTours';
 import {Saveds} from '../pages/content/Saveds';
 import Explore2 from '../pages/content/Explore2';
-import { Settings } from '../pages/content/Settings';
-import { EditProfile } from '../pages/content/EditProfile';
+import {Settings} from '../pages/content/Settings';
+import {EditProfile} from '../pages/content/EditProfile';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,9 +22,8 @@ export const DefaultLayout = () => {
   const netInfo = useNetInfo();
 
   return (
-    <Tab.Navigator initialRouteName='HomeSatck'>
-      <Tab.Screen 
-
+    <Tab.Navigator initialRouteName="HomeSatck">
+      <Tab.Screen
         name="ProfileSatck"
         options={{
           tabBarShowLabel: false,
@@ -53,13 +52,10 @@ export const DefaultLayout = () => {
       />
 
       <Tab.Screen
-      
         options={{
-          
           unmountOnBlur: true,
           tabBarActiveTintColor: 'skyblue',
           lazy: true,
-          
 
           headerShown: false,
           tabBarShowLabel: false,
@@ -67,7 +63,6 @@ export const DefaultLayout = () => {
             <AntDesign name="home" size={24} color={color} />
           ),
         }}
-
         name="HomeSatck"
         component={netInfo.isConnected ? HomeSatck : NotConnected}
       />
@@ -99,8 +94,6 @@ function ProfileSatck() {
       <Profiles.Screen name="Saveds" component={Saveds} />
       <Profiles.Screen name="settings" component={Settings} />
       <Profiles.Screen name="EditProfile" component={EditProfile} />
-
-
     </Profiles.Navigator>
   );
 }
