@@ -39,6 +39,7 @@ import {NoLogin} from '../../components/NoLogin';
 import {useDispatch} from 'react-redux';
 import {profileMode} from '../../state-management/action/profileModeAction';
 import {GalleryModal} from '../../components/GalleryModal';
+import {ProfileHeader} from '../../components/ProfileHeader';
 
 export const Profile = ({navigation, route}) => {
   const dispatch = useDispatch();
@@ -52,46 +53,13 @@ export const Profile = ({navigation, route}) => {
         setProfile(res.data);
       });
     }
-  }, [route.params]);
+  },[route]);
   const toast = useToast();
   if (logedin) {
     return (
       <NativeBaseProvider>
         <View bg={'skyblue'} onTouchCancel={onClose} flex={1}>
-          <View
-            flexDirection={'row'}
-            justifyContent="space-between"
-            w="100%"
-            p={1}
-            flex={0.2}>
-            <View>
-              <IconButton
-                onPress={onOpen}
-                _icon={{
-                  as: Feather,
-                  name: 'align-left',
-                  color: 'white',
-                  size: 7,
-                }}
-              />
-            </View>
-            <View>
-              <IconButton
-                onPress={() =>
-                  toast.show({
-                    title: 'به زودی',
-                    placement: 'top',
-                  })
-                }
-                _icon={{
-                  as: AntDesign,
-                  name: 'qrcode',
-                  color: 'white',
-                  size: 7,
-                }}
-              />
-            </View>
-          </View>
+          <ProfileHeader onOpen={() => onOpen()} />
           <View bg="white" borderTopRadius={30} shadow={3} flex={0.8}>
             <Box
               size="170"
@@ -213,6 +181,14 @@ export const Profile = ({navigation, route}) => {
                 navigation.navigate('MyTours');
               }}>
               تورهای من
+            </Actionsheet.Item>
+            <Actionsheet.Item
+              endIcon={<Icon as={Entypo} size="6" name="lock" />}
+              alignItems="flex-end"
+              onPress={() => {
+                navigation.navigate('Security');
+              }}>
+              {'امنیت '}
             </Actionsheet.Item>
             <Actionsheet.Item
               endIcon={<Icon as={SimpleLineIcons} size="6" name="logout" />}

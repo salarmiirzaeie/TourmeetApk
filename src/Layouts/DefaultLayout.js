@@ -15,6 +15,7 @@ import {Saveds} from '../pages/content/Saveds';
 import Explore2 from '../pages/content/Explore2';
 import {Settings} from '../pages/content/Settings';
 import {EditProfile} from '../pages/content/EditProfile';
+import { Security } from '../pages/content/Security';
 
 const Tab = createBottomTabNavigator();
 
@@ -94,6 +95,7 @@ function ProfileSatck() {
       <Profiles.Screen name="Saveds" component={Saveds} />
       <Profiles.Screen name="settings" component={Settings} />
       <Profiles.Screen name="EditProfile" component={EditProfile} />
+      <Profiles.Screen name="Security" component={Security} />
     </Profiles.Navigator>
   );
 }

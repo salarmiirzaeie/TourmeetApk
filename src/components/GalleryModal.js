@@ -11,42 +11,25 @@ import {
   IconButton,
   Menu,
   HamburgerIcon,
+  Actionsheet,
 } from 'native-base';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Dimensions, Modal, Platform} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {uploadprofilephoto} from '../services/userServices';
+import {Formik} from 'formik';
+import {useNavigation} from '@react-navigation/native';
 
 export const GalleryModal = ({images}) => {
   const {width: windowWidth} = Dimensions.get('window');
-
+  const {isOpen, onOpen, onClose} = useDisclose();
   const [visible, setvisible] = useState(false);
+  const navigation = useNavigation();
   const options = {
     noData: true,
-    // includeBase64:true,
-    selectionLimit: 5,
-  };
-
-  const createFormData = photos => {
-    const datas = [];
-    const data = new FormData();
-    // console.log(photo)
-    photos.forEach(element => {
-      data.append('photo', {
-        name: element.fileName,
-        type: element.type,
-        uri:
-          Platform.OS === 'android'
-            ? element.uri
-            : element.uri.replace('file://', ''),
-      });
-      datas.push(data);
-    });
-    return datas;
   };
 
   return (
@@ -59,7 +42,7 @@ export const GalleryModal = ({images}) => {
               <Image
                 alt="ll"
                 source={{
-                  uri: `http://192.168.43.153:3333/uploads/thumbnails/${item}`,
+                  uri: `http://192.168.43.153:3333/uploads/profilePhotos/${item.name}`,
                 }}
                 size="170"
                 rounded={'full'}
@@ -71,27 +54,81 @@ export const GalleryModal = ({images}) => {
         horizontal
         showsHorizontalScrollIndicator={false}
       />
-      <Pressable
-        onPress={() => {
-          launchImageLibrary(options, res => {
-            const df = createFormData(res.assets);
-            console.log(df);
-            uploadprofilephoto(df).then(res => {
-              console.log(res);
-            });
-          });
+      <Formik
+        initialValues={{
+          image1: '',
         }}
-        justifyContent={'center'}
-        alignItems="center"
-        rounded={'full'}
-        bg={'skyblue'}
-        alignSelf="flex-end"
-        mt={130}
-        zIndex={10}
-        position="absolute"
-        size={10}>
-        <AntDesign style={{fontSize: 15}} name="camera" />
-      </Pressable>
+        onSubmit={values => {
+          let data = new FormData();
+          data.append('image1', values.image1);
+          setTimeout(async () => {
+            await uploadprofilephoto(data).then(res => {
+              console.log(res);
+              if (res !== undefined) {
+                if (res.status === 200) {
+                  onClose();
+                  navigation.navigate('Profile', {
+                    pf: Math.random(),
+                  });
+                } else {
+                  alert(res.data.message);
+                }
+              } else {
+                console.log("jnnn")
+                navigation.navigate('Profile', {
+                  pf: Math.random(),
+                });
+              }
+            });
+          }, 1000);
+        }}>
+        {({
+          values,
+
+          errors,
+
+          touched,
+
+          handleChange,
+
+          handleBlur,
+
+          handleSubmit,
+
+          isSubmitting,
+          setFieldValue,
+        }) => (
+          <Pressable
+            onPress={async () => {
+              await launchImageLibrary(options, async response => {
+                if (response.assets[0].uri) {
+                  let data = {
+                    name: response.assets[0].fileName,
+                    type: response.assets[0].type,
+                    uri:
+                      Platform.OS === 'android'
+                        ? response.assets[0].uri
+                        : response.assets[0].uri.replace('file://', ''),
+                  };
+                  await setFieldValue('image1', data);
+                }
+              });
+              onOpen();
+              handleSubmit();
+            }}
+            justifyContent={'center'}
+            alignItems="center"
+            rounded={'full'}
+            bg={'skyblue'}
+            alignSelf="flex-end"
+            mt={130}
+            zIndex={10}
+            position="absolute"
+            size={10}>
+            <AntDesign style={{fontSize: 15}} name="camera" />
+          </Pressable>
+        )}
+      </Formik>
       <Modal
         visible={visible}
         animationType={'fade'}
@@ -120,20 +157,6 @@ export const GalleryModal = ({images}) => {
               );
             }}>
             <Menu.Item flexDirection={'row-reverse'}>حذف</Menu.Item>
-            <Menu.Item
-              onPress={() => {
-                console.log('x');
-
-                CameraRoll.save(
-                  `http://192.168.43.153:3333/uploads/thumbnails/defaultProfile.jpg`,
-                ).then(() => {
-                  console.log('first');
-                });
-                console.log('x');
-              }}
-              flexDirection={'row-reverse'}>
-              ذخیره
-            </Menu.Item>
           </Menu>
           <IconButton
             my={3}
@@ -142,8 +165,8 @@ export const GalleryModal = ({images}) => {
           />
         </View>
 
-        <View bg="black" p={2} justifyContent="center" flex={1}>
-          <View alignSelf={'center'} flex={0.5} bg={'blue.300'}>
+        <View bg="black" justifyContent="center" flex={1}>
+          <View alignSelf={'center'} mt={-10} flex={0.5} bg={'blue.300'}>
             <FlatList
               data={images}
               renderItem={({item}) => {
@@ -151,7 +174,7 @@ export const GalleryModal = ({images}) => {
                   <Image
                     alt="ll"
                     source={{
-                      uri: `http://192.168.43.153:3333/uploads/thumbnails/${item}`,
+                      uri: `http://192.168.43.153:3333/uploads/profilePhotos/${item.name}`,
                     }}
                     style={{width: windowWidth, height: '100%'}}
                   />
@@ -164,6 +187,15 @@ export const GalleryModal = ({images}) => {
           </View>
         </View>
       </Modal>
+      <Actionsheet
+        isOpen={isOpen}
+        onClose={onClose}
+        hideDragIndicator
+        disableOverlay>
+        <Actionsheet.Content justifyContent={'center'} h={200}>
+          <Spinner size={'lg'} />
+        </Actionsheet.Content>
+      </Actionsheet>
     </>
   );
 };

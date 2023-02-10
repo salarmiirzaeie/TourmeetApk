@@ -5,11 +5,13 @@ import Feather from 'react-native-vector-icons/Feather';
 
 import {useNavigation} from '@react-navigation/native';
 import {CityModal} from './CityModal';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useSelector} from 'react-redux';
 
 export const SearchInput = () => {
   const navigation = useNavigation();
   const [visible, setvisible] = useState(false);
-
+  let city = useSelector(state => state.cityState);
   return (
     <>
       <Input
@@ -37,7 +39,7 @@ export const SearchInput = () => {
             fontFamily={'B Yekan'}
             w={'20%'}
             bg={'skyblue'}>
-            تبریز
+            {city}
           </Button>
         }
         InputRightElement={

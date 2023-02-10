@@ -1,5 +1,7 @@
-import { combineReducers } from "redux";
-import { profileModeReducer } from "./profileModeReducer";
+import {combineReducers} from 'redux';
+import {cityReducer} from './cityReducer';
+import {profileModeReducer} from './profileModeReducer';
 export default combineReducers({
-    profileModeState:profileModeReducer
-})
+  profileModeState: profileModeReducer,
+  cityState: cityReducer,
+});

@@ -12,16 +12,20 @@ import {
   ScrollView,
 } from 'native-base';
 
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {HomeHeader} from '../../components/HomeHeader';
 import {SearchInput} from '../../components/SearchInput';
 import {PopularTours} from '../../components/PopularTours';
 import {PopularCompanies} from '../../components/PopularCompanies';
 import {HomeCategory} from '../../components/HomeCategory';
-import {CityModal} from '../../components/CityModal';
 
-export const Home = () => {
+
+export const Home = ({route}) => {
   const scroll = useRef(null);
+
+  useEffect(() => {
+    console.log('fgd');
+  }, [route]);
   return (
     <NativeBaseProvider>
       <View bg="skyblue" flex={1}>

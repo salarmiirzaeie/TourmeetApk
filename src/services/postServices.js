@@ -1,5 +1,8 @@
 import axios from 'axios';
+import {Store} from '../../store';
 const apiPort = 'http://192.168.43.153:3333/';
+let city = Store.getState().cityState;
+
 export const getIndex = () => {
   const res = axios
     .get(`${apiPort}`)

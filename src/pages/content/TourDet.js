@@ -51,6 +51,7 @@ const TourDet = ({route}) => {
       setcreator(res.data.user);
     });
   }, []);
+  console.log(Date.now())
   const scrollOffsetY = useRef(new Animated.Value(0)).current;
   return (
     <NativeBaseProvider>
@@ -109,8 +110,8 @@ const TourDet = ({route}) => {
                     <Text fontFamily={"B Yekan"}>عنوان</Text>
                   </View>
                 </List.Item>
-                <Divider />
-                <List.Item>
+                {/* <Divider /> */}
+                {/* <List.Item>
                   <View
                     flexDirection={'row'}
                     flex={1}
@@ -119,7 +120,7 @@ const TourDet = ({route}) => {
                     <Text fontFamily={"B Yekan"}>{post.price}</Text>
                     <Text fontFamily={"B Yekan"}>قیمت</Text>
                   </View>
-                </List.Item>
+                </List.Item> */}
                 <Divider />
                 <List.Item>
                   <View
@@ -197,7 +198,6 @@ const TourDet = ({route}) => {
                     <Text fontFamily={"B Yekan"}>توضیحات</Text>
                   </View>
                 </List.Item>
-                <Divider />
               </List>
             </View>
           </ScrollView>

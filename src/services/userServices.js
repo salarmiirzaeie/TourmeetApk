@@ -72,14 +72,12 @@ export const userProfile = () => {
     });
   return res;
 };
-export const uploadprofilephoto = data => {
-  console.log('first');
-  const res = axios
-    .post(`${apiPort}/upload-profilephoto`, data, {
+export const uploadprofilephoto = async data => {
+  const res = await axios
+    .post(`${apiPort}/uploadphoto`, data, {
       headers: {
         Authorization: `Bearer ${token._j}`,
         'content-type': 'multipart/form-data',
-        // Accept: 'application/json',
       },
     })
     .then(response => {

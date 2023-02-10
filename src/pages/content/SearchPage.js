@@ -67,7 +67,6 @@ const SearchPage = () => {
         <Input
           autoFocus={true}
           onChange={q => {
-            console.log(q);
             if (q.nativeEvent.text === '') {
               setserc(true);
             } else setserc(false);
