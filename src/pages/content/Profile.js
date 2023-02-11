@@ -51,6 +51,7 @@ export const Profile = ({navigation, route}) => {
     if (logedin) {
       userProfile().then(res => {
         setProfile(res.data);
+        console.log(res.data)
       });
     }
   },[route]);
@@ -58,7 +59,7 @@ export const Profile = ({navigation, route}) => {
   if (logedin) {
     return (
       <NativeBaseProvider>
-        <View bg={'skyblue'} onTouchCancel={onClose} flex={1}>
+        <View bg={'#24C2D8'} onTouchCancel={onClose} flex={1}>
           <ProfileHeader onOpen={() => onOpen()} />
           <View bg="white" borderTopRadius={30} shadow={3} flex={0.8}>
             <Box

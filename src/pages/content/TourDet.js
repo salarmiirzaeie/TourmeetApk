@@ -26,6 +26,7 @@ import {
 } from 'native-base';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {getPost} from '../../services/postServices';
 import {DetAppBar} from '../../components/DetAppBar';
 import {Gallery} from '../../components/Gallery';
@@ -33,9 +34,10 @@ import {DetFooter} from '../../components/DetFooter';
 import {formDate} from '../../utils/helpers';
 import {Joineds} from '../../components/Joineds';
 import {useNavigation} from '@react-navigation/native';
-import {Animated, Dimensions} from 'react-native';
+import {Animated, Dimensions, Share, Alert} from 'react-native';
 import {DetContent} from '../../components/DetContent';
 import Timer from '../../components/Timer';
+import {CircleProgress} from './CircleProgress';
 const TourDet = ({route}) => {
   const [pos, setposition] = useState({mode: true});
   const [post, setpost] = useState({});
@@ -51,13 +53,28 @@ const TourDet = ({route}) => {
       setcreator(res.data.user);
     });
   }, []);
-  console.log(Date.now())
   const scrollOffsetY = useRef(new Animated.Value(0)).current;
+  const onShare = async () => {
+    const result = await Share.share({
+      message:
+        'React Native | A framework for building native apps using React',
+    });
+    if (result.action === Share.sharedAction) {
+      if (result.activityType) {
+        // shared with activity type of result.activityType
+      } else {
+        // shared
+      }
+    } else if (result.action === Share.dismissedAction) {
+      // dismissed
+    }
+  };
+
   return (
     <NativeBaseProvider>
       <View flex={1}>
         <View flex={0.1}>
-          <DetAppBar pos={scrollOffsetY} />
+          <DetAppBar share={() => onShare()} pos={scrollOffsetY} />
         </View>
         <View mt={-24} zIndex={-5} flex={0.85}>
           <ScrollView
@@ -75,130 +92,147 @@ const TourDet = ({route}) => {
             <View
               bg={'white'}
               mt={-3}
-              // h={initialLayout.height/1.8}
+              px={5}
+              py={1}
               justifyContent="space-between"
-              borderTopRadius={'3xl'}>
-              {/* <DetContent data={post} /> */}
-              <List style={{borderTopColor: 'transparent'}}>
-                <List.Item>
-                  <View
-                    flexDirection={'row'}
-                    flex={1}
-                    h={100}
-                    px={2}
-                    justifyContent="space-between">
-                    <View justifyContent="center" flex={0.5}>
-                      <Timer />
-                    </View>
-                    <Divider orientation="vertical" />
-                    <View justifyContent="center" flex={0.5}>
-                      <Text fontFamily={"B Yekan"} textAlign={'center'}>
-                        {post.price}
-                        {'تومان'}
-                      </Text>
-                    </View>
-                  </View>
-                </List.Item>
-                <Divider />
-                <List.Item>
-                  <View
-                    flexDirection={'row'}
-                    flex={1}
-                    px={2}
-                    justifyContent="space-between">
-                    <Text fontFamily={"B Yekan"}>{post.title}</Text>
-                    <Text fontFamily={"B Yekan"}>عنوان</Text>
-                  </View>
-                </List.Item>
-                {/* <Divider /> */}
-                {/* <List.Item>
-                  <View
-                    flexDirection={'row'}
-                    flex={1}
-                    px={2}
-                    justifyContent="space-between">
-                    <Text fontFamily={"B Yekan"}>{post.price}</Text>
-                    <Text fontFamily={"B Yekan"}>قیمت</Text>
-                  </View>
-                </List.Item> */}
-                <Divider />
-                <List.Item>
-                  <View
-                    flexDirection={'row'}
-                    flex={1}
-                    px={2}
-                    justifyContent="space-between">
-                    <Text fontFamily={"B Yekan"}>{post.capacity}</Text>
-                    <Text fontFamily={"B Yekan"}>ظرفیت</Text>
-                  </View>
-                </List.Item>
-                <Divider />
-                <List.Item>
-                  <View
-                    flexDirection={'row'}
-                    flex={1}
-                    px={2}
-                    justifyContent="space-between">
-                    <Text fontFamily={"B Yekan"}>{post.durationTime}</Text>
-                    <Text fontFamily={"B Yekan"}>مدت زمان</Text>
-                  </View>
-                </List.Item>
-                <Divider />
-                <List.Item>
-                  <View
-                    flexDirection={'row'}
-                    flex={1}
-                    px={2}
-                    justifyContent="space-between">
-                    <Text fontFamily={"B Yekan"}> {formDate(post.date)}</Text>
-                    <Text fontFamily={"B Yekan"}>تاریخ</Text>
-                  </View>
-                </List.Item>
-                <Divider />
+              borderTopRadius={25}>
+              <View flex={1}>
+                <View
+                  flexDirection={'row-reverse'}
+                  justifyContent="space-between">
+                  <Text
+                    alignSelf={'center'}
+                    fontSize={'lg'}
+                    fontFamily={'B Yekan'}
+                    bold>
+                    {post.title}
+                  </Text>
+                  <CircleProgress
+                    size={40}
+                    pgColor="#24C2D8"
+                    strokeWidth={6}
+                    text={`${80}%`}
+                    progressPercent={80}
+                    textColor="gray"
+                  />
+                </View>
+                <View
+                  w={'80%'}
+                  pt={1}
+                  alignSelf="flex-end"
+                  flexDirection={'row'}
+                  justifyContent="space-between">
+                  <Box justifyContent="center" flexDirection={'row-reverse'}>
+                    <FontAwesome5
+                      name="calendar-alt"
+                      style={{fontSize: 15}}
+                      color={'#24C2D8'}
+                    />
 
-                <List.Item>
-                  <View
-                    flexDirection={'row'}
-                    flex={1}
-                    px={2}
-                    justifyContent="space-between">
-                    <Pressable
-                      onPress={() => {
-                        navigation.navigate('CampProfile', {
-                          id: creator.id,
-                        });
-                      }}>
-                      <Badge colorScheme={'danger'}>
-                        <Text fontFamily={"B Yekan"}>{creator.name}</Text>
-                      </Badge>
-                    </Pressable>
-                    <Text fontFamily={"B Yekan"}>میزبان</Text>
-                  </View>
-                </List.Item>
+                    <Text fontSize={15} color={'gray.400'}>
+                      {formDate(post.date)}
+                    </Text>
+                  </Box>
+                  <Box justifyContent="center" flexDirection={'row-reverse'}>
+                    <FontAwesome5
+                      name="map-marker-alt"
+                      style={{fontSize: 15}}
+                      color={'#24C2D8'}
+                    />
+
+                    <Text fontSize={15} color={'gray.400'}>
+                      {post.type}
+                    </Text>
+                  </Box>
+                  <Box justifyContent="center" flexDirection={'row-reverse'}>
+                    <FontAwesome5
+                      name="hourglass-half"
+                      style={{fontSize: 15}}
+                      color={'#24C2D8'}
+                    />
+
+                    <Text
+                      fontFamily={'B Yekan'}
+                      fontSize={15}
+                      color={'gray.400'}>
+                      {post.durationTime}
+                    </Text>
+                  </Box>
+                </View>
+                <View alignSelf={'flex-end'} flexDirection={'row'} py={4}>
+                  <Text
+                    textAlign={'right'}
+                    color={'gray.400'}
+                    fontFamily={'B Yekan'}
+                    fontSize={15}>
+                    تومان
+                  </Text>
+                  <Text
+                    textAlign={'right'}
+                    fontFamily={'B Yekan'}
+                    fontSize={15}>
+                    {post.price}
+                  </Text>
+                </View>
                 <Divider />
-                <List.Item>
-                  <View
-                    flexDirection={'row'}
-                    flex={1}
-                    px={2}
-                    justifyContent="space-between">
-                    <Joineds />
-                    <Text fontFamily={"B Yekan"}>افرادعضوشده</Text>
-                  </View>
-                </List.Item>
+                <View
+                  py={3}
+                  justifyContent={'space-between'}
+                  flexDirection={'row'}>
+                  <Badge bg={'#E8FDFF'} rounded={'xl'}>
+                    <Text
+                      fontSize={'sm'}
+                      color={'gray.500'}
+                      fontFamily={'B Yekan'}>
+                      {creator.name}
+                    </Text>
+                  </Badge>
+                  <Text
+                    bold
+                    alignSelf={'center'}
+                    fontSize={'md'}
+                    fontFamily={'B Yekan'}>
+                    {'میزبان'}
+                  </Text>
+                </View>
                 <Divider />
-                <List.Item>
-                  <View
-                    flexDirection={'row'}
-                    flex={1}
-                    px={2}
-                    h={100}
-                    justifyContent="space-between">
-                    <Text fontFamily={"B Yekan"}>{post.description}</Text>
-                    <Text fontFamily={"B Yekan"}>توضیحات</Text>
+                <View py={4}>
+                  <Text fontSize={'md'} fontFamily={'B Yekan'} bold>
+                    {'درباره '}
+                  </Text>
+                  <Text
+                    pt={2}
+                    fontSize={'sm'}
+                    color={'gray.400'}
+                    fontFamily={'B Yekan'}>
+                    {
+                      'طرح‌نما یا لورم ایپسوم به نوشتاری آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود. طراح گرافیک از این نوشتار به‌عنوان عنصری از ترکیب‌بندی برای پُر کردن صفحه و ارائهٔ اولیهٔ شکل ظاهری و کلیِ طرح سفارش‌گرفته‌شده‌استفاده می‌کند، تا ازنظر گرافیکی نشانگر چگونگی نوع و اندازهٔ قلم و ظاهرِ متن باشد.  '
+                    }
+                  </Text>
+                </View>
+                <Divider />
+                <View
+                  py={4}
+                  justifyContent={'space-between'}
+                  flexDirection={'row'}>
+                  <Joineds />
+
+                  <Badge bg={'#E8FDFF'} rounded={'xl'}>
+                    <Text
+                      fontSize={'sm'}
+                      color={'gray.500'}
+                      fontFamily={'B Yekan'}>
+                      افرادعضوشده
+                    </Text>
+                  </Badge>
+                </View>
+                <Divider />
+                <View h={150} py={3}>
+                  <View rounded={'xl'} h={'full'} w={'full'} bg="#24C2D8">
+                    <Text>s</Text>
                   </View>
-                </List.Item>
-              </List>
+                </View>
+              </View>
             </View>
           </ScrollView>
         </View>

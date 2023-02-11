@@ -31,7 +31,7 @@ export const NoLogin = () => {
               ورود
             </Button>
             <Button
-              bg={'skyblue'}
+              bg={'#24C2D8'}
               onPress={() => navigation.navigate('SignUp')}>
               ثبت نام
             </Button>

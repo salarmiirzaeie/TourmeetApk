@@ -29,6 +29,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch} from 'react-redux';
 import {profileMode} from '../state-management/action/profileModeAction';
 import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
+import { tokenMode } from '../state-management/action/tokenAction';
 
 const SignUp = ({navigation}) => {
   const [isOpen, setIsOpen] = useState({isOpen: false, message: ''});
@@ -41,6 +42,8 @@ const SignUp = ({navigation}) => {
 
   const storeData = async value => {
     try {
+      dispatch(tokenMode(value));
+
       await AsyncStorage.setItem('@storage_Key', value);
     } catch (e) {
       // saving error
@@ -131,7 +134,7 @@ const SignUp = ({navigation}) => {
                       }
                       isLoading={isload}
                       onPress={handleSubmit}
-                      bg="skyblue">
+                      bg="#24C2D8">
                       {'ثبت نام'}
                     </Button>
                     <Divider />

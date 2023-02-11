@@ -23,15 +23,15 @@ export const DetFooter = () => {
     }
   }, []);
   return (
-    <View px={2} bg="white" flex={0.05}>
+    <View px={3} bg="white" justifyContent={"center"} flex={0.06}>
       {!joined ? (
         <Button
           onPress={async () => {
             setJoined(true);
             await joinTour(data);
           }}
-          borderRadius={'xl'}
-          bg={'skyblue'}>
+          borderRadius={'2xl'}
+          bg={'#24C2D8'}>
           پیوستن
         </Button>
       ) : (
@@ -40,7 +40,7 @@ export const DetFooter = () => {
             setJoined(false);
             await unjoinTour(data);
           }}
-          borderRadius={'xl'}
+          borderRadius={'2xl'}
           bg={'gray.400'}>
           عضوشده
         </Button>

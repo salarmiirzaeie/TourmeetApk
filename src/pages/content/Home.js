@@ -19,16 +19,15 @@ import {PopularTours} from '../../components/PopularTours';
 import {PopularCompanies} from '../../components/PopularCompanies';
 import {HomeCategory} from '../../components/HomeCategory';
 
-
 export const Home = ({route}) => {
   const scroll = useRef(null);
 
   useEffect(() => {
-    console.log('fgd');
+    // console.log('fgd');
   }, [route]);
   return (
     <NativeBaseProvider>
-      <View bg="skyblue" flex={1}>
+      <View bg="#24C2D8" flex={1}>
         <HomeHeader
           toTop={() => {
             scroll.current.scrollTo({y: 0, animated: true});
@@ -42,23 +41,47 @@ export const Home = ({route}) => {
               </Center>
             </View>
             <View
-              bg="#F1F5F2"
+              bg="#F8F8F8"
               p={3}
               mt={0}
               borderTopRadius={25}
               shadow={3}
               flex={1}>
-              <HomeCategory />
-              <Text color={'dark.400'}>محبوب ترین تورها</Text>
+              <View h={250}>
+                <HomeCategory />
+              </View>
+              <View
+                px={1}
+                w={'full'}
+                justifyContent={'space-between'}
+                mt={3}
+                flexDirection="row-reverse">
+                <Text fontSize={'md'} fontFamily={'B Yekan'} bold>
+                  محبوب ترین تورها
+                </Text>
+                <Text fontSize={'sm'} color={'gray.400'} fontFamily={'B Yekan'}>
+                  مشاهده همه
+                </Text>
+              </View>
 
-              <View h={250} pt={3}>
+              <View h={250} mt={3}>
                 <PopularTours />
               </View>
-              <Text color={'dark.400'} pb={2}>
-                محبوب ترین کمپ ها
-              </Text>
+              <View
+                px={1}
+                w={'full'}
+                justifyContent={'space-between'}
+                mt={3}
+                flexDirection="row-reverse">
+                <Text fontSize={'md'} fontFamily={'B Yekan'} bold>
+                  محبوب ترین گروه ها
+                </Text>
+                <Text fontSize={'sm'} color={'gray.400'} fontFamily={'B Yekan'}>
+                  مشاهده همه
+                </Text>
+              </View>
 
-              <View borderRadius={'md'} h={90}>
+              <View borderRadius={'md'} mt={3} h={70}>
                 <PopularCompanies />
               </View>
             </View>

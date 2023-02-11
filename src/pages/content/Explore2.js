@@ -86,7 +86,7 @@ const Explore2 = () => {
         indicatorStyle={{backgroundColor: 'transparent'}}
         style={{
           height: 50,
-          backgroundColor: 'skyblue',
+          backgroundColor: '#24C2D8',
           borderBottomEndRadius: 30,
           borderBottomLeftRadius: 30,
         }}

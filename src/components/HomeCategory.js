@@ -42,7 +42,7 @@ export const HomeCategory = () => {
                 }}
               />
               <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
-                bg={'gray.500'}
+                bg={'gray.400'}
                 color={'white'}
                 textAlign={'center'}
                 borderRadius={'lg'}>
@@ -68,7 +68,7 @@ export const HomeCategory = () => {
                 }}
               />
               <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
-                bg={'gray.500'}
+                bg={'gray.400'}
                 color={'white'}
                 textAlign={'center'}
                 borderRadius={'lg'}>
@@ -94,7 +94,7 @@ export const HomeCategory = () => {
                 }}
               />
               <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
-                bg={'gray.500'}
+                bg={'gray.400'}
                 color={'white'}
                 textAlign={'center'}
                 borderRadius={'lg'}>
@@ -122,7 +122,7 @@ export const HomeCategory = () => {
                 }}
               />
               <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
-                bg={'gray.500'}
+                bg={'gray.400'}
                 color={'white'}
                 textAlign={'center'}
                 borderRadius={'lg'}>
@@ -148,7 +148,7 @@ export const HomeCategory = () => {
                 }}
               />
               <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
-                bg={'gray.500'}
+                bg={'gray.400'}
                 color={'white'}
                 textAlign={'center'}
                 borderRadius={'lg'}>
@@ -174,7 +174,7 @@ export const HomeCategory = () => {
                 }}
               />
               <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
-                bg={'gray.500'}
+                bg={'gray.400'}
                 color={'white'}
                 textAlign={'center'}
                 borderRadius={'lg'}>

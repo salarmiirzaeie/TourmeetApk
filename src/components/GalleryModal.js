@@ -12,14 +12,15 @@ import {
   Menu,
   HamburgerIcon,
   Actionsheet,
+  Button,
 } from 'native-base';
-import React, {useEffect, useState} from 'react';
-import {Dimensions, Modal, Platform} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {Dimensions, Modal, Platform, TouchableHighlight} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import {uploadprofilephoto} from '../services/userServices';
+import {deleteprofile, uploadprofilephoto} from '../services/userServices';
 import {Formik} from 'formik';
 import {useNavigation} from '@react-navigation/native';
 
@@ -31,7 +32,7 @@ export const GalleryModal = ({images}) => {
   const options = {
     noData: true,
   };
-
+  const deletebutton = useRef();
   return (
     <>
       <FlatList
@@ -52,6 +53,7 @@ export const GalleryModal = ({images}) => {
         }}
         pagingEnabled
         horizontal
+        scrollEnabled={false}
         showsHorizontalScrollIndicator={false}
       />
       <Formik
@@ -74,7 +76,7 @@ export const GalleryModal = ({images}) => {
                   alert(res.data.message);
                 }
               } else {
-                console.log("jnnn")
+                console.log('jnnn');
                 navigation.navigate('Profile', {
                   pf: Math.random(),
                 });
@@ -119,7 +121,7 @@ export const GalleryModal = ({images}) => {
             justifyContent={'center'}
             alignItems="center"
             rounded={'full'}
-            bg={'skyblue'}
+            bg={'#24C2D8'}
             alignSelf="flex-end"
             mt={130}
             zIndex={10}
@@ -156,7 +158,13 @@ export const GalleryModal = ({images}) => {
                 />
               );
             }}>
-            <Menu.Item flexDirection={'row-reverse'}>حذف</Menu.Item>
+            <Menu.Item
+              onPress={() => {
+                console.log(deletebutton.current.directEventTypes);
+              }}
+              flexDirection={'row-reverse'}>
+              حذف
+            </Menu.Item>
           </Menu>
           <IconButton
             my={3}
@@ -171,13 +179,30 @@ export const GalleryModal = ({images}) => {
               data={images}
               renderItem={({item}) => {
                 return (
-                  <Image
-                    alt="ll"
-                    source={{
-                      uri: `http://192.168.43.153:3333/uploads/profilePhotos/${item.name}`,
-                    }}
-                    style={{width: windowWidth, height: '100%'}}
-                  />
+                  <>
+                    <Button
+                      ref={deletebutton}
+                      onPress={() => {
+                        console.log('ggggggggggggg');
+                        deleteprofile(item.name).then(res => {
+                          if (res.status === 200) {
+                            console.log('حله');
+                          } else {
+                            console.log(res.data.message);
+                          }
+                        });
+                      }}>
+                      s
+                    </Button>
+
+                    <Image
+                      alt="ll"
+                      source={{
+                        uri: `http://192.168.43.153:3333/uploads/profilePhotos/${item.name}`,
+                      }}
+                      style={{width: windowWidth, height: '100%'}}
+                    />
+                  </>
                 );
               }}
               pagingEnabled

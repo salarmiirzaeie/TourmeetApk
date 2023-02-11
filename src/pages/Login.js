@@ -33,6 +33,7 @@ import {
   GoogleSigninButton,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+import {tokenMode} from '../state-management/action/tokenAction';
 
 const Login = ({navigation}) => {
   const [isOpen, setIsOpen] = useState({isOpen: false, message: ''});
@@ -44,6 +45,7 @@ const Login = ({navigation}) => {
   const [isload, setislpad] = useState(false);
   const storeData = async value => {
     try {
+      dispatch(tokenMode(value));
       await AsyncStorage.setItem('@storage_Key', value);
     } catch (e) {
       // saving error
@@ -162,7 +164,7 @@ const Login = ({navigation}) => {
                       }
                       isLoading={isload}
                       onPress={handleSubmit}
-                      bg="skyblue">
+                      bg="#24C2D8">
                       {'ورود'}
                     </Button>
                     <Link alignSelf={'flex-end'}>فراموشی رمز؟ </Link>
@@ -176,7 +178,6 @@ const Login = ({navigation}) => {
                     <View
                       mt={2}
                       p={1}
-                      
                       flexDirection="row"
                       justifyContent="space-between">
                       <GoogleSigninButton

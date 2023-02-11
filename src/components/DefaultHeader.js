@@ -25,7 +25,7 @@ export const DefaultHeader = name => {
       <HStack
         justifyContent="space-between"
         zIndex={99}
-        bg="skyblue"
+        bg="#24C2D8"
         w="100%"
         p={2}
         // flex={1}

@@ -19,7 +19,7 @@ import {useSelector} from 'react-redux';
 import {isSaved, saveTour, unSaveTour} from '../services/dashboardServices';
 import {Animated, View} from 'react-native';
 
-export const DetAppBar = ({pos}) => {
+export const DetAppBar = ({pos, share}) => {
   const navigation = useNavigation();
   const logedin = useSelector(state => state.profileModeState);
   const [saved, setsaved] = useState(false);
@@ -27,7 +27,7 @@ export const DetAppBar = ({pos}) => {
   const animateHeaderBackgroundColor = pos.interpolate({
     inputRange: [0, 200],
 
-    outputRange: ['transparent', 'white'],
+    outputRange: ['transparent', '#24C2D8'],
     extrapolate: 'clamp',
   });
   const animateHeaderTextColor = pos.interpolate({
@@ -63,7 +63,7 @@ export const DetAppBar = ({pos}) => {
         <HStack colorScheme={'red.400'} borderRadius="full">
           <IconButton
             onPress={() => navigation.goBack()}
-            bg={'gray.400'}
+            // bg={'gray.400'}
             size={'sm'}
             borderRadius="2xl"
             colorScheme={animateHeaderTextColor}
@@ -80,7 +80,7 @@ export const DetAppBar = ({pos}) => {
           {saved ? (
             <HStack borderRadius="full">
               <IconButton
-                bg={'gray.400'}
+                // bg={'gray.400'}
                 size={'sm'}
                 borderRadius="2xl"
                 onPress={() => {
@@ -99,7 +99,7 @@ export const DetAppBar = ({pos}) => {
           ) : (
             <HStack borderRadius="full">
               <IconButton
-                bg={'gray.400'}
+                // bg={'gray.400'}
                 size={'sm'}
                 borderRadius="2xl"
                 onPress={() => {
@@ -122,7 +122,8 @@ export const DetAppBar = ({pos}) => {
           <HStack borderRadius="full">
             <Box>
               <IconButton
-                bg={'gray.400'}
+                onPress={() => share()}
+                // bg={'gray.400'}
                 size={'md'}
                 borderRadius="2xl"
                 _icon={{

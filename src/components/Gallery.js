@@ -55,40 +55,10 @@ export const Gallery = ({images}) => {
         <View
           px={3}
           bg="black"
-          flexDirection={'row'}
+          flexDirection={'row-reverse'}
           justifyContent={'space-between'}
           w={'full'}>
-          <Menu
-            w="190"
-            trigger={triggerProps => {
-              return (
-                <IconButton
-                  my={3}
-                  icon={
-                    <Entypo
-                      style={{fontSize: 20, color: 'gray'}}
-                      name="dots-three-vertical"
-                    />
-                  }
-                  accessibilityLabel="More options menu"
-                  {...triggerProps}
-                />
-              );
-            }}>
-            <Menu.Item
-              onPress={() => {
-                console.log(img.current);
-
-                // CameraRoll.save(
-                //   `http://192.168.43.153:3333/uploads/thumbnails/defaultProfile.jpg`,
-                // ).then(() => {
-                //   console.log('first');
-                // });
-              }}
-              flexDirection={'row-reverse'}>
-              ذخیره
-            </Menu.Item>
-          </Menu>
+          
           <IconButton
             my={3}
             onPress={() => setvisible(false)}

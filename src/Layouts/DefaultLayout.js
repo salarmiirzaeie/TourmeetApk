@@ -29,7 +29,7 @@ export const DefaultLayout = () => {
         options={{
           tabBarShowLabel: false,
           unmountOnBlur: true,
-          tabBarActiveTintColor: 'skyblue',
+          tabBarActiveTintColor: '#24C2D8',
           headerShown: false,
           tabBarIcon: ({color}) => (
             <Feather name="user" size={24} color={color} />
@@ -43,7 +43,7 @@ export const DefaultLayout = () => {
         options={{
           tabBarShowLabel: false,
           unmountOnBlur: true,
-          tabBarActiveTintColor: 'skyblue',
+          tabBarActiveTintColor: '#24C2D8',
           headerShown: false,
           tabBarIcon: ({color}) => (
             <Ionicons name="compass-outline" size={24} color={color} />
@@ -55,7 +55,7 @@ export const DefaultLayout = () => {
       <Tab.Screen
         options={{
           unmountOnBlur: true,
-          tabBarActiveTintColor: 'skyblue',
+          tabBarActiveTintColor: '#24C2D8',
           lazy: true,
 
           headerShown: false,

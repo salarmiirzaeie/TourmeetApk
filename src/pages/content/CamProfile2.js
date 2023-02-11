@@ -245,7 +245,7 @@ const CamProfile2 = () => {
         <View
           style={{
             height: HEADER_HEIGHT,
-            backgroundColor: 'skyblue',
+            backgroundColor: '#24C2D8',
             justifyContent: 'center',
           }}>
           <View
@@ -271,7 +271,7 @@ const CamProfile2 = () => {
           indicatorStyle={{backgroundColor: 'transparent'}}
           style={{
             height: TAB_BAR_HEIGHT,
-            backgroundColor: 'skyblue',
+            backgroundColor: '#24C2D8',
             borderBottomEndRadius: 30,
             borderBottomLeftRadius: 30,
           }}

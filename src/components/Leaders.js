@@ -1,13 +1,13 @@
 import {Circle, NativeBaseProvider, Image, View, Avatar} from 'native-base';
 import React from 'react';
 
-export const Joineds = () => {
+export const Leaders = () => {
   return (
     <NativeBaseProvider>
       <View flexDirection={"row"}>
         <Avatar
           zIndex={1}
-          size={'sm'}
+          size={'xs'}
           
           source={{
             uri: `http://192.168.43.153:3333/uploads/sea.jpg`,
@@ -15,7 +15,7 @@ export const Joineds = () => {
         />
         <Avatar
           zIndex={2}
-          size={'sm'}
+          size={'xs'}
           ml={-3}
 
           source={{
@@ -24,7 +24,7 @@ export const Joineds = () => {
         />
         <Avatar
           zIndex={3}
-          size={'sm'}
+          size={'xs'}
           ml={-3}
 
           source={{
@@ -33,7 +33,7 @@ export const Joineds = () => {
         />
         <Avatar
           zIndex={3}
-          size={'sm'}
+          size={'xs'}
           ml={-3}
 
           source={{

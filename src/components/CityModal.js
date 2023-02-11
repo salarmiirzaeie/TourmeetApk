@@ -46,7 +46,7 @@ export const CityModal = ({visible, setvisible}) => {
       animationType={'fade'}
       onRequestClose={() => setvisible(false)}>
       <View flex={1}>
-        <View bg={'skyblue'} flexDirection="row" px={1} flex={0.08}>
+        <View bg={'#24C2D8'} flexDirection="row" px={1} flex={0.08}>
           <Input
             onChange={q => {
               if (q.nativeEvent.text === '') {

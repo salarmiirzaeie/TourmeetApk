@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Input, Circle, PresenceTransition, Button} from 'native-base';
+import {Input, Circle, PresenceTransition, Button, Box} from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 
@@ -28,17 +28,17 @@ export const SearchInput = () => {
         borderColor="white"
         shadow={4}
         textAlign="center"
-        variant="rounded"
+        rounded={"xl"}
         InputLeftElement={
           <Button
             onPress={() => setvisible(true)}
             p={0}
             m={0}
             h="full"
-            startIcon={<Feather style={{fontSize: 18}} name="map-pin" />}
+            startIcon={<Feather style={{fontSize: 18,color:"white"}} name="map-pin" />}
             fontFamily={'B Yekan'}
             w={'20%'}
-            bg={'skyblue'}>
+            bg={'#24C2D8'}>
             {city}
           </Button>
         }
@@ -56,9 +56,9 @@ export const SearchInput = () => {
                 duration: 300,
               },
             }}>
-            <Circle bg="skyblue" size={8}>
-              <AntDesign name="search1" color="white" size={20} />
-            </Circle>
+            <Box bg="#24C2D8" justifyContent={"center"} rounded={"xl"} size={8}>
+              <AntDesign style={{alignSelf:"center"}} name="search1" color="white" size={20} />
+            </Box>
           </PresenceTransition>
         }
       />
