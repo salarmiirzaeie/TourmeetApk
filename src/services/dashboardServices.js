@@ -1,20 +1,21 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import {Store} from '../../store';
+
 const apiPort = 'http://192.168.43.153:3333/dashboard';
-let token = AsyncStorage.getItem('@storage_Key');
 
-// const token = async () => {
-//   const tok = await AsyncStorage.getItem('@storage_Key');
-//   return tok;
-// };
-// const uu = token().then();
-
+const gettoken = async () => {
+  let token = await AsyncStorage.getItem('@storage_Key');
+  return token;
+};
 export const joinTour = async data => {
-  console.log(token._j);
+  console.log(data);
+  console.log(await gettoken());
+
   const res = await axios
     .put(`${apiPort}/join-tour`, data, {
       headers: {
-        Authorization: `Bearer ${token._j}`,
+        Authorization: `Bearer ${await gettoken()}`,
       },
     })
     .then(response => {
@@ -25,11 +26,11 @@ export const joinTour = async data => {
     });
   return res;
 };
-export const unjoinTour = data => {
+export const unjoinTour = async data => {
   const res = axios
     .put(`${apiPort}/unjoin-tour`, data, {
       headers: {
-        Authorization: `Bearer ${token._j}`,
+        Authorization: `Bearer ${await gettoken()}`,
       },
     })
     .then(response => {
@@ -40,11 +41,11 @@ export const unjoinTour = data => {
     });
   return res;
 };
-export const saveTour = data => {
+export const saveTour = async data => {
   const res = axios
     .put(`${apiPort}/save-tour`, data, {
       headers: {
-        Authorization: `Bearer ${token._j}`,
+        Authorization: `Bearer ${await gettoken()}`,
       },
     })
     .then(response => {
@@ -55,11 +56,11 @@ export const saveTour = data => {
     });
   return res;
 };
-export const unSaveTour = data => {
+export const unSaveTour = async data => {
   const res = axios
     .put(`${apiPort}/unsave-tour`, data, {
       headers: {
-        Authorization: `Bearer ${token._j}`,
+        Authorization: `Bearer ${await gettoken()}`,
       },
     })
     .then(response => {
@@ -70,11 +71,11 @@ export const unSaveTour = data => {
     });
   return res;
 };
-export const saveds = () => {
+export const saveds = async () => {
   const res = axios
     .get(`${apiPort}/saveds`, {
       headers: {
-        Authorization: `Bearer ${token._j}`,
+        Authorization: `Bearer ${await gettoken()}`,
       },
     })
     .then(response => {
@@ -85,11 +86,11 @@ export const saveds = () => {
     });
   return res;
 };
-export const joineds = () => {
+export const joineds = async () => {
   const res = axios
     .get(`${apiPort}/joineds`, {
       headers: {
-        Authorization: `Bearer ${token._j}`,
+        Authorization: `Bearer ${await gettoken()}`,
       },
     })
     .then(response => {
@@ -101,11 +102,13 @@ export const joineds = () => {
   return res;
 };
 
-export const isSaved = data => {
+export const isSaved = async data => {
+  console.log(await gettoken());
+
   const res = axios
     .post(`${apiPort}/is-saved`, data, {
       headers: {
-        Authorization: `Bearer ${token._j}`,
+        Authorization: `Bearer ${await gettoken()}`,
       },
     })
     .then(response => {
@@ -116,11 +119,11 @@ export const isSaved = data => {
     });
   return res;
 };
-export const isJoined = data => {
+export const isJoined = async data => {
   const res = axios
     .post(`${apiPort}/is-joined`, data, {
       headers: {
-        Authorization: `Bearer ${token._j}`,
+        Authorization: `Bearer ${await gettoken()}`,
       },
     })
     .then(response => {

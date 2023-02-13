@@ -30,7 +30,7 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {ProfileHeader} from '../../components/ProfileHeader';
 import {ProfileContent} from '../../components/ProfileContent';
 import {getUser} from '../../services/postServices';
-const CampProfile2 = ({route}) => {
+const UserProfile = ({route}) => {
   const {isOpen, onOpen, onClose} = useDisclose();
 
   const [user, setuser] = useState({});
@@ -38,6 +38,7 @@ const CampProfile2 = ({route}) => {
     getUser(route.params.id).then(res => {
       if (res.status === 200) {
         setuser(res.data);
+        console.log(res.data);
       }
     });
   }, []);
@@ -45,11 +46,10 @@ const CampProfile2 = ({route}) => {
     <NativeBaseProvider>
       <View bg={'#24C2D8'} onTouchCancel={onClose} flex={1}>
         <ProfileHeader mode={'otheruser'} onOpen={() => onOpen()} />
-        <ProfileContent rate={user.rate} mode={'camp'} profile={user} />
+        <ProfileContent mode={'otheruser'} profile={user} />
+        
       </View>
-
-     
     </NativeBaseProvider>
   );
 };
-export default CampProfile2;
+export default UserProfile;

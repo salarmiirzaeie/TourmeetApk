@@ -25,7 +25,6 @@ import {
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import {login} from '../services/userServices';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch} from 'react-redux';
 import {profileMode} from '../state-management/action/profileModeAction';
 import {
@@ -34,6 +33,7 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import {tokenMode} from '../state-management/action/tokenAction';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({navigation}) => {
   const [isOpen, setIsOpen] = useState({isOpen: false, message: ''});
@@ -45,8 +45,7 @@ const Login = ({navigation}) => {
   const [isload, setislpad] = useState(false);
   const storeData = async value => {
     try {
-      dispatch(tokenMode(value));
-      await AsyncStorage.setItem('@storage_Key', value);
+      AsyncStorage.setItem('@storage_Key', value);
     } catch (e) {
       // saving error
     }

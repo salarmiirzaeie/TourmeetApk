@@ -23,7 +23,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch} from 'react-redux';
 import {cityMode} from '../state-management/action/cityAction';
 import {useNavigation} from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const CityModal = ({visible, setvisible}) => {
   const {width: windowWidth, height: windowHeight} = Dimensions.get('window');

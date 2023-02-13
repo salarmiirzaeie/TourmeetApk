@@ -34,7 +34,7 @@ export const DefaultHeader = name => {
                <Text fontFamily={"B Yekan"}>{''}</Text>
 
         <View pl={5} justifyContent={'center'}>
-          <Text fontFamily={"B Yekan"} fontSize={15} textAlign="center">
+          <Text color={"white"} fontFamily={"B Yekan"} fontSize={15} textAlign="center">
             {name.name}
           </Text>
         </View>

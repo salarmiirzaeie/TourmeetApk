@@ -22,40 +22,53 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {deleteprofile, uploadprofilephoto} from '../services/userServices';
 import {Formik} from 'formik';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
-export const GalleryModal = ({images}) => {
+export const GalleryModal = ({images, mode, rate}) => {
   const {width: windowWidth} = Dimensions.get('window');
   const {isOpen, onOpen, onClose} = useDisclose();
   const [visible, setvisible] = useState(false);
   const navigation = useNavigation();
+  const route = useRoute();
   const options = {
     noData: true,
   };
   const deletebutton = useRef();
   return (
     <>
-      <FlatList
-        data={images}
-        renderItem={({item}) => {
-          return (
-            <Pressable onPress={() => setvisible(true)}>
-              <Image
-                alt="ll"
-                source={{
-                  uri: `http://192.168.43.153:3333/uploads/profilePhotos/${item.name}`,
-                }}
-                size="170"
-                rounded={'full'}
-              />
-            </Pressable>
-          );
-        }}
-        pagingEnabled
-        horizontal
-        scrollEnabled={false}
-        showsHorizontalScrollIndicator={false}
-      />
+      {images == null || images.length === 0 ? (
+        <Image
+          alt="ll"
+          source={{
+            uri: `http://192.168.43.153:3333/uploads/defaultProfile1.jpg`,
+          }}
+          size="170"
+          rounded={'full'}
+        />
+      ) : (
+        <FlatList
+          data={images}
+          renderItem={({item}) => {
+            return (
+              <Pressable onPress={() => setvisible(true)}>
+                <Image
+                  alt="ll"
+                  source={{
+                    uri: `http://192.168.43.153:3333/uploads/profilePhotos/${item.name}`,
+                  }}
+                  size="170"
+                  rounded={'full'}
+                />
+              </Pressable>
+            );
+          }}
+          pagingEnabled
+          horizontal
+          scrollEnabled={false}
+          showsHorizontalScrollIndicator={false}
+        />
+      )}
+
       <Formik
         initialValues={{
           image1: '',
@@ -99,37 +112,53 @@ export const GalleryModal = ({images}) => {
 
           isSubmitting,
           setFieldValue,
-        }) => (
-          <Pressable
-            onPress={async () => {
-              await launchImageLibrary(options, async response => {
-                if (response.assets[0].uri) {
-                  let data = {
-                    name: response.assets[0].fileName,
-                    type: response.assets[0].type,
-                    uri:
-                      Platform.OS === 'android'
-                        ? response.assets[0].uri
-                        : response.assets[0].uri.replace('file://', ''),
-                  };
-                  await setFieldValue('image1', data);
-                }
-              });
-              onOpen();
-              handleSubmit();
-            }}
-            justifyContent={'center'}
-            alignItems="center"
-            rounded={'full'}
-            bg={'#24C2D8'}
-            alignSelf="flex-end"
-            mt={130}
-            zIndex={10}
-            position="absolute"
-            size={10}>
-            <AntDesign style={{fontSize: 15}} name="camera" />
-          </Pressable>
-        )}
+        }) =>
+          mode !== 'camp' ? (
+            <Pressable
+              display={mode !== 'myprofile' ? 'none' : 'flex'}
+              onPress={async () => {
+                await launchImageLibrary(options, async response => {
+                  if (response.assets[0].uri) {
+                    let data = {
+                      name: response.assets[0].fileName,
+                      type: response.assets[0].type,
+                      uri:
+                        Platform.OS === 'android'
+                          ? response.assets[0].uri
+                          : response.assets[0].uri.replace('file://', ''),
+                    };
+                    setFieldValue('image1', data);
+                  }
+                });
+                onOpen();
+                handleSubmit();
+              }}
+              justifyContent={'center'}
+              alignItems="center"
+              rounded={'full'}
+              bg={'#24C2D8'}
+              alignSelf="flex-end"
+              mt={130}
+              zIndex={10}
+              position="absolute"
+              size={10}>
+              <AntDesign style={{fontSize: 15}} name="camera" />
+            </Pressable>
+          ) : (
+            <Box
+              justifyContent={'center'}
+              alignItems="center"
+              rounded={'full'}
+              bg={'#24C2D8'}
+              alignSelf="flex-end"
+              mt={130}
+              zIndex={10}
+              position="absolute"
+              size={10}>
+              <Text>{rate}</Text>
+            </Box>
+          )
+        }
       </Formik>
       <Modal
         visible={visible}
@@ -142,6 +171,7 @@ export const GalleryModal = ({images}) => {
           justifyContent={'space-between'}
           w={'full'}>
           <Menu
+            display={mode !== 'myprofile' ? 'none' : 'flex'}
             w="190"
             trigger={triggerProps => {
               return (
@@ -149,7 +179,11 @@ export const GalleryModal = ({images}) => {
                   my={3}
                   icon={
                     <Entypo
-                      style={{fontSize: 20, color: 'gray'}}
+                      style={{
+                        fontSize: 20,
+                        color: 'gray',
+                        display: mode !== 'myprofile' ? 'none' : 'flex',
+                      }}
                       name="dots-three-vertical"
                     />
                   }
@@ -181,6 +215,7 @@ export const GalleryModal = ({images}) => {
                 return (
                   <>
                     <Button
+                      display={mode !== 'myprofile' ? 'none' : 'flex'}
                       ref={deletebutton}
                       onPress={() => {
                         console.log('ggggggggggggg');

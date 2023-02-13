@@ -1,5 +1,4 @@
 import React, {useRef, useState} from 'react';
-import axios from 'axios';
 import {Formik} from 'formik';
 
 import {
@@ -7,29 +6,18 @@ import {
   NativeBaseProvider,
   View,
   VStack,
-  FormControl,
-  Heading,
-  Box,
   Input,
   Button,
-  Link,
-  IconButton,
-  Menu,
   Divider,
   Text,
-  Circle,
-  Color,
   AlertDialog,
 } from 'native-base';
 
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import Feather from 'react-native-vector-icons/Feather';
 import {login, register} from '../services/userServices';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch} from 'react-redux';
 import {profileMode} from '../state-management/action/profileModeAction';
 import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
-import { tokenMode } from '../state-management/action/tokenAction';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignUp = ({navigation}) => {
   const [isOpen, setIsOpen] = useState({isOpen: false, message: ''});
@@ -39,12 +27,9 @@ const SignUp = ({navigation}) => {
   const cancelRef = useRef(null);
   const [isload, setislpad] = useState(false);
   const dispatch = useDispatch();
-
   const storeData = async value => {
     try {
-      dispatch(tokenMode(value));
-
-      await AsyncStorage.setItem('@storage_Key', value);
+      AsyncStorage.setItem('@storage_Key', value);
     } catch (e) {
       // saving error
     }
@@ -76,9 +61,14 @@ const SignUp = ({navigation}) => {
                         login({
                           email: values.email,
                           password: values.password,
-                        }).then(async res => {
-                          if (res.status === 207) {
-                            await storeData(res.data.token.toString());
+                        }).then(async result => {
+                          if (result.status === 207) {
+                            // dispatch(tokenMode(result.data.token.toString()));
+                            await storeData(result.data.token.toString());
+
+                            // await storeData(result.data.token.toString());
+                            console.log(result.data.token.toString());
+
                             dispatch(profileMode(true));
                             navigation.navigate('Profile', {
                               pf: true,
@@ -91,7 +81,7 @@ const SignUp = ({navigation}) => {
                     });
 
                     setSubmitting(false);
-                  }, 400);
+                  }, 1000);
                 }}>
                 {({handleChange, handleBlur, handleSubmit, values}) => (
                   <VStack width="100%" space={4}>

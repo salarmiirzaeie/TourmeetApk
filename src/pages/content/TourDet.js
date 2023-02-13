@@ -36,7 +36,6 @@ import {Joineds} from '../../components/Joineds';
 import {useNavigation} from '@react-navigation/native';
 import {Animated, Dimensions, Share, Alert} from 'react-native';
 import {DetContent} from '../../components/DetContent';
-import Timer from '../../components/Timer';
 import {CircleProgress} from './CircleProgress';
 const TourDet = ({route}) => {
   const [pos, setposition] = useState({mode: true});
@@ -51,6 +50,7 @@ const TourDet = ({route}) => {
     getPost(route.params.id).then(res => {
       setpost(res.data.post);
       setcreator(res.data.user);
+      console.log(res.data.post);
     });
   }, []);
   const scrollOffsetY = useRef(new Animated.Value(0)).current;
@@ -179,14 +179,22 @@ const TourDet = ({route}) => {
                   py={3}
                   justifyContent={'space-between'}
                   flexDirection={'row'}>
-                  <Badge bg={'#E8FDFF'} rounded={'xl'}>
-                    <Text
-                      fontSize={'sm'}
-                      color={'gray.500'}
-                      fontFamily={'B Yekan'}>
-                      {creator.name}
-                    </Text>
-                  </Badge>
+                  <Pressable
+                    onPress={() =>
+                      navigation.navigate('CampProfile', {
+                        id: creator.id,
+                      })
+                    }>
+                    <Badge bg={'#E8FDFF'} rounded={'xl'}>
+                      <Text
+                        fontSize={'sm'}
+                        color={'gray.500'}
+                        fontFamily={'B Yekan'}>
+                        {creator.name}
+                      </Text>
+                    </Badge>
+                  </Pressable>
+
                   <Text
                     bold
                     alignSelf={'center'}
@@ -215,7 +223,14 @@ const TourDet = ({route}) => {
                   py={4}
                   justifyContent={'space-between'}
                   flexDirection={'row'}>
-                  <Joineds />
+                  <Pressable
+                    onPress={() =>
+                      navigation.navigate('UsersPage', {
+                        joinedUsers: post.joinedUsers,
+                      })
+                    }>
+                    <Joineds />
+                  </Pressable>
 
                   <Badge bg={'#E8FDFF'} rounded={'xl'}>
                     <Text
