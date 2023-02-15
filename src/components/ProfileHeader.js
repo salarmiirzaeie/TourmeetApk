@@ -4,7 +4,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import Feather from 'react-native-vector-icons/Feather';
 
-export const ProfileHeader = ({onOpen, mode}) => {
+export const ProfileHeader = ({onOpen, mode, onshare}) => {
   return (
     <View
       flexDirection={'row'}
@@ -12,18 +12,31 @@ export const ProfileHeader = ({onOpen, mode}) => {
       w="100%"
       p={1}
       flex={0.2}>
-      <View display={mode == 'myprofile' ? 'flex' : 'none'}>
-        <IconButton
-          onPress={onOpen}
-          _icon={{
-            as: Feather,
-            name: 'align-left',
-            color: 'white',
-            size: 7,
-          }}
-        />
+      <View display={mode === 'myprofile' || 'camp' ? 'flex' : 'none'}>
+        {mode === 'camp' ? (
+          <IconButton
+            onPress={() => onshare()}
+            _icon={{
+              as: Feather,
+              name: 'share',
+              color: 'white',
+              size: 7,
+            }}
+          />
+        ) : (
+          <IconButton
+            display={mode === 'otheruser' ? 'none' : 'flex'}
+            onPress={onOpen}
+            _icon={{
+              as: Feather,
+              name: 'align-left',
+              color: 'white',
+              size: 7,
+            }}
+          />
+        )}
       </View>
-      <View display={mode == 'myprofile' ? 'flex' : 'none'}>
+      <View display={mode === 'myprofile' ? 'flex' : 'none'}>
         <IconButton
           //   onPress={() =>
           //     toast.show({

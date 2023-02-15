@@ -55,10 +55,10 @@ export const Profile = ({navigation, route}) => {
     return (
       <NativeBaseProvider>
         <View bg={'#24C2D8'} onTouchCancel={onClose} flex={1}>
-          <ProfileHeader mode={"myprofile"} onOpen={() => onOpen()} />
-          <ProfileContent mode={"myprofile"} profile={profile} />
+          <ProfileHeader mode={'myprofile'} onOpen={() => onOpen()} />
+          <ProfileContent mode={'myprofile'} profile={profile} />
         </View>
-        
+
         <Actionsheet isOpen={isOpen} onClose={onClose}>
           <Actionsheet.Content>
             <Actionsheet.Item

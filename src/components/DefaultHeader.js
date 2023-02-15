@@ -31,10 +31,14 @@ export const DefaultHeader = name => {
         // flex={1}
         flexDirection="row"
         borderRadius={10}>
-               <Text fontFamily={"B Yekan"}>{''}</Text>
+        <Text fontFamily={'B Yekan'}>{''}</Text>
 
         <View pl={5} justifyContent={'center'}>
-          <Text color={"white"} fontFamily={"B Yekan"} fontSize={15} textAlign="center">
+          <Text
+            color={'white'}
+            fontFamily={'B Yekan'}
+            fontSize={15}
+            textAlign="center">
             {name.name}
           </Text>
         </View>

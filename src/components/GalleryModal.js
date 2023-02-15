@@ -78,7 +78,6 @@ export const GalleryModal = ({images, mode, rate}) => {
           data.append('image1', values.image1);
           setTimeout(async () => {
             await uploadprofilephoto(data).then(res => {
-              console.log(res);
               if (res !== undefined) {
                 if (res.status === 200) {
                   onClose();
@@ -89,7 +88,6 @@ export const GalleryModal = ({images, mode, rate}) => {
                   alert(res.data.message);
                 }
               } else {
-                console.log('jnnn');
                 navigation.navigate('Profile', {
                   pf: Math.random(),
                 });
@@ -118,20 +116,22 @@ export const GalleryModal = ({images, mode, rate}) => {
               display={mode !== 'myprofile' ? 'none' : 'flex'}
               onPress={async () => {
                 await launchImageLibrary(options, async response => {
-                  if (response.assets[0].uri) {
-                    let data = {
-                      name: response.assets[0].fileName,
-                      type: response.assets[0].type,
-                      uri:
-                        Platform.OS === 'android'
-                          ? response.assets[0].uri
-                          : response.assets[0].uri.replace('file://', ''),
-                    };
-                    setFieldValue('image1', data);
+                  if (!response.didCancel) {
+                    if (response.assets[0].uri) {
+                      let data = {
+                        name: response.assets[0].fileName,
+                        type: response.assets[0].type,
+                        uri:
+                          Platform.OS === 'android'
+                            ? response.assets[0].uri
+                            : response.assets[0].uri.replace('file://', ''),
+                      };
+                      setFieldValue('image1', data);
+                    }
+                    onOpen();
+                    handleSubmit();
                   }
                 });
-                onOpen();
-                handleSubmit();
               }}
               justifyContent={'center'}
               alignItems="center"
@@ -194,7 +194,7 @@ export const GalleryModal = ({images, mode, rate}) => {
             }}>
             <Menu.Item
               onPress={() => {
-                console.log(deletebutton.current.directEventTypes);
+                // console.log(deletebutton.current.directEventTypes);
               }}
               flexDirection={'row-reverse'}>
               حذف
@@ -210,25 +210,25 @@ export const GalleryModal = ({images, mode, rate}) => {
         <View bg="black" justifyContent="center" flex={1}>
           <View alignSelf={'center'} mt={-10} flex={0.5} bg={'blue.300'}>
             <FlatList
+            onScroll={(res)=>console.log(res)
+            }
               data={images}
               renderItem={({item}) => {
                 return (
                   <>
-                    <Button
+                    {/* <Button
                       display={mode !== 'myprofile' ? 'none' : 'flex'}
                       ref={deletebutton}
                       onPress={() => {
-                        console.log('ggggggggggggg');
                         deleteprofile(item.name).then(res => {
                           if (res.status === 200) {
-                            console.log('حله');
                           } else {
                             console.log(res.data.message);
                           }
                         });
                       }}>
                       s
-                    </Button>
+                    </Button> */}
 
                     <Image
                       alt="ll"

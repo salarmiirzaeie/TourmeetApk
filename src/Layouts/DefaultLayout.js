@@ -15,7 +15,8 @@ import {Saveds} from '../pages/content/Saveds';
 import Explore2 from '../pages/content/Explore2';
 import {Settings} from '../pages/content/Settings';
 import {EditProfile} from '../pages/content/EditProfile';
-import { Security } from '../pages/content/Security';
+import {Security} from '../pages/content/Security';
+import PopularToursPage from '../pages/content/PopularToursPage';
 
 const Tab = createBottomTabNavigator();
 
@@ -79,6 +80,7 @@ function HomeSatck() {
         headerShown: false,
       }}>
       <Homes.Screen name="Home" component={Home} />
+      <Homes.Screen name="PopularToursPage" component={PopularToursPage} />
     </Homes.Navigator>
   );
 }

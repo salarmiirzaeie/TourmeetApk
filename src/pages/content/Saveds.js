@@ -12,14 +12,16 @@ export const Saveds = () => {
         setsaveds(res.data);
       }
     });
-  });
+  },[]);
   return (
     <NativeBaseProvider>
       <View flex={1}>
-        <View flex={0.12}>
+        <View flex={0.095}>
           <DefaultHeader name={'تورهای ذخیره شده'} />
         </View>
-        <List2 datas={saves} />
+        <View flex={1}>
+          <List2 datas={saves} />
+        </View>
       </View>
     </NativeBaseProvider>
   );

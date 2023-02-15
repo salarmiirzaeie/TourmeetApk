@@ -25,20 +25,20 @@ import {
   Center,
 } from 'native-base';
 
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {getPost} from '../../services/postServices';
 import {DetAppBar} from '../../components/DetAppBar';
 import {Gallery} from '../../components/Gallery';
 import {DetFooter} from '../../components/DetFooter';
-import {formDate} from '../../utils/helpers';
+import {formDate, persianDuration, persianType} from '../../utils/helpers';
 import {Joineds} from '../../components/Joineds';
 import {useNavigation} from '@react-navigation/native';
 import {Animated, Dimensions, Share, Alert} from 'react-native';
-import {DetContent} from '../../components/DetContent';
 import {CircleProgress} from './CircleProgress';
+import {RelatedTours} from '../../components/RelatedTours';
+import {onShare} from '../../utils/helpers';
+
 const TourDet = ({route}) => {
-  const [pos, setposition] = useState({mode: true});
   const [post, setpost] = useState({});
   const [creator, setcreator] = useState({});
   const navigation = useNavigation();
@@ -50,25 +50,9 @@ const TourDet = ({route}) => {
     getPost(route.params.id).then(res => {
       setpost(res.data.post);
       setcreator(res.data.user);
-      console.log(res.data.post);
     });
   }, []);
   const scrollOffsetY = useRef(new Animated.Value(0)).current;
-  const onShare = async () => {
-    const result = await Share.share({
-      message:
-        'React Native | A framework for building native apps using React',
-    });
-    if (result.action === Share.sharedAction) {
-      if (result.activityType) {
-        // shared with activity type of result.activityType
-      } else {
-        // shared
-      }
-    } else if (result.action === Share.dismissedAction) {
-      // dismissed
-    }
-  };
 
   return (
     <NativeBaseProvider>
@@ -90,7 +74,7 @@ const TourDet = ({route}) => {
               </View>
             )}
             <View
-              bg={'white'}
+              bg={'#F8F8F8'}
               mt={-3}
               px={5}
               py={1}
@@ -111,8 +95,16 @@ const TourDet = ({route}) => {
                     size={40}
                     pgColor="#24C2D8"
                     strokeWidth={6}
-                    text={`${80}%`}
-                    progressPercent={80}
+                    text={
+                      post.joinedUsers
+                        ? `${post.joinedUsers.length}/${post.capacity}`
+                        : '0/0'
+                    }
+                    progressPercent={
+                      post.joinedUsers
+                        ? (post.joinedUsers.length / post.capacity) * 100
+                        : 100
+                    }
                     textColor="gray"
                   />
                 </View>
@@ -141,7 +133,7 @@ const TourDet = ({route}) => {
                     />
 
                     <Text fontSize={15} color={'gray.400'}>
-                      {post.type}
+                      {persianType(post.type)}
                     </Text>
                   </Box>
                   <Box justifyContent="center" flexDirection={'row-reverse'}>
@@ -155,7 +147,7 @@ const TourDet = ({route}) => {
                       fontFamily={'B Yekan'}
                       fontSize={15}
                       color={'gray.400'}>
-                      {post.durationTime}
+                      {persianDuration(post.durationTime)}
                     </Text>
                   </Box>
                 </View>
@@ -210,12 +202,15 @@ const TourDet = ({route}) => {
                   </Text>
                   <Text
                     pt={2}
+                    textAlign="right"
                     fontSize={'sm'}
+                    h={180}
                     color={'gray.400'}
                     fontFamily={'B Yekan'}>
-                    {
+                    {post.body}
+                    {/* {
                       'طرح‌نما یا لورم ایپسوم به نوشتاری آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود. طراح گرافیک از این نوشتار به‌عنوان عنصری از ترکیب‌بندی برای پُر کردن صفحه و ارائهٔ اولیهٔ شکل ظاهری و کلیِ طرح سفارش‌گرفته‌شده‌استفاده می‌کند، تا ازنظر گرافیکی نشانگر چگونگی نوع و اندازهٔ قلم و ظاهرِ متن باشد.  '
-                    }
+                    } */}
                   </Text>
                 </View>
                 <Divider />
@@ -224,12 +219,12 @@ const TourDet = ({route}) => {
                   justifyContent={'space-between'}
                   flexDirection={'row'}>
                   <Pressable
-                    onPress={() =>
+                    onPress={() => {
                       navigation.navigate('UsersPage', {
-                        joinedUsers: post.joinedUsers,
-                      })
-                    }>
-                    <Joineds />
+                        id: post._id,
+                      });
+                    }}>
+                    <Joineds data={post.joinedUsers} />
                   </Pressable>
 
                   <Badge bg={'#E8FDFF'} rounded={'xl'}>
@@ -241,10 +236,16 @@ const TourDet = ({route}) => {
                     </Text>
                   </Badge>
                 </View>
-                <Divider />
+                {/* <Divider />
                 <View h={150} py={3}>
                   <View rounded={'xl'} h={'full'} w={'full'} bg="#24C2D8">
                     <Text>s</Text>
+                  </View>
+                </View> */}
+                <Divider />
+                <View>
+                  <View py={3}>
+                    <RelatedTours id={post._id} typep={post.type} />
                   </View>
                 </View>
               </View>

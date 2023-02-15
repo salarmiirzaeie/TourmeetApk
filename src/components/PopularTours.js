@@ -8,20 +8,32 @@ import {
   Text,
   Skeleton,
   Badge,
+  Box,
 } from 'native-base';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import {useNavigation} from '@react-navigation/native';
-import {getPopularTours} from '../services/postServices';
-import {formDate, truncate} from '../utils/helpers';
+import {getPopularTours, getPopularTourswtok} from '../services/postServices';
+import {formDate, persianDuration, truncate} from '../utils/helpers';
+import {useSelector} from 'react-redux';
 export const PopularTours = () => {
   const navigation = useNavigation();
   const [posts, setposts] = useState([]);
+  const logedin = useSelector(state => state.profileModeState);
 
   useEffect(() => {
-    getPopularTours().then(res => {
-      setposts(res.data);
-    });
+    if (logedin) {
+      getPopularTourswtok().then(res => {
+        setposts(res.data);
+        console.log(res.data);
+      });
+    } else {
+      getPopularTours().then(res => {
+        setposts(res.data);
+        console.log(res.data);
+      });
+    }
   }, []);
   const scrollRef = useRef();
   const scrollToEnd = () => scrollRef.current.scrollToEnd({animated: false});
@@ -35,7 +47,7 @@ export const PopularTours = () => {
       onContentSizeChange={scrollToEnd}
       contentContainerStyle={{flexDirection: 'row-reverse'}}
       horizontal={true}>
-      <HStack h={250} W="full" space={4}>
+      <HStack mt={2} h={250} w="full" space={4}>
         {posts.map((post, i) => (
           <Pressable
             key={i}
@@ -50,6 +62,18 @@ export const PopularTours = () => {
             // shadow={1}
             // p={2}
             bg={'white'}>
+            <Box zIndex={200} position={'absolute'}>
+              <MaterialIcons
+                color={'#24C2D8'}
+                style={{
+                  zIndex: 80,
+                  fontSize: 30,
+                  marginTop: -10,
+                  marginLeft: 3,
+                }}
+                name="bookmark"
+              />
+            </Box>
             <Image
               rounded="2xl"
               h="70%"
@@ -77,7 +101,7 @@ export const PopularTours = () => {
                 justifyContent={'space-between'}>
                 <Badge rounded={'2xl'}>
                   <Text color={'gray.400'} fontSize="sm" textAlign={'right'}>
-                    {post.durationTime}
+                    {persianDuration(post.durationTime)}
                   </Text>
                 </Badge>
                 <View
@@ -91,7 +115,7 @@ export const PopularTours = () => {
                     textAlign={'right'}>
                     {formDate(post.date)}
                   </Text>
-                  <Fontisto style={{fontSize: 18}}  name="date" />
+                  <Fontisto style={{fontSize: 18}} name="date" />
                 </View>
               </View>
             </View>

@@ -38,7 +38,6 @@ const UserProfile = ({route}) => {
     getUser(route.params.id).then(res => {
       if (res.status === 200) {
         setuser(res.data);
-        console.log(res.data);
       }
     });
   }, []);

@@ -68,7 +68,7 @@ export const UserList = ({data}) => {
                 alignSelf={'center'}
                 size={'lg'}
                 source={{
-                  uri: `http://192.168.43.153:3333/uploads/sea.jpg`,
+                  uri: `http://192.168.43.153:3333/uploads/profilePhotos/${item.profilephotoss?item.profilephotoss[0].name:"defaultProfile.jpg"}`,
                 }}
               />
             </View>

@@ -26,13 +26,13 @@ import {
   Pressable,
 } from 'native-base';
 import {getpostjoineds} from '../../services/postServices';
-const UserPage = ({route}) => {
+const LeadersPage = ({route}) => {
   const [users, setusers] = useState([]);
   useEffect(() => {
     getpostjoineds(route.params.id).then(res => {
       if (res.status === 200) {
         setusers(res.data);
-        console.log(res.data[0].profilephotos)
+        console.log(res.data[0].profilephotos);
       }
     });
   }, []);
@@ -40,11 +40,11 @@ const UserPage = ({route}) => {
     <NativeBaseProvider>
       <View flex={1}>
         <View flex={0.095}>
-          <DefaultHeader name="افرادعضوشده" />
+          <DefaultHeader name="لیدرها" />
         </View>
         <UserList data={users} />
       </View>
     </NativeBaseProvider>
   );
 };
-export default UserPage;
+export default LeadersPage;

@@ -9,12 +9,13 @@ import {
   View,
   HStack,
   Pressable,
-  Modal,
   useDisclose,
   List,
   Divider,
 } from 'native-base';
 import React, {useEffect, useState} from 'react';
+import {Modal} from 'react-native';
+
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
@@ -59,7 +60,7 @@ const SearchPage = () => {
       }
     });
   }, []);
-  const {isOpen, onOpen, onClose} = useDisclose();
+  const [visiblity, setvidsible] = useState(false);
 
   return (
     <NativeBaseProvider>
@@ -101,60 +102,60 @@ const SearchPage = () => {
         <View
           flexDirection="row"
           alignSelf={'flex-end'}
-          w={'60%'}
           px={1}
           justifyContent={'space-between'}>
           {/* <MaterialIcons name="list" /> */}
-          <Pressable onPress={onOpen}>
+          <Pressable onPress={() => setvidsible(true)}>
             <View flexDirection={'row'}>
-              <Text fontFamily={"B Yekan"}>{sort}</Text>
+              <Text fontFamily={'B Yekan'}>{sort}</Text>
 
               <FontAwesome style={{fontSize: 20}} name="sort-amount-desc" />
             </View>
           </Pressable>
-
-          <FontAwesome style={{fontSize: 20}} name="filter" />
         </View>
       </VStack>
       {serc ? <List2 datas={posts} /> : <List2 datas={tours} />}
       <Modal
-        backgroundColor={'black'}
+        onRequestClose={() => setvidsible(false)}
         size={'full'}
-        onClose={onClose}
-        isOpen={isOpen}>
-        <Modal.Content h={'100%'}>
-          <List>
-            <List.Item
-              onPress={() => {
-                sorting(1);
-                setSort('جدیدترین');
+        visible={visiblity}>
+        <View justifyContent={'center'} flex={1} p={5}>
+          <Button
+            onPress={() => {
+              sorting(1);
+              setSort('جدیدترین');
 
-                onClose();
-              }}>
-              <Text fontFamily={"B Yekan"} textAlign={"right"}>{'جدیدترین'}</Text>
-            </List.Item>
-            <Divider />
-            <List.Item 
-              onPress={() => {
-                sorting(2);
-                setSort('ارزان ترین');
+              setvidsible(false);
+            }}>
+            <Text fontFamily={'B Yekan'} textAlign={'right'}>
+              {'جدیدترین'}
+            </Text>
+          </Button>
+          <Divider />
+          <Button
+            onPress={() => {
+              sorting(2);
+              setSort('ارزان ترین');
 
-                onClose();
-              }}>
-              <Text fontFamily={"B Yekan"} textAlign={"right"}>{'ارزان ترین'}</Text>
-            </List.Item>
-            <Divider />
-            <List.Item
-              onPress={() => {
-                sorting(3);
-                setSort(' محبوبترین');
+              setvidsible(false);
+            }}>
+            <Text fontFamily={'B Yekan'} textAlign={'right'}>
+              {'ارزان ترین'}
+            </Text>
+          </Button>
+          <Divider />
+          <Button
+            onPress={() => {
+              sorting(3);
+              setSort(' محبوبترین');
 
-                onClose();
-              }}>
-              <Text fontFamily={"B Yekan"} textAlign={"right"}>{' محبوبترین'}</Text>
-            </List.Item>
-          </List>
-        </Modal.Content>
+              setvidsible(false);
+            }}>
+            <Text fontFamily={'B Yekan'} textAlign={'right'}>
+              {' محبوبترین'}
+            </Text>
+          </Button>
+        </View>
       </Modal>
     </NativeBaseProvider>
   );

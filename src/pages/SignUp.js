@@ -67,7 +67,6 @@ const SignUp = ({navigation}) => {
                             await storeData(result.data.token.toString());
 
                             // await storeData(result.data.token.toString());
-                            console.log(result.data.token.toString());
 
                             dispatch(profileMode(true));
                             navigation.navigate('Profile', {

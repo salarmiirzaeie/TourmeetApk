@@ -12,14 +12,16 @@ export const MyTours = () => {
         setjoins(res.data);
       }
     });
-  });
+  },[]);
   return (
     <NativeBaseProvider>
       <View flex={1}>
-        <View flex={0.12}>
-          <DefaultHeader name={"تورهای من"} />
+        <View flex={0.095}>
+          <DefaultHeader name={'تورهای من'} />
         </View>
-        <List2 datas={joins} />
+        <View flex={1}>
+          <List2 datas={joins} />
+        </View>
       </View>
     </NativeBaseProvider>
   );

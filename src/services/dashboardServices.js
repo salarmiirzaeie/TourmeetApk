@@ -9,8 +9,6 @@ const gettoken = async () => {
   return token;
 };
 export const joinTour = async data => {
-  console.log(data);
-  console.log(await gettoken());
 
   const res = await axios
     .put(`${apiPort}/join-tour`, data, {
@@ -103,7 +101,6 @@ export const joineds = async () => {
 };
 
 export const isSaved = async data => {
-  console.log(await gettoken());
 
   const res = axios
     .post(`${apiPort}/is-saved`, data, {

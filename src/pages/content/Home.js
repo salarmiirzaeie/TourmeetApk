@@ -10,6 +10,7 @@ import {
   Divider,
   StatusBar,
   ScrollView,
+  Pressable,
 } from 'native-base';
 
 import React, {useEffect, useRef, useState} from 'react';
@@ -18,10 +19,11 @@ import {SearchInput} from '../../components/SearchInput';
 import {PopularTours} from '../../components/PopularTours';
 import {PopularCompanies} from '../../components/PopularCompanies';
 import {HomeCategory} from '../../components/HomeCategory';
+import {useNavigation} from '@react-navigation/native';
 
 export const Home = ({route}) => {
   const scroll = useRef(null);
-
+  const navigation = useNavigation();
   useEffect(() => {
     // console.log('fgd');
   }, [route]);
@@ -54,17 +56,23 @@ export const Home = ({route}) => {
                 px={1}
                 w={'full'}
                 justifyContent={'space-between'}
-                mt={3}
+                mt={2}
                 flexDirection="row-reverse">
                 <Text fontSize={'md'} fontFamily={'B Yekan'} bold>
                   محبوب ترین تورها
                 </Text>
-                <Text fontSize={'sm'} color={'gray.400'} fontFamily={'B Yekan'}>
-                  مشاهده همه
-                </Text>
+                <Pressable
+                  onPress={() => navigation.navigate('PopularToursPage')}>
+                  <Text
+                    fontSize={'sm'}
+                    color={'gray.400'}
+                    fontFamily={'B Yekan'}>
+                    مشاهده همه
+                  </Text>
+                </Pressable>
               </View>
 
-              <View h={250} mt={3}>
+              <View h={250} mt={0}>
                 <PopularTours />
               </View>
               <View
@@ -76,9 +84,9 @@ export const Home = ({route}) => {
                 <Text fontSize={'md'} fontFamily={'B Yekan'} bold>
                   محبوب ترین گروه ها
                 </Text>
-                <Text fontSize={'sm'} color={'gray.400'} fontFamily={'B Yekan'}>
+                {/* <Text fontSize={'sm'} color={'gray.400'} fontFamily={'B Yekan'}>
                   مشاهده همه
-                </Text>
+                </Text> */}
               </View>
 
               <View borderRadius={'md'} mt={3} h={70}>

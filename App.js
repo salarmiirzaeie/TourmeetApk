@@ -14,6 +14,8 @@ const UserProfile = React.lazy(() => import('./src/pages/content/UserProfile'));
 
 const CamProfile2 = React.lazy(() => import('./src/pages/content/CamProfile2'));
 const CampTours = React.lazy(() => import('./src/pages/content/CampTours'));
+const PermissPage = React.lazy(() => import('./src/pages/content/PermissPage'));
+const LeadersPage = React.lazy(() => import('./src/pages/content/LeadersPage'));
 
 const SearchPage = React.lazy(() => import('./src/pages/content/SearchPage'));
 const TourDet = React.lazy(() => import('./src/pages/content/TourDet'));
@@ -41,11 +43,14 @@ const App = () => {
             <MainSatck.Screen name="SignUp" component={SignUp} />
             <MainSatck.Screen name="Direct" component={Direct} />
             <MainSatck.Screen name="TourDet" component={TourDet} />
+            <MainSatck.Screen name="TourDet2" component={TourDet} />
             <MainSatck.Screen name="SearchPage" component={SearchPage} />
             <MainSatck.Screen name="CampProfile" component={CamProfile2} />
             <MainSatck.Screen name="UsersPage" component={UsersPage} />
             <MainSatck.Screen name="UserProfile" component={UserProfile} />
             <MainSatck.Screen name="CampTours" component={CampTours} />
+            <MainSatck.Screen name="PermissPage" component={PermissPage} />
+            <MainSatck.Screen name="LeadersPage" component={LeadersPage} />
           </MainSatck.Navigator>
         </NavigationContainer>
       </PersistGate>

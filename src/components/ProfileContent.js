@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Center,
   NativeBaseProvider,
@@ -11,16 +11,6 @@ import {
   ScrollView,
   Text,
   Divider,
-  Actionsheet,
-  useDisclose,
-  Input,
-  Button,
-  FormControl,
-  TextArea,
-  useToast,
-  Icon,
-  CircleIcon,
-  Circle,
   Pressable,
   Badge,
 } from 'native-base';
@@ -31,7 +21,6 @@ import {GalleryModal} from './GalleryModal';
 import {useNavigation} from '@react-navigation/native';
 export const ProfileContent = ({profile, mode, rate}) => {
   const navigation = useNavigation();
-  console.log(profile)
   return (
     <View bg="#F8F8F8" borderTopRadius={30} shadow={3} flex={0.8}>
       <Box size="170" mt={-85} bg="red.100" bg="transparent" alignSelf="center">
@@ -121,7 +110,11 @@ export const ProfileContent = ({profile, mode, rate}) => {
             <Divider />
           </View>
           <Pressable
-            onPress={() => console.log('first')}
+            onPress={() =>
+              navigation.navigate('PermissPage', {
+                id: profile.id,
+              })
+            }
             h={75}
             flexDirection="row">
             <View justifyContent={'center'} alignItems="center" flex={0.15}>
@@ -135,6 +128,7 @@ export const ProfileContent = ({profile, mode, rate}) => {
             </View>
           </Pressable>
         </View>
+
         <Pressable
           display={mode === 'camp' ? 'flex' : 'none'}
           onPress={() =>
@@ -148,13 +142,38 @@ export const ProfileContent = ({profile, mode, rate}) => {
             <AntDesign name="left" size={24} color="black" />
           </View>
           <View flexDirection={'row'} justifyContent={'center'} flex={0.7}>
-            <Circle>
+            {/* <Circle>
               <Badge rounded={'full'} bg={'gray.300'}>
                 5
               </Badge>
-            </Circle>
+            </Circle> */}
 
             <Text alignSelf={'center'}>تورها</Text>
+          </View>
+          <View justifyContent={'center'} alignItems="center" flex={0.15}>
+            <AntDesign name="dingding" size={24} color="black" />
+          </View>
+        </Pressable>
+        <Pressable
+          display={mode === 'camp' ? 'flex' : 'none'}
+          onPress={() =>
+            navigation.navigate('LeadersPage', {
+              id: profile.id,
+            })
+          }
+          h={75}
+          flexDirection="row">
+          <View justifyContent={'center'} alignItems="center" flex={0.15}>
+            <AntDesign name="left" size={24} color="black" />
+          </View>
+          <View flexDirection={'row'} justifyContent={'center'} flex={0.7}>
+            {/* <Circle>
+              <Badge rounded={'full'} bg={'gray.300'}>
+                5
+              </Badge>
+            </Circle> */}
+
+            <Text alignSelf={'center'}>لیدرها</Text>
           </View>
           <View justifyContent={'center'} alignItems="center" flex={0.15}>
             <AntDesign name="dingding" size={24} color="black" />

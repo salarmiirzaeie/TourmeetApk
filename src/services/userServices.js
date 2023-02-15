@@ -60,7 +60,6 @@ export const editProfile =async data => {
   return res;
 };
 export const userProfile = async () => {
-  console.log(await gettoken());
 
   const res = axios
     .get(`${apiPort}/profile`, {
