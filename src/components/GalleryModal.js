@@ -15,7 +15,13 @@ import {
   Button,
 } from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
-import {Dimensions, Modal, Platform, TouchableHighlight} from 'react-native';
+import {
+  Alert,
+  Dimensions,
+  Modal,
+  Platform,
+  TouchableHighlight,
+} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
@@ -28,12 +34,11 @@ export const GalleryModal = ({images, mode, rate}) => {
   const {width: windowWidth} = Dimensions.get('window');
   const {isOpen, onOpen, onClose} = useDisclose();
   const [visible, setvisible] = useState(false);
+  const [scrollstate, setscrollstate] = useState(0);
   const navigation = useNavigation();
-  const route = useRoute();
   const options = {
     noData: true,
   };
-  const deletebutton = useRef();
   return (
     <>
       {images == null || images.length === 0 ? (
@@ -73,27 +78,24 @@ export const GalleryModal = ({images, mode, rate}) => {
         initialValues={{
           image1: '',
         }}
-        onSubmit={values => {
-          let data = new FormData();
-          data.append('image1', values.image1);
-          setTimeout(async () => {
-            await uploadprofilephoto(data).then(res => {
-              if (res !== undefined) {
-                if (res.status === 200) {
-                  onClose();
-                  navigation.navigate('Profile', {
-                    pf: Math.random(),
-                  });
-                } else {
-                  alert(res.data.message);
-                }
-              } else {
+        onSubmit={async values => {
+          let data = await new FormData();
+          await data.append('image1', values.image1);
+          await uploadprofilephoto(data).then(async res => {
+            if (await res) {
+              if ((await res.status) === 200) {
+                onClose();
                 navigation.navigate('Profile', {
-                  pf: Math.random(),
+                  pf: Math.random(100),
                 });
+              } else {
+                console.log(res.data.message);
+                onClose();
               }
-            });
-          }, 1000);
+            } else {
+              Alert.alert('خطا');
+            }
+          });
         }}>
         {({
           values,
@@ -163,7 +165,10 @@ export const GalleryModal = ({images, mode, rate}) => {
       <Modal
         visible={visible}
         animationType={'fade'}
-        onRequestClose={() => setvisible(false)}>
+        onRequestClose={() => {
+          setscrollstate(0);
+          setvisible(false);
+        }}>
         <View
           p={3}
           bg="black"
@@ -194,7 +199,22 @@ export const GalleryModal = ({images, mode, rate}) => {
             }}>
             <Menu.Item
               onPress={() => {
-                // console.log(deletebutton.current.directEventTypes);
+                let f = scrollstate / windowWidth;
+
+                deleteprofile(images[Math.ceil(f)].name).then(res => {
+                  if (res.status === 200) {
+                    images.splice(Math.ceil(f), 1);
+                    if (images.length === 0) {
+                      setvisible(false);
+                    } else {
+                      setvisible(true);
+                    }
+
+                    console.log(res.data.message);
+                  } else {
+                    console.log(res.data.message);
+                  }
+                });
               }}
               flexDirection={'row-reverse'}>
               حذف
@@ -210,8 +230,9 @@ export const GalleryModal = ({images, mode, rate}) => {
         <View bg="black" justifyContent="center" flex={1}>
           <View alignSelf={'center'} mt={-10} flex={0.5} bg={'blue.300'}>
             <FlatList
-            onScroll={(res)=>console.log(res)
-            }
+              onScroll={res => {
+                setscrollstate(res.nativeEvent.contentOffset.x);
+              }}
               data={images}
               renderItem={({item}) => {
                 return (

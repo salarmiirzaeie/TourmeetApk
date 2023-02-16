@@ -24,9 +24,11 @@ import {useNavigation} from '@react-navigation/native';
 export const Home = ({route}) => {
   const scroll = useRef(null);
   const navigation = useNavigation();
-  useEffect(() => {
-    // console.log('fgd');
-  }, [route]);
+  // const [cit, setcit] = useState(0);
+  // useEffect(() => {
+  //   console.log('fgd');
+  //   navigation.isFocused(true);
+  // }, [cit]);
   return (
     <NativeBaseProvider>
       <View bg="#24C2D8" flex={1}>
@@ -36,10 +38,10 @@ export const Home = ({route}) => {
           }}
         />
         <ScrollView ref={scroll}>
-          <View h={800}>
+          <View h={780}>
             <View py={8} flex={0.06}>
               <Center>
-                <SearchInput />
+                <SearchInput/>
               </Center>
             </View>
             <View

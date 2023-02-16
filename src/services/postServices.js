@@ -2,14 +2,18 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import {Store} from '../../store';
 const apiPort = 'http://192.168.43.153:3333/';
-let city = Store.getState().cityState;
-const gettoken = async () => {
-  let token = await AsyncStorage.getItem('@storage_Key');
-  return token;
+// const gettoken = async () => {
+//   let token = await AsyncStorage.getItem('@storage_Key');
+//   return token;
+// };
+const getCity = async () => {
+  let city = await Store.getState().cityState;
+
+  return city;
 };
-export const getIndex = () => {
+export const getIndex = async () => {
   const res = axios
-    .get(`${apiPort}`)
+    .get(`${apiPort}getall/${await getCity()}`)
     .then(response => {
       return response;
     })
@@ -51,9 +55,11 @@ export const getRelatedTours = data => {
     });
   return res;
 };
-export const getPopularCamps = () => {
+export const getPopularCamps = async () => {
+  console.log(await getCity());
+
   const res = axios
-    .get(`${apiPort}getPopularCamps`)
+    .get(`${apiPort}getPopularCamps/${await getCity()}`)
     .then(response => {
       return response;
     })
@@ -64,7 +70,7 @@ export const getPopularCamps = () => {
 };
 export const getPopularTours = async () => {
   const res = await axios
-    .get(`${apiPort}getPopularTours`)
+    .get(`${apiPort}getPopularTours/${await getCity()}`)
     .then(response => {
       return response;
     })
@@ -73,28 +79,18 @@ export const getPopularTours = async () => {
     });
   return res;
 };
-export const getPopularTourswtok = async () => {
-  const res = await axios
-    .get(`${apiPort}getPopularTours/${await gettoken()}`)
-    .then(response => {
-      return response;
-    })
-    .catch(err => {
-      return err.response;
-    });
-  return res;
-};
-export const searchTour = data => {
-  const res = axios
-    .post(`${apiPort}searchtour`, data)
-    .then(response => {
-      return response;
-    })
-    .catch(err => {
-      return err.response;
-    });
-  return res;
-};
+
+// export const searchTour = data => {
+//   const res = axios
+//     .post(`${apiPort}searchtour`, data)
+//     .then(response => {
+//       return response;
+//     })
+//     .catch(err => {
+//       return err.response;
+//     });
+//   return res;
+// };
 export const getPost = data => {
   // console.log(data)
   const res = axios

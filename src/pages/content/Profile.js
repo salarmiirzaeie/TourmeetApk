@@ -34,7 +34,6 @@ import {userProfile} from '../../services/userServices';
 import {NoLogin} from '../../components/NoLogin';
 import {useDispatch} from 'react-redux';
 import {profileMode} from '../../state-management/action/profileModeAction';
-import {GalleryModal} from '../../components/GalleryModal';
 import {ProfileHeader} from '../../components/ProfileHeader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ProfileContent} from '../../components/ProfileContent';

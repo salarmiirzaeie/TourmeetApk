@@ -16,19 +16,6 @@ import List2 from '../../components/List2';
 import NoList from '../../components/NoList';
 import {getIndex} from '../../services/postServices';
 
-const DATA = [
-  {name: 'Marissa Castillo'},
-  {name: 'Denzel Curry'},
-  {name: 'Miles Ferguson'},
-  {name: 'Kenny Moreno'},
-  {name: 'Shelby Craig'},
-  {name: 'Jordyn Brewer'},
-  {name: 'Tanya Walker'},
-  {name: 'Nolan Figueroa'},
-  {name: 'Sophia Gibbs'},
-  {name: 'Vincent Sandoval'},
-];
-
 const initialLayout = {
   height: 0,
   width: Dimensions.get('window').width,
@@ -54,22 +41,22 @@ const Explore2 = () => {
   const renderScene = ({route}: any) => {
     switch (route.key) {
       case 'first':
-        return posts.length !== 0 ? (
-          <List2 datas={posts.sort((a, b) => b.capacity - a.capacity)} />
+        return posts?.length !== 0 ? (
+          <List2 datas={posts?.sort((a, b) => b.capacity - a.capacity)} />
         ) : (
           <NoList />
         );
       case 'second':
-        return posts.length !== 0 ? (
-          <List2 datas={posts.sort((a, b) => a.price - b.price)} />
+        return posts?.length !== 0 ? (
+          <List2 datas={posts?.sort((a, b) => a.price - b.price)} />
         ) : (
           <NoList />
         );
 
       case 'third':
-        return posts.length !== 0 ? (
+        return posts?.length !== 0 ? (
           <List2
-            datas={posts.sort((a, b) => date(a.createdAt) - date(b.createdAt))}
+            datas={posts?.sort((a, b) => date(a.createdAt) - date(b.createdAt))}
           />
         ) : (
           <NoList />

@@ -16,7 +16,7 @@ import {
   Icon,
 } from 'native-base';
 import React, {useState} from 'react';
-import {Dimensions, Modal, Platform} from 'react-native';
+import {Dimensions, Modal, NativeModules, Platform} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -81,7 +81,6 @@ export const CityModal = ({visible, setvisible}) => {
           />
         </View>
         <View flex={0.9}>
-
           <FlatList
             data={serc ? data : tours}
             renderItem={({item}) => (
@@ -92,6 +91,7 @@ export const CityModal = ({visible, setvisible}) => {
                 onPress={() => {
                   dispatch(cityMode(item));
                   setvisible(false);
+                  NativeModules.DevSettings.reload();
 
                   navigation.navigate('Home', {
                     pf: Math.random(100),

@@ -39,10 +39,11 @@ export const DetFooter = () => {
         </Button>
       ) : (
         <Button
-          onPress={async () => {
-            setJoined(false);
-            await unjoinTour(data);
-          }}
+        disabled
+          // onPress={async () => {
+          //   setJoined(false);
+          //   await unjoinTour(data);
+          // }}
           borderRadius={'2xl'}
           bg={'gray.400'}>
           عضوشده

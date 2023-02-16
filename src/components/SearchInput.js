@@ -6,8 +6,9 @@ import Feather from 'react-native-vector-icons/Feather';
 import {useNavigation} from '@react-navigation/native';
 import {CityModal} from './CityModal';
 import {useSelector} from 'react-redux';
+import {NativeModules} from 'react-native';
 
-export const SearchInput = () => {
+export const SearchInput = ({setsate}) => {
   const navigation = useNavigation();
   const [visible, setvisible] = useState(false);
   let city = useSelector(state => state.cityState);
@@ -27,14 +28,16 @@ export const SearchInput = () => {
         borderColor="white"
         shadow={4}
         textAlign="center"
-        rounded={"xl"}
+        rounded={'xl'}
         InputLeftElement={
           <Button
             onPress={() => setvisible(true)}
             p={0}
             m={0}
             h="full"
-            startIcon={<Feather style={{fontSize: 18,color:"white"}} name="map-pin" />}
+            startIcon={
+              <Feather style={{fontSize: 18, color: 'white'}} name="map-pin" />
+            }
             fontFamily={'B Yekan'}
             w={'20%'}
             bg={'#24C2D8'}>
@@ -55,14 +58,25 @@ export const SearchInput = () => {
                 duration: 300,
               },
             }}>
-            <Box bg="#24C2D8" justifyContent={"center"} rounded={"xl"} size={8}>
-              <AntDesign style={{alignSelf:"center"}} name="search1" color="white" size={20} />
+            <Box bg="#24C2D8" justifyContent={'center'} rounded={'xl'} size={8}>
+              <AntDesign
+                style={{alignSelf: 'center'}}
+                name="search1"
+                color="white"
+                size={20}
+              />
             </Box>
           </PresenceTransition>
         }
       />
 
-      <CityModal visible={visible} setvisible={() => setvisible(false)} />
+      <CityModal
+        visible={visible}
+        setvisible={() => {
+          // setsate();
+          setvisible(false);
+        }}
+      />
     </>
   );
 };

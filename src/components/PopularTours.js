@@ -23,17 +23,16 @@ export const PopularTours = () => {
   const logedin = useSelector(state => state.profileModeState);
 
   useEffect(() => {
-    if (logedin) {
-      getPopularTourswtok().then(res => {
-        setposts(res.data);
-        console.log(res.data);
-      });
-    } else {
-      getPopularTours().then(res => {
-        setposts(res.data);
-        console.log(res.data);
-      });
-    }
+    // if (logedin) {
+    //   getPopularTourswtok().then(res => {
+    //     setposts(res.data);
+    //     console.log(res.data);
+    //   });
+    // } else {
+    getPopularTours().then(res => {
+      setposts(res.data);
+    });
+    // }
   }, []);
   const scrollRef = useRef();
   const scrollToEnd = () => scrollRef.current.scrollToEnd({animated: false});
@@ -62,7 +61,7 @@ export const PopularTours = () => {
             // shadow={1}
             // p={2}
             bg={'white'}>
-            <Box zIndex={200} position={'absolute'}>
+            {/* <Box zIndex={200} position={'absolute'}>
               <MaterialIcons
                 color={'#24C2D8'}
                 style={{
@@ -73,7 +72,7 @@ export const PopularTours = () => {
                 }}
                 name="bookmark"
               />
-            </Box>
+            </Box> */}
             <Image
               rounded="2xl"
               h="70%"
