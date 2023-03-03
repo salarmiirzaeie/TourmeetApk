@@ -5,6 +5,7 @@ import {DefaultLayout} from './src/Layouts/DefaultLayout';
 import {NativeBaseProvider, Spinner, View} from 'native-base';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
+
 import {persistor, Store} from './store';
 const Login = React.lazy(() => import('./src/pages/Login'));
 const SignUp = React.lazy(() => import('./src/pages/SignUp'));
@@ -16,17 +17,13 @@ const CamProfile2 = React.lazy(() => import('./src/pages/content/CamProfile2'));
 const CampTours = React.lazy(() => import('./src/pages/content/CampTours'));
 const PermissPage = React.lazy(() => import('./src/pages/content/PermissPage'));
 const LeadersPage = React.lazy(() => import('./src/pages/content/LeadersPage'));
+const ForgetPassword = React.lazy(() => import('./src/pages/ForgetPassword'));
+const EnterNumb = React.lazy(() => import('./src/pages/EnterNumb'));
+const ChangePassword = React.lazy(() => import('./src/pages/ChangePassword'));
 
 const SearchPage = React.lazy(() => import('./src/pages/content/SearchPage'));
 const TourDet = React.lazy(() => import('./src/pages/content/TourDet'));
 
-const loading = () => {
-  <NativeBaseProvider>
-    <View>
-      <Spinner color={'red.500'} colorScheme={'coolGray'} />
-    </View>
-  </NativeBaseProvider>;
-};
 const App = () => {
   const MainSatck = createNativeStackNavigator();
 
@@ -51,6 +48,15 @@ const App = () => {
             <MainSatck.Screen name="CampTours" component={CampTours} />
             <MainSatck.Screen name="PermissPage" component={PermissPage} />
             <MainSatck.Screen name="LeadersPage" component={LeadersPage} />
+            <MainSatck.Screen
+              name="ChangePassword"
+              component={ChangePassword}
+            />
+            <MainSatck.Screen name="EnterNumb" component={EnterNumb} />
+            <MainSatck.Screen
+              name="ForgetPassword"
+              component={ForgetPassword}
+            />
           </MainSatck.Navigator>
         </NavigationContainer>
       </PersistGate>

@@ -16,7 +16,7 @@ import {
 } from 'native-base';
 import React from 'react';
 
-export const HomeCategory = () => {
+ const HomeCategory = () => {
   const navigation = useNavigation();
   return (
     <NativeBaseProvider>
@@ -90,7 +90,7 @@ export const HomeCategory = () => {
                 W="full"
                 alt="ee"
                 source={{
-                  uri: `http://192.168.43.153:3333/uploads/mountain.jpg`,
+                  uri: `https://static.vecteezy.com/system/resources/thumbnails/000/125/643/small_2x/vector-everest-climber.jpg`,
                 }}
               />
               <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
@@ -187,3 +187,4 @@ export const HomeCategory = () => {
     </NativeBaseProvider>
   );
 };
+export default React.memo(HomeCategory)

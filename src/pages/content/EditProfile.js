@@ -1,30 +1,19 @@
 import {Formik} from 'formik';
 import {
-  Center,
   NativeBaseProvider,
   View,
-  HStack,
-  Image,
-  IconButton,
-  Box,
-  Heading,
-  ScrollView,
   Text,
   Divider,
-  Actionsheet,
-  useDisclose,
   Input,
   Button,
-  FormControl,
   TextArea,
-  useToast,
-  Icon,
 } from 'native-base';
 import React, {useState} from 'react';
-import {DefaultHeader} from '../../components/DefaultHeader';
+import DefaultHeader from '../../components/DefaultHeader';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {editProfile} from '../../services/userServices';
+import { Alert } from 'react-native';
 
 export const EditProfile = ({route, navigation}) => {
   let profile = route.params.profile;
@@ -42,6 +31,7 @@ export const EditProfile = ({route, navigation}) => {
               description: profile.description,
               phoneNumber: profile.phoneNumber,
               email: profile.email,
+              username: profile.username,
             }}
             onSubmit={values => {
               setTimeout(() => {
@@ -52,7 +42,8 @@ export const EditProfile = ({route, navigation}) => {
                       pf: true,
                     });
                   } else {
-                    alert(res.data.message);
+                    Alert.alert(res.data.message)
+                  
                   }
                 });
               }, 500);
@@ -77,6 +68,30 @@ export const EditProfile = ({route, navigation}) => {
                   <View flex={0.85}>
                     <View justifyContent={'center'} flex={0.5}>
                       <Text textAlign={'right'} fontFamily={'B Yekan'}>
+                        نام کاربری
+                      </Text>
+                    </View>
+                    <View justifyContent={'center'} flex={0.5}>
+                      <Input
+                        onBlur={handleBlur('username')}
+                        placeholder="نام کاربری"
+                        onChangeText={handleChange('username')}
+                        value={values.username}
+                        editable
+                      />
+                    </View>
+                  </View>
+                  <View
+                    justifyContent={'center'}
+                    alignItems="center"
+                    flex={0.15}>
+                    <AntDesign name="user" size={24} color="black" />
+                  </View>
+                </View>
+                <View h={75} flexDirection="row">
+                  <View flex={0.85}>
+                    <View justifyContent={'center'} flex={0.5}>
+                      <Text textAlign={'right'} fontFamily={'B Yekan'}>
                         نام
                       </Text>
                     </View>
@@ -95,7 +110,7 @@ export const EditProfile = ({route, navigation}) => {
                     justifyContent={'center'}
                     alignItems="center"
                     flex={0.15}>
-                    <Ionicons name="person" size={24} color="black" />
+                    <FontAwesome name="angellist" size={24} color="black" />
                   </View>
                 </View>
                 <Divider bg={'gray.100'} />
@@ -149,6 +164,7 @@ export const EditProfile = ({route, navigation}) => {
                     <AntDesign name="mail" size={24} color="black" />
                   </View>
                 </View>
+
                 <View h={75} flexDirection="row">
                   <View flex={0.85}>
                     <View justifyContent={'center'} flex={0.5}>

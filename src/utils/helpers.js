@@ -1,7 +1,7 @@
 const {default: axios} = require('axios');
-const apiPort = 'http://localhost:3333/users';
+const apiPort = 'http://192.168.43.153:3333/users';
 const moment = require('jalali-moment');
-const {Share} = require('react-native');
+const {Share, PermissionsAndroid} = require('react-native');
 
 exports.truncate = (str, len) => {
   if (str.length > len && str.length > 0) {
@@ -102,9 +102,11 @@ exports.isAuth = token => {
     });
   return res;
 };
-exports.onShare = async () => {
+exports.onShare = async data => {
   const result = await Share.share({
-    message: 'React Native | A framework for building native apps using React',
+    message: `${data.name} 
+    
+    ${data.desc}`,
   });
   if (result.action === Share.sharedAction) {
     if (result.activityType) {
@@ -115,4 +117,23 @@ exports.onShare = async () => {
   } else if (result.action === Share.dismissedAction) {
     // dismissed
   }
+};
+exports.permision = async () => {
+  await PermissionsAndroid.request(
+    PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+    PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+  );
+};
+exports.checkpermision = async () => {
+  const per = await PermissionsAndroid.check(
+    PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE &&
+      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+  )
+    .then(res => {
+      return res;
+    })
+    .catch(ress => {
+      return ress;
+    });
+  return per;
 };

@@ -40,6 +40,7 @@ export const SearchInput = ({setsate}) => {
             }
             fontFamily={'B Yekan'}
             w={'20%'}
+            
             bg={'#24C2D8'}>
             {city}
           </Button>

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {DefaultHeader} from '../../components/DefaultHeader';
+import DefaultHeader from '../../components/DefaultHeader';
 import {UserList} from '../../components/UserList';
 import {
   Center,
@@ -25,14 +25,13 @@ import {
   Circle,
   Pressable,
 } from 'native-base';
-import {getpostjoineds} from '../../services/postServices';
+import {getpostjoineds, getTourLeaders} from '../../services/postServices';
 const LeadersPage = ({route}) => {
   const [users, setusers] = useState([]);
   useEffect(() => {
-    getpostjoineds(route.params.id).then(res => {
+    getTourLeaders(route.params.id).then(res => {
       if (res.status === 200) {
         setusers(res.data);
-        console.log(res.data[0].profilephotos);
       }
     });
   }, []);

@@ -1,6 +1,6 @@
 import {Box, NativeBaseProvider, View} from 'native-base';
 import React, {useEffect, useState} from 'react';
-import {DefaultHeader} from '../../components/DefaultHeader';
+import DefaultHeader from '../../components/DefaultHeader';
 import List2 from '../../components/List2';
 import {getIndex} from '../../services/postServices';
 

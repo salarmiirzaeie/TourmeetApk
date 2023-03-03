@@ -30,7 +30,7 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {ProfileHeader} from '../../components/ProfileHeader';
 import {ProfileContent} from '../../components/ProfileContent';
 import {getUser} from '../../services/postServices';
-import {Share} from 'react-native';
+import {Linking, Share} from 'react-native';
 import {onShare} from '../../utils/helpers';
 const CampProfile2 = ({route}) => {
   const {isOpen, onOpen, onClose} = useDisclose();
@@ -48,7 +48,7 @@ const CampProfile2 = ({route}) => {
     <NativeBaseProvider>
       <View bg={'#24C2D8'} onTouchCancel={onClose} flex={1}>
         <ProfileHeader
-          onshare={() => onShare()}
+          onshare={() => onShare({name: user.name, desc: user.description})}
           mode={'camp'}
           onOpen={() => onOpen()}
         />

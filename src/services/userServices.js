@@ -16,6 +16,17 @@ export const login = data => {
     });
   return res;
 };
+export const forgetPassword = data => {
+  const res = axios
+    .post(`${apiPort}/forget-password`, data)
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      return err.response;
+    });
+  return res;
+};
 export const register = data => {
   const res = axios
     .post(`${apiPort}/register`, data)
@@ -27,10 +38,11 @@ export const register = data => {
     });
   return res;
 };
-export const resetPassword =async data => {
+export const changePassword = async data => {
   const res = axios
-    .post(`${apiPort}/reset-password/${await gettoken()}`, data, {
+    .post(`${apiPort}/changepassword`, data, {
       headers: {
+        // 'content-type': 'multipart/form-data',
         Authorization: `Bearer ${await gettoken()}`,
       },
     })
@@ -42,8 +54,35 @@ export const resetPassword =async data => {
     });
   return res;
 };
+export const reserPassword = async data => {
+  const res = axios
+    .post(`${apiPort}/reset-password`, data, {
+      headers: {
+        // 'content-type': 'multipart/form-data',
+        Authorization: `Bearer ${await data.token}`,
+      },
+    })
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      return err.response;
+    });
+  return res;
+};
+export const recievecode = async data => {
+  const res = axios
+    .post(`${apiPort}/recievecode`, data)
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      return err.response;
+    });
+  return res;
+};
 
-export const editProfile =async data => {
+export const editProfile = async data => {
   const res = axios
     .post(`${apiPort}/edit-profile`, data, {
       headers: {
@@ -60,7 +99,6 @@ export const editProfile =async data => {
   return res;
 };
 export const userProfile = async () => {
-
   const res = axios
     .get(`${apiPort}/profile`, {
       headers: {

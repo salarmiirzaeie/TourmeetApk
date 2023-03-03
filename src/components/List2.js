@@ -2,6 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {Dimensions} from 'react-native';
 import {
+  Box,
   FlatList,
   Image,
   NativeBaseProvider,
@@ -43,6 +44,9 @@ const List2 = ({datas}: any) => {
               paddingHorizontal: 5,
             }}>
             <Image
+              fallbackSource={{
+                uri: `http://192.168.43.153:3333/uploads/sea.jpg`,
+              }}
               alt="thumbnil"
               style={{flex: 0.35, borderRadius: 10}}
               source={{
@@ -57,8 +61,7 @@ const List2 = ({datas}: any) => {
               }}>
               <View style={{flex: 0.4}}>
                 <Text
-                bold
-                  fontFamily={'B Yekan'}
+                  fontFamily={'B YekanBold'}
                   style={{color: 'black', textAlign: 'right', fontSize: 15}}>
                   {item.title}
                 </Text>

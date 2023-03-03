@@ -37,19 +37,24 @@ import {profileMode} from '../../state-management/action/profileModeAction';
 import {ProfileHeader} from '../../components/ProfileHeader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ProfileContent} from '../../components/ProfileContent';
+import {PermissionsAndroid} from 'react-native';
 
 export const Profile = ({navigation, route}) => {
   const dispatch = useDispatch();
   const {isOpen, onOpen, onClose} = useDisclose();
   const logedin = useSelector(state => state.profileModeState);
   const [profile, setProfile] = useState({});
+
   useEffect(() => {
     if (logedin) {
       userProfile().then(res => {
-        setProfile(res.data);
+        if (res.status === 200) {
+          setProfile(res.data);
+        }
       });
     }
   }, [route]);
+
   if (logedin) {
     return (
       <NativeBaseProvider>
@@ -78,14 +83,7 @@ export const Profile = ({navigation, route}) => {
               }}>
               ذخیره ها
             </Actionsheet.Item>
-            <Actionsheet.Item
-              endIcon={<Icon as={MaterialIcons} size="6" name="settings" />}
-              alignItems="flex-end"
-              onPress={() => {
-                navigation.navigate('settings');
-              }}>
-              {'تنظیمات '}
-            </Actionsheet.Item>
+
             <Actionsheet.Item
               endIcon={<Icon as={Entypo} size="6" name="aircraft" />}
               alignItems="flex-end"

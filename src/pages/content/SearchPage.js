@@ -51,12 +51,16 @@ const SearchPage = () => {
   };
   useEffect(() => {
     getIndex().then(res => {
-      if (params.params.text !== 'b') {
-        setpots(
-          res.data.posts.filter(q => q.type === params.params.text.toString()),
-        );
-      } else {
-        setpots(res.data.posts);
+      if (res.status === 200) {
+        if (params.params.text !== 'b') {
+          setpots(
+            res.data.posts.filter(
+              q => q.type === params.params.text.toString(),
+            ),
+          );
+        } else {
+          setpots(res.data.posts);
+        }
       }
     });
   }, []);

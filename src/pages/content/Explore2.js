@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import {TabView, TabBar} from 'react-native-tab-view';
 import List2 from '../../components/List2';
-import NoList from '../../components/NoList';
+import {Nodata} from '../../components/Nodata';
 import {getIndex} from '../../services/postServices';
 
 const initialLayout = {
@@ -35,7 +35,9 @@ const Explore2 = () => {
 
   useEffect(() => {
     getIndex().then(res => {
-      setpostss(res.data.posts);
+      if (res.status === 200) {
+        setpostss(res.data.posts);
+      }
     });
   }, []);
   const renderScene = ({route}: any) => {
@@ -44,13 +46,13 @@ const Explore2 = () => {
         return posts?.length !== 0 ? (
           <List2 datas={posts?.sort((a, b) => b.capacity - a.capacity)} />
         ) : (
-          <NoList />
+          <Nodata />
         );
       case 'second':
         return posts?.length !== 0 ? (
           <List2 datas={posts?.sort((a, b) => a.price - b.price)} />
         ) : (
-          <NoList />
+          <Nodata />
         );
 
       case 'third':
@@ -59,7 +61,7 @@ const Explore2 = () => {
             datas={posts?.sort((a, b) => date(a.createdAt) - date(b.createdAt))}
           />
         ) : (
-          <NoList />
+          <Nodata />
         );
       default:
         return null;

@@ -23,7 +23,6 @@ export const Gallery = ({images}) => {
 
   const [visible, setvisible] = useState(false);
   const img = useRef(null);
-  const {isOpen, onOpen, onClose} = useDisclose();
 
   return (
     <>
@@ -34,6 +33,9 @@ export const Gallery = ({images}) => {
             <Pressable onPress={() => setvisible(true)}>
               <Image
                 ref={img}
+                fallbackSource={{
+                  uri: `http://192.168.43.153:3333/uploads/thumbnails/sea.jpg`,
+                }}
                 alt="ll"
                 source={{
                   uri: `http://192.168.43.153:3333/uploads/thumbnails/${item}`,
@@ -73,6 +75,9 @@ export const Gallery = ({images}) => {
               renderItem={({item}) => {
                 return (
                   <Image
+                  fallbackSource={{
+                    uri: `http://192.168.43.153:3333/uploads/thumbnails/sea.jpg`,
+                  }}
                     alt="ll"
                     source={{
                       uri: `http://192.168.43.153:3333/uploads/thumbnails/${item}`,

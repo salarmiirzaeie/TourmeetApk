@@ -7,7 +7,6 @@ import {
   HamburgerIcon,
   Divider,
   NativeBaseProvider,
-  Alert,
 } from 'native-base';
 
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -17,7 +16,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {isSaved, saveTour, unSaveTour} from '../services/dashboardServices';
-import {Animated, View} from 'react-native';
+import {Animated, Alert} from 'react-native';
 
 export const DetAppBar = ({pos, share}) => {
   const navigation = useNavigation();
@@ -103,11 +102,14 @@ export const DetAppBar = ({pos, share}) => {
                 size={'sm'}
                 borderRadius="2xl"
                 onPress={() => {
+                  console.log(logedin)
                   if (!logedin) {
-                    Alert('واردحساب کاربری خودشوید');
-                  } else setsaved(true);
+                    Alert.alert('واردحساب کاربری خودشوید');
+                  } else {
+                    setsaved(true);
 
-                  saveTour({postId: params.params.id});
+                    saveTour({postId: params.params.id});
+                  }
                 }}
                 _icon={{
                   as: MaterialIcons,

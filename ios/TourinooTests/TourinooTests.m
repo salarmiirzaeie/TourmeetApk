@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface TourinooTests : XCTestCase
+@interface TourmeetTests : XCTestCase
 
 @end
 
-@implementation TourinooTests
+@implementation TourmeetTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL (^)(UIView *view))test
 {

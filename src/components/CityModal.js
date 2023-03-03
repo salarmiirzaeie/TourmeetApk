@@ -14,10 +14,10 @@ import {
   ScrollView,
   Input,
   Icon,
+  Divider,
 } from 'native-base';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Dimensions, Modal, NativeModules, Platform} from 'react-native';
-import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch} from 'react-redux';
@@ -39,6 +39,9 @@ export const CityModal = ({visible, setvisible}) => {
 
     setours(data.filter(item => regex.test(item)));
   };
+  useEffect(() => {
+    setserc(true);
+  }, [visible]);
   return (
     <Modal
       visible={visible}
@@ -54,9 +57,9 @@ export const CityModal = ({visible, setvisible}) => {
 
               searchTour({text: q.nativeEvent.text});
             }}
+            color="white"
+            borderColor={'transparent'}
             placeholder="جستجو..."
-            // width="100%"
-            // borderRadius="4"
             flex={0.99}
             fontSize="14"
             InputLeftElement={
@@ -64,7 +67,7 @@ export const CityModal = ({visible, setvisible}) => {
                 m="2"
                 ml="3"
                 size="6"
-                color="gray.400"
+                color="white"
                 as={<MaterialIcons name="search" />}
               />
             }
@@ -84,24 +87,32 @@ export const CityModal = ({visible, setvisible}) => {
           <FlatList
             data={serc ? data : tours}
             renderItem={({item}) => (
-              <Pressable
-                my={1}
-                justifyContent="center"
-                bg={'gray.300'}
-                onPress={() => {
-                  dispatch(cityMode(item));
-                  setvisible(false);
-                  NativeModules.DevSettings.reload();
+              <>
+                <Pressable
+                  onPress={() => {
+                    dispatch(cityMode(item));
+                    setvisible(false);
+                    NativeModules.DevSettings.reload();
 
-                  navigation.navigate('Home', {
-                    pf: Math.random(100),
-                  });
-                }}
-                px={3}
-                h={windowHeight / 15}
-                w={'full'}>
-                <Text textAlign={'right'}>{item}</Text>
-              </Pressable>
+                    navigation.navigate('Home', {
+                      pf: Math.random(100),
+                    });
+                  }}
+                  px={3}
+                  h={windowHeight / 15}
+                  w={'full'}>
+                  <View
+                    mt={3}
+                    flex={1}
+                    flexDirection="row"
+                    justifyContent="space-between">
+                    <AntDesign style={{fontSize: 20}} name="left" />
+
+                    <Text textAlign={'right'}>{item}</Text>
+                  </View>
+                </Pressable>
+                <Divider />
+              </>
             )}
           />
         </View>

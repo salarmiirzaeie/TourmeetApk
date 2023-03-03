@@ -11,12 +11,13 @@ import {
   Divider,
   Text,
   AlertDialog,
+  Link,
 } from 'native-base';
 
 import {login, register} from '../services/userServices';
 import {useDispatch} from 'react-redux';
 import {profileMode} from '../state-management/action/profileModeAction';
-import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
+// import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignUp = ({navigation}) => {
@@ -39,17 +40,16 @@ const SignUp = ({navigation}) => {
       <View bg={'white'} flex={1} w={'100%'} alignItems={'center'}>
         <View w={'100%'} flex={1}>
           <Center flex={1}>
-            <Text fontFamily={'B Yekan'} fontSize={50} bold={true}>
-              Tourino
+            <Text fontFamily={'DastNevis'} fontSize={50}>
+              تورمیت
             </Text>
             <View w={'80%'}>
               <Formik
                 initialValues={{
-                  name: '',
                   email: '',
                   password: '',
                   confirmPassword: '',
-                  type: 'tourist',
+                  type:'tourist'
                 }}
                 onSubmit={(values, {setSubmitting}) => {
                   setislpad(true);
@@ -84,13 +84,13 @@ const SignUp = ({navigation}) => {
                 }}>
                 {({handleChange, handleBlur, handleSubmit, values}) => (
                   <VStack width="100%" space={4}>
-                    <Input
+                    {/* <Input
                       bgColor={'gray.100'}
                       onBlur={handleBlur('name')}
                       placeholder="Name"
                       onChangeText={handleChange('name')}
                       value={values.name}
-                    />
+                    /> */}
 
                     <Input
                       bgColor={'gray.100'}
@@ -126,13 +126,23 @@ const SignUp = ({navigation}) => {
                       bg="#24C2D8">
                       {'ثبت نام'}
                     </Button>
+                    <Link
+                      onPress={() => navigation.navigate('ForgetPassword')}
+                      alignSelf={'flex-end'}>
+                     {'فراموشی رمز؟'}
+                    </Link>
+                    <Link
+                      alignSelf={'flex-end'}
+                      onPress={() => navigation.navigate('Login')}>
+                       {"ورود"}
+                    </Link>
                     <Divider />
                     <View
                       mt={2}
                       p={1}
                       flexDirection="row"
                       justifyContent="space-between">
-                      <GoogleSigninButton style={{width: '100%'}} />
+                      {/* <GoogleSigninButton style={{width: '100%'}} /> */}
                     </View>
                   </VStack>
                 )}

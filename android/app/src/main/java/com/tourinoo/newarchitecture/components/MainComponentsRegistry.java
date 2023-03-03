@@ -1,4 +1,4 @@
-package com.tourinoo.newarchitecture.components;
+package com.Tourmeet.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

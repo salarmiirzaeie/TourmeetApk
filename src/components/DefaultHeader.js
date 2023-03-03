@@ -17,7 +17,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import React from 'react';
 
-export const DefaultHeader = name => {
+ const DefaultHeader = name => {
   const navigation = useNavigation();
 
   return (
@@ -56,3 +56,4 @@ export const DefaultHeader = name => {
     </NativeBaseProvider>
   );
 };
+export default React.memo(DefaultHeader)

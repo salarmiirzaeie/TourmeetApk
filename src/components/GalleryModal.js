@@ -29,21 +29,25 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {deleteprofile, uploadprofilephoto} from '../services/userServices';
 import {Formik} from 'formik';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import {checkpermision, permision} from '../utils/helpers';
 
 export const GalleryModal = ({images, mode, rate}) => {
   const {width: windowWidth} = Dimensions.get('window');
   const {isOpen, onOpen, onClose} = useDisclose();
   const [visible, setvisible] = useState(false);
+  const [nn, setnn] = useState(0);
   const [scrollstate, setscrollstate] = useState(0);
   const navigation = useNavigation();
   const options = {
     noData: true,
   };
+  useEffect(() => {}, [nn]);
   return (
     <>
       {images == null || images.length === 0 ? (
         <Image
           alt="ll"
+        
           source={{
             uri: `http://192.168.43.153:3333/uploads/defaultProfile1.jpg`,
           }}
@@ -58,6 +62,9 @@ export const GalleryModal = ({images, mode, rate}) => {
               <Pressable onPress={() => setvisible(true)}>
                 <Image
                   alt="ll"
+                  fallbackSource={{
+                    uri: `http://192.168.43.153:3333/uploads/defaultProfile1.jpg`,
+                  }}
                   source={{
                     uri: `http://192.168.43.153:3333/uploads/profilePhotos/${item.name}`,
                   }}
@@ -79,23 +86,24 @@ export const GalleryModal = ({images, mode, rate}) => {
           image1: '',
         }}
         onSubmit={async values => {
-          let data = await new FormData();
-          await data.append('image1', values.image1);
-          await uploadprofilephoto(data).then(async res => {
-            if (await res) {
-              if ((await res.status) === 200) {
-                onClose();
-                navigation.navigate('Profile', {
-                  pf: Math.random(100),
-                });
+          let data = new FormData();
+          data.append('image1', values.image1);
+          setTimeout(async () => {
+            await uploadprofilephoto(data).then(async res => {
+              if (await res) {
+                if ((await res.status) === 200) {
+                  onClose();
+                  navigation.navigate('Profile', {
+                    pf: Math.random(100),
+                  });
+                } else {
+                  onClose();
+                }
               } else {
-                console.log(res.data.message);
-                onClose();
+                Alert.alert(res.data.message)
               }
-            } else {
-              Alert.alert('خطا');
-            }
-          });
+            });
+          }, 1000);
         }}>
         {({
           values,
@@ -117,6 +125,7 @@ export const GalleryModal = ({images, mode, rate}) => {
             <Pressable
               display={mode !== 'myprofile' ? 'none' : 'flex'}
               onPress={async () => {
+                await permision();
                 await launchImageLibrary(options, async response => {
                   if (!response.didCancel) {
                     if (response.assets[0].uri) {
@@ -208,6 +217,7 @@ export const GalleryModal = ({images, mode, rate}) => {
                       setvisible(false);
                     } else {
                       setvisible(true);
+                      setnn(Math.random(100));
                     }
 
                     console.log(res.data.message);
@@ -237,22 +247,11 @@ export const GalleryModal = ({images, mode, rate}) => {
               renderItem={({item}) => {
                 return (
                   <>
-                    {/* <Button
-                      display={mode !== 'myprofile' ? 'none' : 'flex'}
-                      ref={deletebutton}
-                      onPress={() => {
-                        deleteprofile(item.name).then(res => {
-                          if (res.status === 200) {
-                          } else {
-                            console.log(res.data.message);
-                          }
-                        });
-                      }}>
-                      s
-                    </Button> */}
-
                     <Image
                       alt="ll"
+                      fallbackSource={{
+                        uri: `http://192.168.43.153:3333/uploads/defaultProfile1.jpg`,
+                      }}
                       source={{
                         uri: `http://192.168.43.153:3333/uploads/profilePhotos/${item.name}`,
                       }}

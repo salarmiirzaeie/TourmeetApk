@@ -21,7 +21,9 @@ export const RelatedTours = ({typep, id}) => {
   const route = useRoute();
   useEffect(() => {
     getRelatedTours({typep, id}).then(res => {
-      setposts(res.data);
+      if (res.status === 200) {
+        setposts(res.data);
+      }
     });
   }, [typep, id]);
   const scrollRef = useRef();
@@ -35,12 +37,12 @@ export const RelatedTours = ({typep, id}) => {
         // directionalLockEnabled={true}
         h={190}
         ref={scrollRef}
-        flexDirection={posts.length < 2 ? 'row-reverse' : 'row'}
+        flexDirection={posts.length <= 2 ? 'row-reverse' : 'row'}
         onContentSizeChange={scrollToEnd}
         contentContainerStyle={{flexDirection: 'row-reverse'}}
         horizontal={true}>
         <View>
-          <Text fontSize={'lg'} fontFamily={'B Yekan'} >
+          <Text fontSize={'lg'} fontFamily={'B Yekan'}>
             تورهای مرتبط
           </Text>
           <HStack pt={3} flex={1} w="full" space={4}>
@@ -65,6 +67,9 @@ export const RelatedTours = ({typep, id}) => {
                   rounded="2xl"
                   h="55%"
                   W="80%"
+                  fallbackSource={{
+                    uri: `http://192.168.43.153:3333/uploads/sea.jpg`,
+                  }}
                   alt="ee"
                   source={{
                     uri: `http://192.168.43.153:3333/uploads/thumbnails/${post.thumbnail[0]}`,
@@ -78,7 +83,10 @@ export const RelatedTours = ({typep, id}) => {
                   justifyContent={'space-between'}
                   h="40%"
                   w="100%">
-                  <Text bold fontSize={'md'} textAlign={'right'}>
+                  <Text
+                    fontFamily={'B YekanBold'}
+                    fontSize={'md'}
+                    textAlign={'right'}>
                     {truncate(post.title, 7)}
                   </Text>
                   <View

@@ -1,4 +1,4 @@
-package com.tourinoo.newarchitecture;
+package com.Tourmeet.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.tourinoo.BuildConfig;
-import com.tourinoo.newarchitecture.components.MainComponentsRegistry;
-import com.tourinoo.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.Tourmeet.BuildConfig;
+import com.Tourmeet.newarchitecture.components.MainComponentsRegistry;
+import com.Tourmeet.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -56,7 +56,6 @@ export const getRelatedTours = data => {
   return res;
 };
 export const getPopularCamps = async () => {
-  console.log(await getCity());
 
   const res = axios
     .get(`${apiPort}getPopularCamps/${await getCity()}`)
@@ -109,6 +108,20 @@ export const getpostjoineds = data => {
   // console.log(data)
   const res = axios
     .get(`${apiPort}joinedusers/${data}`)
+    .then(response => {
+      // console.log(response.data)
+
+      return response;
+    })
+    .catch(err => {
+      return err.response;
+    });
+  return res;
+};
+export const getTourLeaders = data => {
+  // console.log(data)
+  const res = axios
+    .get(`${apiPort}getcampleaders/${data}`)
     .then(response => {
       // console.log(response.data)
 

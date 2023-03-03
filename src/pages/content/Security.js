@@ -21,9 +21,10 @@ import {
   Icon,
 } from 'native-base';
 import React, {useState} from 'react';
-import {DefaultHeader} from '../../components/DefaultHeader';
+import DefaultHeader from '../../components/DefaultHeader';
 import Feather from 'react-native-vector-icons/Feather';
-import {editProfile, resetPassword} from '../../services/userServices';
+import {Alert} from 'react-native';
+import { changePassword } from '../../services/userServices';
 
 export const Security = ({route, navigation}) => {
   const [isload, setisload] = useState(false);
@@ -42,9 +43,9 @@ export const Security = ({route, navigation}) => {
             }}
             onSubmit={values => {
               setTimeout(() => {
-                resetPassword(values).then(res => {
-
-                  alert(res.data.message);
+                changePassword(values).then(res => {
+                  Alert.alert(res.data.message);
+                  setisload(false)
                 });
               }, 500);
             }}>

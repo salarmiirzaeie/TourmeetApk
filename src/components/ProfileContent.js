@@ -15,7 +15,9 @@ import {
   Badge,
 } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import {GalleryModal} from './GalleryModal';
 import {useNavigation} from '@react-navigation/native';
@@ -28,6 +30,26 @@ export const ProfileContent = ({profile, mode, rate}) => {
       </Box>
 
       <View pl={6} flex={1}>
+        <View
+          display={mode !== 'myprofile' ? 'none' : 'flex'}
+          h={75}
+          flexDirection="row">
+          <View flex={0.85}>
+            <View justifyContent={'center'} flex={0.5}>
+              <Text textAlign={'right'} color="gray.400" fontFamily={'B Yekan'}>
+                نام کاربری
+              </Text>
+            </View>
+            <View justifyContent={'center'} flex={0.5}>
+              <Text textAlign={'right'} fontFamily={'B YekanBold'}>
+                {profile.username}
+              </Text>
+            </View>
+          </View>
+          <View justifyContent={'center'} alignItems="center" flex={0.15}>
+            <AntDesign name="user" size={24} color="black" />
+          </View>
+        </View>
         <View h={75} flexDirection="row">
           <View flex={0.85}>
             <View justifyContent={'center'} flex={0.5}>
@@ -37,13 +59,13 @@ export const ProfileContent = ({profile, mode, rate}) => {
             </View>
 
             <View justifyContent={'center'} flex={0.5}>
-              <Text textAlign={'right'} fontFamily={'B Yekan'} bold>
+              <Text textAlign={'right'} fontFamily={'B YekanBold'}>
                 {profile.name}
               </Text>
             </View>
           </View>
           <View justifyContent={'center'} alignItems="center" flex={0.15}>
-            <Ionicons name="person" size={24} color="black" />
+            <FontAwesome name="angellist" size={24} color="black" />
           </View>
         </View>
         <View
@@ -57,7 +79,7 @@ export const ProfileContent = ({profile, mode, rate}) => {
               </Text>
             </View>
             <View justifyContent={'center'} flex={0.5}>
-              <Text textAlign={'right'} fontFamily={'B Yekan'} bold>
+              <Text textAlign={'right'} fontFamily={'B YekanBold'}>
                 {profile.phoneNumber}
               </Text>
             </View>
@@ -66,7 +88,6 @@ export const ProfileContent = ({profile, mode, rate}) => {
             <AntDesign name="phone" size={24} color="black" />
           </View>
         </View>
-
         <View
           display={mode !== 'myprofile' ? 'none' : 'flex'}
           h={75}
@@ -78,7 +99,7 @@ export const ProfileContent = ({profile, mode, rate}) => {
               </Text>
             </View>
             <View justifyContent={'center'} flex={0.5}>
-              <Text textAlign={'right'} fontFamily={'B Yekan'} bold>
+              <Text textAlign={'right'} fontFamily={'B YekanBold'}>
                 {profile.email}
               </Text>
             </View>
@@ -96,13 +117,13 @@ export const ProfileContent = ({profile, mode, rate}) => {
               </Text>
             </View>
             <View justifyContent={'center'} flex={0.5}>
-              <Text textAlign={'right'} fontFamily={'B Yekan'} bold>
+              <Text textAlign={'right'} fontFamily={'B YekanBold'}>
                 {profile.description}
               </Text>
             </View>
           </View>
           <View justifyContent={'center'} alignItems="center" flex={0.15}>
-            <AntDesign name="infocirlce" size={24} color="black" />
+            <Feather name="info" size={24} color="black" />
           </View>
         </View>
         <View display={mode === 'camp' ? 'flex' : 'none'}>
@@ -151,7 +172,7 @@ export const ProfileContent = ({profile, mode, rate}) => {
             <Text alignSelf={'center'}>تورها</Text>
           </View>
           <View justifyContent={'center'} alignItems="center" flex={0.15}>
-            <AntDesign name="dingding" size={24} color="black" />
+            <MaterialCommunityIcons name="island" size={28} color="black" />
           </View>
         </Pressable>
         <Pressable
@@ -176,7 +197,11 @@ export const ProfileContent = ({profile, mode, rate}) => {
             <Text alignSelf={'center'}>لیدرها</Text>
           </View>
           <View justifyContent={'center'} alignItems="center" flex={0.15}>
-            <AntDesign name="dingding" size={24} color="black" />
+            <MaterialCommunityIcons
+              name="human-greeting"
+              size={28}
+              color="black"
+            />
           </View>
         </Pressable>
       </View>

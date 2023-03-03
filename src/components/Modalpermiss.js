@@ -35,6 +35,9 @@ export const Modalpermiss = ({images, visiblity, setvisible}) => {
                 return (
                   <>
                     <Image
+                      fallbackSource={{
+                        uri: `http://192.168.43.153:3333/uploads/sea.jpg`,
+                      }}
                       alt="ll"
                       source={{
                         uri: `http://192.168.43.153:3333/uploads/permissions/${item.name}`,

@@ -48,8 +48,10 @@ const TourDet = ({route}) => {
   };
   useEffect(() => {
     getPost(route.params.id).then(res => {
-      setpost(res.data.post);
-      setcreator(res.data.user);
+      if (res.status === 200) {
+        setpost(res.data.post);
+        setcreator(res.data.user);
+      }
     });
   }, []);
   const scrollOffsetY = useRef(new Animated.Value(0)).current;
@@ -58,7 +60,10 @@ const TourDet = ({route}) => {
     <NativeBaseProvider>
       <View flex={1}>
         <View flex={0.1}>
-          <DetAppBar share={() => onShare()} pos={scrollOffsetY} />
+          <DetAppBar
+            share={() => onShare({name: post.title, desc: post.body})}
+            pos={scrollOffsetY}
+          />
         </View>
         <View mt={-24} zIndex={-5} flex={0.85}>
           <ScrollView
@@ -87,8 +92,7 @@ const TourDet = ({route}) => {
                   <Text
                     alignSelf={'center'}
                     fontSize={'lg'}
-                    fontFamily={'B Yekan'}
-                    bold>
+                    fontFamily={'B YekanBold'}>
                     {post.title}
                   </Text>
                   <CircleProgress
@@ -188,16 +192,15 @@ const TourDet = ({route}) => {
                   </Pressable>
 
                   <Text
-                    bold
                     alignSelf={'center'}
                     fontSize={'md'}
-                    fontFamily={'B Yekan'}>
+                    fontFamily={'B YekanBold'}>
                     {'میزبان'}
                   </Text>
                 </View>
                 <Divider />
                 <View py={4}>
-                  <Text fontSize={'md'} fontFamily={'B Yekan'} bold>
+                  <Text fontSize={'md'} fontFamily={'B YekanBold'}>
                     {'درباره '}
                   </Text>
                   <Text

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {DefaultHeader} from '../../components/DefaultHeader';
+import DefaultHeader from '../../components/DefaultHeader';
 import {UserList} from '../../components/UserList';
 import {
   Center,
@@ -32,7 +32,6 @@ const UserPage = ({route}) => {
     getpostjoineds(route.params.id).then(res => {
       if (res.status === 200) {
         setusers(res.data);
-        console.log(res.data[0].profilephotos)
       }
     });
   }, []);

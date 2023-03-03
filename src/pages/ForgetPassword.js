@@ -23,7 +23,7 @@ import {
   Alert,
 } from 'native-base';
 
-import {login} from '../services/userServices';
+import {forgetPassword, login} from '../services/userServices';
 import {useDispatch} from 'react-redux';
 import {profileMode} from '../state-management/action/profileModeAction';
 // import {
@@ -33,7 +33,7 @@ import {profileMode} from '../state-management/action/profileModeAction';
 // } from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Login = ({navigation}) => {
+const ForgetPassword = ({navigation}) => {
   const [isOpen, setIsOpen] = useState({isOpen: false, message: ''});
 
   const onClose = () => setIsOpen(false);
@@ -48,7 +48,7 @@ const Login = ({navigation}) => {
       // saving error
     }
   };
-  // GoogleSignin.configure({
+
   //   scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
   //   webClientId: '<FROM DEVELOPER CONSOLE>', // client ID of type WEB for your server (needed to verify user ID and offline access)
   //   offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
@@ -91,25 +91,18 @@ const Login = ({navigation}) => {
             </Text>
             <View w={'80%'}>
               <Formik
-                initialValues={{email: '', password: ''}}
+                initialValues={{email: ''}}
                 onSubmit={values => {
-                  setislpad(true);
                   setTimeout(async () => {
-                    login(values).then(res => {
-                      setislpad(false);
-
-                      if (res.status === 207) {
-                        storeData(res.data.token.toString());
-                        dispatch(profileMode(true));
-                        navigation.navigate('Profile', {
-                          pf: true,
+                    forgetPassword(values).then(res => {
+                      if (res.status === 200) {
+                        navigation.navigate('EnterNumb', {
+                          id: res.data.userId,
                         });
-                      } else {
-                        setIsOpen({isOpen: true, message: res.data.message});
-
-                        // alert(res.data.message);
                       }
-                      // setSubmitting(false);
+                      else{
+                        Alert.alert(res.data.message)
+                      }
                     });
                   }, 200);
                 }}>
@@ -141,36 +134,13 @@ const Login = ({navigation}) => {
                       autoComplete="email"
                     />
 
-                    <Input
-                      bgColor={'gray.100'}
-                      onBlur={handleBlur('password')}
-                      placeholder="Password"
-                      onChangeText={handleChange('password')}
-                      value={values.password}
-                      type={'password'}
-                      isRequired
-                      autoComplete="password"
-                    />
-
                     <Button
-                      isDisabled={
-                        !values.email || !values.password ? true : false
-                      }
+                      isDisabled={!values.email ? true : false}
                       isLoading={isload}
                       onPress={handleSubmit}
                       bg="#24C2D8">
                       {'ورود'}
                     </Button>
-                    <Link
-                      onPress={() => navigation.navigate('ForgetPassword')}
-                      alignSelf={'flex-end'}>
-                     {'فراموشی رمز؟'}
-                    </Link>
-                    <Link
-                      alignSelf={'flex-end'}
-                      onPress={() => navigation.navigate('SignUp')}>
-                      ثبت نام
-                    </Link>
 
                     <Divider />
                     <View
@@ -215,4 +185,4 @@ const Login = ({navigation}) => {
     </NativeBaseProvider>
   );
 };
-export default Login;
+export default ForgetPassword;

@@ -26,8 +26,9 @@ export const NoLogin = () => {
           <Text fontFamily={"B Yekan"} textAlign={'center'}>لطفاواردحساب کاربری خودشوید.</Text>
           <HStack space={1} pt={5} justifyContent={'center'}>
             <Button
-              bg={'amber.300'}
+              bg={'gray.400'}
               onPress={() => navigation.navigate('Login')}>
+
               ورود
             </Button>
             <Button
