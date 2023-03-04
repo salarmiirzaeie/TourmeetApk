@@ -19,19 +19,23 @@ import {Nodata} from './Nodata';
 export const PopularTours = () => {
   const navigation = useNavigation();
   const [posts, setposts] = useState([]);
+  const [status, setstatuss] = useState(3);
 
   useEffect(() => {
     getPopularTours().then(res => {
       if (res?.status === 200) {
+        setstatuss(1);
         setposts(res.data);
-
+      }
+      if (res?.status === 408) {
+        setstatuss(0);
       }
     });
     // }
   }, []);
   const scrollRef = useRef();
   const scrollToEnd = () => scrollRef.current.scrollToEnd({animated: false});
-  if (posts.length !== 0) {
+  if (status === 1) {
     return (
       <ScrollView
         showsHorizontalScrollIndicator={false}
@@ -90,7 +94,10 @@ export const PopularTours = () => {
                 justifyContent={'space-between'}
                 h="20%"
                 w="100%">
-                <Text fontFamily={"B YekanBold"} fontSize={'md'} textAlign={'right'}>
+                <Text
+                  fontFamily={'B YekanBold'}
+                  fontSize={'md'}
+                  textAlign={'right'}>
                   {post.title}
                 </Text>
                 <View
@@ -123,7 +130,11 @@ export const PopularTours = () => {
         </HStack>
       </ScrollView>
     );
-  } else {
-    return <Nodata />;
+  }
+  if (status === 0) {
+    return <Nodata status={0} />;
+  }
+  if (status === 3) {
+    return <Nodata status={3} />;
   }
 };

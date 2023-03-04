@@ -20,17 +20,22 @@ import {NoCamp} from './NoCamp';
 export const PopularCompanies = () => {
   const navigation = useNavigation();
   const [camps, setcamps] = useState([]);
+  const [status, setstatuss] = useState(3);
+
   useEffect(() => {
     getPopularCamps().then(res => {
       if (res?.status === 200) {
+        setstatuss(1);
         setcamps(res.data);
-        console.log(res.data);
+      }
+      if (res?.status === 408) {
+        setstatuss(0);
       }
     });
   }, []);
   const scrollRef = useRef();
   const scrollToEnd = () => scrollRef.current.scrollToEnd({animated: false});
-  if (camps.length !== 0) {
+  if (status === 1) {
     return (
       <ScrollView
         showsHorizontalScrollIndicator={false}
@@ -53,6 +58,8 @@ export const PopularCompanies = () => {
                   id: post.id,
                 })
               }>
+            
+
               <Box h="full" flexDirection={'row-reverse'} w="full" rounded="xl">
                 <Image
                   flex={0.45}
@@ -92,7 +99,11 @@ export const PopularCompanies = () => {
         </HStack>
       </ScrollView>
     );
-  } else {
-    return <NoCamp />;
+  }
+  if (status === 0) {
+    return <NoCamp status={0} />;
+  }
+  if (status === 3) {
+    return <NoCamp status={3} />;
   }
 };

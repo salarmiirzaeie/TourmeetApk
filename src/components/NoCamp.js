@@ -1,7 +1,7 @@
-import {Box, Text} from 'native-base';
+import {Box, Spinner, Text} from 'native-base';
 import React from 'react';
 
-export const NoCamp = () => {
+export const NoCamp = ({status}) => {
   return (
     <Box
       flex={1}
@@ -11,9 +11,13 @@ export const NoCamp = () => {
       justifyContent="center"
       textAlign={'center'}
       alignSelf={'center'}>
-      <Text fontFamily={'B Yekan'} textAlign="center">
-        {'فعلاً گروهی برای این شهرموجودنیست!'}
-      </Text>
+      {status === 0 ? (
+        <Text fontFamily={'B Yekan'} textAlign="center">
+          {'فعلاً گروهی برای این شهرموجودنیست!'}
+        </Text>
+      ) : (
+        <Spinner  />
+      )}
     </Box>
   );
 };

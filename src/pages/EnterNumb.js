@@ -6,20 +6,11 @@ import {
   NativeBaseProvider,
   View,
   VStack,
-  FormControl,
-  Heading,
-  Box,
   Input,
   Button,
-  Link,
-  IconButton,
-  Menu,
   Divider,
   Text,
-  Circle,
-  Color,
   AlertDialog,
-  Spinner,
   HStack,
 } from 'native-base';
 
@@ -52,9 +43,8 @@ const EnterNumb = ({navigation}) => {
                         navigation.navigate('ChangePassword', {
                           token: res.data.token,
                         });
-                      }
-                      else{
-                        Alert.alert(res.data.message)
+                      } else {
+                        Alert.alert(res.data.message);
                       }
                     },
                   );
@@ -100,7 +90,7 @@ const EnterNumb = ({navigation}) => {
                       <Divider w={'15%'} />
                     </HStack>
                     <Button onPress={handleSubmit} bg="#24C2D8">
-                      {'ورود'}
+                      {'ثبت'}
                     </Button>
 
                     <Divider />

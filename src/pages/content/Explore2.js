@@ -1,3 +1,4 @@
+import {NativeBaseProvider, Spinner} from 'native-base';
 import React, {useState, useRef, useEffect} from 'react';
 import {
   View,
@@ -31,38 +32,51 @@ const Explore2 = () => {
 
   const isValidTabPress: any = useRef(false);
   const [posts, setpostss] = useState([]);
+  const [status, setstatuss] = useState(3);
   const date = a => new Date(a);
 
   useEffect(() => {
     getIndex().then(res => {
       if (res.status === 200) {
+        setstatuss(1);
         setpostss(res.data.posts);
+      }
+      if (res.status === 408) {
+        setstatuss(0);
       }
     });
   }, []);
   const renderScene = ({route}: any) => {
     switch (route.key) {
       case 'first':
-        return posts?.length !== 0 ? (
+        return status === 3 ? (
+          <Nodata status={3} />
+        ) : status === 0 ? (
+          <Nodata status={0} />
+        ) : (
           <List2 datas={posts?.sort((a, b) => b.capacity - a.capacity)} />
-        ) : (
-          <Nodata />
         );
+
       case 'second':
-        return posts?.length !== 0 ? (
-          <List2 datas={posts?.sort((a, b) => a.price - b.price)} />
+        return status === 3 ? (
+          <Nodata status={3} />
+        ) : status === 0 ? (
+          <Nodata status={0} />
         ) : (
-          <Nodata />
+          <List2 datas={posts?.sort((a, b) => a.price - b.price)} />
         );
 
       case 'third':
-        return posts?.length !== 0 ? (
+        return status === 3 ? (
+          <Nodata status={3} />
+        ) : status === 0 ? (
+          <Nodata status={0} />
+        ) : (
           <List2
             datas={posts?.sort((a, b) => date(a.createdAt) - date(b.createdAt))}
           />
-        ) : (
-          <Nodata />
         );
+
       default:
         return null;
     }
@@ -75,6 +89,7 @@ const Explore2 = () => {
         indicatorStyle={{backgroundColor: 'transparent'}}
         style={{
           height: 50,
+          
           backgroundColor: '#24C2D8',
           borderBottomEndRadius: 30,
           borderBottomLeftRadius: 30,
@@ -91,7 +106,7 @@ const Explore2 = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={{flex: 1, backgroundColor: 'lightgray'}}>
+      <SafeAreaView style={{flex: 1, backgroundColor: '#F8F8F8'}}>
         <TabView
           navigationState={{index, routes}}
           renderScene={renderScene}

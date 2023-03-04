@@ -1,7 +1,7 @@
-import {Box, NativeBaseProvider, Text} from 'native-base';
+import {Box, NativeBaseProvider, Spinner, Text} from 'native-base';
 import React from 'react';
 
-export const Nodata = () => {
+export const Nodata = ({status}) => {
   return (
     <NativeBaseProvider>
       <Box
@@ -12,9 +12,13 @@ export const Nodata = () => {
         justifyContent="center"
         textAlign={'center'}
         alignSelf={'center'}>
-        <Text fontFamily={'B Yekan'} textAlign="center">
-          {'فعلاً توری برای این شهرموجودنیست!'}
-        </Text>
+        {status === 0 ? (
+          <Text fontFamily={'B Yekan'} textAlign="center">
+            {'فعلاً توری برای این شهرموجودنیست!'}
+          </Text>
+        ) : (
+          <Spinner />
+        )}
       </Box>
     </NativeBaseProvider>
   );

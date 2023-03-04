@@ -39,7 +39,7 @@ const List2 = ({datas}: any) => {
               flexDirection: 'row',
               marginVertical: 1,
               marginHorizontal: 5,
-              backgroundColor: '#F8F8F8',
+              backgroundColor: 'white',
               paddingVertical: 1,
               paddingHorizontal: 5,
             }}>

@@ -6,25 +6,15 @@ import {
   NativeBaseProvider,
   View,
   VStack,
-  FormControl,
-  Heading,
-  Box,
   Input,
   Button,
-  Link,
-  IconButton,
-  Menu,
   Divider,
   Text,
-  Circle,
-  Color,
   AlertDialog,
-  Spinner,
-  HStack,
 } from 'native-base';
 
 import {useRoute} from '@react-navigation/native';
-import {recievecode, reserPassword} from '../services/userServices';
+import {reserPassword} from '../services/userServices';
 import {Alert} from 'react-native';
 
 const ChangePassword = ({navigation}) => {
@@ -92,7 +82,7 @@ const ChangePassword = ({navigation}) => {
                       type="password"
                     />
                     <Button onPress={handleSubmit} bg="#24C2D8">
-                      {'ورود'}
+                      {'ثبت'}
                     </Button>
 
                     <Divider />

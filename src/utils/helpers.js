@@ -118,22 +118,4 @@ exports.onShare = async data => {
     // dismissed
   }
 };
-exports.permision = async () => {
-  await PermissionsAndroid.request(
-    PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-    PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-  );
-};
-exports.checkpermision = async () => {
-  const per = await PermissionsAndroid.check(
-    PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE &&
-      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-  )
-    .then(res => {
-      return res;
-    })
-    .catch(ress => {
-      return ress;
-    });
-  return per;
-};
+

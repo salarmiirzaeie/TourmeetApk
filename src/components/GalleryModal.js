@@ -19,6 +19,7 @@ import {
   Alert,
   Dimensions,
   Modal,
+  PermissionsAndroid,
   Platform,
   TouchableHighlight,
 } from 'react-native';
@@ -29,7 +30,6 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {deleteprofile, uploadprofilephoto} from '../services/userServices';
 import {Formik} from 'formik';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {checkpermision, permision} from '../utils/helpers';
 
 export const GalleryModal = ({images, mode, rate}) => {
   const {width: windowWidth} = Dimensions.get('window');
@@ -47,7 +47,6 @@ export const GalleryModal = ({images, mode, rate}) => {
       {images == null || images.length === 0 ? (
         <Image
           alt="ll"
-        
           source={{
             uri: `http://192.168.43.153:3333/uploads/defaultProfile1.jpg`,
           }}
@@ -100,7 +99,7 @@ export const GalleryModal = ({images, mode, rate}) => {
                   onClose();
                 }
               } else {
-                Alert.alert(res.data.message)
+                Alert.alert(res.data.message);
               }
             });
           }, 1000);
@@ -125,22 +124,34 @@ export const GalleryModal = ({images, mode, rate}) => {
             <Pressable
               display={mode !== 'myprofile' ? 'none' : 'flex'}
               onPress={async () => {
-                await permision();
-                await launchImageLibrary(options, async response => {
-                  if (!response.didCancel) {
-                    if (response.assets[0].uri) {
-                      let data = {
-                        name: response.assets[0].fileName,
-                        type: response.assets[0].type,
-                        uri:
-                          Platform.OS === 'android'
-                            ? response.assets[0].uri
-                            : response.assets[0].uri.replace('file://', ''),
-                      };
-                      setFieldValue('image1', data);
-                    }
-                    onOpen();
-                    handleSubmit();
+                await PermissionsAndroid.check(
+                  PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES &&
+                    PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+                ).then(response => {
+                  console.log(response)
+                  if (response) {
+                    launchImageLibrary(options, async response => {
+                      if (!response.didCancel) {
+                        if (response.assets[0].uri) {
+                          let data = {
+                            name: response.assets[0].fileName,
+                            type: response.assets[0].type,
+                            uri:
+                              Platform.OS === 'android'
+                                ? response.assets[0].uri
+                                : response.assets[0].uri.replace('file://', ''),
+                          };
+                          setFieldValue('image1', data);
+                        }
+                        onOpen();
+                        handleSubmit();
+                      }
+                    });
+                  } else {
+                    PermissionsAndroid.request(
+                      PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES,
+                      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+                    );
                   }
                 });
               }}

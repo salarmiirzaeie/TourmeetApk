@@ -6,32 +6,15 @@ import {
   NativeBaseProvider,
   View,
   VStack,
-  FormControl,
-  Heading,
-  Box,
   Input,
   Button,
-  Link,
-  IconButton,
-  Menu,
   Divider,
   Text,
-  Circle,
-  Color,
   AlertDialog,
-  Spinner,
   Alert,
 } from 'native-base';
 
 import {forgetPassword, login} from '../services/userServices';
-import {useDispatch} from 'react-redux';
-import {profileMode} from '../state-management/action/profileModeAction';
-// import {
-//   GoogleSignin,
-//   GoogleSigninButton,
-//   statusCodes,
-// } from '@react-native-google-signin/google-signin';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ForgetPassword = ({navigation}) => {
   const [isOpen, setIsOpen] = useState({isOpen: false, message: ''});
@@ -39,15 +22,6 @@ const ForgetPassword = ({navigation}) => {
   const onClose = () => setIsOpen(false);
 
   const cancelRef = useRef(null);
-  const dispatch = useDispatch();
-  const [isload, setislpad] = useState(false);
-  const storeData = async value => {
-    try {
-      AsyncStorage.setItem('@storage_Key', value);
-    } catch (e) {
-      // saving error
-    }
-  };
 
   //   scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
   //   webClientId: '<FROM DEVELOPER CONSOLE>', // client ID of type WEB for your server (needed to verify user ID and offline access)
@@ -99,9 +73,8 @@ const ForgetPassword = ({navigation}) => {
                         navigation.navigate('EnterNumb', {
                           id: res.data.userId,
                         });
-                      }
-                      else{
-                        Alert.alert(res.data.message)
+                      } else {
+                        Alert.alert(res.data.message);
                       }
                     });
                   }, 200);
@@ -136,10 +109,9 @@ const ForgetPassword = ({navigation}) => {
 
                     <Button
                       isDisabled={!values.email ? true : false}
-                      isLoading={isload}
                       onPress={handleSubmit}
                       bg="#24C2D8">
-                      {'ورود'}
+                      {'ثبت'}
                     </Button>
 
                     <Divider />
@@ -159,14 +131,6 @@ const ForgetPassword = ({navigation}) => {
             </View>
           </Center>
         </View>
-        {/* <View w="100%" flex={0.1}>
-          <View flex={0.5}></View>
-          <Divider />
-
-          <View flex={0.5} pl={10}>
-            <Text fontFamily={"B Yekan"}>cd</Text>
-          </View>
-        </View> */}
       </View>
       <AlertDialog
         leastDestructiveRef={cancelRef}
