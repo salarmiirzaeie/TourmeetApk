@@ -30,6 +30,7 @@ const TourDet = ({route}) => {
   const [post, setpost] = useState({});
   const [creator, setcreator] = useState({});
   const [status, setstatuss] = useState(3);
+  const [sttats, setsttats] = useState(0);
 
   const navigation = useNavigation();
   const initialLayout = {
@@ -44,7 +45,7 @@ const TourDet = ({route}) => {
         setcreator(res.data.user);
       }
     });
-  }, []);
+  }, [sttats]);
   const scrollOffsetY = useRef(new Animated.Value(0)).current;
   return (
     <NativeBaseProvider>
@@ -246,7 +247,7 @@ const TourDet = ({route}) => {
               </View>
             </ScrollView>
           </View>
-          <DetFooter />
+          <DetFooter sestat={() => setsttats(Math.random(1))} />
         </View>
       ) : (
         <Nodata status={30} />

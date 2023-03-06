@@ -4,11 +4,12 @@ import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {isJoined, joinTour, unjoinTour} from '../services/dashboardServices';
 import {JoinConfirmModal} from './JoinConfirmModal';
-export const DetFooter = () => {
+export const DetFooter = ({sestat}) => {
   const params = useRoute();
 
   // console.log(params.params.id)
   const [joined, setJoined] = useState(false);
+  const [sttats, setsttats] = useState(0);
   const logedin = useSelector(state => state.profileModeState);
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export const DetFooter = () => {
         }
       });
     }
-  }, []);
+  }, [sttats]);
   const [modalVisible, setModalVisible] = React.useState(false);
 
   return (
@@ -51,6 +52,9 @@ export const DetFooter = () => {
         </Button>
       )}
       <JoinConfirmModal
+        setstat={() => {
+          sestat()
+          setsttats(Math.random(1))}}
         modalVisible={modalVisible}
         setModalVisible={res => setModalVisible(res)}
       />

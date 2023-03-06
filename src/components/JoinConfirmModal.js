@@ -1,25 +1,12 @@
-import {
-  NativeBaseProvider,
-  Box,
-  FlatList,
-  Image,
-  Pressable,
-  useDisclose,
-  Spinner,
-  Text,
-  View,
-  IconButton,
-  Menu,
-  HamburgerIcon,
-  Actionsheet,
-  Button,
-  Modal,
-} from 'native-base';
-import React, {useEffect, useRef, useState} from 'react';
-import Entypo from 'react-native-vector-icons/Entypo';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import {useRoute} from '@react-navigation/native';
+import {Image, Text, View, Button, Modal} from 'native-base';
+import React from 'react';
+import {Alert} from 'react-native';
+import {isJoined, joinTour, unjoinTour} from '../services/dashboardServices';
 
-export const JoinConfirmModal = ({setModalVisible, modalVisible}) => {
+export const JoinConfirmModal = ({setModalVisible, modalVisible, setstat}) => {
+  const params = useRoute();
+
   return (
     <>
       <Modal isOpen={modalVisible} onClose={() => setModalVisible(false)}>
@@ -38,7 +25,24 @@ export const JoinConfirmModal = ({setModalVisible, modalVisible}) => {
               <Text textAlign={'center'} fontFamily="B Yekan">
                 {'دوست من قبل رفتن باید هزینه اش رو پرداخت کنی!!'}
               </Text>
-              <Button rounded={'xl'} mt={2} bg={'#24C2D8'} alignSelf={'center'}>
+              <Button
+                onPress={async () => {
+                  await joinTour({
+                    postId: params.params.id,
+                    status: 'ok',
+                  }).then(res => {
+                    if (res.status === 200) {
+                      setstat();
+                      setModalVisible(false)
+                    } else {
+                      Alert.alert(res.data.message);
+                    }
+                  });
+                }}
+                rounded={'xl'}
+                mt={2}
+                bg={'#24C2D8'}
+                alignSelf={'center'}>
                 <Text color={'white'} fontFamily="B Yekan">
                   {'پرداخت هزینه'}
                 </Text>
