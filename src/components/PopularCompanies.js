@@ -27,6 +27,7 @@ export const PopularCompanies = () => {
       if (res?.status === 200) {
         setstatuss(1);
         setcamps(res.data);
+        console.log(res.data);
       }
       if (res?.status === 408) {
         setstatuss(0);
@@ -58,39 +59,52 @@ export const PopularCompanies = () => {
                   id: post.id,
                 })
               }>
-            
-
               <Box h="full" flexDirection={'row-reverse'} w="full" rounded="xl">
-                <Image
-                  flex={0.45}
-                  rounded="xl"
-                  fallbackSource={{
-                    uri: `http://192.168.43.153:3333/uploads/sea.jpg`,
-                  }}
-                  h="full"
-                  alt="ee"
-                  source={{
-                    uri: `http://192.168.43.153:3333/uploads/${post.photo}`,
-                  }}
-                />
-                <Box p={1} flex={0.55}>
+                {post.profilePhotos && post.profilePhotos.length !== 0 ? (
+                  <Image
+                    flex={0.45}
+                    rounded="xl"
+                    fallbackSource={{
+                      uri: `http://192.168.43.153:3333/uploads/defaultProfile1.jpg`,
+                    }}
+                    source={{
+                      uri: `http://192.168.43.153:3333/uploads/profilePhotos/${post.profilePhotos[0].name}`,
+                    }}
+                    h="full"
+                    alt="ee"
+                  />
+                ) : (
+                  <Image
+                    flex={0.45}
+                    rounded="xl"
+                    source={{
+                      uri: `http://192.168.43.153:3333/uploads/defaultProfile1.jpg`,
+                    }}
+                    h="full"
+                    alt="ee"
+                  />
+                )}
+                <Box
+                  p={1}
+                  flexDirection="column"
+                  justifyContent="space-between"
+                  flex={0.55}>
                   <Text
                     textAlign={'right'}
                     fontFamily={'B YekanBold'}
                     fontSize="12">
                     {post.name}
                   </Text>
-                  <Text
+                  {/* <Text
                     textAlign={'right'}
                     fontFamily={'B Yekan'}
                     fontSize="10"
                     color={'gray.400'}>
-                    {truncate(post.description, 10)}
-                    {'ddd '}
-                  </Text>
+                    {truncate(post.description, 5)}
+                  </Text> */}
 
-                  <Box justifyContent={'center'} alignSelf={'center'}>
-                    <Leaders />
+                  <Box mt={2} alignSelf={'center'}>
+                    <Leaders data={post.leaders} />
                   </Box>
                 </Box>
               </Box>

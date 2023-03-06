@@ -124,36 +124,53 @@ export const GalleryModal = ({images, mode, rate}) => {
             <Pressable
               display={mode !== 'myprofile' ? 'none' : 'flex'}
               onPress={async () => {
-                await PermissionsAndroid.check(
-                  PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES &&
-                    PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-                ).then(response => {
-                  console.log(response)
-                  if (response) {
-                    launchImageLibrary(options, async response => {
-                      if (!response.didCancel) {
-                        if (response.assets[0].uri) {
-                          let data = {
-                            name: response.assets[0].fileName,
-                            type: response.assets[0].type,
-                            uri:
-                              Platform.OS === 'android'
-                                ? response.assets[0].uri
-                                : response.assets[0].uri.replace('file://', ''),
-                          };
-                          setFieldValue('image1', data);
-                        }
-                        onOpen();
-                        handleSubmit();
-                      }
-                    });
-                  } else {
-                    PermissionsAndroid.request(
-                      PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES,
-                      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-                    );
+                launchImageLibrary(options, async response => {
+                  if (!response.didCancel) {
+                    if (response.assets[0].uri) {
+                      let data = {
+                        name: response.assets[0].fileName,
+                        type: response.assets[0].type,
+                        uri:
+                          Platform.OS === 'android'
+                            ? response.assets[0].uri
+                            : response.assets[0].uri.replace('file://', ''),
+                      };
+                      setFieldValue('image1', data);
+                    }
+                    onOpen();
+                    handleSubmit();
                   }
                 });
+                // await PermissionsAndroid.check(
+                //   PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES &&
+                //     PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+                // ).then(response => {
+                // console.log(response)
+                // if (response) {
+                //   launchImageLibrary(options, async response => {
+                //     if (!response.didCancel) {
+                //       if (response.assets[0].uri) {
+                //         let data = {
+                //           name: response.assets[0].fileName,
+                //           type: response.assets[0].type,
+                //           uri:
+                //             Platform.OS === 'android'
+                //               ? response.assets[0].uri
+                //               : response.assets[0].uri.replace('file://', ''),
+                //         };
+                //         setFieldValue('image1', data);
+                //       }
+                //       onOpen();
+                //       handleSubmit();
+                //     }
+                //   });
+                // } else {
+                //   PermissionsAndroid.request(
+                //     PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES,
+                //     PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+                //   );
+                // }
+                // });
               }}
               justifyContent={'center'}
               alignItems="center"

@@ -1,5 +1,5 @@
 import {useRoute} from '@react-navigation/native';
-import {Button, View,Text} from 'native-base';
+import {Button, View, Text} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {isJoined, joinTour, unjoinTour} from '../services/dashboardServices';
@@ -10,7 +10,6 @@ export const DetFooter = () => {
   // console.log(params.params.id)
   const [joined, setJoined] = useState(false);
   const logedin = useSelector(state => state.profileModeState);
-  const data = {postId: params.params.id};
 
   useEffect(() => {
     if (logedin) {
@@ -35,11 +34,13 @@ export const DetFooter = () => {
           }}
           borderRadius={'2xl'}
           bg={'#24C2D8'}>
-          <Text color={"white"} fontFamily={"B Yekan"}>پیوستن به سفر</Text>
+          <Text color={'white'} fontFamily={'B Yekan'}>
+            پیوستن به سفر
+          </Text>
         </Button>
       ) : (
         <Button
-        disabled
+          disabled
           // onPress={async () => {
           //   setJoined(false);
           //   await unjoinTour(data);
