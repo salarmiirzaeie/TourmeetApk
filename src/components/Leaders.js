@@ -1,11 +1,22 @@
 import {Circle, NativeBaseProvider, Image, View, Avatar} from 'native-base';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getTourLeaders } from '../services/postServices';
 
 export const Leaders = ({data}) => {
-  const lenth = data && data.length;
+  const [users, setusers] = useState([]);
+  useEffect(() => {
+    console.log(data)
+    getTourLeaders(data).then(res => {
+      if (res.status === 200) {
+        setusers(res.data);
+        console.log(res.data)
+      }
+    });
+  }, []);
+  const lenth = users && users.length;
   return (
     <NativeBaseProvider>
-      {data && (
+      {users && (
         <View flexDirection={'row'}>
           {lenth >= 1 ? (
             <Avatar
@@ -13,8 +24,8 @@ export const Leaders = ({data}) => {
               size={'7'}
               source={{
                 uri: `http://192.168.43.153:3333/uploads/profilePhotos/${
-                  data[0]
-                    ? data[0].profilephotoss[0].name
+                  users[0].profilephotoss[0]
+                    ? users[0].profilephotoss[0].name
                     : 'defaultProfile1.jpg'
                 }`,
               }}
@@ -30,8 +41,8 @@ export const Leaders = ({data}) => {
               ml={-3}
               source={{
                 uri: `http://192.168.43.153:3333/uploads/profilePhotos/${
-                  data[1]
-                    ? data[1].profilephotoss[0].name
+                  users[1].profilephotoss[0]
+                    ? users[1].profilephotoss[0].name
                     : 'defaultProfile.jpg'
                 }`,
               }}
@@ -46,8 +57,8 @@ export const Leaders = ({data}) => {
               ml={-3}
               source={{
                 uri: `http://192.168.43.153:3333/uploads/profilePhotos/${
-                  data[2]
-                    ? data[2].profilephotoss[0].name
+                  users[2].profilephotoss[0]
+                    ? users[2].profilephotoss[0].name
                     : 'defaultProfile.jpg'
                 }`,
               }}

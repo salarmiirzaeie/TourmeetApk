@@ -104,7 +104,7 @@ export const PopularCompanies = () => {
                   </Text> */}
 
                   <Box mt={2} alignSelf={'center'}>
-                    <Leaders data={post.leaders} />
+                    <Leaders data={post.id} />
                   </Box>
                 </Box>
               </Box>
