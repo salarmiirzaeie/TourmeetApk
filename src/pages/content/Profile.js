@@ -37,19 +37,28 @@ import {profileMode} from '../../state-management/action/profileModeAction';
 import {ProfileHeader} from '../../components/ProfileHeader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ProfileContent} from '../../components/ProfileContent';
-import {PermissionsAndroid} from 'react-native';
 
 export const Profile = ({navigation, route}) => {
   const dispatch = useDispatch();
   const {isOpen, onOpen, onClose} = useDisclose();
   const logedin = useSelector(state => state.profileModeState);
   const [profile, setProfile] = useState({});
-
+  const storeData = async value => {
+    try {
+      AsyncStorage.setItem('@storage_Key', value);
+    } catch (e) {
+      // saving error
+    }
+  };
   useEffect(() => {
     if (logedin) {
       userProfile().then(res => {
         if (res.status === 200) {
           setProfile(res.data);
+        }
+        if (res.status === 404) {
+          dispatch(profileMode(false));
+          storeData(null)
         }
       });
     }

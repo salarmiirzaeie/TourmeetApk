@@ -54,7 +54,9 @@ const Explore2 = () => {
         ) : status === 0 ? (
           <Nodata status={0} />
         ) : (
-          <List2 datas={posts?.sort((a, b) => b.capacity - a.capacity)} />
+          <List2
+            datas={posts?.sort((a, b) => date(b.createdAt) - date(a.createdAt))}
+          />
         );
 
       case 'second':
@@ -73,7 +75,9 @@ const Explore2 = () => {
           <Nodata status={0} />
         ) : (
           <List2
-            datas={posts?.sort((a, b) => date(a.createdAt) - date(b.createdAt))}
+            datas={posts?.sort(
+              (a, b) => b.joinedUsers.length - a.joinedUsers.length,
+            )}
           />
         );
 
@@ -89,7 +93,7 @@ const Explore2 = () => {
         indicatorStyle={{backgroundColor: 'transparent'}}
         style={{
           height: 50,
-          
+
           backgroundColor: '#24C2D8',
           borderBottomEndRadius: 30,
           borderBottomLeftRadius: 30,

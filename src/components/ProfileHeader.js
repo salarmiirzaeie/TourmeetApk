@@ -38,12 +38,7 @@ export const ProfileHeader = ({onOpen, mode, onshare}) => {
       </View>
       <View display={mode === 'myprofile' ? 'flex' : 'none'}>
         <IconButton
-          //   onPress={() =>
-          //     toast.show({
-          //       title: 'به زودی',
-          //       placement: 'top',
-          //     })
-          //   }
+          
           _icon={{
             as: AntDesign,
             name: 'qrcode',

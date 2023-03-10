@@ -7,7 +7,7 @@ const apiPort = 'http://192.168.43.153:3333/';
 //   return token;
 // };
 const getCity = async () => {
-  let city = await Store.getState().cityState;
+  let city = await Store.getState().cityState.id;
 
   return city;
 };
@@ -44,9 +44,9 @@ export const getCampGallery = data => {
     });
   return res;
 };
-export const getRelatedTours = data => {
+export const getRelatedTours = async data => {
   const res = axios
-    .post(`${apiPort}relatedTours`, data)
+    .post(`${apiPort}relatedTours/${await getCity()}`, data)
     .then(response => {
       return response;
     })
@@ -56,7 +56,6 @@ export const getRelatedTours = data => {
   return res;
 };
 export const getPopularCamps = async () => {
-
   const res = axios
     .get(`${apiPort}getPopularCamps/${await getCity()}`)
     .then(response => {
@@ -91,11 +90,9 @@ export const getPopularTours = async () => {
 //   return res;
 // };
 export const getPost = data => {
-  // console.log(data)
   const res = axios
     .get(`${apiPort}post/${data}`)
     .then(response => {
-      // console.log(response.data)
 
       return response;
     })
@@ -105,11 +102,9 @@ export const getPost = data => {
   return res;
 };
 export const getpostjoineds = data => {
-  // console.log(data)
   const res = axios
     .get(`${apiPort}joinedusers/${data}`)
     .then(response => {
-      // console.log(response.data)
 
       return response;
     })
@@ -119,11 +114,9 @@ export const getpostjoineds = data => {
   return res;
 };
 export const getTourLeaders = data => {
-  // console.log(data)
   const res = axios
     .get(`${apiPort}getcampleaders/${data}`)
     .then(response => {
-      // console.log(response.data)
 
       return response;
     })
@@ -133,11 +126,32 @@ export const getTourLeaders = data => {
   return res;
 };
 export const getUser = data => {
-  // console.log(data)
   const res = axios
     .get(`${apiPort}user/${data}`)
     .then(response => {
-      // console.log(response.data)
+
+      return response;
+    })
+    .catch(err => {
+      return err.response;
+    });
+  return res;
+};
+export const getcities = data => {
+  const res = axios
+    .get(`${apiPort}cities/${data}`)
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      return err.response;
+    });
+  return res;
+};
+export const getprovinces = () => {
+  const res = axios
+    .get(`${apiPort}provinces`)
+    .then(response => {
 
       return response;
     })

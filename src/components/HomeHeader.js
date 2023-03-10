@@ -1,17 +1,7 @@
 import React from 'react';
-import {
-  IconButton,
-  HStack,
-  Heading,
-  Center,
-  useToast,
-  Pressable,
-  Text,
-} from 'native-base';
-import {useNavigation} from '@react-navigation/native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {DastNevis} from '../assets/fonts/DastNevis.otf';
- const HomeHeader = ({toTop}) => {
+import {IconButton, HStack, useToast, Pressable, Text} from 'native-base';
+import Octicons from 'react-native-vector-icons/Octicons';
+const HomeHeader = ({toTop}) => {
   const toast = useToast();
   return (
     <HStack p={2} justifyContent="space-between" w="100%">
@@ -19,21 +9,25 @@ import {DastNevis} from '../assets/fonts/DastNevis.otf';
         <IconButton
           onPress={() =>
             toast.show({
-              title: 'به زودی',
+              title: 'شبکه اجتماعی گردشگران به زودی راه اندازی خواهد شد',
               placement: 'top',
             })
           }
           _icon={{
-            as: FontAwesome,
-            name: 'send',
+            as: Octicons,
+            name: 'inbox',
             color: 'white',
-            size: 7,
+            size: 5,
           }}
         />
       </HStack>
       <HStack pr={2}>
         <Pressable onPress={() => toTop()} justifyContent={'center'} ml={2}>
-          <Text fontFamily={"B Yekan"} color="white" fontFamily={"DastNevis"} fontSize="3xl">
+          <Text
+            fontFamily={'B Yekan'}
+            color="white"
+            fontFamily={'DastNevis'}
+            fontSize="3xl">
             تورمیت
           </Text>
         </Pressable>
@@ -41,4 +35,4 @@ import {DastNevis} from '../assets/fonts/DastNevis.otf';
     </HStack>
   );
 };
-export default React.memo(HomeHeader)
+export default React.memo(HomeHeader);

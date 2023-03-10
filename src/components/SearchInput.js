@@ -1,16 +1,21 @@
 import React, {useState} from 'react';
-import {Input, Circle, PresenceTransition, Button, Box} from 'native-base';
+import {
+  Input,
+  Circle,
+  PresenceTransition,
+  Button,
+  Box,
+  Text,
+} from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 
 import {useNavigation} from '@react-navigation/native';
 import {CityModal} from './CityModal';
 import {useSelector} from 'react-redux';
-import {NativeModules} from 'react-native';
 
 export const SearchInput = ({setsate}) => {
   const navigation = useNavigation();
-  const [visible, setvisible] = useState(false);
   let city = useSelector(state => state.cityState);
   return (
     <>
@@ -31,18 +36,18 @@ export const SearchInput = ({setsate}) => {
         rounded={'xl'}
         InputLeftElement={
           <Button
-            onPress={() => setvisible(true)}
+            onPress={() => navigation.navigate('Provinces')}
             p={0}
             m={0}
             h="full"
             startIcon={
               <Feather style={{fontSize: 18, color: 'white'}} name="map-pin" />
             }
-            fontFamily={'B Yekan'}
             w={'20%'}
-            
             bg={'#24C2D8'}>
-            {city}
+            <Text fontFamily={'B Yekan'} color={'white'}>
+              {city.name}
+            </Text>
           </Button>
         }
         InputRightElement={
@@ -69,14 +74,6 @@ export const SearchInput = ({setsate}) => {
             </Box>
           </PresenceTransition>
         }
-      />
-
-      <CityModal
-        visible={visible}
-        setvisible={() => {
-          // setsate();
-          setvisible(false);
-        }}
       />
     </>
   );

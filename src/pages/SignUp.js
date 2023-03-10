@@ -49,7 +49,8 @@ const SignUp = ({navigation}) => {
                   email: '',
                   password: '',
                   confirmPassword: '',
-                  type:'tourist'
+                  type: 'tourist',
+                  username: '',
                 }}
                 onSubmit={(values, {setSubmitting}) => {
                   setislpad(true);
@@ -84,13 +85,14 @@ const SignUp = ({navigation}) => {
                 }}>
                 {({handleChange, handleBlur, handleSubmit, values}) => (
                   <VStack width="100%" space={4}>
-                    {/* <Input
+                    <Input
+                      isRequired
                       bgColor={'gray.100'}
-                      onBlur={handleBlur('name')}
-                      placeholder="Name"
-                      onChangeText={handleChange('name')}
-                      value={values.name}
-                    /> */}
+                      onBlur={handleBlur('username')}
+                      placeholder="User Name"
+                      onChangeText={handleChange('username')}
+                      value={values.username}
+                    />
 
                     <Input
                       bgColor={'gray.100'}
@@ -119,22 +121,20 @@ const SignUp = ({navigation}) => {
                     />
                     <Button
                       isDisabled={
-                        !values.email || !values.password ? true : false
+                        !values.email || !values.username || !values.password
+                          ? true
+                          : false
                       }
                       isLoading={isload}
                       onPress={handleSubmit}
                       bg="#24C2D8">
                       {'ثبت نام'}
                     </Button>
-                    <Link
-                      onPress={() => navigation.navigate('ForgetPassword')}
-                      alignSelf={'flex-end'}>
-                     {'فراموشی رمز؟'}
-                    </Link>
+
                     <Link
                       alignSelf={'flex-end'}
                       onPress={() => navigation.navigate('Login')}>
-                       {"ورود"}
+                      {'ورود'}
                     </Link>
                     <Divider />
                     <View

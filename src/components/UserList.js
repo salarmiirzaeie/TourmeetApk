@@ -58,9 +58,9 @@ export const UserList = ({data}) => {
                 />
               </View>
               <View p={2} flex={0.7}>
-                <Text textAlign={'right'}>{item.name}</Text>
+                <Text textAlign={'right'}>{item.username}</Text>
                 <Text color={'gray.400'} mt={1} textAlign={'right'}>
-                  {item.email}
+                  {item.name}
                 </Text>
               </View>
 

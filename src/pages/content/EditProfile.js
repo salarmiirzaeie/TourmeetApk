@@ -8,15 +8,29 @@ import {
   Button,
   TextArea,
 } from 'native-base';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import DefaultHeader from '../../components/DefaultHeader';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {editProfile} from '../../services/userServices';
-import { Alert } from 'react-native';
+import {editProfile, userProfile} from '../../services/userServices';
+import {Alert} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
 export const EditProfile = ({route, navigation}) => {
-  let profile = route.params.profile;
+
+  const logedin = useSelector(state => state.profileModeState);
+
+  const [profile, setProfile] = useState({});
+
+  useEffect(() => {
+    if (logedin) {
+      userProfile().then(res => {
+        if (res.status === 200) {
+          setProfile(res.data);
+        }
+      });
+    }
+  }, [route]);
   const [isload, setisload] = useState(false);
   return (
     <NativeBaseProvider>
@@ -33,6 +47,7 @@ export const EditProfile = ({route, navigation}) => {
               email: profile.email,
               username: profile.username,
             }}
+            enableReinitialize={true}
             onSubmit={values => {
               setTimeout(() => {
                 editProfile(values).then(res => {
@@ -42,8 +57,7 @@ export const EditProfile = ({route, navigation}) => {
                       pf: true,
                     });
                   } else {
-                    Alert.alert(res.data.message)
-                  
+                    Alert.alert(res.data.message);
                   }
                 });
               }, 500);
@@ -199,7 +213,7 @@ export const EditProfile = ({route, navigation}) => {
                     flex={0.85}>
                     <Button
                       isLoading={isload}
-                      flex={0.5}
+                      flex={0.45}
                       onPress={() => {
                         handleSubmit();
                         setisload(true);
@@ -207,7 +221,7 @@ export const EditProfile = ({route, navigation}) => {
                       ثبت
                     </Button>
                     <Button
-                      flex={0.5}
+                      flex={0.45}
                       colorScheme={'danger'}
                       onPress={() => navigation.navigate('Profile')}>
                       لغو

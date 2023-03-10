@@ -106,7 +106,11 @@ export const PopularTours = () => {
                   flexDirection={'row'}
                   justifyContent={'space-between'}>
                   <Badge rounded={'2xl'}>
-                    <Text color={'gray.400'} fontSize="sm" textAlign={'right'}>
+                    <Text
+                      color={'gray.400'}
+                      fontFamily={'B Yekan'}
+                      fontSize="sm"
+                      textAlign={'right'}>
                       {persianDuration(post.durationTime)}
                     </Text>
                   </Badge>

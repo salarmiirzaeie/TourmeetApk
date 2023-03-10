@@ -23,7 +23,7 @@ import List2 from '../../components/List2';
 import {getIndex} from '../../services/postServices';
 
 const SearchPage = () => {
-  const [sort, setSort] = useState('مرتبط ترین');
+  const [sort, setSort] = useState('جدیدترین');
   const [serc, setserc] = useState(true);
   const [tours, setours] = useState([]);
   const [posts, setpots] = useState([]);
@@ -93,15 +93,7 @@ const SearchPage = () => {
               as={<MaterialIcons name="search" />}
             />
           }
-          // InputRightElement={
-          //   <Icon
-          //     m="2"
-          //     mr="3"
-          //     size="6"
-          //     color="gray.400"
-          //     as={<MaterialIcons name="mic" />}
-          //   />
-          // }
+         
         />
         <View
           flexDirection="row"

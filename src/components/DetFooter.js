@@ -1,20 +1,19 @@
 import {useRoute} from '@react-navigation/native';
 import {Button, View, Text} from 'native-base';
 import React, {useEffect, useState} from 'react';
+import { Alert } from 'react-native';
 import {useSelector} from 'react-redux';
 import {isJoined, joinTour, unjoinTour} from '../services/dashboardServices';
 import {JoinConfirmModal} from './JoinConfirmModal';
 export const DetFooter = ({sestat}) => {
   const params = useRoute();
 
-  // console.log(params.params.id)
   const [joined, setJoined] = useState(false);
   const [sttats, setsttats] = useState(0);
   const logedin = useSelector(state => state.profileModeState);
 
   useEffect(() => {
     if (logedin) {
-      // console.log("first")
       isJoined({postId: params.params.id}).then(res => {
         if (res.status === 200) {
           setJoined(res.data);
@@ -29,7 +28,12 @@ export const DetFooter = ({sestat}) => {
       {!joined ? (
         <Button
           onPress={async () => {
-            setModalVisible(true);
+            if (!logedin) {
+              Alert.alert('واردحساب کاربری خودشوید');
+            } else {
+              setModalVisible(true);
+
+            }
             // setJoined(true);
             // await joinTour(data);
           }}

@@ -145,7 +145,6 @@ export const GalleryModal = ({images, mode, rate}) => {
                 //   PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES &&
                 //     PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
                 // ).then(response => {
-                // console.log(response)
                 // if (response) {
                 //   launchImageLibrary(options, async response => {
                 //     if (!response.didCancel) {
@@ -192,6 +191,7 @@ export const GalleryModal = ({images, mode, rate}) => {
               alignSelf="flex-end"
               mt={130}
               zIndex={10}
+              display='none'
               position="absolute"
               size={10}>
               <Text>{rate}</Text>
@@ -248,9 +248,7 @@ export const GalleryModal = ({images, mode, rate}) => {
                       setnn(Math.random(100));
                     }
 
-                    console.log(res.data.message);
                   } else {
-                    console.log(res.data.message);
                   }
                 });
               }}

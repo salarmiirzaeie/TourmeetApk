@@ -1,36 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {userProfile} from '../../services/userServices';
-import {
-  Center,
-  NativeBaseProvider,
-  View,
-  HStack,
-  Image,
-  IconButton,
-  Box,
-  Heading,
-  ScrollView,
-  Text,
-  Divider,
-  Actionsheet,
-  useDisclose,
-  Input,
-  Button,
-  FormControl,
-  TextArea,
-  useToast,
-  Icon,
-  CircleIcon,
-  Circle,
-  Pressable,
-} from 'native-base';
-
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import {NativeBaseProvider, View,useDisclose, ScrollView} from 'native-base';
 
 import {ProfileHeader} from '../../components/ProfileHeader';
 import {ProfileContent} from '../../components/ProfileContent';
 import {getUser} from '../../services/postServices';
-import {Linking, Share} from 'react-native';
 import {onShare} from '../../utils/helpers';
 const CampProfile2 = ({route}) => {
   const {isOpen, onOpen, onClose} = useDisclose();

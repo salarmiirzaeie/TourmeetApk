@@ -21,11 +21,11 @@ import {Dimensions, Modal, NativeModules, Platform} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch} from 'react-redux';
-import {cityMode} from '../state-management/action/cityAction';
 import {useNavigation} from '@react-navigation/native';
-import {getprovinces} from '../services/postServices';
+import {cityMode} from '../../state-management/action/cityAction';
+import {getprovinces} from '../../services/postServices';
 
-export const CityModal = ({visible, setvisible}) => {
+export const Provinces = () => {
   const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
   // const [visibleInput, setvisibleInput] = useState(false);
   const dispatch = useDispatch();
@@ -42,20 +42,14 @@ export const CityModal = ({visible, setvisible}) => {
   };
   useEffect(() => {
     setserc(true);
-    if (visible === true) {
-      getprovinces().then(res => {
-        if (res.status === 200) {
-          setprovinces(res.data);
-        }
-      });
-    }
-   
-  }, [visible]);
+    getprovinces().then(res => {
+      if (res.status === 200) {
+        setprovinces(res.data);
+      }
+    });
+  }, []);
   return (
-    <Modal
-      visible={visible}
-      animationType={'fade'}
-      onRequestClose={() => setvisible(false)}>
+    <NativeBaseProvider>
       <View flex={1}>
         <View bg={'#24C2D8'} flexDirection="row" px={1} flex={0.08}>
           <Input
@@ -83,7 +77,7 @@ export const CityModal = ({visible, setvisible}) => {
           />
           <IconButton
             size={'xs'}
-            onPress={() => setvisible(false)}
+            onPress={() => navigation.goBack()}
             _icon={{
               as: AntDesign,
               name: 'right',
@@ -99,12 +93,11 @@ export const CityModal = ({visible, setvisible}) => {
               <>
                 <Pressable
                   onPress={() => {
-                    dispatch(cityMode(item));
-                    setvisible(false);
-                    NativeModules.DevSettings.reload();
+                    // dispatch(cityMode(item));
+                    // NativeModules.DevSettings.reload();
 
-                    navigation.navigate('Home', {
-                      pf: Math.random(100),
+                    navigation.navigate('Cities', {
+                      id: item.id,
                     });
                   }}
                   px={3}
@@ -117,7 +110,9 @@ export const CityModal = ({visible, setvisible}) => {
                     justifyContent="space-between">
                     <AntDesign style={{fontSize: 20}} name="left" />
 
-                    <Text textAlign={'right'}>{item.name}</Text>
+                    <Text fontFamily={'B Yekan'} textAlign={'right'}>
+                      {item.name}
+                    </Text>
                   </View>
                 </Pressable>
                 <Divider />
@@ -126,6 +121,6 @@ export const CityModal = ({visible, setvisible}) => {
           />
         </View>
       </View>
-    </Modal>
+    </NativeBaseProvider>
   );
 };

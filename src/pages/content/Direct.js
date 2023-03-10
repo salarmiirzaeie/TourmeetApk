@@ -68,7 +68,6 @@ const Direct = ({navigation}) => {
           <Input
             placeholder="Search"
             isFocused={false}
-            onFocus={() => console.log('cxcxc')}
             variant="filled"
             width="100%"
             borderRadius="10"

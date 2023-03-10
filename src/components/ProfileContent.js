@@ -31,7 +31,7 @@ export const ProfileContent = ({profile, mode, rate}) => {
 
       <View pl={6} flex={1}>
         <View
-          display={mode !== 'myprofile' ? 'none' : 'flex'}
+          display={mode === 'camp' ? 'none' : 'flex'}
           h={75}
           flexDirection="row">
           <View flex={0.85}>
@@ -69,7 +69,7 @@ export const ProfileContent = ({profile, mode, rate}) => {
           </View>
         </View>
         <View
-          display={mode !== 'myprofile' ? 'none' : 'flex'}
+          display={mode === 'camp'||mode === 'myprofile' ? 'flex' : 'none'}
           h={75}
           flexDirection="row">
           <View flex={0.85}>
@@ -109,20 +109,24 @@ export const ProfileContent = ({profile, mode, rate}) => {
           </View>
         </View>
 
-        <View h={75} flexDirection="row">
-          <View flex={0.85}>
-            <View justifyContent={'center'} flex={0.5}>
+        <View flexDirection="row">
+          <View flex={0.85} pb={2}>
+            {/* <View justifyContent={'center'} flex={0.5}>
               <Text textAlign={'right'} color="gray.400" fontFamily={'B Yekan'}>
                 درباره
               </Text>
             </View>
-            <View justifyContent={'center'} flex={0.5}>
-              <Text textAlign={'right'} fontFamily={'B YekanBold'}>
-                {profile.description}
-              </Text>
-            </View>
+            <View justifyContent={'center'} flex={0.5}> */}
+            <Text textAlign={'right'} color="gray.400" fontFamily={'B Yekan'}>
+              درباره
+            </Text>
+            <Text textAlign={'right'} fontFamily={'B YekanBold'}>
+            {profile.description}
+            </Text>
+            {/* </View>
+          </View> */}
           </View>
-          <View justifyContent={'center'} alignItems="center" flex={0.15}>
+          <View alignItems="center" flex={0.15}>
             <Feather name="info" size={24} color="black" />
           </View>
         </View>

@@ -117,7 +117,11 @@ const TourDet = ({route}) => {
                         color={'#24C2D8'}
                       />
 
-                      <Text fontSize={15} color={'gray.400'}>
+                      <Text
+                        fontFamily={'B Yekan'}
+                        fontSize={15}
+                        mx={1}
+                        color={'gray.400'}>
                         {formDate(post.date)}
                       </Text>
                     </Box>
@@ -128,7 +132,11 @@ const TourDet = ({route}) => {
                         color={'#24C2D8'}
                       />
 
-                      <Text fontSize={15} color={'gray.400'}>
+                      <Text
+                        fontFamily={'B Yekan'}
+                        fontSize={15}
+                        mx={1}
+                        color={'gray.400'}>
                         {persianType(post.type)}
                       </Text>
                     </Box>
@@ -140,6 +148,7 @@ const TourDet = ({route}) => {
                       />
 
                       <Text
+                        mx={1}
                         fontFamily={'B Yekan'}
                         fontSize={15}
                         color={'gray.400'}>
@@ -152,6 +161,7 @@ const TourDet = ({route}) => {
                       textAlign={'right'}
                       color={'gray.400'}
                       fontFamily={'B Yekan'}
+                      mx={1}
                       fontSize={15}>
                       تومان
                     </Text>
@@ -193,7 +203,7 @@ const TourDet = ({route}) => {
                   <Divider />
                   <View py={4}>
                     <Text fontSize={'md'} fontFamily={'B YekanBold'}>
-                      {'درباره '}
+                      {'توضیحات '}
                     </Text>
                     <Text
                       pt={2}
@@ -221,15 +231,22 @@ const TourDet = ({route}) => {
                       }}>
                       <Joineds data={post.joinedUsers} />
                     </Pressable>
-
-                    <Badge bg={'#E8FDFF'} rounded={'xl'}>
-                      <Text
-                        fontSize={'sm'}
-                        color={'gray.500'}
-                        fontFamily={'B Yekan'}>
-                        افرادعضوشده
-                      </Text>
-                    </Badge>
+                    <Pressable
+                      alignSelf={'center'}
+                      onPress={() => {
+                        navigation.navigate('UsersPage', {
+                          id: post._id,
+                        });
+                      }}>
+                      <Badge bg={'#E8FDFF'} rounded={'xl'}>
+                        <Text
+                          fontSize={'sm'}
+                          color={'gray.500'}
+                          fontFamily={'B Yekan'}>
+                          افرادعضوشده
+                        </Text>
+                      </Badge>
+                    </Pressable>
                   </View>
                   {/* <Divider />
                 <View h={150} py={3}>

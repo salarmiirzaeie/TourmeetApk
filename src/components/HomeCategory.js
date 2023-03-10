@@ -90,13 +90,14 @@ import React from 'react';
                 W="full"
                 alt="ee"
                 source={{
-                  uri: `https://static.vecteezy.com/system/resources/thumbnails/000/125/643/small_2x/vector-everest-climber.jpg`,
+                  uri: `http://192.168.43.153:3333/uploads/mountain.jpg`,
                 }}
               />
               <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
                 bg={'gray.400'}
                 color={'white'}
                 textAlign={'center'}
+                
                 borderRadius={'lg'}>
                 کوهنوردی
               </Text>

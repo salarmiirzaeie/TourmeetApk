@@ -27,7 +27,6 @@ export const PopularCompanies = () => {
       if (res?.status === 200) {
         setstatuss(1);
         setcamps(res.data);
-        console.log(res.data);
       }
       if (res?.status === 408) {
         setstatuss(0);

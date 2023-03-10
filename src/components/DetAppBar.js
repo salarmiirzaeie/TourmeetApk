@@ -102,7 +102,6 @@ export const DetAppBar = ({pos, share}) => {
                 size={'sm'}
                 borderRadius="2xl"
                 onPress={() => {
-                  console.log(logedin)
                   if (!logedin) {
                     Alert.alert('واردحساب کاربری خودشوید');
                   } else {

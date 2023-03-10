@@ -5,7 +5,6 @@ import { getTourLeaders } from '../services/postServices';
 export const Leaders = ({data}) => {
   const [users, setusers] = useState([]);
   useEffect(() => {
-    console.log(data)
     getTourLeaders(data).then(res => {
       if (res.status === 200) {
         setusers(res.data);
@@ -26,7 +25,7 @@ export const Leaders = ({data}) => {
                 uri: `http://192.168.43.153:3333/uploads/profilePhotos/${
                   users[0].profilephotoss[0]
                     ? users[0].profilephotoss[0].name
-                    : 'defaultProfile1.jpg'
+                    : 'defaultProfile.jpg'
                 }`,
               }}
             />
