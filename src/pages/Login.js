@@ -28,12 +28,13 @@ import {useDispatch} from 'react-redux';
 import {profileMode} from '../state-management/action/profileModeAction';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useRoute} from '@react-navigation/native';
 
 const Login = ({navigation}) => {
   const [isOpen, setIsOpen] = useState({isOpen: false, message: ''});
 
   const onClose = () => setIsOpen(false);
-
+  const route = useRoute();
   const cancelRef = useRef(null);
   const dispatch = useDispatch();
   const [isload, setislpad] = useState(false);
@@ -44,7 +45,7 @@ const Login = ({navigation}) => {
       // saving error
     }
   };
-  
+
   return (
     <NativeBaseProvider>
       <View bg={'white'} flex={1} w={'100%'} alignItems={'center'}>
@@ -65,15 +66,18 @@ const Login = ({navigation}) => {
                       if (res.status === 207) {
                         storeData(res.data.token.toString());
                         dispatch(profileMode(true));
-                        navigation.navigate('Profile', {
-                          pf: true,
-                        });
+                        if (route.params !== undefined) {
+                          navigation.navigate('TourDet3', {
+                            id: route.params.id,
+                          });
+                        } else {
+                          navigation.navigate('Profile', {
+                            pf: true,
+                          });
+                        }
                       } else {
                         setIsOpen({isOpen: true, message: res.data.message});
-
-                        // alert(res.data.message);
                       }
-                      // setSubmitting(false);
                     });
                   }, 200);
                 }}>
@@ -91,24 +95,26 @@ const Login = ({navigation}) => {
                   handleSubmit,
 
                   isSubmitting,
-
-                  /* and other goodies */
                 }) => (
                   <VStack width="100%" space={4}>
                     <Input
                       bgColor={'gray.100'}
                       onBlur={handleBlur('email')}
-                      placeholder="UserName or Email"
+                      placeholder="نام کاربری یا ایمیل"
                       onChangeText={handleChange('email')}
                       value={values.email}
                       isRequired
                       autoComplete="email"
+                      textAlign={'center'}
+
+
                     />
 
                     <Input
                       bgColor={'gray.100'}
                       onBlur={handleBlur('password')}
-                      placeholder="Password"
+                      placeholder="رمزعبور"
+                      textAlign={'center'}
                       onChangeText={handleChange('password')}
                       value={values.password}
                       type={'password'}
@@ -128,39 +134,25 @@ const Login = ({navigation}) => {
                     <Link
                       onPress={() => navigation.navigate('ForgetPassword')}
                       alignSelf={'flex-end'}>
-                     {'فراموشی رمز؟'}
+                      {'فراموشی رمز؟'}
                     </Link>
                     <Link
                       alignSelf={'flex-end'}
-                      onPress={() => navigation.navigate('SignUp')}>
+                      onPress={() =>
+                        navigation.navigate('SignUp', {
+                          id: route.params.id,
+                        })
+                      }>
                       ثبت نام
                     </Link>
 
                     <Divider />
-                    <View
-                      mt={2}
-                      p={1}
-                      flexDirection="row"
-                      justifyContent="space-between">
-                      {/* <GoogleSigninButton
-                        onPress={() => signIn()}
-                        style={{width: '100%'}}
-                      /> */}
-                    </View>
                   </VStack>
                 )}
               </Formik>
             </View>
           </Center>
         </View>
-        {/* <View w="100%" flex={0.1}>
-          <View flex={0.5}></View>
-          <Divider />
-
-          <View flex={0.5} pl={10}>
-            <Text fontFamily={"B Yekan"}>cd</Text>
-          </View>
-        </View> */}
       </View>
       <AlertDialog
         leastDestructiveRef={cancelRef}

@@ -7,6 +7,10 @@ import {
   HamburgerIcon,
   Divider,
   NativeBaseProvider,
+  Modal,
+  View,
+  Text,
+  Button,
 } from 'native-base';
 
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -45,6 +49,8 @@ export const DetAppBar = ({pos, share}) => {
       });
     }
   }, []);
+  const [modalVisible2, setModalVisible2] = React.useState(false);
+
   return (
     <NativeBaseProvider>
       <Animated.View
@@ -103,7 +109,7 @@ export const DetAppBar = ({pos, share}) => {
                 borderRadius="2xl"
                 onPress={() => {
                   if (!logedin) {
-                    Alert.alert('واردحساب کاربری خودشوید');
+                    setModalVisible2(true);
                   } else {
                     setsaved(true);
 
@@ -138,6 +144,29 @@ export const DetAppBar = ({pos, share}) => {
           </HStack>
         </HStack>
       </Animated.View>
+      <Modal isOpen={modalVisible2} onClose={() => setModalVisible2(false)}>
+        <Modal.Content>
+          <Modal.Body justifyContent={'center'}>
+            <View alignSelf={'center'}>
+              <Text textAlign={'center'} fontFamily="B Yekan">
+                {'لطفا واردحساب کاربری خودبشوید!!'}
+              </Text>
+              <Button
+                onPress={() => {
+                  navigation.navigate('Login');
+                }}
+                rounded={'xl'}
+                mt={2}
+                bg={'#24C2D8'}
+                alignSelf={'center'}>
+                <Text color={'white'} fontFamily="B Yekan">
+                  {'ورودبه حساب کاربری'}
+                </Text>
+              </Button>
+            </View>
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
     </NativeBaseProvider>
   );
 };

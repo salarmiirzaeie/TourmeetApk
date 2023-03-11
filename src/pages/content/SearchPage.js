@@ -40,8 +40,8 @@ const SearchPage = () => {
       tours.sort((a, b) => a.price - b.price);
     }
     if (res === 3) {
-      posts.sort((a, b) => b.capacity - a.capacity);
-      tours.sort((a, b) => b.capacity - a.capacity);
+      posts.sort((a, b) => b.joinedUsers.length - a.joinedUsers.length);
+      tours.sort((a, b) => b.joinedUsers.length - a.joinedUsers.length);
     }
   };
   const searchTour = res => {
@@ -93,7 +93,6 @@ const SearchPage = () => {
               as={<MaterialIcons name="search" />}
             />
           }
-         
         />
         <View
           flexDirection="row"

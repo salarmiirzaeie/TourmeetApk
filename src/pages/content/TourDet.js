@@ -45,7 +45,7 @@ const TourDet = ({route}) => {
         setcreator(res.data.user);
       }
     });
-  }, [sttats]);
+  }, [sttats, route]);
   const scrollOffsetY = useRef(new Animated.Value(0)).current;
   return (
     <NativeBaseProvider>

@@ -19,11 +19,13 @@ import {useDispatch} from 'react-redux';
 import {profileMode} from '../state-management/action/profileModeAction';
 // import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useRoute} from '@react-navigation/native';
 
 const SignUp = ({navigation}) => {
   const [isOpen, setIsOpen] = useState({isOpen: false, message: ''});
 
   const onClose = () => setIsOpen(false);
+  const route = useRoute();
 
   const cancelRef = useRef(null);
   const [isload, setislpad] = useState(false);
@@ -64,15 +66,18 @@ const SignUp = ({navigation}) => {
                           password: values.password,
                         }).then(async result => {
                           if (result.status === 207) {
-                            // dispatch(tokenMode(result.data.token.toString()));
                             await storeData(result.data.token.toString());
 
-                            // await storeData(result.data.token.toString());
-
                             dispatch(profileMode(true));
-                            navigation.navigate('Profile', {
-                              pf: true,
-                            });
+                            if (route.params !== undefined) {
+                              navigation.navigate('TourDet3', {
+                                id: route.params.id,
+                              });
+                            } else {
+                              navigation.navigate('Profile', {
+                                pf: true,
+                              });
+                            }
                           }
                         });
                       } else {
@@ -89,35 +94,43 @@ const SignUp = ({navigation}) => {
                       isRequired
                       bgColor={'gray.100'}
                       onBlur={handleBlur('username')}
-                      placeholder="User Name"
+                      placeholder="نام کاربری"
                       onChangeText={handleChange('username')}
                       value={values.username}
+                      textAlign={'center'}
+
                     />
 
                     <Input
                       bgColor={'gray.100'}
                       onBlur={handleBlur('email')}
-                      placeholder="Email"
+                      placeholder="ایمیل"
                       onChangeText={handleChange('email')}
                       value={values.email}
+                      textAlign={'center'}
+
                     />
 
                     <Input
                       bgColor={'gray.100'}
                       onBlur={handleBlur('password')}
-                      placeholder="Password"
+                      placeholder="رمزعبور"
                       onChangeText={handleChange('password')}
                       value={values.password}
                       type={'password'}
+                      textAlign={'center'}
+
                     />
 
                     <Input
                       bgColor={'gray.100'}
                       onBlur={handleBlur('confirmPassword')}
-                      placeholder="ConfirmPassword"
+                      placeholder="تکراررمزعبور"
                       onChangeText={handleChange('confirmPassword')}
                       value={values.confirmPassword}
                       type={'password'}
+                      textAlign={'center'}
+
                     />
                     <Button
                       isDisabled={

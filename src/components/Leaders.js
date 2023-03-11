@@ -8,7 +8,6 @@ export const Leaders = ({data}) => {
     getTourLeaders(data).then(res => {
       if (res.status === 200) {
         setusers(res.data);
-        console.log(res.data)
       }
     });
   }, []);

@@ -11,6 +11,8 @@ import {
   StatusBar,
   ScrollView,
   Pressable,
+  Actionsheet,
+  Button,
 } from 'native-base';
 
 import React, {useEffect, useRef, useState} from 'react';
@@ -20,6 +22,7 @@ import {PopularTours} from '../../components/PopularTours';
 import {PopularCompanies} from '../../components/PopularCompanies';
 import HomeCategory from '../../components/HomeCategory';
 import {useNavigation} from '@react-navigation/native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export const Home = ({route}) => {
   const scroll = useRef(null);
@@ -93,6 +96,22 @@ export const Home = ({route}) => {
           </View>
         </ScrollView>
       </View>
+      <Actionsheet isOpen={true} hideDragIndicator disableOverlay>
+        <Actionsheet.Content px={5} justifyContent={'space-evenly'} h={250}>
+          <Text fontSize={20} fontFamily={'B YekanBold'}>
+            به روزرسانی ضروری
+            <MaterialIcons size={25} name="system-update" />
+          </Text>
+          <Divider />
+          <Text fontFamily={'B Yekan'} fontSize={15}>
+            دوست خوبم،به روز رسانی به این نسخه ضروری هست.بعد به روزرسانی ،دوباره
+            میتونی از همه ی امکانات تورمیت استفاده کنی.
+          </Text>
+          <Button w={'full'} bg="#24C2D8" fontFamily={'B Yekan'}>
+            به روزرسانی
+          </Button>
+        </Actionsheet.Content>
+      </Actionsheet>
     </NativeBaseProvider>
   );
 };

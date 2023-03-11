@@ -9,7 +9,7 @@ const HomeHeader = ({toTop}) => {
         <IconButton
           onPress={() =>
             toast.show({
-              title: 'شبکه اجتماعی گردشگران به زودی راه اندازی خواهد شد',
+              title: 'درحال راه اندازی!',
               placement: 'top',
             })
           }

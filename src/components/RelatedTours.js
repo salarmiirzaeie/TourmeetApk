@@ -51,7 +51,9 @@ export const RelatedTours = ({typep, id}) => {
                 key={i}
                 onPress={() => {
                   navigation.navigate(
-                    route.name === 'TourDet' ? 'TourDet2' : 'TourDet',
+                    route.name === 'TourDet' || route.name === 'TourDet3'
+                      ? 'TourDet2'
+                      : 'TourDet',
                     {
                       id: post._id,
                     },

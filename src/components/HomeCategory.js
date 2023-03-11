@@ -16,7 +16,7 @@ import {
 } from 'native-base';
 import React from 'react';
 
- const HomeCategory = () => {
+const HomeCategory = () => {
   const navigation = useNavigation();
   return (
     <NativeBaseProvider>
@@ -41,7 +41,8 @@ import React from 'react';
                   uri: `http://192.168.43.153:3333/uploads/sea.jpg`,
                 }}
               />
-              <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
+              <Text
+                fontFamily={'B Yekan'}
                 bg={'gray.400'}
                 color={'white'}
                 textAlign={'center'}
@@ -67,7 +68,8 @@ import React from 'react';
                   uri: `http://192.168.43.153:3333/uploads/offroad.jpg`,
                 }}
               />
-              <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
+              <Text
+                fontFamily={'B Yekan'}
                 bg={'gray.400'}
                 color={'white'}
                 textAlign={'center'}
@@ -93,11 +95,11 @@ import React from 'react';
                   uri: `http://192.168.43.153:3333/uploads/mountain.jpg`,
                 }}
               />
-              <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
+              <Text
+                fontFamily={'B Yekan'}
                 bg={'gray.400'}
                 color={'white'}
                 textAlign={'center'}
-                
                 borderRadius={'lg'}>
                 کوهنوردی
               </Text>
@@ -122,7 +124,8 @@ import React from 'react';
                   uri: `http://192.168.43.153:3333/uploads/desert.jpg`,
                 }}
               />
-              <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
+              <Text
+                fontFamily={'B Yekan'}
                 bg={'gray.400'}
                 color={'white'}
                 textAlign={'center'}
@@ -148,7 +151,8 @@ import React from 'react';
                   uri: `http://192.168.43.153:3333/uploads/jungle.jpg`,
                 }}
               />
-              <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
+              <Text
+                fontFamily={'B Yekan'}
                 bg={'gray.400'}
                 color={'white'}
                 textAlign={'center'}
@@ -174,7 +178,8 @@ import React from 'react';
                   uri: `http://192.168.43.153:3333/uploads/historical.jpg`,
                 }}
               />
-              <Text fontFamily={"B Yekan"} fontFamily={"B Yekan"}
+              <Text
+                fontFamily={'B Yekan'}
                 bg={'gray.400'}
                 color={'white'}
                 textAlign={'center'}
@@ -188,4 +193,4 @@ import React from 'react';
     </NativeBaseProvider>
   );
 };
-export default React.memo(HomeCategory)
+export default React.memo(HomeCategory);

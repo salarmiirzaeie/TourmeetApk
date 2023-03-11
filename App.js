@@ -1,12 +1,17 @@
-import React, {Suspense} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import React, {Suspense, useEffect, useState} from 'react';
+import {
+  NavigationContainer,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {DefaultLayout} from './src/Layouts/DefaultLayout';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
-import {I18nManager} from 'react-native';
+import {Platform, Linking, I18nManager} from 'react-native';
 
 import {persistor, Store} from './store';
+import {SplashScreen} from './src/components/SplashScreen';
 const Login = React.lazy(() => import('./src/pages/Login'));
 const SignUp = React.lazy(() => import('./src/pages/SignUp'));
 const Direct = React.lazy(() => import('./src/pages/content/Direct'));
@@ -28,8 +33,15 @@ const App = () => {
   I18nManager.allowRTL(false);
 
   const MainSatck = createNativeStackNavigator();
-
-  return (
+  const [splash, setsplash] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setsplash(false);
+    }, 3000);
+  }, []);
+  return splash ? (
+    <SplashScreen />
+  ) : (
     <Provider store={Store}>
       <PersistGate persistor={persistor}>
         <NavigationContainer>
@@ -42,6 +54,7 @@ const App = () => {
             <MainSatck.Screen name="SignUp" component={SignUp} />
             <MainSatck.Screen name="Direct" component={Direct} />
             <MainSatck.Screen name="TourDet" component={TourDet} />
+            <MainSatck.Screen name="TourDet3" component={TourDet} />
             <MainSatck.Screen name="TourDet2" component={TourDet} />
             <MainSatck.Screen name="SearchPage" component={SearchPage} />
             <MainSatck.Screen name="CampProfile" component={CamProfile2} />
