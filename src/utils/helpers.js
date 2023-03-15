@@ -4,7 +4,7 @@ const moment = require('jalali-moment');
 const {Share, PermissionsAndroid} = require('react-native');
 
 exports.truncate = (str, len) => {
-  if (str.length > len && str.length > 0) {
+  if (str?.length > len && str?.length > 0) {
     let new_str = str + ' ';
     new_str = str.substr(0, len);
     new_str = str.substr(0, new_str.lastIndexOf(' '));
@@ -15,6 +15,9 @@ exports.truncate = (str, len) => {
 };
 exports.formDate = date => {
   return moment(date).locale('fa').format('D MMM YYYY');
+};
+exports.formDate2 = date => {
+  return moment(date).locale('fa').format('D MMM');
 };
 exports.persianType = date => {
   switch (date) {
@@ -38,6 +41,20 @@ exports.persianType = date => {
 
     default:
       return 'طبیعت گردی';
+  }
+};
+exports.persianStatus = date => {
+  switch (date) {
+    case 'closed':
+      return 'منقضی شده';
+
+    
+    case 'Recruiting':
+      return 'فعال';
+
+    
+    default:
+      return 'منقضی شده ';
   }
 };
 exports.persianDuration = date => {

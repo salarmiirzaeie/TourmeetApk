@@ -106,8 +106,6 @@ const Login = ({navigation}) => {
                       isRequired
                       autoComplete="email"
                       textAlign={'center'}
-
-
                     />
 
                     <Input
@@ -138,11 +136,15 @@ const Login = ({navigation}) => {
                     </Link>
                     <Link
                       alignSelf={'flex-end'}
-                      onPress={() =>
-                        navigation.navigate('SignUp', {
-                          id: route.params.id,
-                        })
-                      }>
+                      onPress={() => {
+                        if (route.params !== undefined) {
+                          navigation.navigate('SignUp', {
+                            id: route.params.id,
+                          });
+                        } else {
+                          navigation.navigate('SignUp');
+                        }
+                      }}>
                       ثبت نام
                     </Link>
 

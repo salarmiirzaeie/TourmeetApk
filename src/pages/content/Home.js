@@ -96,7 +96,7 @@ export const Home = ({route}) => {
           </View>
         </ScrollView>
       </View>
-      <Actionsheet isOpen={true} hideDragIndicator disableOverlay>
+      <Actionsheet isOpen={false} hideDragIndicator disableOverlay>
         <Actionsheet.Content px={5} justifyContent={'space-evenly'} h={250}>
           <Text fontSize={20} fontFamily={'B YekanBold'}>
             به روزرسانی ضروری

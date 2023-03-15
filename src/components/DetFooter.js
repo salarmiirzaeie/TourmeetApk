@@ -5,7 +5,7 @@ import {Alert} from 'react-native';
 import {useSelector} from 'react-redux';
 import {isJoined, joinTour, unjoinTour} from '../services/dashboardServices';
 import {JoinConfirmModal} from './JoinConfirmModal';
-export const DetFooter = ({sestat}) => {
+export const DetFooter = ({sestat, mainstatus}) => {
   const params = useRoute();
   const navigation = useNavigation();
 
@@ -28,31 +28,32 @@ export const DetFooter = ({sestat}) => {
   return (
     <View px={3} bg="white" justifyContent={'center'} flex={0.06}>
       {!joined ? (
-        <Button
-          onPress={async () => {
-            if (!logedin) {
-              setModalVisible2(true);
-            } else {
-              setModalVisible(true);
-            }
-            // setJoined(true);
-            // await joinTour(data);
-          }}
-          borderRadius={'2xl'}
-          bg={'#24C2D8'}>
-          <Text color={'white'} fontFamily={'B Yekan'}>
-            پیوستن به سفر
-          </Text>
-        </Button>
+        mainstatus ? (
+          <Button
+            onPress={async () => {
+              if (!logedin) {
+                setModalVisible2(true);
+              } else {
+                setModalVisible(true);
+              }
+              // setJoined(true);
+              // await joinTour(data);
+            }}
+            borderRadius={'2xl'}
+            bg={'#24C2D8'}>
+            <Text color={'white'} fontFamily={'B Yekan'}>
+              پیوستن به سفر
+            </Text>
+          </Button>
+        ) : (
+          <Button borderRadius={'2xl'} disabled bg={'red.400'}>
+            <Text color={'white'} fontFamily={'B Yekan'}>
+              {'ظرفیت تکمیل'}
+            </Text>
+          </Button>
+        )
       ) : (
-        <Button
-          disabled
-          // onPress={async () => {
-          //   setJoined(false);
-          //   await unjoinTour(data);
-          // }}
-          borderRadius={'2xl'}
-          bg={'gray.400'}>
+        <Button disabled borderRadius={'2xl'} bg={'gray.400'}>
           عضوشده
         </Button>
       )}
@@ -73,8 +74,8 @@ export const DetFooter = ({sestat}) => {
               </Text>
               <Button
                 onPress={() => {
-                  navigation.navigate('Login',{
-                    id: params.params.id
+                  navigation.navigate('Login', {
+                    id: params.params.id,
                   });
                 }}
                 rounded={'xl'}

@@ -14,7 +14,7 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 
 import {useNavigation} from '@react-navigation/native';
 import {getPopularTours, getPopularTourswtok} from '../services/postServices';
-import {formDate, persianDuration, truncate} from '../utils/helpers';
+import {formDate, formDate2, persianDuration, truncate} from '../utils/helpers';
 import {Nodata} from './Nodata';
 export const PopularTours = () => {
   const navigation = useNavigation();
@@ -123,7 +123,7 @@ export const PopularTours = () => {
                       color={'gray.400'}
                       fontSize="sm"
                       textAlign={'right'}>
-                      {formDate(post.date)}
+                      {formDate2(post.date)}
                     </Text>
                     <Fontisto style={{fontSize: 18}} name="date" />
                   </View>

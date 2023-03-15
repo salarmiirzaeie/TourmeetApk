@@ -62,9 +62,9 @@ export const Joineds = ({data}) => {
           ) : (
             ''
           )}
-          {lenth >= 1 ? (
+          {lenth >= 3 && lenth !== 3 ? (
             <Circle zIndex={4} ml={-3} bg={'#24C2D8'} rounded="full" size={'9'}>
-              {lenth + '+'}
+              {lenth - 3 + '+'}
             </Circle>
           ) : (
             ''

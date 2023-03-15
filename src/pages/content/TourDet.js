@@ -209,7 +209,6 @@ const TourDet = ({route}) => {
                       pt={2}
                       textAlign="right"
                       fontSize={'sm'}
-                      h={180}
                       color={'gray.400'}
                       fontFamily={'B Yekan'}>
                       {post.body}
@@ -264,7 +263,12 @@ const TourDet = ({route}) => {
               </View>
             </ScrollView>
           </View>
-          <DetFooter sestat={() => setsttats(Math.random(1))} />
+          <DetFooter
+            mainstatus={
+              post.capacity === post.joinedUsers?.length ? false : true
+            }
+            sestat={() => setsttats(Math.random(1))}
+          />
         </View>
       ) : (
         <Nodata status={30} />

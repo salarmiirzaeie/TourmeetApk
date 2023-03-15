@@ -41,7 +41,11 @@ const UserPage = ({route}) => {
         <View flex={0.095}>
           <DefaultHeader name="افرادعضوشده" />
         </View>
-        <UserList data={users} />
+        <View flex={1}>
+          <ScrollView>
+            <UserList data={users} />
+          </ScrollView>
+        </View>
       </View>
     </NativeBaseProvider>
   );

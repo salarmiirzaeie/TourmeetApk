@@ -21,6 +21,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import {GalleryModal} from './GalleryModal';
 import {useNavigation} from '@react-navigation/native';
+import {truncate} from '../utils/helpers';
 export const ProfileContent = ({profile, mode, rate}) => {
   const navigation = useNavigation();
   return (
@@ -69,7 +70,7 @@ export const ProfileContent = ({profile, mode, rate}) => {
           </View>
         </View>
         <View
-          display={mode === 'camp'||mode === 'myprofile' ? 'flex' : 'none'}
+          display={mode === 'camp' || mode === 'myprofile' ? 'flex' : 'none'}
           h={75}
           flexDirection="row">
           <View flex={0.85}>
@@ -121,7 +122,7 @@ export const ProfileContent = ({profile, mode, rate}) => {
               درباره
             </Text>
             <Text textAlign={'right'} fontFamily={'B YekanBold'}>
-            {profile.description}
+              {truncate(profile.description, 200)}
             </Text>
             {/* </View>
           </View> */}
