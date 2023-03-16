@@ -24,6 +24,7 @@ const PermissPage = React.lazy(() => import('./src/pages/content/PermissPage'));
 const LeadersPage = React.lazy(() => import('./src/pages/content/LeadersPage'));
 const ForgetPassword = React.lazy(() => import('./src/pages/ForgetPassword'));
 const EnterNumb = React.lazy(() => import('./src/pages/EnterNumb'));
+const Chat = React.lazy(() => import('./src/pages/content/Chat'));
 const ChangePassword = React.lazy(() => import('./src/pages/ChangePassword'));
 
 const SearchPage = React.lazy(() => import('./src/pages/content/SearchPage'));
@@ -54,6 +55,7 @@ const App = () => {
             <MainSatck.Screen name="SignUp" component={SignUp} />
             <MainSatck.Screen name="Direct" component={Direct} />
             <MainSatck.Screen name="TourDet" component={TourDet} />
+            <MainSatck.Screen name="Chat" component={Chat} />
             <MainSatck.Screen name="TourDet3" component={TourDet} />
             <MainSatck.Screen name="TourDet2" component={TourDet} />
             <MainSatck.Screen name="SearchPage" component={SearchPage} />

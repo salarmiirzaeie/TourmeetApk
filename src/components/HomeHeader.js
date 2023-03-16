@@ -1,17 +1,20 @@
 import React from 'react';
 import {IconButton, HStack, useToast, Pressable, Text} from 'native-base';
 import Octicons from 'react-native-vector-icons/Octicons';
+import { useNavigation } from '@react-navigation/native';
 const HomeHeader = ({toTop}) => {
   const toast = useToast();
+  const navigation=useNavigation()
   return (
     <HStack p={2} justifyContent="space-between" w="100%">
       <HStack>
         <IconButton
           onPress={() =>
-            toast.show({
-              title: 'درحال راه اندازی!',
-              placement: 'top',
-            })
+            // toast.show({
+            //   title: 'درحال راه اندازی!',
+            //   placement: 'top',
+            // })
+            navigation.navigate("Direct")
           }
           _icon={{
             as: Octicons,

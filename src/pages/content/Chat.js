@@ -16,12 +16,14 @@ import {
   Button,
   IconButton,
 } from 'native-base';
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Feather  from 'react-native-vector-icons/Feather';
+import Feather from 'react-native-vector-icons/Feather';
+import socket from '../../utils/socket';
 
-export const Chat = ({navigation}) => {
+const Chat = ({navigation}) => {
+  const [message, setmessage] = useState('');
   const data = [
     {
       id: '68694a0f-3da1-431f-bd56-142371e29d72',
@@ -201,8 +203,13 @@ export const Chat = ({navigation}) => {
   return (
     <NativeBaseProvider>
       <View flex={1} bg={'red.100'}>
-        <View p={1} justifyContent={"space-between"} flexDirection={'row'} h={60} bg={'#8F95D3'}>
-          <View justifyContent={"center"} flexDirection={"row"}>
+        <View
+          p={1}
+          justifyContent={'space-between'}
+          flexDirection={'row'}
+          h={60}
+          bg={'#8F95D3'}>
+          <View justifyContent={'center'} flexDirection={'row'}>
             <IconButton
               onPress={() => navigation.goBack()}
               _icon={{
@@ -213,20 +220,24 @@ export const Chat = ({navigation}) => {
                 shadow: 5,
               }}
             />
-            <Pressable onPress={()=>navigation.navigate("MyProfile")} flexDirection={"row"}>
-            <Avatar size="38" source={{
-              uri:  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwgu1A5zgPSvfE83nurkuzNEoXs9DMNr8Ww&usqp=CAU'
-            }} />
-            <Text fontFamily={"B Yekan"}>SaraMazaheri</Text>
+            <Pressable
+              onPress={() => navigation.navigate('MyProfile')}
+              flexDirection={'row'}>
+              <Avatar
+                size="38"
+                source={{
+                  uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwgu1A5zgPSvfE83nurkuzNEoXs9DMNr8Ww&usqp=CAU',
+                }}
+              />
+              <Text fontFamily={'B Yekan'}>SaraMazaheri</Text>
             </Pressable>
-           
           </View>
-          <View justifyContent={"center"}>
-          <IconButton
+          <View justifyContent={'center'}>
+            <IconButton
               onPress={() => navigation.goBack()}
               _icon={{
                 as: Feather,
-                name: "more-vertical",
+                name: 'more-vertical',
                 color: 'white',
                 size: 7,
                 shadow: 5,
@@ -244,13 +255,14 @@ export const Chat = ({navigation}) => {
             flex={0.94}
             bg={'gray.100'}>
             {data.map((item, i) => (
-              <Box key={i}
+              <Box
+                key={i}
                 p={2}
                 alignSelf={item.type == 0 ? 'flex-end' : 'flex-start'}
                 bg={item.type == 1 ? 'white' : 'gray.300'}
                 m={1}
                 rounded={'xl'}>
-                <Text fontFamily={"B Yekan"}>{item.recentText}</Text>
+                <Text fontFamily={'B Yekan'}>{item.recentText}</Text>
               </Box>
             ))}
           </ScrollView>
@@ -260,12 +272,22 @@ export const Chat = ({navigation}) => {
             placeholder="type.."
             // onFocus={() => focusPoint.current.scrollToEnd({animated: true})}
             width="100%"
+            onChangeText={msg => {
+              setmessage(msg);
+            }}
             h={'100%'}
             borderRadius="10"
             borderWidth="2"
             InputRightElement={
               <IconButton
-                // onPress={onOpen}
+                onPress={() => {
+                  socket.emit('pvChat', {
+                    message: message,
+                    name: 'nickname',
+                    to: 'socketId',
+                    from: 'socket.id',
+                  });
+                }}
                 _icon={{
                   as: Ionicons,
                   name: 'send',
@@ -280,3 +302,4 @@ export const Chat = ({navigation}) => {
     </NativeBaseProvider>
   );
 };
+export default Chat;
