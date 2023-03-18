@@ -6,12 +6,13 @@ import {
 } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {DefaultLayout} from './src/Layouts/DefaultLayout';
-import {Provider} from 'react-redux';
+import {Provider, useSelector} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {Platform, Linking, I18nManager} from 'react-native';
 
 import {persistor, Store} from './store';
 import {SplashScreen} from './src/components/SplashScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Login = React.lazy(() => import('./src/pages/Login'));
 const SignUp = React.lazy(() => import('./src/pages/SignUp'));
 const Direct = React.lazy(() => import('./src/pages/content/Direct'));
@@ -35,6 +36,7 @@ const App = () => {
 
   const MainSatck = createNativeStackNavigator();
   const [splash, setsplash] = useState(true);
+
   useEffect(() => {
     setTimeout(() => {
       setsplash(false);

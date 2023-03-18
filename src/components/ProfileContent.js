@@ -27,7 +27,12 @@ export const ProfileContent = ({profile, mode, rate}) => {
   return (
     <View bg="#F8F8F8" borderTopRadius={30} shadow={3} flex={0.8}>
       <Box size="170" mt={-85} bg="red.100" bg="transparent" alignSelf="center">
-        <GalleryModal rate={rate} mode={mode} images={profile.profilePhotos} />
+        <GalleryModal
+          id={profile.id}
+          rate={rate}
+          mode={mode}
+          images={profile.profilePhotos}
+        />
       </Box>
 
       <View pl={6} flex={1}>

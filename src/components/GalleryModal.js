@@ -25,13 +25,14 @@ import {
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Feather from 'react-native-vector-icons/Feather';
 
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {deleteprofile, uploadprofilephoto} from '../services/userServices';
 import {Formik} from 'formik';
 import {useNavigation, useRoute} from '@react-navigation/native';
 
-export const GalleryModal = ({images, mode, rate}) => {
+export const GalleryModal = ({images, mode, rate, id}) => {
   const {width: windowWidth} = Dimensions.get('window');
   const {isOpen, onOpen, onClose} = useDisclose();
   const [visible, setvisible] = useState(false);
@@ -120,9 +121,8 @@ export const GalleryModal = ({images, mode, rate}) => {
           isSubmitting,
           setFieldValue,
         }) =>
-          mode !== 'camp' ? (
+          mode === 'myprofile' ? (
             <Pressable
-              display={mode !== 'myprofile' ? 'none' : 'flex'}
               onPress={async () => {
                 launchImageLibrary(options, async response => {
                   if (!response.didCancel) {
@@ -182,8 +182,8 @@ export const GalleryModal = ({images, mode, rate}) => {
               size={10}>
               <AntDesign style={{fontSize: 15}} name="camera" />
             </Pressable>
-          ) : (
-            <Box
+          ) : mode !== 'camp' ? (
+            <Pressable
               justifyContent={'center'}
               alignItems="center"
               rounded={'full'}
@@ -191,11 +191,17 @@ export const GalleryModal = ({images, mode, rate}) => {
               alignSelf="flex-end"
               mt={130}
               zIndex={10}
-              display='none'
               position="absolute"
+              onPress={() => {
+                navigation.navigate('Chat', {
+                  id: id,
+                });
+              }}
               size={10}>
-              <Text>{rate}</Text>
-            </Box>
+              <Feather style={{fontSize: 15}} name="send" />
+            </Pressable>
+          ) : (
+            ''
           )
         }
       </Formik>
@@ -247,7 +253,6 @@ export const GalleryModal = ({images, mode, rate}) => {
                       setvisible(true);
                       setnn(Math.random(100));
                     }
-
                   } else {
                   }
                 });

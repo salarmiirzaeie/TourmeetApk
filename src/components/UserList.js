@@ -25,10 +25,11 @@ import {
   Avatar,
 } from 'native-base';
 import {Dimensions} from 'react-native';
-import Entypo from 'react-native-vector-icons/Entypo';
+import Feather from 'react-native-vector-icons/Feather';
 import {useNavigation} from '@react-navigation/native';
 
 export const UserList = ({data}) => {
+  console.log(data)
   const initialLayout = {
     height: Dimensions.get('window').height,
     width: Dimensions.get('window').width,
@@ -51,12 +52,20 @@ export const UserList = ({data}) => {
             px={2}
             h={initialLayout.height / 10}>
             <View flex={1} flexDirection={'row'}>
-              <View justifyContent={'center'} flex={0.1}>
-                <Entypo
+              <Pressable
+                onPress={() => {
+                  console.log(item._id);
+                  navigation.navigate('Chat', {
+                    id: item._id,
+                  });
+                }}
+                justifyContent={'center'}
+                flex={0.1}>
+                <Feather
                   style={{fontSize: 20, alignSelf: 'center'}}
-                  name="dots-three-vertical"
+                  name="send"
                 />
-              </View>
+              </Pressable>
               <View p={2} flex={0.7}>
                 <Text textAlign={'right'}>{item.username}</Text>
                 <Text color={'gray.400'} mt={1} textAlign={'right'}>

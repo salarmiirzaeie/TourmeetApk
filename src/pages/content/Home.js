@@ -23,13 +23,28 @@ import {PopularCompanies} from '../../components/PopularCompanies';
 import HomeCategory from '../../components/HomeCategory';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import socket from '../../utils/socket';
+import {useSelector} from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Home = ({route}) => {
   const scroll = useRef(null);
   const navigation = useNavigation();
 
+  const logedin = useSelector(state => state.profileModeState);
+  const gettoken = async () => {
+    let token = await AsyncStorage.getItem('@storage_Key');
+    return token;
+  };
+  const callsocket = async () => {
+    socket.emit('enterchat', {id: socket.id, userId: await gettoken()});
+  };
   // const [cit, setcit] = useState(0);
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (logedin) {
+      callsocket();
+    }
+  }, []);
   return (
     <NativeBaseProvider>
       <View bg="#24C2D8" flex={1}>
