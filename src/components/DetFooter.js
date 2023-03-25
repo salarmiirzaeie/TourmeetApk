@@ -1,9 +1,8 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {Button, View, Text, Modal} from 'native-base';
 import React, {useEffect, useState} from 'react';
-import {Alert} from 'react-native';
 import {useSelector} from 'react-redux';
-import {isJoined, joinTour, unjoinTour} from '../services/dashboardServices';
+import {isJoined} from '../services/dashboardServices';
 import {JoinConfirmModal} from './JoinConfirmModal';
 export const DetFooter = ({sestat, mainstatus}) => {
   const params = useRoute();

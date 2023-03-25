@@ -14,7 +14,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {editProfile, userProfile} from '../../services/userServices';
 import {Alert} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import { useSelector} from 'react-redux';
 
 export const EditProfile = ({route, navigation}) => {
 

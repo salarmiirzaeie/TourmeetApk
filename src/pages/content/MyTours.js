@@ -8,13 +8,11 @@ export const MyTours = () => {
   const [joins, setjoins] = useState([]);
   useEffect(() => {
     joineds().then(res => {
-      console.log(res.status)
-
       if (res.status === 200) {
         setjoins(res.data);
       }
     });
-  },[]);
+  }, []);
   return (
     <NativeBaseProvider>
       <View flex={1}>

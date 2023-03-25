@@ -1,4 +1,4 @@
-import {Image, NativeBaseProvider, Spinner, Text, View} from 'native-base';
+import {Image, NativeBaseProvider, Text, View} from 'native-base';
 import React from 'react';
 
 export const SplashScreen = () => {
@@ -11,7 +11,13 @@ export const SplashScreen = () => {
               source={require('../assets/images/splash.png')}
               alt="splash"
             />
-            <Text textAlign={'center'} mt={3} fontFamily={'B Yekan'}>باحالترین تورها</Text>
+            <Text
+              textAlign={'center'}
+              mt={3}
+              fontSize="lg"
+              fontFamily={'DastNevis'}>
+               تورمیت همونیه که تو میخوای :)
+            </Text>
           </View>
         </View>
       </View>

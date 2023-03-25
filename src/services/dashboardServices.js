@@ -1,15 +1,13 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import {Store} from '../../store';
 
-const apiPort = 'http://192.168.43.153:3333/dashboard';
+const apiPort = 'https://api.tourmeet.ir/dashboard';
 
 const gettoken = async () => {
   let token = await AsyncStorage.getItem('@storage_Key');
   return token;
 };
 export const joinTour = async data => {
-
   const res = await axios
     .put(`${apiPort}/join-tour`, data, {
       headers: {
@@ -84,6 +82,18 @@ export const saveds = async () => {
     });
   return res;
 };
+export const checkversion = async data => {
+  console.log(data)
+  const res = axios
+    .get(`${apiPort}/checkVersion/${data}`)
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      return err.response;
+    });
+  return res;
+};
 export const joineds = async () => {
   const res = axios
     .get(`${apiPort}/joineds`, {
@@ -101,7 +111,6 @@ export const joineds = async () => {
 };
 
 export const isSaved = async data => {
-
   const res = axios
     .post(`${apiPort}/is-saved`, data, {
       headers: {

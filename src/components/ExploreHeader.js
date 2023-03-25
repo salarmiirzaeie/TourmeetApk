@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import {TabBar} from 'react-native-tab-view';
 
 const ExploreHeader = (props: any) => {

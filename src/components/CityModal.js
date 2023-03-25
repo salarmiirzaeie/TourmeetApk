@@ -1,23 +1,16 @@
 import {
-  NativeBaseProvider,
-  Box,
   FlatList,
-  Image,
   Pressable,
-  useDisclose,
-  Spinner,
   Text,
   View,
   IconButton,
-  Menu,
-  HamburgerIcon,
-  ScrollView,
+ 
   Input,
   Icon,
   Divider,
 } from 'native-base';
 import React, {useEffect, useState} from 'react';
-import {Dimensions, Modal, NativeModules, Platform} from 'react-native';
+import {Dimensions, Modal, NativeModules} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch} from 'react-redux';

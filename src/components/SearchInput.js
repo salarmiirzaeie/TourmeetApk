@@ -1,17 +1,9 @@
-import React, {useState} from 'react';
-import {
-  Input,
-  Circle,
-  PresenceTransition,
-  Button,
-  Box,
-  Text,
-} from 'native-base';
+import React from 'react';
+import {Input, PresenceTransition, Button, Box, Text} from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 
 import {useNavigation} from '@react-navigation/native';
-import {CityModal} from './CityModal';
 import {useSelector} from 'react-redux';
 
 export const SearchInput = ({setsate}) => {

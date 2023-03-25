@@ -1,4 +1,4 @@
-import {Circle, NativeBaseProvider, Image, View, Avatar} from 'native-base';
+import {Circle, NativeBaseProvider, View, Avatar} from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { getTourLeaders } from '../services/postServices';
 
@@ -21,7 +21,7 @@ export const Leaders = ({data}) => {
               zIndex={1}
               size={'7'}
               source={{
-                uri: `http://192.168.43.153:3333/uploads/profilePhotos/${
+                uri: `https://api.tourmeet.ir/uploads/profilePhotos/${
                   users[0].profilephotoss[0]
                     ? users[0].profilephotoss[0].name
                     : 'defaultProfile.jpg'
@@ -38,7 +38,7 @@ export const Leaders = ({data}) => {
               size={'7'}
               ml={-3}
               source={{
-                uri: `http://192.168.43.153:3333/uploads/profilePhotos/${
+                uri: `https://api.tourmeet.ir/uploads/profilePhotos/${
                   users[1].profilephotoss[0]
                     ? users[1].profilephotoss[0].name
                     : 'defaultProfile.jpg'
@@ -54,7 +54,7 @@ export const Leaders = ({data}) => {
               size={'7'}
               ml={-3}
               source={{
-                uri: `http://192.168.43.153:3333/uploads/profilePhotos/${
+                uri: `https://api.tourmeet.ir/uploads/profilePhotos/${
                   users[2].profilephotoss[0]
                     ? users[2].profilephotoss[0].name
                     : 'defaultProfile.jpg'

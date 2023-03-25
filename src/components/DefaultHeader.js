@@ -1,11 +1,7 @@
 import {
   HStack,
   IconButton,
-  Menu,
-  Pressable,
-  Box,
-  HamburgerIcon,
-  Divider,
+  
   NativeBaseProvider,
   Text,
   View,
@@ -13,8 +9,7 @@ import {
 
 import {useNavigation} from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Feather from 'react-native-vector-icons/Feather';
+
 import React from 'react';
 
  const DefaultHeader = name => {

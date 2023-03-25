@@ -2,7 +2,7 @@ import {useRoute} from '@react-navigation/native';
 import {Image, Text, View, Button, Modal} from 'native-base';
 import React from 'react';
 import {Alert} from 'react-native';
-import {isJoined, joinTour, unjoinTour} from '../services/dashboardServices';
+import {joinTour} from '../services/dashboardServices';
 
 export const JoinConfirmModal = ({setModalVisible, modalVisible, setstat}) => {
   const params = useRoute();
@@ -19,7 +19,7 @@ export const JoinConfirmModal = ({setModalVisible, modalVisible, setstat}) => {
                 w={200}
                 alt="ee"
                 source={{
-                  uri: `http://192.168.43.153:3333/uploads/tourists.png`,
+                  uri: `https://api.tourmeet.ir/uploads/tourists.png`,
                 }}
               />
               <Text textAlign={'center'} fontFamily="B Yekan">
@@ -33,7 +33,7 @@ export const JoinConfirmModal = ({setModalVisible, modalVisible, setstat}) => {
                   }).then(res => {
                     if (res.status === 200) {
                       setstat();
-                      setModalVisible(false)
+                      setModalVisible(false);
                     } else {
                       Alert.alert(res.data.message);
                     }

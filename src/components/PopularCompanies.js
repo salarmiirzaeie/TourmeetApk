@@ -1,19 +1,14 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
-  Center,
   Box,
-  Badge,
   Pressable,
   Image,
   ScrollView,
   HStack,
   Text,
 } from 'native-base';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
 import {getPopularCamps} from '../services/postServices';
-import {Joineds} from './Joineds';
-import {truncate} from '../utils/helpers';
 import {Leaders} from './Leaders';
 import {NoCamp} from './NoCamp';
 
@@ -64,10 +59,10 @@ export const PopularCompanies = () => {
                     flex={0.45}
                     rounded="xl"
                     fallbackSource={{
-                      uri: `http://192.168.43.153:3333/uploads/defaultProfile1.jpg`,
+                      uri: `https://api.tourmeet.ir/uploads/defaultProfile1.jpg`,
                     }}
                     source={{
-                      uri: `http://192.168.43.153:3333/uploads/profilePhotos/${post.profilePhotos[0].name}`,
+                      uri: `https://api.tourmeet.ir/uploads/profilePhotos/${post.profilePhotos[0].name}`,
                     }}
                     h="full"
                     alt="ee"
@@ -77,7 +72,7 @@ export const PopularCompanies = () => {
                     flex={0.45}
                     rounded="xl"
                     source={{
-                      uri: `http://192.168.43.153:3333/uploads/defaultProfile1.jpg`,
+                      uri: `https://api.tourmeet.ir/uploads/defaultProfile1.jpg`,
                     }}
                     h="full"
                     alt="ee"

@@ -6,21 +6,12 @@ import {
   NativeBaseProvider,
   View,
   VStack,
-  FormControl,
-  Heading,
-  Box,
   Input,
   Button,
   Link,
-  IconButton,
-  Menu,
   Divider,
   Text,
-  Circle,
-  Color,
   AlertDialog,
-  Spinner,
-  Alert,
 } from 'native-base';
 
 import {login} from '../services/userServices';

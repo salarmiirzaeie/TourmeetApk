@@ -6,15 +6,13 @@ import {
   HStack,
   View,
   Text,
-  Skeleton,
   Badge,
-  Box,
 } from 'native-base';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
 import {useNavigation} from '@react-navigation/native';
-import {getPopularTours, getPopularTourswtok} from '../services/postServices';
-import {formDate, formDate2, persianDuration, truncate} from '../utils/helpers';
+import {getPopularTours} from '../services/postServices';
+import {formDate2, persianDuration} from '../utils/helpers';
 import {Nodata} from './Nodata';
 export const PopularTours = () => {
   const navigation = useNavigation();
@@ -80,10 +78,10 @@ export const PopularTours = () => {
                 W="80%"
                 alt="ee"
                 fallbackSource={{
-                  uri: `http://192.168.43.153:3333/uploads/sea.jpg`,
+                  uri: `https://api.tourmeet.ir/uploads/sea.jpg`,
                 }}
                 source={{
-                  uri: `http://192.168.43.153:3333/uploads/thumbnails/${post.thumbnail[0]}`,
+                  uri: `https://api.tourmeet.ir/uploads/thumbnails/${post.thumbnail[0]}`,
                 }}
               />
 

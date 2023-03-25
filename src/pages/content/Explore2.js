@@ -1,17 +1,5 @@
-import {NativeBaseProvider, Spinner} from 'native-base';
 import React, {useState, useRef, useEffect} from 'react';
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  StatusBar,
-  SafeAreaView,
-  Animated,
-  Text,
-  Image,
-  Pressable,
-  FlatList,
-} from 'react-native';
+import {Dimensions, StatusBar, SafeAreaView} from 'react-native';
 import {TabView, TabBar} from 'react-native-tab-view';
 import List2 from '../../components/List2';
 import {Nodata} from '../../components/Nodata';

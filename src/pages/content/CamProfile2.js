@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {NativeBaseProvider, View,useDisclose, ScrollView} from 'native-base';
+import {NativeBaseProvider, View, useDisclose} from 'native-base';
 
 import {ProfileHeader} from '../../components/ProfileHeader';
 import {ProfileContent} from '../../components/ProfileContent';
 import {getUser} from '../../services/postServices';
 import {onShare} from '../../utils/helpers';
 const CampProfile2 = ({route}) => {
-  const {isOpen, onOpen, onClose} = useDisclose();
+  const {onOpen, onClose} = useDisclose();
 
   const [user, setuser] = useState({});
   useEffect(() => {

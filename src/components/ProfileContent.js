@@ -1,19 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {
-  Center,
-  NativeBaseProvider,
-  View,
-  HStack,
-  Image,
-  IconButton,
-  Box,
-  Heading,
-  ScrollView,
-  Text,
-  Divider,
-  Pressable,
-  Badge,
-} from 'native-base';
+import React from 'react';
+import {View, Box, Text, Divider, Pressable} from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';

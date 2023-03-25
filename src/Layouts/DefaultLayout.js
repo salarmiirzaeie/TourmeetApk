@@ -1,5 +1,5 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import React, {useState} from 'react';
+import React from 'react';
 import {Home} from '../pages/content/Home';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -16,13 +16,17 @@ import Explore2 from '../pages/content/Explore2';
 import {EditProfile} from '../pages/content/EditProfile';
 import {Security} from '../pages/content/Security';
 import PopularToursPage from '../pages/content/PopularToursPage';
-import { Provinces } from '../pages/content/Provinces';
-import { Cities } from '../pages/content/Cities';
+import {Provinces} from '../pages/content/Provinces';
+import {Cities} from '../pages/content/Cities';
+
 
 const Tab = createBottomTabNavigator();
 
 export const DefaultLayout = () => {
   const netInfo = useNetInfo();
+ 
+  
+  
 
   return (
     <Tab.Navigator initialRouteName="HomeSatck">

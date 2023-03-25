@@ -14,7 +14,7 @@ import {
   Alert,
 } from 'native-base';
 
-import {forgetPassword, login} from '../services/userServices';
+import {forgetPassword} from '../services/userServices';
 
 const ForgetPassword = ({navigation}) => {
   const [isOpen, setIsOpen] = useState({isOpen: false, message: ''});

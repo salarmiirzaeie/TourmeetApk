@@ -7,10 +7,7 @@ import {
   Button,
   Text,
   View,
-  HStack,
   Pressable,
-  useDisclose,
-  List,
   Divider,
 } from 'native-base';
 import React, {useEffect, useState} from 'react';

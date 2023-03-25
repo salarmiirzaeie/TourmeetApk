@@ -1,30 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {
-  Center,
   NativeBaseProvider,
   View,
-  HStack,
-  Image,
-  IconButton,
-  Box,
-  Heading,
-  ScrollView,
-  Text,
-  Divider,
   Actionsheet,
   useDisclose,
-  Input,
-  Button,
-  FormControl,
-  TextArea,
-  useToast,
   Icon,
-  CircleIcon,
-  Circle,
-  Pressable,
 } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -58,7 +40,7 @@ export const Profile = ({navigation, route}) => {
         }
         if (res.status === 404) {
           dispatch(profileMode(false));
-          storeData(null)
+          storeData(null);
         }
       });
     }

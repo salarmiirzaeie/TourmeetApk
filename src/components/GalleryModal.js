@@ -1,36 +1,23 @@
 import {
-  NativeBaseProvider,
-  Box,
   FlatList,
   Image,
   Pressable,
   useDisclose,
   Spinner,
-  Text,
   View,
   IconButton,
   Menu,
-  HamburgerIcon,
   Actionsheet,
-  Button,
 } from 'native-base';
-import React, {useEffect, useRef, useState} from 'react';
-import {
-  Alert,
-  Dimensions,
-  Modal,
-  PermissionsAndroid,
-  Platform,
-  TouchableHighlight,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Alert, Dimensions, Modal, Platform} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Feather from 'react-native-vector-icons/Feather';
 
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {launchImageLibrary} from 'react-native-image-picker';
 import {deleteprofile, uploadprofilephoto} from '../services/userServices';
 import {Formik} from 'formik';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 export const GalleryModal = ({images, mode, rate, id}) => {
   const {width: windowWidth} = Dimensions.get('window');
@@ -49,7 +36,7 @@ export const GalleryModal = ({images, mode, rate, id}) => {
         <Image
           alt="ll"
           source={{
-            uri: `http://192.168.43.153:3333/uploads/defaultProfile1.jpg`,
+            uri: `https://api.tourmeet.ir/uploads/defaultProfile1.jpg`,
           }}
           size="170"
           rounded={'full'}
@@ -63,10 +50,10 @@ export const GalleryModal = ({images, mode, rate, id}) => {
                 <Image
                   alt="ll"
                   fallbackSource={{
-                    uri: `http://192.168.43.153:3333/uploads/defaultProfile1.jpg`,
+                    uri: `https://api.tourmeet.ir/uploads/defaultProfile1.jpg`,
                   }}
                   source={{
-                    uri: `http://192.168.43.153:3333/uploads/profilePhotos/${item.name}`,
+                    uri: `https://api.tourmeet.ir/uploads/profilePhotos/${item.name}`,
                   }}
                   size="170"
                   rounded={'full'}
@@ -182,24 +169,6 @@ export const GalleryModal = ({images, mode, rate, id}) => {
               size={10}>
               <AntDesign style={{fontSize: 15}} name="camera" />
             </Pressable>
-          ) : mode !== 'camp' ? (
-            <Pressable
-              justifyContent={'center'}
-              alignItems="center"
-              rounded={'full'}
-              bg={'#24C2D8'}
-              alignSelf="flex-end"
-              mt={130}
-              zIndex={10}
-              position="absolute"
-              onPress={() => {
-                navigation.navigate('Chat', {
-                  id: id,
-                });
-              }}
-              size={10}>
-              <Feather style={{fontSize: 15}} name="send" />
-            </Pressable>
           ) : (
             ''
           )
@@ -281,10 +250,10 @@ export const GalleryModal = ({images, mode, rate, id}) => {
                     <Image
                       alt="ll"
                       fallbackSource={{
-                        uri: `http://192.168.43.153:3333/uploads/defaultProfile1.jpg`,
+                        uri: `https://api.tourmeet.ir/uploads/defaultProfile1.jpg`,
                       }}
                       source={{
-                        uri: `http://192.168.43.153:3333/uploads/profilePhotos/${item.name}`,
+                        uri: `https://api.tourmeet.ir/uploads/profilePhotos/${item.name}`,
                       }}
                       style={{width: windowWidth, height: '100%'}}
                     />

@@ -1,34 +1,25 @@
 import {
   NativeBaseProvider,
-  Box,
   FlatList,
-  Image,
   Pressable,
-  useDisclose,
-  Spinner,
   Text,
   View,
   IconButton,
-  Menu,
-  HamburgerIcon,
-  ScrollView,
   Input,
   Icon,
   Divider,
 } from 'native-base';
 import React, {useEffect, useState} from 'react';
-import {Dimensions, Modal, NativeModules, Platform} from 'react-native';
+import {Dimensions} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
-import {cityMode} from '../../state-management/action/cityAction';
 import {getprovinces} from '../../services/postServices';
 
 export const Provinces = () => {
   const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
   // const [visibleInput, setvisibleInput] = useState(false);
-  const dispatch = useDispatch();
   const navigation = useNavigation();
   const [serc, setserc] = useState(true);
 

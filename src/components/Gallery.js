@@ -1,21 +1,15 @@
 import {
-  NativeBaseProvider,
-  Box,
   FlatList,
   Image,
   Pressable,
-  useDisclose,
-  Spinner,
   View,
-  Menu,
   IconButton,
 } from 'native-base';
 import React from 'react';
 import {useState} from 'react';
 import {Dimensions, Modal} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import {CameraRoll} from '@react-native-camera-roll/camera-roll';
+
 import {useRef} from 'react';
 export const Gallery = ({images}) => {
   const {width: windowWidth} = Dimensions.get('window');
@@ -34,11 +28,11 @@ export const Gallery = ({images}) => {
               <Image
                 ref={img}
                 fallbackSource={{
-                  uri: `http://192.168.43.153:3333/uploads/thumbnails/sea.jpg`,
+                  uri: `https://api.tourmeet.ir/uploads/thumbnails/sea.jpg`,
                 }}
                 alt="ll"
                 source={{
-                  uri: `http://192.168.43.153:3333/uploads/thumbnails/${item}`,
+                  uri: `https://api.tourmeet.ir/uploads/thumbnails/${item}`,
                 }}
                 style={{width: windowWidth, height: windowheight / 2.5}}
               />
@@ -76,11 +70,11 @@ export const Gallery = ({images}) => {
                 return (
                   <Image
                   fallbackSource={{
-                    uri: `http://192.168.43.153:3333/uploads/thumbnails/sea.jpg`,
+                    uri: `https://api.tourmeet.ir/uploads/thumbnails/sea.jpg`,
                   }}
                     alt="ll"
                     source={{
-                      uri: `http://192.168.43.153:3333/uploads/thumbnails/${item}`,
+                      uri: `https://api.tourmeet.ir/uploads/thumbnails/${item}`,
                     }}
                     style={{width: windowWidth, height: '100%'}}
                   />

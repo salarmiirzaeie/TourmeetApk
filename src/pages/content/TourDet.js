@@ -10,6 +10,7 @@ import {
   ScrollView,
   Badge,
   Spinner,
+  Button,
 } from 'native-base';
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -17,7 +18,13 @@ import {getPost} from '../../services/postServices';
 import {DetAppBar} from '../../components/DetAppBar';
 import {Gallery} from '../../components/Gallery';
 import {DetFooter} from '../../components/DetFooter';
-import {formDate, persianDuration, persianType} from '../../utils/helpers';
+import {
+  formDate,
+  formDate2,
+  persianDuration,
+  persianType,
+  truncate,
+} from '../../utils/helpers';
 import {Joineds} from '../../components/Joineds';
 import {useNavigation} from '@react-navigation/native';
 import {Animated, Dimensions} from 'react-native';
@@ -31,6 +38,7 @@ const TourDet = ({route}) => {
   const [creator, setcreator] = useState({});
   const [status, setstatuss] = useState(3);
   const [sttats, setsttats] = useState(0);
+  const [trancate, settruncate] = useState(true);
 
   const navigation = useNavigation();
   const initialLayout = {
@@ -122,7 +130,7 @@ const TourDet = ({route}) => {
                         fontSize={15}
                         mx={1}
                         color={'gray.400'}>
-                        {formDate(post.date)}
+                        {formDate2(post.date)}
                       </Text>
                     </Box>
                     <Box justifyContent="center" flexDirection={'row-reverse'}>
@@ -211,11 +219,11 @@ const TourDet = ({route}) => {
                       fontSize={'sm'}
                       color={'gray.400'}
                       fontFamily={'B Yekan'}>
-                      {post.body}
-                      {/* {
-                      'طرح‌نما یا لورم ایپسوم به نوشتاری آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود. طراح گرافیک از این نوشتار به‌عنوان عنصری از ترکیب‌بندی برای پُر کردن صفحه و ارائهٔ اولیهٔ شکل ظاهری و کلیِ طرح سفارش‌گرفته‌شده‌استفاده می‌کند، تا ازنظر گرافیکی نشانگر چگونگی نوع و اندازهٔ قلم و ظاهرِ متن باشد.  '
-                    } */}
+                      {trancate ? truncate(post.body, 150) : post.body}
                     </Text>
+                    <Pressable onPress={() => settruncate(!trancate)}>
+                      <Text>{trancate ? 'نمایش بیشتر' : 'نمایش کمتر'}</Text>
+                    </Pressable>
                   </View>
                   <Divider />
                   <View

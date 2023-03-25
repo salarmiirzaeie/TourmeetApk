@@ -2,13 +2,8 @@ import {
   Center,
   NativeBaseProvider,
   View,
-  HStack,
   Text,
-  Box,
-  Heading,
-  VStack,
   Divider,
-  StatusBar,
   ScrollView,
   Pressable,
   Actionsheet,
@@ -23,27 +18,19 @@ import {PopularCompanies} from '../../components/PopularCompanies';
 import HomeCategory from '../../components/HomeCategory';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import socket from '../../utils/socket';
-import {useSelector} from 'react-redux';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {checkversion} from '../../services/dashboardServices';
 
-export const Home = ({route}) => {
+export const Home = () => {
   const scroll = useRef(null);
   const navigation = useNavigation();
 
-  const logedin = useSelector(state => state.profileModeState);
-  const gettoken = async () => {
-    let token = await AsyncStorage.getItem('@storage_Key');
-    return token;
-  };
-  const callsocket = async () => {
-    socket.emit('enterchat', {id: socket.id, userId: await gettoken()});
-  };
-  // const [cit, setcit] = useState(0);
+  const [cit, setcit] = useState(false);
   useEffect(() => {
-    if (logedin) {
-      callsocket();
-    }
+    checkversion(1).then(res => {
+      if (res.status === 200) {
+        setcit(res.data);
+      }
+    });
   }, []);
   return (
     <NativeBaseProvider>
@@ -111,7 +98,7 @@ export const Home = ({route}) => {
           </View>
         </ScrollView>
       </View>
-      <Actionsheet isOpen={false} hideDragIndicator disableOverlay>
+      <Actionsheet isOpen={cit} hideDragIndicator disableOverlay>
         <Actionsheet.Content px={5} justifyContent={'space-evenly'} h={250}>
           <Text fontSize={20} fontFamily={'B YekanBold'}>
             به روزرسانی ضروری

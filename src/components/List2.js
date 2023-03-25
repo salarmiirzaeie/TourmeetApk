@@ -11,7 +11,7 @@ import {
   Text,
   View,
 } from 'native-base';
-import {formDate, formDate2, persianDuration, persianStatus} from '../utils/helpers';
+import { formDate2, persianDuration, persianStatus} from '../utils/helpers';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const initialLayout = {
@@ -67,12 +67,12 @@ const List2 = ({datas}: any) => {
                 h="full"
                 zIndex={10}
                 fallbackSource={{
-                  uri: `http://192.168.43.153:3333/uploads/sea.jpg`,
+                  uri: `https://api.tourmeet.ir/uploads/sea.jpg`,
                 }}
                 alt="thumbnil"
                 rounded={10}
                 source={{
-                  uri: `http://192.168.43.153:3333/uploads/thumbnails/${item.thumbnail[0]}`,
+                  uri: `https://api.tourmeet.ir/uploads/thumbnails/${item.thumbnail[0]}`,
                 }}
               />
             </Box>

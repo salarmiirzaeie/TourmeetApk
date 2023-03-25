@@ -1,16 +1,10 @@
 import {useNavigation} from '@react-navigation/native';
 import {
-  Center,
   NativeBaseProvider,
   View,
   HStack,
   Text,
-  Box,
-  Heading,
   VStack,
-  Divider,
-  StatusBar,
-  ScrollView,
   Image,
   Pressable,
 } from 'native-base';
@@ -38,7 +32,7 @@ const HomeCategory = () => {
                 W="full"
                 alt="ee"
                 source={{
-                  uri: `http://192.168.43.153:3333/uploads/sea.jpg`,
+                  uri: `https://api.tourmeet.ir/uploads/sea.jpg`,
                 }}
               />
               <Text
@@ -65,7 +59,7 @@ const HomeCategory = () => {
                 W="full"
                 alt="ee"
                 source={{
-                  uri: `http://192.168.43.153:3333/uploads/offroad.jpg`,
+                  uri: `https://api.tourmeet.ir/uploads/offroad.jpg`,
                 }}
               />
               <Text
@@ -92,7 +86,7 @@ const HomeCategory = () => {
                 W="full"
                 alt="ee"
                 source={{
-                  uri: `http://192.168.43.153:3333/uploads/mountain.jpg`,
+                  uri: `https://api.tourmeet.ir/uploads/mountain.jpg`,
                 }}
               />
               <Text
@@ -121,7 +115,7 @@ const HomeCategory = () => {
                 W="full"
                 alt="ee"
                 source={{
-                  uri: `http://192.168.43.153:3333/uploads/desert.jpg`,
+                  uri: `https://api.tourmeet.ir/uploads/desert.jpg`,
                 }}
               />
               <Text
@@ -148,7 +142,7 @@ const HomeCategory = () => {
                 W="full"
                 alt="ee"
                 source={{
-                  uri: `http://192.168.43.153:3333/uploads/jungle.jpg`,
+                  uri: `https://api.tourmeet.ir/uploads/jungle.jpg`,
                 }}
               />
               <Text
@@ -175,7 +169,7 @@ const HomeCategory = () => {
                 W="full"
                 alt="ee"
                 source={{
-                  uri: `http://192.168.43.153:3333/uploads/historical.jpg`,
+                  uri: `https://api.tourmeet.ir/uploads/historical.jpg`,
                 }}
               />
               <Text

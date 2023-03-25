@@ -1,32 +1,19 @@
 import {Formik} from 'formik';
 import {
-  Center,
   NativeBaseProvider,
   View,
-  HStack,
-  Image,
-  IconButton,
-  Box,
-  Heading,
-  ScrollView,
   Text,
   Divider,
-  Actionsheet,
-  useDisclose,
   Input,
   Button,
-  FormControl,
-  TextArea,
-  useToast,
-  Icon,
 } from 'native-base';
 import React, {useState} from 'react';
 import DefaultHeader from '../../components/DefaultHeader';
 import Feather from 'react-native-vector-icons/Feather';
 import {Alert} from 'react-native';
-import { changePassword } from '../../services/userServices';
+import {changePassword} from '../../services/userServices';
 
-export const Security = ({route, navigation}) => {
+export const Security = ({navigation}) => {
   const [isload, setisload] = useState(false);
   return (
     <NativeBaseProvider>
@@ -45,7 +32,7 @@ export const Security = ({route, navigation}) => {
               setTimeout(() => {
                 changePassword(values).then(res => {
                   Alert.alert(res.data.message);
-                  setisload(false)
+                  setisload(false);
                 });
               }, 500);
             }}>

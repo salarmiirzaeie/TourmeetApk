@@ -1,23 +1,13 @@
 import {
-  NativeBaseProvider,
-  Box,
+  
   FlatList,
   Image,
-  Pressable,
-  useDisclose,
-  Spinner,
-  Text,
+ 
   View,
-  IconButton,
-  Menu,
-  HamburgerIcon,
-  Actionsheet,
-  Button,
+  
 } from 'native-base';
-import React, {useEffect, useRef, useState} from 'react';
-import {Dimensions, Modal, Platform, TouchableHighlight} from 'react-native';
-import Entypo from 'react-native-vector-icons/Entypo';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import React from 'react';
+import {Dimensions, Modal } from 'react-native' 
 
 export const Modalpermiss = ({images, visiblity, setvisible}) => {
   const {width: windowWidth} = Dimensions.get('window');
@@ -36,11 +26,11 @@ export const Modalpermiss = ({images, visiblity, setvisible}) => {
                   <>
                     <Image
                       fallbackSource={{
-                        uri: `http://192.168.43.153:3333/uploads/sea.jpg`,
+                        uri: `https://api.tourmeet.ir/uploads/sea.jpg`,
                       }}
                       alt="ll"
                       source={{
-                        uri: `http://192.168.43.153:3333/uploads/permissions/${item.name}`,
+                        uri: `https://api.tourmeet.ir/uploads/permissions/${item.name}`,
                       }}
                       style={{width: windowWidth, height: '100%'}}
                     />

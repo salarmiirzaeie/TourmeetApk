@@ -20,7 +20,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {isSaved, saveTour, unSaveTour} from '../services/dashboardServices';
-import {Animated, Alert} from 'react-native';
+import {Animated} from 'react-native';
 
 export const DetAppBar = ({pos, share}) => {
   const navigation = useNavigation();

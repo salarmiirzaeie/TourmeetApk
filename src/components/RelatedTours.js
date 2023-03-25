@@ -1,20 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {
-  Pressable,
-  Image,
-  ScrollView,
-  HStack,
-  View,
-  Text,
-  Skeleton,
-  Badge,
-  Box,
-} from 'native-base';
+import {Pressable, Image, ScrollView, HStack, View, Text} from 'native-base';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {formDate, truncate} from '../utils/helpers';
-import {getPopularTours, getRelatedTours} from '../services/postServices';
+import {getRelatedTours} from '../services/postServices';
 export const RelatedTours = ({typep, id}) => {
   const navigation = useNavigation();
   const [posts, setposts] = useState([]);
@@ -70,11 +60,11 @@ export const RelatedTours = ({typep, id}) => {
                   h="55%"
                   W="80%"
                   fallbackSource={{
-                    uri: `http://192.168.43.153:3333/uploads/sea.jpg`,
+                    uri: `https://api.tourmeet.ir/uploads/sea.jpg`,
                   }}
                   alt="ee"
                   source={{
-                    uri: `http://192.168.43.153:3333/uploads/thumbnails/${post.thumbnail[0]}`,
+                    uri: `https://api.tourmeet.ir/uploads/thumbnails/${post.thumbnail[0]}`,
                   }}
                 />
 

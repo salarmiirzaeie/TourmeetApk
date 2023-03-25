@@ -1,12 +1,10 @@
 import {useNavigation} from '@react-navigation/native';
 import {
-  Box,
   Button,
   HStack,
   NativeBaseProvider,
   Text,
   View,
-  VStack,
 } from 'native-base';
 import React from 'react';
 

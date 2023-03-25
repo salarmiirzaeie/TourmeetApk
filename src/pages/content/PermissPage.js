@@ -1,10 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
-import {Box, NativeBaseProvider, View} from 'native-base';
+import {NativeBaseProvider} from 'native-base';
 import React, {useEffect, useState} from 'react';
-import DefaultHeader from '../../components/DefaultHeader';
-import List2 from '../../components/List2';
 import {Modalpermiss} from '../../components/Modalpermiss';
-import {getCampGallery, getCampTours} from '../../services/postServices';
+import {getCampGallery} from '../../services/postServices';
 
 const PermissPage = ({route}) => {
   const [images, setimages] = useState([]);

@@ -1,29 +1,22 @@
 import {
   NativeBaseProvider,
-  Box,
   FlatList,
-  Image,
   Pressable,
-  useDisclose,
-  Spinner,
   Text,
   View,
   IconButton,
-  Menu,
-  HamburgerIcon,
-  ScrollView,
   Input,
   Icon,
   Divider,
 } from 'native-base';
 import React, {useEffect, useState} from 'react';
-import {Dimensions, Modal, NativeModules, Platform} from 'react-native';
+import {Dimensions, NativeModules} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
-import {getcities, getprovinces} from '../../services/postServices';
+import {getcities} from '../../services/postServices';
 import {cityMode} from '../../state-management/action/cityAction';
 
 export const Cities = ({route}) => {
@@ -98,9 +91,7 @@ export const Cities = ({route}) => {
 
                     NativeModules.DevSettings.reload();
 
-                    // navigation.navigate('Home', {
-                    //   pf: Math.random(100),
-                    // });
+                    navigation.navigate('Home');
                   }}
                   px={3}
                   h={windowHeight / 15}
@@ -113,7 +104,6 @@ export const Cities = ({route}) => {
                     <MaterialCommunityIcons
                       style={{fontSize: 20}}
                       name="map-marker-check-outline"
-                      
                     />
 
                     <Text fontFamily={'B Yekan'} textAlign={'right'}>
