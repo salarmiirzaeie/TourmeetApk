@@ -78,10 +78,10 @@ export const PopularTours = () => {
                 W="80%"
                 alt="ee"
                 fallbackSource={{
-                  uri: `https://api.tourmeet.ir/uploads/sea.jpg`,
+                  uri: `http://192.168.43.153:3333/uploads/sea.jpg`,
                 }}
                 source={{
-                  uri: `https://api.tourmeet.ir/uploads/thumbnails/${post.thumbnail[0]}`,
+                  uri: `http://192.168.43.153:3333/uploads/thumbnails/${post.thumbnail[0]}`,
                 }}
               />
 

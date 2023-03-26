@@ -14,6 +14,7 @@ import {
 } from 'native-base';
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {getPost} from '../../services/postServices';
 import {DetAppBar} from '../../components/DetAppBar';
 import {Gallery} from '../../components/Gallery';
@@ -32,6 +33,7 @@ import {CircleProgress} from './CircleProgress';
 import {RelatedTours} from '../../components/RelatedTours';
 import {onShare} from '../../utils/helpers';
 import {Nodata} from '../../components/Nodata';
+import {Comment} from '../../components/Comment';
 
 const TourDet = ({route}) => {
   const [post, setpost] = useState({});
@@ -255,12 +257,24 @@ const TourDet = ({route}) => {
                       </Badge>
                     </Pressable>
                   </View>
-                  {/* <Divider />
-                <View h={150} py={3}>
-                  <View rounded={'xl'} h={'full'} w={'full'} bg="#24C2D8">
-                    <Text>s</Text>
+
+                  <Divider />
+                  <View py={4}>
+                    <Button
+                      onPress={() =>
+                        navigation.navigate('CommentsPage', {
+                          id: post._id,
+                        })
+                      }
+                      endIcon={<FontAwesome name="comments" />}
+                      variant={'outline'}
+                      colorScheme="warning">
+                      <Text fontFamily={'B Yekan'} textAlign={'center'}>
+                        نظرات (16)
+                      </Text>
+                    </Button>
                   </View>
-                </View> */}
+
                   <Divider />
                   <View>
                     <View py={3}>

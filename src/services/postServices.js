@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {Store} from '../../store';
-const apiPort = 'https://api.tourmeet.ir/';
+const apiPort = 'http://192.168.43.153:3333/';
 // const gettoken = async () => {
 //   let token = await AsyncStorage.getItem('@storage_Key');
 //   return token;
@@ -92,7 +92,6 @@ export const getPost = data => {
   const res = axios
     .get(`${apiPort}post/${data}`)
     .then(response => {
-
       return response;
     })
     .catch(err => {
@@ -104,7 +103,6 @@ export const getpostjoineds = data => {
   const res = axios
     .get(`${apiPort}joinedusers/${data}`)
     .then(response => {
-
       return response;
     })
     .catch(err => {
@@ -116,7 +114,6 @@ export const getTourLeaders = data => {
   const res = axios
     .get(`${apiPort}getcampleaders/${data}`)
     .then(response => {
-
       return response;
     })
     .catch(err => {
@@ -128,7 +125,6 @@ export const getUser = data => {
   const res = axios
     .get(`${apiPort}user/${data}`)
     .then(response => {
-
       return response;
     })
     .catch(err => {
@@ -151,7 +147,17 @@ export const getprovinces = () => {
   const res = axios
     .get(`${apiPort}provinces`)
     .then(response => {
-
+      return response;
+    })
+    .catch(err => {
+      return err.response;
+    });
+  return res;
+};
+export const getcomments = data => {
+  const res = axios
+    .get(`${apiPort}postcomments/${data}`)
+    .then(response => {
       return response;
     })
     .catch(err => {

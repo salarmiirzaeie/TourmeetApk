@@ -60,11 +60,11 @@ export const RelatedTours = ({typep, id}) => {
                   h="55%"
                   W="80%"
                   fallbackSource={{
-                    uri: `https://api.tourmeet.ir/uploads/sea.jpg`,
+                    uri: `http://192.168.43.153:3333/uploads/sea.jpg`,
                   }}
                   alt="ee"
                   source={{
-                    uri: `https://api.tourmeet.ir/uploads/thumbnails/${post.thumbnail[0]}`,
+                    uri: `http://192.168.43.153:3333/uploads/thumbnails/${post.thumbnail[0]}`,
                   }}
                 />
 
