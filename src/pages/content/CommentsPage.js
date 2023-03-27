@@ -12,37 +12,37 @@ import {
   KeyboardAvoidingView,
 } from 'native-base';
 import Feather from 'react-native-vector-icons/Feather';
-import {getcomments} from '../../services/postServices';
+import {addComment, getcomments} from '../../services/postServices';
 import {Formik} from 'formik';
+import { Dimensions } from 'react-native';
+import { Comment } from '../../components/Comment';
+const initialLayout = {
+  height: Dimensions.get('window').height,
+  width: Dimensions.get('window').width,
+};
 const CommentsPage = ({route}) => {
+
   const [comments, setcomments] = useState([]);
+  const [status, setstatus] = useState(0);
   useEffect(() => {
     getcomments(route.params.id).then(res => {
       if (res.status === 200) {
         setcomments(res.data);
+        console.log(res.data)
       }
     });
-  }, []);
+  }, [status]);
   return (
     <NativeBaseProvider>
       <View flex={1}>
-        <View flex={0.095}>
+        <View h={initialLayout.height/12}>
           <DefaultHeader name="نظرات" />
         </View>
         <View flex={1}>
-          <ScrollView>
-            <View px={2} py={1} flex={1}>
-              <Box
-                style={{
-                  borderWidth: 1,
-                  borderRadius: 4,
-                  borderColor: 'lightgray',
-                }}
-                variant={'outline'}
-                p={1}>
-                <Text>s</Text>
-              </Box>
-            </View>
+          <ScrollView px={2} py={1}>
+            {comments.map(item => (
+             <Comment key={item._id} cm={item} />
+            ))}
           </ScrollView>
         </View>
         <KeyboardAvoidingView
@@ -56,9 +56,16 @@ const CommentsPage = ({route}) => {
           px={2}
           flex={0.07}>
           <Formik
-            initialValues={{post: '', comment: '', user: '', reply: ''}}
+            initialValues={{post: '', comment: '', reply: ''}}
             onSubmit={values => {
-              setTimeout(async () => {}, 200);
+              setTimeout(async () => {
+                values.post = route.params.id;
+                addComment(values).then(res => {
+                  if (res.status === 200) {
+                    setstatus(Math.random(1));
+                  }
+                });
+              }, 200);
             }}>
             {({
               values,

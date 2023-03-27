@@ -257,7 +257,7 @@ const TourDet = ({route}) => {
                       </Badge>
                     </Pressable>
                   </View>
-
+{/* 
                   <Divider />
                   <View py={4}>
                     <Button
@@ -273,7 +273,7 @@ const TourDet = ({route}) => {
                         نظرات (16)
                       </Text>
                     </Button>
-                  </View>
+                  </View> */}
 
                   <Divider />
                   <View>

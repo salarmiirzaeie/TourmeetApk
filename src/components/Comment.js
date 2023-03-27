@@ -1,17 +1,19 @@
-import {View, Text} from 'native-base';
+import {View, Text, Box} from 'native-base';
 import React from 'react';
 
-export const Comment = () => {
+export const Comment = ({cm}) => {
+
   return (
-    <View
-      px={1}
-      py={2}
-      borderRadius={'lg'}
-      style={{borderBottomColor:'red'}}
-      bg={'white'}>
-      <Text color={'gray.400'} textAlign={'right'}>
-        تورچندروزه هست؟
-      </Text>
-    </View>
+    <Box
+      style={{
+        borderWidth: 1,
+        borderRadius: 4,
+        borderColor: 'lightgray',
+      }}
+      variant={'outline'}
+      p={1}>
+      <Text>{cm.comment}</Text>
+      <Text>{cm.createdAt}</Text>
+    </Box>
   );
 };
