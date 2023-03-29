@@ -20,7 +20,7 @@ import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {checkversion} from '../../services/dashboardServices';
 
-export const Home = () => {
+export const Home = ({route}) => {
   const scroll = useRef(null);
   const navigation = useNavigation();
 
@@ -31,7 +31,7 @@ export const Home = () => {
         setcit(res.data);
       }
     });
-  }, []);
+  }, [route]);
   return (
     <NativeBaseProvider>
       <View bg="#24C2D8" flex={1}>
