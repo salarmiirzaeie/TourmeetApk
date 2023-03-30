@@ -96,9 +96,7 @@ export const CityModal = ({visible, setvisible}) => {
                     setvisible(false);
                     NativeModules.DevSettings.reload();
 
-                    navigation.navigate('Home', {
-                      pf: Math.random(100),
-                    });
+                    navigation.navigate('PopularToursPage');
                   }}
                   px={3}
                   h={windowHeight / 15}

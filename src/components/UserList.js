@@ -52,7 +52,7 @@ export const UserList = ({data}) => {
                   alignSelf={'center'}
                   size={'lg'}
                   source={{
-                    uri: `http://192.168.43.153:3333/uploads/profilePhotos/${
+                    uri: `https://api.tourmeet.ir/uploads/profilePhotos/${
                       item.profilephotoss[0]
                         ? item.profilephotoss[0]?.name
                         : 'defaultProfile.jpg'

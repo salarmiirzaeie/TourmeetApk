@@ -17,7 +17,7 @@ export const Joineds = ({data}) => {
               zIndex={1}
               size={'9'}
               source={{
-                uri: `http://192.168.43.153:3333/uploads/profilePhotos/${
+                uri: `https://api.tourmeet.ir/uploads/profilePhotos/${
                   data[0].profilephotoss[0]
                     ? data[0]?.profilephotoss[0]?.name
                     : 'defaultProfile.jpg'
@@ -34,7 +34,7 @@ export const Joineds = ({data}) => {
               size={'9'}
               ml={-3}
               source={{
-                uri: `http://192.168.43.153:3333/uploads/profilePhotos/${
+                uri: `https://api.tourmeet.ir/uploads/profilePhotos/${
                   data[1].profilephotoss[0]
                     ? data[1]?.profilephotoss[0]?.name
                     : 'defaultProfile.jpg'
@@ -50,7 +50,7 @@ export const Joineds = ({data}) => {
               size={'9'}
               ml={-3}
               source={{
-                uri: `http://192.168.43.153:3333/uploads/profilePhotos/${
+                uri: `https://api.tourmeet.ir/uploads/profilePhotos/${
                   data[2].profilephotoss[0]
                     ? data[2]?.profilephotoss[0]?.name
                     : 'defaultProfile.jpg'

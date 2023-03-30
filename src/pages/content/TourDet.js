@@ -10,17 +10,14 @@ import {
   ScrollView,
   Badge,
   Spinner,
-  Button,
 } from 'native-base';
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {getPost} from '../../services/postServices';
 import {DetAppBar} from '../../components/DetAppBar';
 import {Gallery} from '../../components/Gallery';
 import {DetFooter} from '../../components/DetFooter';
 import {
-  formDate,
   formDate2,
   persianDuration,
   persianType,
@@ -33,7 +30,6 @@ import {CircleProgress} from './CircleProgress';
 import {RelatedTours} from '../../components/RelatedTours';
 import {onShare} from '../../utils/helpers';
 import {Nodata} from '../../components/Nodata';
-import {Comment} from '../../components/Comment';
 
 const TourDet = ({route}) => {
   const [post, setpost] = useState({});
@@ -50,9 +46,9 @@ const TourDet = ({route}) => {
   useEffect(() => {
     getPost(route.params.id).then(res => {
       if (res.status === 200) {
-        setstatuss(1);
         setpost(res.data.post);
         setcreator(res.data.user);
+        setstatuss(1);
       }
     });
   }, [sttats, route]);
@@ -73,7 +69,7 @@ const TourDet = ({route}) => {
                 [{nativeEvent: {contentOffset: {y: scrollOffsetY}}}],
                 {useNativeDriver: false},
               )}>
-              {post == {} ? (
+              {post === {} ? (
                 <Spinner />
               ) : (
                 <View h={initialLayout.height / 2.5}>
@@ -103,15 +99,16 @@ const TourDet = ({route}) => {
                       strokeWidth={6}
                       text={
                         post.joinedUsers
-                          ? `${post.joinedUsers.length}/${post.capacity}`
+                          ? `${post.joinedUsers?.length}/${post.capacity}`
                           : '0/0'
                       }
                       progressPercent={
                         post.joinedUsers
-                          ? (post.joinedUsers.length / post.capacity) * 100
+                          ? (post.joinedUsers?.length / post.capacity) * 100
                           : 100
                       }
                       textColor="gray"
+                      textSize={10}
                     />
                   </View>
                   <View
@@ -257,23 +254,6 @@ const TourDet = ({route}) => {
                       </Badge>
                     </Pressable>
                   </View>
-{/* 
-                  <Divider />
-                  <View py={4}>
-                    <Button
-                      onPress={() =>
-                        navigation.navigate('CommentsPage', {
-                          id: post._id,
-                        })
-                      }
-                      endIcon={<FontAwesome name="comments" />}
-                      variant={'outline'}
-                      colorScheme="warning">
-                      <Text fontFamily={'B Yekan'} textAlign={'center'}>
-                        نظرات (16)
-                      </Text>
-                    </Button>
-                  </View> */}
 
                   <Divider />
                   <View>

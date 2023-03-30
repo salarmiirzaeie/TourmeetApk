@@ -26,11 +26,11 @@ export const Modalpermiss = ({images, visiblity, setvisible}) => {
                   <>
                     <Image
                       fallbackSource={{
-                        uri: `http://192.168.43.153:3333/uploads/sea.jpg`,
+                        uri: `https://api.tourmeet.ir/uploads/sea.jpg`,
                       }}
                       alt="ll"
                       source={{
-                        uri: `http://192.168.43.153:3333/uploads/permissions/${item.name}`,
+                        uri: `https://api.tourmeet.ir/uploads/permissions/${item.name}`,
                       }}
                       style={{width: windowWidth, height: '100%'}}
                     />

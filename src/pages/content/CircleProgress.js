@@ -1,6 +1,6 @@
 import React from 'react';
-import {View} from 'react-native';
-import {Svg, Circle, Text as SVGText} from 'react-native-svg';
+import {View, Text} from 'react-native';
+import {Svg, Circle} from 'react-native-svg';
 
 export const CircleProgress = props => {
   const {size, strokeWidth, text} = props;
@@ -11,7 +11,6 @@ export const CircleProgress = props => {
   return (
     <View style={{margin: 10}}>
       <Svg width={size} height={size}>
-        {/* Background Circle */}
         <Circle
           stroke={props.bgColor ? props.bgColor : '#f2f2f2'}
           fill="none"
@@ -21,7 +20,6 @@ export const CircleProgress = props => {
           {...{strokeWidth}}
         />
 
-        {/* Progress Circle */}
         <Circle
           stroke={props.pgColor ? props.pgColor : '#3b5998'}
           fill="none"
@@ -35,15 +33,22 @@ export const CircleProgress = props => {
           {...{strokeWidth}}
         />
 
-        {/* Text */}
-        <SVGText
-          fontSize={props.textSize ? props.textSize : '10'}
-          x={size / 2}
-          y={size / 2 + (props.textSize ? props.textSize / 2 - 1 : 5)}
-          textAnchor="middle"
-          fill={props.textColor ? props.textColor : '#333333'}>
+        <Text
+          // fontSize={props.textSize ? props.textSize : '10'}
+          // x={size / 2}
+          // y={size / 2 + (props.textSize ? props.textSize / 2 - 1 : 5)}
+          // textAnchor="middle"
+
+          style={{
+            alignSelf: 'center',
+            textAlign: 'center',
+            color: 'gray',
+            fontSize: 10,
+            fontFamily: 'B Yekan',
+            marginTop:"30%"
+          }}>
           {text}
-        </SVGText>
+        </Text>
       </Svg>
     </View>
   );

@@ -19,7 +19,7 @@ export const JoinConfirmModal = ({setModalVisible, modalVisible, setstat}) => {
                 w={200}
                 alt="ee"
                 source={{
-                  uri: `http://192.168.43.153:3333/uploads/tourists.png`,
+                  uri: `https://api.tourmeet.ir/uploads/tourists.png`,
                 }}
               />
               <Text textAlign={'center'} fontFamily="B Yekan">

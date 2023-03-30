@@ -36,7 +36,7 @@ export const GalleryModal = ({images, mode, rate, id}) => {
         <Image
           alt="ll"
           source={{
-            uri: `http://192.168.43.153:3333/uploads/defaultProfile1.jpg`,
+            uri: `https://api.tourmeet.ir/uploads/defaultProfile1.jpg`,
           }}
           size="170"
           rounded={'full'}
@@ -50,10 +50,10 @@ export const GalleryModal = ({images, mode, rate, id}) => {
                 <Image
                   alt="ll"
                   fallbackSource={{
-                    uri: `http://192.168.43.153:3333/uploads/defaultProfile1.jpg`,
+                    uri: `https://api.tourmeet.ir/uploads/defaultProfile1.jpg`,
                   }}
                   source={{
-                    uri: `http://192.168.43.153:3333/uploads/profilePhotos/${item.name}`,
+                    uri: `https://api.tourmeet.ir/uploads/profilePhotos/${item.name}`,
                   }}
                   size="170"
                   rounded={'full'}
@@ -250,10 +250,10 @@ export const GalleryModal = ({images, mode, rate, id}) => {
                     <Image
                       alt="ll"
                       fallbackSource={{
-                        uri: `http://192.168.43.153:3333/uploads/defaultProfile1.jpg`,
+                        uri: `https://api.tourmeet.ir/uploads/defaultProfile1.jpg`,
                       }}
                       source={{
-                        uri: `http://192.168.43.153:3333/uploads/profilePhotos/${item.name}`,
+                        uri: `https://api.tourmeet.ir/uploads/profilePhotos/${item.name}`,
                       }}
                       style={{width: windowWidth, height: '100%'}}
                     />

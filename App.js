@@ -15,9 +15,7 @@ const UserProfile = React.lazy(() => import('./src/pages/content/UserProfile'));
 
 const CamProfile2 = React.lazy(() => import('./src/pages/content/CamProfile2'));
 const CampTours = React.lazy(() => import('./src/pages/content/CampTours'));
-const CommentsPage = React.lazy(() =>
-  import('./src/pages/content/CommentsPage'),
-);
+
 const PermissPage = React.lazy(() => import('./src/pages/content/PermissPage'));
 const LeadersPage = React.lazy(() => import('./src/pages/content/LeadersPage'));
 const ForgetPassword = React.lazy(() => import('./src/pages/ForgetPassword'));
@@ -57,7 +55,6 @@ const App = () => {
             <MainSatck.Screen name="SearchPage" component={SearchPage} />
             <MainSatck.Screen name="CampProfile" component={CamProfile2} />
             <MainSatck.Screen name="UsersPage" component={UsersPage} />
-            <MainSatck.Screen name="CommentsPage" component={CommentsPage} />
             <MainSatck.Screen name="UserProfile" component={UserProfile} />
             <MainSatck.Screen name="CampTours" component={CampTours} />
             <MainSatck.Screen name="PermissPage" component={PermissPage} />
