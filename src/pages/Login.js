@@ -20,13 +20,14 @@ import {profileMode} from '../state-management/action/profileModeAction';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useRoute} from '@react-navigation/native';
+import { Alert } from 'react-native';
 
 const Login = ({navigation}) => {
-  const [isOpen, setIsOpen] = useState({isOpen: false, message: ''});
+  // const [isOpen, setIsOpen] = useState({isopen: false, message: ''});
 
-  const onClose = () => setIsOpen(false);
+  // const onClose = () => setIsOpen({isopen: false, message: ''});
   const route = useRoute();
-  const cancelRef = useRef(null);
+  // const cancelRef = useRef(null);
   const dispatch = useDispatch();
   const [isload, setislpad] = useState(false);
   const storeData = async value => {
@@ -53,7 +54,6 @@ const Login = ({navigation}) => {
                   setTimeout(async () => {
                     login(values).then(res => {
                       setislpad(false);
-
                       if (res.status === 207) {
                         storeData(res.data.token.toString());
                         dispatch(profileMode(true));
@@ -67,7 +67,8 @@ const Login = ({navigation}) => {
                           });
                         }
                       } else {
-                        setIsOpen({isOpen: true, message: res.data.message});
+                        // setIsOpen({isopen: true, message: res.data?.message});
+                        Alert.alert(res.data.message)
                       }
                     });
                   }, 200);
@@ -147,20 +148,20 @@ const Login = ({navigation}) => {
           </Center>
         </View>
       </View>
-      <AlertDialog
+      {/* <AlertDialog
         leastDestructiveRef={cancelRef}
-        isOpen={isOpen.isOpen}
+        isOpen={isOpen.isopen}
         onClose={() => {
           onClose();
         }}>
         <AlertDialog.Content>
           <AlertDialog.CloseButton />
-          <AlertDialog.Header>{''}</AlertDialog.Header>
+          <AlertDialog.Header>{'خطا'}</AlertDialog.Header>
           <AlertDialog.Body>
             <Center>{isOpen.message}</Center>
           </AlertDialog.Body>
         </AlertDialog.Content>
-      </AlertDialog>
+      </AlertDialog> */}
     </NativeBaseProvider>
   );
 };

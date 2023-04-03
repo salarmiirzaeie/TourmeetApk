@@ -13,6 +13,7 @@ import {
   AlertDialog,
   Link,
 } from 'native-base';
+import {Alert} from 'react-native';
 
 import {login, register} from '../services/userServices';
 import {useDispatch} from 'react-redux';
@@ -22,12 +23,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useRoute} from '@react-navigation/native';
 
 const SignUp = ({navigation}) => {
-  const [isOpen, setIsOpen] = useState({isOpen: false, message: ''});
-
-  const onClose = () => setIsOpen(false);
   const route = useRoute();
 
-  const cancelRef = useRef(null);
   const [isload, setislpad] = useState(false);
   const dispatch = useDispatch();
   const storeData = async value => {
@@ -78,10 +75,12 @@ const SignUp = ({navigation}) => {
                                 pf: true,
                               });
                             }
+                          } else {
+                            Alert.alert(result.data.message);
                           }
                         });
                       } else {
-                        setIsOpen({isOpen: true, message: res.data.message});
+                        Alert.alert(res.data.message);
                       }
                     });
 
@@ -98,7 +97,6 @@ const SignUp = ({navigation}) => {
                       onChangeText={handleChange('username')}
                       value={values.username}
                       textAlign={'center'}
-
                     />
 
                     <Input
@@ -108,7 +106,6 @@ const SignUp = ({navigation}) => {
                       onChangeText={handleChange('email')}
                       value={values.email}
                       textAlign={'center'}
-
                     />
 
                     <Input
@@ -119,7 +116,6 @@ const SignUp = ({navigation}) => {
                       value={values.password}
                       type={'password'}
                       textAlign={'center'}
-
                     />
 
                     <Input
@@ -130,7 +126,6 @@ const SignUp = ({navigation}) => {
                       value={values.confirmPassword}
                       type={'password'}
                       textAlign={'center'}
-
                     />
                     <Button
                       isDisabled={
@@ -164,7 +159,7 @@ const SignUp = ({navigation}) => {
           </Center>
         </View>
       </View>
-      <AlertDialog
+      {/* <AlertDialog
         leastDestructiveRef={cancelRef}
         isOpen={isOpen.isOpen}
         onClose={() => {
@@ -177,7 +172,7 @@ const SignUp = ({navigation}) => {
             <Center>{isOpen.message}</Center>
           </AlertDialog.Body>
         </AlertDialog.Content>
-      </AlertDialog>
+      </AlertDialog> */}
     </NativeBaseProvider>
   );
 };

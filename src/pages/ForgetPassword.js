@@ -17,11 +17,7 @@ import {
 import {forgetPassword} from '../services/userServices';
 
 const ForgetPassword = ({navigation}) => {
-  const [isOpen, setIsOpen] = useState({isOpen: false, message: ''});
-
-  const onClose = () => setIsOpen(false);
-
-  const cancelRef = useRef(null);
+  
 
   
   return (
@@ -101,20 +97,7 @@ const ForgetPassword = ({navigation}) => {
           </Center>
         </View>
       </View>
-      <AlertDialog
-        leastDestructiveRef={cancelRef}
-        isOpen={isOpen.isOpen}
-        onClose={() => {
-          onClose();
-        }}>
-        <AlertDialog.Content>
-          <AlertDialog.CloseButton />
-          <AlertDialog.Header>{''}</AlertDialog.Header>
-          <AlertDialog.Body>
-            <Center>{isOpen.message}</Center>
-          </AlertDialog.Body>
-        </AlertDialog.Content>
-      </AlertDialog>
+     
     </NativeBaseProvider>
   );
 };
