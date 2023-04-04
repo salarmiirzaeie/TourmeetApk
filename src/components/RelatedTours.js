@@ -3,7 +3,7 @@ import {Pressable, Image, ScrollView, HStack, View, Text} from 'native-base';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {formDate, truncate} from '../utils/helpers';
+import {formDate2, truncate} from '../utils/helpers';
 import {getRelatedTours} from '../services/postServices';
 export const RelatedTours = ({typep, id}) => {
   const navigation = useNavigation();
@@ -96,7 +96,7 @@ export const RelatedTours = ({typep, id}) => {
                         color={'gray.400'}
                         fontSize="sm"
                         textAlign={'right'}>
-                        {formDate(post.date)}
+                        {formDate2(post.date)}
                       </Text>
                       <Fontisto style={{fontSize: 18}} name="date" />
                     </View>
