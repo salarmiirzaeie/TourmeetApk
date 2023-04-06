@@ -10,16 +10,13 @@ import {
   Button,
   Divider,
   Text,
-  AlertDialog,
-  Alert,
+  
 } from 'native-base';
 
 import {forgetPassword} from '../services/userServices';
+import { Alert } from 'react-native';
 
 const ForgetPassword = ({navigation}) => {
-  
-
-  
   return (
     <NativeBaseProvider>
       <View bg={'white'} flex={1} w={'100%'} alignItems={'center'}>
@@ -32,7 +29,7 @@ const ForgetPassword = ({navigation}) => {
               <Formik
                 initialValues={{email: ''}}
                 onSubmit={values => {
-                  setTimeout(async () => {
+                  setTimeout(() => {
                     forgetPassword(values).then(res => {
                       if (res.status === 200) {
                         navigation.navigate('EnterNumb', {
@@ -40,6 +37,7 @@ const ForgetPassword = ({navigation}) => {
                         });
                       } else {
                         Alert.alert(res.data.message);
+                        // console.log("err")
                       }
                     });
                   }, 200);
@@ -97,7 +95,6 @@ const ForgetPassword = ({navigation}) => {
           </Center>
         </View>
       </View>
-     
     </NativeBaseProvider>
   );
 };

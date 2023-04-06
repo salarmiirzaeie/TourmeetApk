@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {Formik} from 'formik';
 
 import {
@@ -10,8 +10,8 @@ import {
   Button,
   Divider,
   Text,
-  AlertDialog,
   Link,
+  Modal,
 } from 'native-base';
 import {Alert} from 'react-native';
 
@@ -21,12 +21,16 @@ import {profileMode} from '../state-management/action/profileModeAction';
 // import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useRoute} from '@react-navigation/native';
+import {MatnModal} from '../components/MatnModal';
 
 const SignUp = ({navigation}) => {
   const route = useRoute();
-
+  const [showModal, setShowModal] = useState(false);
   const [isload, setislpad] = useState(false);
   const dispatch = useDispatch();
+  const stormodal = () => {
+    setShowModal(true);
+  };
   const storeData = async value => {
     try {
       AsyncStorage.setItem('@storage_Key', value);
@@ -138,18 +142,29 @@ const SignUp = ({navigation}) => {
                       bg="#24C2D8">
                       {'ثبت نام'}
                     </Button>
-
-                    <Link
-                      alignSelf={'flex-end'}
-                      onPress={() => navigation.navigate('Login')}>
-                      {'ورود'}
-                    </Link>
-                    <Divider />
                     <View
-                      mt={2}
-                      p={1}
-                      flexDirection="row"
-                      justifyContent="space-between">
+                      flexDirection={'row'}
+                      justifyContent={'space-between'}>
+                      <Link alignSelf={'flex-end'} onPress={() => stormodal()}>
+                        {'سیاست حفظ حریم شخصی برنامه'}
+                      </Link>
+                      <Link
+                        alignSelf={'flex-end'}
+                        onPress={() => navigation.navigate('Login')}>
+                        {'ورود'}
+                      </Link>
+                    </View>
+
+                    <Divider />
+                    <View>
+                      <Text
+                        fontFamily={'B Yekan'}
+                        fontSize={10}
+                        color={'gray.400'}
+                        textAlign={'right'}>
+                        قبل ثبت نام لطفا متن سیاست حفظ حریم شخصی برنامه رامطالعه
+                        بفرمایید.
+                      </Text>
                       {/* <GoogleSigninButton style={{width: '100%'}} /> */}
                     </View>
                   </VStack>
@@ -159,20 +174,10 @@ const SignUp = ({navigation}) => {
           </Center>
         </View>
       </View>
-      {/* <AlertDialog
-        leastDestructiveRef={cancelRef}
-        isOpen={isOpen.isOpen}
-        onClose={() => {
-          onClose();
-        }}>
-        <AlertDialog.Content>
-          <AlertDialog.CloseButton />
-          <AlertDialog.Header>{''}</AlertDialog.Header>
-          <AlertDialog.Body>
-            <Center>{isOpen.message}</Center>
-          </AlertDialog.Body>
-        </AlertDialog.Content>
-      </AlertDialog> */}
+      <MatnModal
+        showModal={showModal}
+        setShowModal={() => setShowModal(false)}
+      />
     </NativeBaseProvider>
   );
 };

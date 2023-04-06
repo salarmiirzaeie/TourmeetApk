@@ -14,15 +14,12 @@ import {
   HStack,
 } from 'native-base';
 
-import {useRoute} from '@react-navigation/native';
 import {recievecode} from '../services/userServices';
 import {Alert} from 'react-native';
 
-const EnterNumb = ({navigation}) => {
+const EnterNumb = ({navigation,route}) => {
   const [isOpen, setIsOpen] = useState({isOpen: false, message: ''});
-
   const onClose = () => setIsOpen(false);
-  const route = useRoute();
   const cancelRef = useRef(null);
 
   return (
@@ -39,6 +36,7 @@ const EnterNumb = ({navigation}) => {
                 onSubmit={values => {
                   recievecode({id: route.params.id, rnumb: values.code}).then(
                     res => {
+                      console.log(res)
                       if (res.status === 200) {
                         navigation.navigate('ChangePassword', {
                           token: res.data.token,

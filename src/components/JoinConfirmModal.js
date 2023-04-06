@@ -1,8 +1,9 @@
 import {useRoute} from '@react-navigation/native';
 import {Image, Text, View, Button, Modal} from 'native-base';
 import React from 'react';
-import {Alert} from 'react-native';
+import {Alert, Linking} from 'react-native';
 import {joinTour} from '../services/dashboardServices';
+import {paymony} from '../services/postServices';
 
 export const JoinConfirmModal = ({setModalVisible, modalVisible, setstat}) => {
   const params = useRoute();
@@ -26,18 +27,19 @@ export const JoinConfirmModal = ({setModalVisible, modalVisible, setstat}) => {
                 {'دوست من قبل رفتن باید هزینه اش رو پرداخت کنی!!'}
               </Text>
               <Button
-                onPress={async () => {
-                  await joinTour({
-                    postId: params.params.id,
-                    status: 'ok',
-                  }).then(res => {
-                    if (res.status === 200) {
-                      setstat();
-                      setModalVisible(false);
-                    } else {
-                      Alert.alert(res.data.message);
-                    }
-                  });
+                onPress={ () => {
+                  Linking.openURL('https://tourmeet.ir/#/peyment')
+                  // await joinTour({
+                  //   postId: params.params.id,
+                  //   status: 'ok',
+                  // }).then(res => {
+                  //   if (res.status === 200) {
+                  //     setstat();
+                  //     setModalVisible(false);
+                  //   } else {
+                  //     Alert.alert(res.data.message);
+                  //   }
+                  // });
                 }}
                 rounded={'xl'}
                 mt={2}

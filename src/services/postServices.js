@@ -55,6 +55,17 @@ export const getRelatedTours = async data => {
     });
   return res;
 };
+export const paymony = async data => {
+  const res = axios
+    .post(`${apiPort}paymony`, data)
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      return err.response;
+    });
+  return res;
+};
 export const getPopularCamps = async () => {
   const res = axios
     .get(`${apiPort}getPopularCamps/${await getCity()}`)

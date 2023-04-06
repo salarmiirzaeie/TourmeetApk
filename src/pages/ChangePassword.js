@@ -13,15 +13,13 @@ import {
   AlertDialog,
 } from 'native-base';
 
-import {useRoute} from '@react-navigation/native';
 import {reserPassword} from '../services/userServices';
 import {Alert} from 'react-native';
 
-const ChangePassword = ({navigation}) => {
+const ChangePassword = ({navigation,route}) => {
   const [isOpen, setIsOpen] = useState({isOpen: false, message: ''});
 
   const onClose = () => setIsOpen(false);
-  const route = useRoute();
   const cancelRef = useRef(null);
 
   return (

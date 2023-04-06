@@ -79,7 +79,7 @@ export const RelatedTours = ({typep, id}) => {
                     fontFamily={'B YekanBold'}
                     fontSize={'md'}
                     textAlign={'right'}>
-                    {truncate(post.title, 7)}
+                    {truncate(post.title, 15)}
                   </Text>
                   <View
                     px={1}
@@ -90,7 +90,7 @@ export const RelatedTours = ({typep, id}) => {
                       {post.durationTime}
                     </Text>
                   </Badge> */}
-                    <View flexDirection={'row'} justifyContent="space-between">
+                    <View flexDirection={'row'} w={"full"} justifyContent="space-between">
                       <Text
                         fontFamily={'B Yekan'}
                         color={'gray.400'}
