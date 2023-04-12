@@ -20,15 +20,20 @@ export const JoinConfirmModal = ({setModalVisible, modalVisible, setstat}) => {
                 w={200}
                 alt="ee"
                 source={{
-                  uri: `https://api.tourmeet.ir/uploads/tourists.png`,
+                  uri: `http://192.168.43.153:3333/uploads/tourists.png`,
                 }}
               />
               <Text textAlign={'center'} fontFamily="B Yekan">
                 {'دوست من قبل رفتن باید هزینه اش رو پرداخت کنی!!'}
               </Text>
               <Button
-                onPress={ () => {
-                  Linking.openURL('https://tourmeet.ir/#/peyment')
+                onPress={() => {
+                  paymony({
+                    postId: params.params.id,
+                  }).then(res => {
+                    Linking.openURL(res.data);
+                  });
+                  // Linking.openURL('https://tourmeet.ir/#/peyment/')
                   // await joinTour({
                   //   postId: params.params.id,
                   //   status: 'ok',

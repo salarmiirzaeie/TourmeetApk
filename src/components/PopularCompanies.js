@@ -59,10 +59,10 @@ export const PopularCompanies = () => {
                     flex={0.45}
                     rounded="xl"
                     fallbackSource={{
-                      uri: `https://api.tourmeet.ir/uploads/defaultProfile1.jpg`,
+                      uri: `http://192.168.43.153:3333/uploads/defaultProfile1.jpg`,
                     }}
                     source={{
-                      uri: `https://api.tourmeet.ir/uploads/profilePhotos/${post.profilePhotos[0].name}`,
+                      uri: `http://192.168.43.153:3333/uploads/profilePhotos/${post.profilePhotos[0].name}`,
                     }}
                     h="full"
                     alt="ee"
@@ -72,7 +72,7 @@ export const PopularCompanies = () => {
                     flex={0.45}
                     rounded="xl"
                     source={{
-                      uri: `https://api.tourmeet.ir/uploads/defaultProfile1.jpg`,
+                      uri: `http://192.168.43.153:3333/uploads/defaultProfile1.jpg`,
                     }}
                     h="full"
                     alt="ee"

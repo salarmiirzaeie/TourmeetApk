@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {DefaultLayout} from './src/Layouts/DefaultLayout';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
-import {I18nManager} from 'react-native';
+import {I18nManager, Linking} from 'react-native';
 
 import {persistor, Store} from './store';
 import {SplashScreen} from './src/components/SplashScreen';
@@ -30,11 +30,12 @@ const App = () => {
 
   const MainSatck = createNativeStackNavigator();
   const [splash, setsplash] = useState(true);
-
+ 
   useEffect(() => {
     setTimeout(() => {
       setsplash(false);
     }, 2000);
+    
   }, []);
   return splash ? (
     <SplashScreen />

@@ -32,7 +32,7 @@ const HomeCategory = () => {
                 W="full"
                 alt="ee"
                 source={{
-                  uri: `https://api.tourmeet.ir/uploads/sea.jpg`,
+                  uri: `http://192.168.43.153:3333/uploads/sea.jpg`,
                 }}
               />
               <Text
@@ -59,7 +59,7 @@ const HomeCategory = () => {
                 W="full"
                 alt="ee"
                 source={{
-                  uri: `https://api.tourmeet.ir/uploads/offroad.jpg`,
+                  uri: `http://192.168.43.153:3333/uploads/offroad.jpg`,
                 }}
               />
               <Text
@@ -86,7 +86,7 @@ const HomeCategory = () => {
                 W="full"
                 alt="ee"
                 source={{
-                  uri: `https://api.tourmeet.ir/uploads/mountain.jpg`,
+                  uri: `http://192.168.43.153:3333/uploads/mountain.jpg`,
                 }}
               />
               <Text
@@ -115,7 +115,7 @@ const HomeCategory = () => {
                 W="full"
                 alt="ee"
                 source={{
-                  uri: `https://api.tourmeet.ir/uploads/desert.jpg`,
+                  uri: `http://192.168.43.153:3333/uploads/desert.jpg`,
                 }}
               />
               <Text
@@ -142,7 +142,7 @@ const HomeCategory = () => {
                 W="full"
                 alt="ee"
                 source={{
-                  uri: `https://api.tourmeet.ir/uploads/jungle.jpg`,
+                  uri: `http://192.168.43.153:3333/uploads/jungle.jpg`,
                 }}
               />
               <Text
@@ -169,7 +169,7 @@ const HomeCategory = () => {
                 W="full"
                 alt="ee"
                 source={{
-                  uri: `https://api.tourmeet.ir/uploads/historical.jpg`,
+                  uri: `http://192.168.43.153:3333/uploads/historical.jpg`,
                 }}
               />
               <Text

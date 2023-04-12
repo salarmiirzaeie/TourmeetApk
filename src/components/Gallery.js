@@ -28,11 +28,11 @@ export const Gallery = ({images}) => {
               <Image
                 ref={img}
                 fallbackSource={{
-                  uri: `https://api.tourmeet.ir/uploads/thumbnails/sea.jpg`,
+                  uri: `http://192.168.43.153:3333/uploads/thumbnails/sea.jpg`,
                 }}
                 alt="ll"
                 source={{
-                  uri: `https://api.tourmeet.ir/uploads/thumbnails/${item}`,
+                  uri: `http://192.168.43.153:3333/uploads/thumbnails/${item}`,
                 }}
                 style={{width: windowWidth, height: windowheight / 2.5}}
               />
@@ -70,11 +70,11 @@ export const Gallery = ({images}) => {
                 return (
                   <Image
                   fallbackSource={{
-                    uri: `https://api.tourmeet.ir/uploads/thumbnails/sea.jpg`,
+                    uri: `http://192.168.43.153:3333/uploads/thumbnails/sea.jpg`,
                   }}
                     alt="ll"
                     source={{
-                      uri: `https://api.tourmeet.ir/uploads/thumbnails/${item}`,
+                      uri: `http://192.168.43.153:3333/uploads/thumbnails/${item}`,
                     }}
                     style={{width: windowWidth, height: '100%'}}
                   />

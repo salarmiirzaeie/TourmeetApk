@@ -1,5 +1,5 @@
 import {CITY} from '../action/actionTypes';
-const initialState = {id: 301, name: 'تهران'};
+const initialState = {id: 12, name: 'تبریز'};
 
 export const cityReducer = (state = initialState, action) => {
   switch (action.type) {

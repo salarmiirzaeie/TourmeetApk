@@ -221,7 +221,15 @@ const TourDet = ({route}) => {
                       {trancate ? truncate(post.body, 150) : post.body}
                     </Text>
                     <Pressable onPress={() => settruncate(!trancate)}>
-                      <Text>{trancate ? 'نمایش بیشتر' : 'نمایش کمتر'}</Text>
+                      <Text
+                        color="#24C2D8"
+                        style={{
+                          textDecorationLine: 'underline',
+                          textDecorationStyle: 'solid',
+                          textDecorationColor: '#24C2D8',
+                        }}>
+                        {trancate ? 'نمایش بیشتر' : 'نمایش کمتر'}
+                      </Text>
                     </Pressable>
                   </View>
                   <Divider />
@@ -266,6 +274,7 @@ const TourDet = ({route}) => {
             </ScrollView>
           </View>
           <DetFooter
+          statuss={post.status}
             mainstatus={
               post.capacity === post.joinedUsers?.length ? false : true
             }

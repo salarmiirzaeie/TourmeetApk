@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-const apiPort = 'https://api.tourmeet.ir/dashboard';
+const apiPort = 'http://192.168.43.153:3333/dashboard';
 
 const gettoken = async () => {
   let token = await AsyncStorage.getItem('@storage_Key');

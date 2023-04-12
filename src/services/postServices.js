@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import {Store} from '../../store';
-const apiPort = 'https://api.tourmeet.ir/';
+const apiPort = 'http://192.168.43.153:3333/';
 const gettoken = async () => {
   let token = await AsyncStorage.getItem('@storage_Key');
   return token;
@@ -10,6 +10,21 @@ const getCity = async () => {
   let city = await Store.getState().cityState.id;
 
   return city;
+};
+export const paymony = async data => {
+  const res = axios
+    .post(`${apiPort}paymony`, data, {
+      headers: {
+        Authorization: `Bearer ${await gettoken()}`,
+      },
+    })
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      return err.response;
+    });
+  return res;
 };
 export const getIndex = async () => {
   const res = axios
@@ -55,17 +70,7 @@ export const getRelatedTours = async data => {
     });
   return res;
 };
-export const paymony = async data => {
-  const res = axios
-    .post(`${apiPort}paymony`, data)
-    .then(response => {
-      return response;
-    })
-    .catch(err => {
-      return err.response;
-    });
-  return res;
-};
+
 export const getPopularCamps = async () => {
   const res = axios
     .get(`${apiPort}getPopularCamps/${await getCity()}`)

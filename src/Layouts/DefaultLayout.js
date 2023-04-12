@@ -28,7 +28,25 @@ export const DefaultLayout = () => {
 
 
   
+  const navigation = useNavigation();
+  const navigate = url => {
+    // E
+    console.log(url)
+    const route = url.replace(/.*?:\/\//g, '');
+    const id = route.match(/\/([^\/]+)\/?$/)[1];
+    const routeName = route.split('/')[0];
 
+    if (routeName === 'tour') {
+      navigation.navigate('TourDet', {id: id});
+    }
+  };
+  useEffect(() => {
+   
+    Linking.getInitialURL().then(url => {
+      console.log(url)
+      navigate(url);
+    });
+  }, []);
  
  
 

@@ -4,10 +4,9 @@ import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {isJoined} from '../services/dashboardServices';
 import {JoinConfirmModal} from './JoinConfirmModal';
-export const DetFooter = ({sestat, mainstatus}) => {
+export const DetFooter = ({sestat, mainstatus, statuss}) => {
   const params = useRoute();
   const navigation = useNavigation();
-
   const [joined, setJoined] = useState(false);
   const [sttats, setsttats] = useState(0);
   const logedin = useSelector(state => state.profileModeState);
@@ -26,34 +25,42 @@ export const DetFooter = ({sestat, mainstatus}) => {
 
   return (
     <View px={3} bg="white" justifyContent={'center'} flex={0.06}>
-      {!joined ? (
-        mainstatus ? (
-          <Button
-            onPress={async () => {
-              if (!logedin) {
-                setModalVisible2(true);
-              } else {
-                setModalVisible(true);
-              }
-              // setJoined(true);
-              // await joinTour(data);
-            }}
-            borderRadius={'2xl'}
-            bg={'#24C2D8'}>
-            <Text color={'white'} fontFamily={'B Yekan'}>
-              پیوستن به سفر
-            </Text>
-          </Button>
+      {statuss === 'Recruiting' ? (
+        !joined ? (
+          mainstatus ? (
+            <Button
+              onPress={async () => {
+                if (!logedin) {
+                  setModalVisible2(true);
+                } else {
+                  setModalVisible(true);
+                }
+                // setJoined(true);
+                // await joinTour(data);
+              }}
+              borderRadius={'2xl'}
+              bg={'#24C2D8'}>
+              <Text color={'white'} fontFamily={'B Yekan'}>
+                پیوستن به سفر
+              </Text>
+            </Button>
+          ) : (
+            <Button borderRadius={'2xl'} disabled bg={'red.400'}>
+              <Text color={'white'} fontFamily={'B Yekan'}>
+                {'ظرفیت تکمیل'}
+              </Text>
+            </Button>
+          )
         ) : (
-          <Button borderRadius={'2xl'} disabled bg={'red.400'}>
-            <Text color={'white'} fontFamily={'B Yekan'}>
-              {'ظرفیت تکمیل'}
-            </Text>
+          <Button disabled borderRadius={'2xl'} bg={'gray.400'}>
+            عضوشده
           </Button>
         )
       ) : (
-        <Button disabled borderRadius={'2xl'} bg={'gray.400'}>
-          عضوشده
+        <Button borderRadius={'2xl'} disabled bg={'red.400'}>
+          <Text color={'white'} fontFamily={'B Yekan'}>
+            {'تکمیل ظرفیت'}
+          </Text>
         </Button>
       )}
       <JoinConfirmModal
