@@ -274,13 +274,9 @@ const TourDet = ({route}) => {
             </ScrollView>
           </View>
           <DetFooter
-<<<<<<< HEAD
             statuss={'ended'}
             // statuss={post.status}
 
-=======
-          statuss={post.status}
->>>>>>> 2aee018f1505ba5abba3792633fcd372345b679f
             mainstatus={
               post.capacity === post.joinedUsers?.length ? false : true
             }
