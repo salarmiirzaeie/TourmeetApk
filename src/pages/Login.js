@@ -58,9 +58,8 @@ const Login = ({navigation}) => {
                         storeData(res.data.token.toString());
                         dispatch(profileMode(true));
                         if (route.params !== undefined) {
-                          navigation.navigate('TourDet3', {
-                            id: route.params.id,
-                          });
+                          navigation.pop(1);
+
                         } else {
                           navigation.navigate('Profile', {
                             pf: true,

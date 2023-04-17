@@ -16,7 +16,7 @@ export const SplashScreen = () => {
               mt={3}
               fontSize="lg"
               fontFamily={'DastNevis'}>
-               تورمیت همونیه که تو میخوای :)
+              با تورمیت خاطره بساز :)
             </Text>
           </View>
         </View>

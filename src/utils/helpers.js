@@ -1,5 +1,5 @@
 const {default: axios} = require('axios');
-const apiPort = 'https://api.tourmeet.ir/users';
+const apiPort = 'http://192.168.43.153:3333/users';
 const moment = require('jalali-moment');
 const {Share, PermissionsAndroid} = require('react-native');
 
@@ -46,13 +46,13 @@ exports.persianType = date => {
 exports.persianStatus = date => {
   switch (date) {
     case 'closed':
-      return 'منقضی شده';
+      return 'بسته شده';
 
-    
     case 'Recruiting':
       return 'فعال';
+    case 'ended':
+      return 'به پایان رسیده';
 
-    
     default:
       return 'منقضی شده ';
   }
@@ -135,4 +135,3 @@ exports.onShare = async data => {
     // dismissed
   }
 };
-

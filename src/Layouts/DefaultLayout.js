@@ -18,20 +18,31 @@ import {Security} from '../pages/content/Security';
 import PopularToursPage from '../pages/content/PopularToursPage';
 import {Provinces} from '../pages/content/Provinces';
 import {Cities} from '../pages/content/Cities';
-import {Linking, Platform} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+// import {Linking} from 'react-native';
+// import {Linking, Platform} from 'react-native';
+// import {useNavigation} from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
 export const DefaultLayout = () => {
   const netInfo = useNetInfo();
+  const navigation = useNavigation();
+  // const navigate = url => {
+  //   // E
+  //   const route = url.replace(/.*?:\/\//g, '');
+  //   const id = route.match(/\/([^\/]+)\/?$/)[1];
+  //   const routeName = route.split('/')[0];
 
-
-  
-
- 
- 
-
+  //   if (routeName === 'chat' || routeName === 'www.tourmeet.ir/#') {
+  //     navigation.navigate('TourDet', {id: id});
+  //   }
+  // };
+  useEffect(() => {
+    // Linking.getInitialURL().then(url => {
+    //   navigate(url);
+    // });
+  }, []);
   return (
     <Tab.Navigator initialRouteName="HomeSatck">
       <Tab.Screen

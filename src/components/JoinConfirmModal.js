@@ -1,16 +1,28 @@
-import {useRoute} from '@react-navigation/native';
-import {Image, Text, View, Button, Modal} from 'native-base';
-import React from 'react';
-import {Alert, Linking} from 'react-native';
-import {joinTour} from '../services/dashboardServices';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {Image, Text, View, Button, Modal, Pressable} from 'native-base';
+import React, {useEffect, useState} from 'react';
 import {paymony} from '../services/postServices';
-
+import {Linking} from 'react-native';
+import {BuyllawModal} from './BuyllawModal';
+import CheckBox from '@react-native-community/checkbox';
+import {joinTour} from '../services/dashboardServices';
 export const JoinConfirmModal = ({setModalVisible, modalVisible, setstat}) => {
+  const [showModal, setShowModal] = useState(false);
+  const stormodal = () => {
+    setShowModal(true);
+  };
   const params = useRoute();
-
+  const [groupValues, setGroupValues] = useState(false);
+  const navigation = useNavigation();
+  useEffect(() => {}, [modalVisible]);
   return (
     <>
-      <Modal isOpen={modalVisible} onClose={() => setModalVisible(false)}>
+      <Modal
+        isOpen={modalVisible}
+        onClose={() => {
+          setModalVisible(false);
+          setGroupValues(false);
+        }}>
         <Modal.Content>
           <Modal.Body justifyContent={'center'}>
             <View alignSelf={'center'}>
@@ -20,26 +32,47 @@ export const JoinConfirmModal = ({setModalVisible, modalVisible, setstat}) => {
                 w={200}
                 alt="ee"
                 source={{
-                  uri: `https://api.tourmeet.ir/uploads/tourists.png`,
+                  uri: `http://192.168.43.153:3333/uploads/tourists.png`,
                 }}
               />
               <Text textAlign={'center'} fontFamily="B Yekan">
                 {'دوست من قبل رفتن باید هزینه اش رو پرداخت کنی!!'}
               </Text>
+              <View mt={2} flexDirection={'row-reverse'}>
+                <CheckBox
+                  disabled={false}
+                  value={groupValues}
+                  onValueChange={() => setGroupValues(!groupValues)}
+                />
+                <Pressable
+                  onPress={() => {
+                    stormodal();
+                  }}
+                  ml={1}>
+                  <Text
+                    color="#24C2D8"
+                    style={{
+                      textDecorationLine: 'underline',
+                      textDecorationStyle: 'solid',
+                      textDecorationColor: '#24C2D8',
+                    }}>
+                    قوانین خرید تورمیت
+                  </Text>
+                </Pressable>
+
+                <Text color={'gray.500'}>را خواندم و موافقم .</Text>
+              </View>
               <Button
-                onPress={ () => {
-                  Linking.openURL('https://tourmeet.ir/#/peyment')
-                  // await joinTour({
+                disabled={groupValues === false ? true : false}
+                onPress={() => {
+                  // paymony({
                   //   postId: params.params.id,
-                  //   status: 'ok',
                   // }).then(res => {
-                  //   if (res.status === 200) {
-                  //     setstat();
-                  //     setModalVisible(false);
-                  //   } else {
-                  //     Alert.alert(res.data.message);
-                  //   }
+                  //   Linking.openURL(res.data);
+                  //   setModalVisible(false);
+                  //   setGroupValues(false);
                   // });
+                  joinTour({postId: params.params.id});
                 }}
                 rounded={'xl'}
                 mt={2}
@@ -53,6 +86,10 @@ export const JoinConfirmModal = ({setModalVisible, modalVisible, setstat}) => {
           </Modal.Body>
         </Modal.Content>
       </Modal>
+      <BuyllawModal
+        showModal={showModal}
+        setShowModal={() => setShowModal(false)}
+      />
     </>
   );
 };

@@ -19,10 +19,13 @@ import HomeCategory from '../../components/HomeCategory';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {checkversion} from '../../services/dashboardServices';
+import {Linking} from 'react-native';
+import {commented} from '../../services/postServices';
 
 export const Home = ({route}) => {
   const scroll = useRef(null);
   const navigation = useNavigation();
+
 
   const [cit, setcit] = useState(false);
   useEffect(() => {
@@ -31,6 +34,11 @@ export const Home = ({route}) => {
         setcit(res.data);
       }
     });
+    console.log("first")
+
+    // commented().then(res => {
+    //   console.log(res.data);
+    // });
   }, [route]);
   return (
     <NativeBaseProvider>
@@ -109,7 +117,13 @@ export const Home = ({route}) => {
             دوست خوبم،به روز رسانی به این نسخه ضروری هست.بعد به روزرسانی ،دوباره
             میتونی از همه ی امکانات تورمیت استفاده کنی.
           </Text>
-          <Button w={'full'} bg="#24C2D8" fontFamily={'B Yekan'}>
+          <Button
+            onPress={() => {
+              Linking.openURL('https://cafebazaar.ir/app/com.Tourmeet');
+            }}
+            w={'full'}
+            bg="#24C2D8"
+            fontFamily={'B Yekan'}>
             به روزرسانی
           </Button>
         </Actionsheet.Content>

@@ -11,7 +11,7 @@ import {
   Text,
   View,
 } from 'native-base';
-import { formDate2, persianDuration, persianStatus} from '../utils/helpers';
+import {formDate2, persianDuration, persianStatus} from '../utils/helpers';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const initialLayout = {
@@ -60,6 +60,24 @@ const List2 = ({datas}: any) => {
                     {persianStatus(item.status)}
                   </Badge>
                 </Box>
+              ) : item.status === 'ended' ? (
+                <Box
+                  p={1}
+                  bg="transparent"
+                  zIndex={12}
+                  w="full"
+                  h={'full'}
+                  justifyContent="flex-end"
+                  position={'absolute'}>
+                  <Badge
+                    rounded={'xl'}
+                    opacity={0.8}
+                    colorScheme="amber"
+                    alignSelf={'center'}
+                    w={'70%'}>
+                    {persianStatus(item.status)}
+                  </Badge>
+                </Box>
               ) : null}
 
               <Image
@@ -67,12 +85,12 @@ const List2 = ({datas}: any) => {
                 h="full"
                 zIndex={10}
                 fallbackSource={{
-                  uri: `https://api.tourmeet.ir/uploads/sea.jpg`,
+                  uri: `http://192.168.43.153:3333/uploads/sea.jpg`,
                 }}
                 alt="thumbnil"
                 rounded={10}
                 source={{
-                  uri: `https://api.tourmeet.ir/uploads/thumbnails/${item.thumbnail[0]}`,
+                  uri: `http://192.168.43.153:3333/uploads/thumbnails/${item.thumbnail[0]}`,
                 }}
               />
             </Box>

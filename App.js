@@ -23,6 +23,7 @@ const EnterNumb = React.lazy(() => import('./src/pages/EnterNumb'));
 const ChangePassword = React.lazy(() => import('./src/pages/ChangePassword'));
 
 const SearchPage = React.lazy(() => import('./src/pages/content/SearchPage'));
+const CommentsPage = React.lazy(() => import('./src/pages/content/CommentsPage'));
 const TourDet = React.lazy(() => import('./src/pages/content/TourDet'));
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
 
   useEffect(() => {
     setTimeout(() => {
+
       setsplash(false);
     }, 2000);
   }, []);
@@ -58,6 +60,7 @@ const App = () => {
             <MainSatck.Screen name="UserProfile" component={UserProfile} />
             <MainSatck.Screen name="CampTours" component={CampTours} />
             <MainSatck.Screen name="PermissPage" component={PermissPage} />
+            <MainSatck.Screen name="CommentsPage" component={CommentsPage} />
             <MainSatck.Screen name="LeadersPage" component={LeadersPage} />
             <MainSatck.Screen
               name="ChangePassword"

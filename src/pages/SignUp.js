@@ -71,9 +71,8 @@ const SignUp = ({navigation}) => {
 
                             dispatch(profileMode(true));
                             if (route.params !== undefined) {
-                              navigation.navigate('TourDet3', {
-                                id: route.params.id,
-                              });
+                            
+                              navigation.pop(2);
                             } else {
                               navigation.navigate('Profile', {
                                 pf: true,
