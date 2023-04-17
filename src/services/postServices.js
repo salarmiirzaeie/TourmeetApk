@@ -26,6 +26,7 @@ export const paymony = async data => {
     });
   return res;
 };
+<<<<<<< HEAD
 export const commented = async () => {
   console.log('first');
   const res = axios
@@ -42,6 +43,8 @@ export const commented = async () => {
     });
   return res;
 };
+=======
+>>>>>>> 2aee018f1505ba5abba3792633fcd372345b679f
 export const getIndex = async () => {
   const res = axios
     .get(`${apiPort}getall/${await getCity()}`)

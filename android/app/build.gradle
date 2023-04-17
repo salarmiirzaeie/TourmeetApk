@@ -139,7 +139,11 @@ android {
         applicationId "com.Tourmeet"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+<<<<<<< HEAD
         versionCode 7
+=======
+        versionCode 5
+>>>>>>> 2aee018f1505ba5abba3792633fcd372345b679f
         versionName "1.1"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 

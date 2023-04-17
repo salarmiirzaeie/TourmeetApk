@@ -20,7 +20,10 @@ import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {checkversion} from '../../services/dashboardServices';
 import {Linking} from 'react-native';
+<<<<<<< HEAD
 import {commented} from '../../services/postServices';
+=======
+>>>>>>> 2aee018f1505ba5abba3792633fcd372345b679f
 
 export const Home = ({route}) => {
   const scroll = useRef(null);

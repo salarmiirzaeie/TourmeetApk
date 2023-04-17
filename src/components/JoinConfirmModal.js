@@ -63,9 +63,20 @@ export const JoinConfirmModal = ({setModalVisible, modalVisible, setstat}) => {
                 <Text color={'gray.500'}>را خواندم و موافقم .</Text>
               </View>
               <Button
+<<<<<<< HEAD
                 disabled={groupValues === false ? true : false}
                 onPress={() => {
                   // paymony({
+=======
+                onPress={() => {
+                  paymony({
+                    postId: params.params.id,
+                  }).then(res => {
+                    Linking.openURL(res.data);
+                  });
+                  // Linking.openURL('https://tourmeet.ir/#/peyment/')
+                  // await joinTour({
+>>>>>>> 2aee018f1505ba5abba3792633fcd372345b679f
                   //   postId: params.params.id,
                   // }).then(res => {
                   //   Linking.openURL(res.data);
